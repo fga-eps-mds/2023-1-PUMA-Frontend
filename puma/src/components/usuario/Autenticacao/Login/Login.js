@@ -5,12 +5,14 @@ import UserService from '../../../../services/UserService';
 import Loading from '../../../shared/loading/Loading.vue';
 import VisitorNav from '../../../../components/VisitorNav/VisitorNav.vue';
 import NAV_CONST from '../../../../utils/enums/navigations.enum.js';
+import AreaExternaHeader from '../../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 export default {
   name: 'LoginUsuario',
   components: {
     Loading,
     VisitorNav,
+    AreaExternaHeader,
   },
   data() {
     return {
