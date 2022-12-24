@@ -63,15 +63,15 @@ export default {
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
           await this.$router.push('/usuario/login');
-          this.makeToast('SUCESSO', 'Cadastro feito com sucesso!', 'success');
+          this.makeToast('Casdastro feito com sucesso!', 'Agora é só fazer login e aproveitar nossos recursos.', 'success');
         }).catch(() => {
           this.isLoading = false;
-          this.makeToast('ERRO', 'Uma falha ocorreu ao efetuar o cadastro. Tente novamente.', 'danger');
+          this.makeToast('Erro ao cadastrar', 'Uma falha ocorreu ao efetuar o cadastro. Confira os dados inseridos e a sua conexão e tente novamente.', 'danger');
         });
       }
     },
     makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, noAutoHide: true, appendToast: true });
     },
     alterarTipoUsuario() {
       if (this.type === 'Aluno' || this.type === 'Professor') {
