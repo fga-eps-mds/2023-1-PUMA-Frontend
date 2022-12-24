@@ -49,7 +49,7 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras-chave, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
 
@@ -62,7 +62,7 @@ export default {
           this.keywordsInfo[data[key].keywordid] = data[key].array_agg;
         });
       } catch (error) {
-        this.makeToast('ERRO', 'Falha ao carregar as palavras-chave', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras-chave, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
 
@@ -78,7 +78,7 @@ export default {
         this.subjects.unshift({ value: 0, text: 'Todas as Disciplinas' });
         this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       } catch (error) {
-        this.makeToast('ERRO', 'Falha ao carregar as disciplinas', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar as disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
 
@@ -101,7 +101,7 @@ export default {
         );
         this.subjectsForm.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       } catch (erro) {
-        this.makeToast('ERRO', 'Falha ao carregar as disciplinas', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar as disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
 
@@ -114,7 +114,7 @@ export default {
         this.subjects.unshift({ value: 0, text: 'Todas as Disciplinas' });
         this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       } catch (error) {
-        this.makeToast('ERRO', 'Falha ao carregar Professor', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
 
@@ -159,12 +159,12 @@ export default {
 
           this.openModalRegister = false;
           this.$store.commit('CLOSE_LOADING_MODAL');
-          this.makeToast('SUCESSO', 'Cadastro realizado com sucesso!', 'success');
+          this.makeToast('Palavra-chave criada com sucesso', `A palavra chave ${this.form.keywordName} foi excluido com sucesso`, 'success');
         }
       } catch (error) {
         this.openModalRegister = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar cadastrar a palavra-chave', 'danger');
+        this.makeToast('Falha ao cadastrar palavra-chave', 'Infelizmente houve um erro ao tentar cadastrar a nova palavra-chave, confira sua conexão com servidor e os dados inseridos e tente novamente mais tarde', 'danger');
       }
     },
 
