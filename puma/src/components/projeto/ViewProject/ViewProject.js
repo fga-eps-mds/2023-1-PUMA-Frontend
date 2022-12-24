@@ -143,7 +143,7 @@ export default {
                 }
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/projetos-disciplina` });
-                this.makeToast('Projeto avaliado com sucesso', `O projeto ${this.form.name} foi avaliado com sucesso`, 'success');
+                this.makeToast('Projeto avaliado com sucesso', `O projeto "${this.form.name}" foi avaliado com sucesso`, 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 this.makeToast('Erro ao avaliar projeto', 'Infelizmente houve um erro ao avaliar projeto, confira sua conexão com servidor e tente novamente', 'danger');

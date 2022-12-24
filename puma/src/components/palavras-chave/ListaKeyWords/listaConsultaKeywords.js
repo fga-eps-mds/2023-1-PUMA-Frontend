@@ -96,7 +96,7 @@ export default {
           const subjectName = this.subjectsForm.find(
             (s) => s.value === this.form.selectedSubject,
           ).text;
-          this.makeToast('Palavra-chave editada', `A palavra-chave ${this.form.keywordName} foi editada com sucesso`, 'success');
+          this.makeToast('Palavra-chave editada', `A palavra-chave "${this.form.keywordName}" foi editada com sucesso`, 'success');
           this.listKeyWords = this.listKeyWords.map((kw) => {
             if (kw.keywordid === this.idKeywordEdit) {
               return {

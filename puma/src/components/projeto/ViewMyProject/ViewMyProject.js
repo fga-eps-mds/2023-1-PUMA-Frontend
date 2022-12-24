@@ -125,7 +125,7 @@ export default {
                 await projectService.updateProject(payload);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
-                this.makeToast('Projeto editado com sucesso', `Edição no projeto ${this.form.name} foi realizada com sucesso`, 'success');
+                this.makeToast('Projeto editado com sucesso', `Edição no projeto "${this.form.name}" foi realizada com sucesso`, 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 this.makeToast('Erro na edição', 'Infelizmente houve um erro ao realizar edição, confira sua conexão com servidor e os dados inseridos e tente novamente mais tarde', 'danger');
@@ -143,7 +143,7 @@ export default {
                 await projectService.deleteProject(this.form.projectid);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
-                this.makeToast('Projeto excluido com sucesso', `Projeto ${this.form.name} foi excluido com sucesso`, 'success');
+                this.makeToast('Projeto excluido com sucesso', `Projeto "${this.form.name}" foi excluido com sucesso`, 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 this.makeToast('Erro ao excluir', 'Infelizmente houve um erro ao excluir projeto, confira sua conexão com servidor e tente novamente', 'danger');

@@ -159,7 +159,7 @@ export default {
 
           this.openModalRegister = false;
           this.$store.commit('CLOSE_LOADING_MODAL');
-          this.makeToast('Palavra-chave criada com sucesso', `A palavra chave ${this.form.keywordName} foi excluido com sucesso`, 'success');
+          this.makeToast('Palavra-chave criada com sucesso', `A palavra chave "${this.form.keywordName}" foi excluido com sucesso`, 'success');
         }
       } catch (error) {
         this.openModalRegister = false;
