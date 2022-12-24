@@ -61,7 +61,7 @@ export default {
             return ['AC', 'RC', 'IC', 'EX', 'EC'].includes(this.form.status);
         },
         makeToast: function (title, message, variant) {
-            this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+            this.$bvToast.toast(message, { title: title, variant: variant, solid: true, noAutoHide: true, appendToast: true });
         },
         handleChangeKeywords: function (value) {
             if (!!!value.find((k) => k.value === this.form.mainKeyword?.value)) {
@@ -101,7 +101,7 @@ export default {
                 this.$store.commit('CLOSE_LOADING_MODAL');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+                this.makeToast('Erro de busca', 'Infelizmente houve um erro ao carregar os dados desse projeto, confira sua conexão com servidor e tente novamente mais tarde', 'danger');
             }
         },
         handleSubmit: async function () {
@@ -125,10 +125,10 @@ export default {
                 await projectService.updateProject(payload);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
-                this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
+                this.makeToast('Projeto editado com sucesso', `Edição no projeto ${this.form.name} foi realizada com sucesso`, 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
+                this.makeToast('Erro na edição', 'Infelizmente houve um erro ao realizar edição, confira sua conexão com servidor e os dados inseridos e tente novamente mais tarde', 'danger');
             }
         },
         handleCancelEdit: function () {
@@ -143,10 +143,10 @@ export default {
                 await projectService.deleteProject(this.form.projectid);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
-                this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
+                this.makeToast('Projeto excluido com sucesso', `Projeto ${this.form.name} foi excluido com sucesso`, 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
+                this.makeToast('Erro ao excluir', 'Infelizmente houve um erro ao excluir projeto, confira sua conexão com servidor e tente novamente', 'danger');
             }
         },
         handleDeleteProject: function () {

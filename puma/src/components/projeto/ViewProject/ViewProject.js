@@ -72,7 +72,7 @@ export default {
             return ['RL', 'AL', 'AC', 'RC', 'IC', 'EX', 'EC'].includes(this.form.status);
         },
         makeToast: function (title, message, variant) {
-            this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+            this.$bvToast.toast(message, { title: title, variant: variant, solid: true, noAutoHide: true, appendToast: true });
         },
         handleChangeEvaluation: function () {
             const AC_FEEDBACK = 'A proposta de projeto foi aceita e em breve poderá ser alocada a um semestre.';
@@ -117,7 +117,7 @@ export default {
                 this.$store.commit('CLOSE_LOADING_MODAL');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+                this.makeToast('Erro de busca', 'Infelizmente houve um erro ao carregar a sua lista de projetos, confira sua conexão com servidor e tente novamente mais tarde', 'danger');
             }
         },
         handleSubmit: async function () {
@@ -143,10 +143,10 @@ export default {
                 }
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/projetos-disciplina` });
-                this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
+                this.makeToast('Projeto avaliado com sucesso', `O projeto ${this.form.name} foi avaliado com sucesso`, 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
+                this.makeToast('Erro ao avaliar projeto', 'Infelizmente houve um erro ao avaliar projeto, confira sua conexão com servidor e tente novamente', 'danger');
             }
         },
         handleEvaluate: function () {
