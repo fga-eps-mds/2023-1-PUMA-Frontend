@@ -8,4 +8,14 @@ export default {
       dispMenu: false,
     };
   },
+
+  methods: {
+    getDispMenu() {
+      return this.dispMenu;
+    },
+
+    setDispMenu(value) {
+      this.dispMenu = value;
+    },
+  },
 };
