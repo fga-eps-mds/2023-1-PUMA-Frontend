@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import AreaExternaHeader from './AreaExternaHeader.vue';
 
-describe('Testando criação do componente AreaExternaHeader', () => {
+describe('Testando criação do componente "AreaExternaHeader"', () => {
   it('Renderizando componente', () => {
     let wrapper = shallowMount(AreaExternaHeader);
     expect(wrapper.exists()).toBe(true);
