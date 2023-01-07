@@ -1,0 +1,134 @@
+<div class="main-content">
+    <ReturnButton/>
+
+    <div class='main-title'>
+      Criar Turma
+    </div>
+
+    <div class="sub-title">
+    Preencha os campos abaixo para criar turmas para uma disciplina já existente
+    </div>
+
+    <div class="content-all">
+      <div class="content content-big">
+        <label class="label">
+          Selecione a disciplina para adicionar uma turma
+        </label>
+        <select class="select-subject">
+          <option value="PSP1">PSP1</option>
+        </select>
+      </div>
+
+      <div class="content content-big">
+        <label class="label">
+          Informe o código da turma, conforme o SIGAA
+        </label>
+        <div class="label-t">
+          T
+        </div>
+        <input type="text" class="input-text" placeholder="Digite no máximo dois números" name="">
+        <p class="p-observation">De acordo com o SIGAA, o modelo de turmas é T01, T02...</p>
+      </div>
+
+      <div class="content content-medium">
+        <label class="label">
+          Em qual período a turma será ministrada?
+        </label>
+
+        <div class="content content-small">
+          <label class="label">
+            Ano
+          </label>
+          <input class="input-text input-text-big" type="text" placeholder="Digite" name="">
+          <p class="p-observation">Ex.: 2020</p>
+        </div>
+
+        <div class="content content-small">
+          <label class="label">
+            Semestre
+          </label>
+          <select class="select-subject">
+            <option>1°</option>
+            <option>2°</option>
+            <option>Verão</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="content content-very-big">
+        <label class="label">
+          Em qual horário da semana?
+        </label>
+
+        <div class="content content-small">
+          <label class="label">
+            Dia da semana
+          </label>
+          <select class="select-subject">
+            <option>Segunda-feira</option>
+            <option>Terça-feira</option>
+            <option>Quarta-feira</option>
+            <option>Quinta-feira</option>
+            <option>Sexta-feira</option>
+            <option>Sábado</option>
+          </select>
+        </div>
+
+        <div class="content-time">
+          <div class="content content-small">
+            <label class="label">
+              Início
+            </label>
+            <input type="text" class="input-text input-text-big" placeholder="00:00" name="">
+          </div>
+
+          <div class="content content-small">
+            <label class="label">
+              Términio
+            </label>
+            <input type="text" class="input-text input-text-big" placeholder="00:00" name="">
+          </div>
+
+          <p class="p-observation">Apenas número no formato HH:MM Ex.: 17:30</p>
+        </div>
+
+        <button
+            class="btn-time"
+            onclick="window.location.href = '/turma/0'">
+            <em class="fa-solid fa-plus mr-2 add-project"></em>Adicionar outro dia
+        </button>
+      </div>
+
+      <div class="content content-big">
+        <label class="label">
+          Quais professores serão responsáveis pela turma?
+        </label>
+        <select class="select-subject">
+          <option>PSP1</option>
+        </select>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="content content-big">
+        <label class="label">
+          Informe uma senha para seus alunos ingressarem na turma
+        </label>
+        <input class="input-text input-text-medium" type="text" placeholder="Digite a senha" name="">
+      </div>
+
+      <div>
+        <button
+            class="btn-create"
+            onclick="window.location.href = '/turma/0'">
+            <em class="fa-solid fa-plus mr-2 add-project"></em>Criar turma
+        </button>
+
+        <button
+            class="btn-cancel"
+            onclick="window.location.href = '/turma/0'">
+            Cancelar
+        </button>
+      </div>
+    </div>
+</div>

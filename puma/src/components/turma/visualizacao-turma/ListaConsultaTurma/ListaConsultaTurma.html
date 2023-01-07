@@ -1,0 +1,36 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+        <tr>
+            <th>Disciplina</th>
+            <th>Turma</th>
+            <th>Semestre</th>
+            <th>Professores</th>
+            <th></th>
+        </tr>
+
+        <tr v-for="item in listSubjects" :key="item.id">
+            <td>{{item.discipline}}</td>
+            <td>{{item.code}}</td>
+            <td>{{item.semester}}</td>
+            <td>
+                <div v-for="professor in item.professors" :key="professor.userid">
+                    {{professor.fullname}}
+                </div>
+                <div v-if="!item.professors.length">
+                    -
+                </div>
+            </td>
+            <td class="botao">
+              <button
+                  class="btn cd-btn"
+                  @click="goToSubject(item.subjectid)">
+                  <em class="fa-solid fa-circle-info mr-2 ml-0 icon-detail"></em> Ver detalhes
+              </button>
+            </td>
+        </tr>
+
+        <div v-if="!listSubjects.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>

@@ -161,8 +161,24 @@ const routes = [
   },
   {
     path: '/disciplinas/visualizar/:id',
-    name: 'Visualização d Disciplina',
+    name: 'Visualização de Disciplina',
     component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/turma/:id',
+    name: 'Edição de Turma',
+    component: () => import('../components/turma/edicao-turma/EdicaoTurma.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/turmas',
+    name: 'Visualização de Turmas',
+    component: () => import('../components/turma/visualizacao-turma/VisualizacaoTurma.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -192,7 +208,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!store.getters.isAuthenticated) {
       next({
-        path: '/usuario/login',
+        path: '/login',
         params: { nextUrl: to.fullPath },
       });
     } else {

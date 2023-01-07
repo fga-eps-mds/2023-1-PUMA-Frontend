@@ -48,6 +48,15 @@ export default {
                         this.$router.push({ path: '/disciplinas' }).catch(()=>{});
                     },
                 },
+                classItem: {
+                    basePath: '/turmas',
+                    title: 'Turmas',
+                    iconUrl: require('@/assets/menu-5.svg'),
+                    show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
+                    onclick: () => {
+                        this.$router.push({ path: '/turmas' }).catch(()=>{});
+                    },
+                },
                 keywords: {
                     basePath: '/palavras-chave',
                     title: 'Palavras-Chave',
@@ -75,7 +84,7 @@ export default {
         },
         showMenuHamburger(element) {
             const content = document.getElementById(element);
-      
+
             if (!content.style.display) {
               content.style.display = 'block';
             } else if (content.style.display === 'block') {
