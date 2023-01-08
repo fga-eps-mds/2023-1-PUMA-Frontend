@@ -168,7 +168,7 @@ const routes = [
     },
   },
   {
-    path: '/turma/:id',
+    path: '/turma/:classid',
     name: 'Edição de Turma',
     component: () => import('../components/turma/edicao-turma/EdicaoTurma.vue'),
     meta: {

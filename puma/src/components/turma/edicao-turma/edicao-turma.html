@@ -14,8 +14,8 @@
         <label class="label">
           Selecione a disciplina para adicionar uma turma
         </label>
-        <select class="select-subject">
-          <option value="PSP1">PSP1</option>
+        <select class="select-subject" v-model="subjectForm">
+          <option v-for="subject in mySubjects" :key="subject.subjectid" :value="subject">{{subject.name}}</option>
         </select>
       </div>
 
@@ -26,7 +26,7 @@
         <div class="label-t">
           T
         </div>
-        <input type="text" class="input-text" placeholder="Digite no máximo dois números" name="">
+        <input type="text" class="input-text" placeholder="Digite no máximo dois números" v-model="codeForm">
         <p class="p-observation">De acordo com o SIGAA, o modelo de turmas é T01, T02...</p>
       </div>
 
@@ -39,7 +39,7 @@
           <label class="label">
             Ano
           </label>
-          <input class="input-text input-text-big" type="text" placeholder="Digite" name="">
+          <input class="input-text input-text-big" type="text" placeholder="Digite" v-model="yearForm">
           <p class="p-observation">Ex.: 2020</p>
         </div>
 
@@ -47,10 +47,10 @@
           <label class="label">
             Semestre
           </label>
-          <select class="select-subject">
-            <option>1°</option>
-            <option>2°</option>
-            <option>Verão</option>
+          <select class="select-subject" v-model="semesterForm">
+            <option value="1">1°</option>
+            <option value="2">2°</option>
+            <option value="VERAO">Verão</option>
           </select>
         </div>
       </div>
@@ -64,13 +64,13 @@
           <label class="label">
             Dia da semana
           </label>
-          <select class="select-subject">
-            <option>Segunda-feira</option>
-            <option>Terça-feira</option>
-            <option>Quarta-feira</option>
-            <option>Quinta-feira</option>
-            <option>Sexta-feira</option>
-            <option>Sábado</option>
+          <select class="select-subject" v-model="dayScheduleForm">
+            <option value="Segunda-feira">Segunda-feira</option>
+            <option value="Terça-feira">Terça-feira</option>
+            <option value="Quarta-feira">Quarta-feira</option>
+            <option value="Quinta-feira">Quinta-feira</option>
+            <option value="Sexta-feira">Sexta-feira</option>
+            <option value="Sábado">Sábado</option>
           </select>
         </div>
 
@@ -79,14 +79,14 @@
             <label class="label">
               Início
             </label>
-            <input type="text" class="input-text input-text-big" placeholder="00:00" name="">
+            <input type="text" class="input-text input-text-big" placeholder="00:00" v-model="startScheduleForm">
           </div>
 
           <div class="content content-small">
             <label class="label">
               Términio
             </label>
-            <input type="text" class="input-text input-text-big" placeholder="00:00" name="">
+            <input type="text" class="input-text input-text-big" placeholder="00:00" v-model="endScheduleForm">
           </div>
 
           <p class="p-observation">Apenas número no formato HH:MM Ex.: 17:30</p>
@@ -103,8 +103,8 @@
         <label class="label">
           Quais professores serão responsáveis pela turma?
         </label>
-        <select class="select-subject">
-          <option>PSP1</option>
+        <select class="select-subject" v-model="teachersForm">
+          <option v-for="professor in subjectForm.professors" :key="professor.userId" :value="professor.userId">{{professor.fullname}}</option>
         </select>
       </div>
 
@@ -114,19 +114,19 @@
         <label class="label">
           Informe uma senha para seus alunos ingressarem na turma
         </label>
-        <input class="input-text input-text-medium" type="text" placeholder="Digite a senha" name="">
+        <input class="input-text input-text-medium" type="text" placeholder="Digite a senha" v-model="passwordForm">
       </div>
 
       <div>
         <button
             class="btn-create"
-            onclick="window.location.href = '/turma/0'">
+            @click="onSubmit()">
             <em class="fa-solid fa-plus mr-2 add-project"></em>Criar turma
         </button>
 
         <button
             class="btn-cancel"
-            onclick="window.location.href = '/turma/0'">
+            onclick="window.location.href = '/turmas'">
             Cancelar
         </button>
       </div>

@@ -1,8 +1,10 @@
 import SubjectService from '../../../services/SubjectService';
+import ClassService from '../../../services/ClassService';
 import ListaConsultaTurma from './ListaConsultaTurma/ListaConsultaTurma.vue';
 
 export default {
   beforeMount() {
+    this.getData();
   },
 
   components: {
@@ -16,8 +18,10 @@ export default {
     isDeletingSubject: false,
     subjects: [],
     mySubjects: [],
+    listClasses: [],
     subjectService: new SubjectService(),
 
+    classService: new ClassService(),
     dispMySubjects: false,
     dispTimeFIlter: false,
     listYears: [
@@ -34,15 +38,16 @@ export default {
   }),
 
   methods: {
-    a() {
-      console.log(this.listSemesters);
-    },
-    getSubjects() {
+    getData() {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       this.subjectService.getSubjects().then((response) => {
         this.subjects = response.data;
-        this.$store.commit('CLOSE_LOADING_MODAL');
-        this.separateSubjects();
+
+        this.classService.getClasses().then((res) => {
+          this.listClasses = res.data;
+          console.log(this.listClasses);
+          this.$store.commit('CLOSE_LOADING_MODAL');
+        });
       }).catch(() => {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Erro ao recuperar disciplinas', 'danger');
