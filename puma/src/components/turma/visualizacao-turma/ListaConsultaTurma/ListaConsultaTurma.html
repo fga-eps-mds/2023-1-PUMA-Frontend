@@ -8,15 +8,15 @@
             <th></th>
         </tr>
 
-        <tr v-for="item in listSubjects" :key="item.id">
-            <td>{{item.discipline}}</td>
-            <td>{{item.code}}</td>
-            <td>{{item.semester}}</td>
+        <tr v-for="item in listClassesEditable" :key="item.classid">
+            <td>{{item.subject.name}}</td>
+            <td>{{item.classcode}}</td>
+            <td>{{formatSemester(item.semester)}}/{{item.year}}</td>
             <td>
-                <div v-for="professor in item.professors" :key="professor.userid">
+                <div v-for="professor in item.subject.professors" :key="professor.userid">
                     {{professor.fullname}}
                 </div>
-                <div v-if="!item.professors.length">
+                <div v-if="!item.subject.professors.length">
                     -
                 </div>
             </td>

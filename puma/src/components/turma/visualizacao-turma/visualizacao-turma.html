@@ -61,13 +61,11 @@
 
     <div class="tabelas">
       <ListaConsultaTurma v-if="dispMySubjects" class="minhasDisciplinas"
-          :title="'Suas Disciplinas'"
-          :dataSubjects="mySubjects"
-          :subjectSearch="subjectSearch"/>
+      :mySubjects="true"
+      :subjectSearch="subjectSearch"/>
 
       <ListaConsultaTurma v-if="!dispMySubjects" class="demaisDisciplinas"
-      :title="'Outras Disciplinas'"
-      :dataSubjects="subjects"
+      :mySubjects="false"
       :subjectSearch="subjectSearch"/>
     </div>
 </div>
