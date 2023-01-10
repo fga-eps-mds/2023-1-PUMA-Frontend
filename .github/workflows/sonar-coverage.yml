@@ -12,15 +12,17 @@ jobs:
       with:
         fetch-depth: 0
     - name: Get dev
-      run:  git fetch origin dev
-    - name: Movendo para diretorio de codigo
-      run:  cd puma
+      run:  cd puma \
+        git fetch origin dev
     - name: Instalar dependencias
-      run:  npm install
+      run:  cd puma \
+        npm install
     - name: Instalar Jest
-      run:  npm install -g jest
+      run:  cd puma \
+        npm install -g jest
     - name: Executar testes
-      run:  jest --coverage --runInBand --detectOpenHandles --forceExit
+      run: cd puma \
+        jest --coverage --runInBand --detectOpenHandles --forceExit
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
