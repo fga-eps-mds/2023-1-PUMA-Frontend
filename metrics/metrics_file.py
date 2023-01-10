@@ -7,7 +7,7 @@ import os
 now = datetime.now()
 
 base_url = 'https://sonarcloud.io/api/measures/component_tree?component=fga-eps-mds_'
-file_name = 'fga-eps-mds-2022-1-PUMA'
+file_name = 'fga-eps-mds-2022-2-PUMA'
 
 metrics = ['files', 'functions', 'complexity', 'comment_lines_density', 'duplicated_lines_density',
            'coverage', 'ncloc', 'tests', 'test_errors', 'test_failures', 'test_execution_time', 'security_rating']
