@@ -16,12 +16,9 @@ export default {
       { date: 2020, selected: false },
     ],
     listSemesters: [
-      { name: '1°', selected: false },
-      { name: '2°', selected: false },
-      { name: 'Verão', selected: false },
+      { name: '1°', selected: false, value: '1' },
+      { name: '2°', selected: false, value: '2' },
+      { name: 'Verão', selected: false, value: 'VERAO' },
     ],
   }),
-
-  methods: {
-  },
 };

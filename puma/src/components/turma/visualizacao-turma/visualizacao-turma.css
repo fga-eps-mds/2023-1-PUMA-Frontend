@@ -175,6 +175,7 @@ svg {
   padding-left: 15px;
   height: 40px;
   width: 250px;
+  cursor: pointer;
 }
 .content-options-filter {
   position: absolute;

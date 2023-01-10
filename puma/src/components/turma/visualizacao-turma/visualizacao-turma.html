@@ -60,12 +60,11 @@
     </div>
 
     <div class="tabelas">
-      <ListaConsultaTurma v-if="dispMySubjects" class="minhasDisciplinas"
+      <ListaConsultaTurma class="minhasDisciplinas"
       :mySubjects="true"
-      :subjectSearch="subjectSearch"/>
-
-      <ListaConsultaTurma v-if="!dispMySubjects" class="demaisDisciplinas"
-      :mySubjects="false"
+      :dispMySubjects="dispMySubjects"
+      :listYears="listYears"
+      :listSemesters="listSemesters"
       :subjectSearch="subjectSearch"/>
     </div>
 </div>

@@ -9,6 +9,9 @@ export default {
   props: {
     mySubjects: Boolean,
     subjectSearch: String,
+    dispMySubjects: Boolean,
+    listYears: Array,
+    listSemesters: Array,
   },
 
   data: () => ({
@@ -19,18 +22,100 @@ export default {
     subjectService: new SubjectService(),
   }),
 
+  created() {
+    this.$watch('listYears', (after) => {
+      after.filter(() => {
+        this.filter();
+        return null;
+      });
+    }, { deep: true });
+
+    this.$watch('listSemesters', (after) => {
+      after.filter(() => {
+        this.filter();
+        return null;
+      });
+    }, { deep: true });
+  },
+
   watch: {
+    deep: true,
+    dispMySubjects() {
+      this.filter();
+    },
     subjectSearch() {
-      if (this.subjectSearch) {
-        this.listClassesEditable = this.listClasses.filter((item) => (
-          item.subject.name.toLowerCase().includes(this.subjectSearch.toLowerCase())));
-      } else {
-        this.listClassesEditable = this.listClasses;
-      }
+      this.filter();
     },
   },
 
   methods: {
+    filter() {
+      this.listClassesEditable = this.listClasses;
+
+      if (this.subjectSearch) {
+        this.listClassesEditable = this.listClasses.filter((item) => (
+          item.subject.name.toLowerCase().includes(this.subjectSearch.toLowerCase())));
+      }
+
+      let listClassesEditable = [];
+      if (this.dispMySubjects) {
+        listClassesEditable = [];
+        this.listClassesEditable.map((sub) => {
+          sub.subject.professors.map((prof) => {
+            if (prof.userid === this.$store.getters.user.userId) {
+              listClassesEditable.push(sub);
+            }
+            return null;
+          });
+          return null;
+        });
+        this.listClassesEditable = listClassesEditable;
+      }
+
+      let listSemester = [];
+      let listYear = [];
+      for (let i = 0; i < this.listSemesters.length;) {
+        if (this.listSemesters[i].selected) {
+          listSemester.push(this.listSemesters[i].value);
+        }
+        i += 1;
+      }
+      for (let i = 0; i < this.listYears.length;) {
+        if (this.listYears[i].selected) {
+          listYear.push(this.listYears[i].date);
+        }
+        i += 1;
+      }
+      if (listSemester.length > 0) {
+        listClassesEditable = [];
+        this.listClassesEditable.map((sub) => {
+          listSemester.map((semester) => {
+            if (semester === sub.semester) {
+              listClassesEditable.push(sub);
+            }
+            return null;
+          });
+          return null;
+        });
+        this.listClassesEditable = listClassesEditable;
+      }
+
+      listSemester = [];
+      if (listYear.length > 0) {
+        listClassesEditable = [];
+        this.listClassesEditable.map((sub) => {
+          listYear.map((year) => {
+            if (year === sub.year) {
+              listClassesEditable.push(sub);
+            }
+            return null;
+          });
+          return null;
+        });
+        this.listClassesEditable = listClassesEditable;
+      }
+      listYear = [];
+    },
     goToSubject(id) {
       this.$router.push({ path: `/turma/${id}` });
     },

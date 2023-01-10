@@ -14,9 +14,33 @@
         <label class="label">
           Selecione a disciplina para adicionar uma turma
         </label>
-        <select class="select-subject" v-model="subjectForm">
+        <!-- <select class="select-subject" v-model="subjectForm">
+          <option value="" selected hidden>Selecione a disciplina</option>
           <option v-for="subject in mySubjects" :key="subject.subjectid" :value="subject">{{subject.name}}</option>
-        </select>
+        </select> -->
+
+        <div class="content-select">
+          <div class="select-subject" @click="dispSelectSubject = !dispSelectSubject">
+            {{(subjectForm?subjectForm.name:"Selecione a disciplina")}}
+
+            <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSubject"></em>
+            <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
+          </div>
+          <div class="content-options-select" v-if="dispSelectSubject">
+            <div class="content-item-options-select" v-for="subjectItem in mySubjects" :key="subjectItem.subjectid" @click="setSubjectForm(subjectItem)">
+              <div v-show="subjectItem !== subjectForm" class="content-item-select">
+                <em class="far fa-circle mr-2"></em>
+                {{subjectItem.name}}
+              </div>
+
+              <div v-show="subjectItem === subjectForm" class="content-item-select content-item-selected">
+                <em class="fa-solid fa-circle-dot mr-2"></em>
+                {{subjectItem.name}}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="content content-big">
@@ -47,11 +71,29 @@
           <label class="label">
             Semestre
           </label>
-          <select class="select-subject" v-model="semesterForm">
-            <option value="1">1°</option>
-            <option value="2">2°</option>
-            <option value="VERAO">Verão</option>
-          </select>
+
+
+          <div class="content-select">
+            <div class="select-subject" @click="dispSelectSubject = !dispSelectSubject">
+              {{(semesterForm?formatSemester():"Selecione")}}
+
+              <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSubject"></em>
+              <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
+            </div>
+            <div class="content-options-select" v-if="dispSelectSubject">
+              <div class="content-item-options-select" v-for="semester in listSemesters" :key="semester.value" @click="setSemesterForm(semester.value)">
+                <div v-show="semester.value !== semesterForm" class="content-item-select">
+                  <em class="far fa-circle mr-2"></em>
+                  {{semester.name}}
+                </div>
+
+                <div v-show="semester.value === semesterForm" class="content-item-select content-item-selected">
+                  <em class="fa-solid fa-circle-dot mr-2"></em>
+                  {{semester.name}}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -64,14 +106,28 @@
           <label class="label">
             Dia da semana
           </label>
-          <select class="select-subject" v-model="dayScheduleForm">
-            <option value="Segunda-feira">Segunda-feira</option>
-            <option value="Terça-feira">Terça-feira</option>
-            <option value="Quarta-feira">Quarta-feira</option>
-            <option value="Quinta-feira">Quinta-feira</option>
-            <option value="Sexta-feira">Sexta-feira</option>
-            <option value="Sábado">Sábado</option>
-          </select>
+
+          <div class="content-select">
+            <div class="select-subject" @click="dispSelectSubject = !dispSelectSubject">
+              {{(dayScheduleForm?dayScheduleForm:"Selecione")}}
+
+              <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSubject"></em>
+              <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
+            </div>
+            <div class="content-options-select" v-if="dispSelectSubject">
+              <div class="content-item-options-select" v-for="day in listDays" :key="day.value" @click="setDayForm(day.value)">
+                <div v-show="day.value !== dayScheduleForm" class="content-item-select">
+                  <em class="far fa-circle mr-2"></em>
+                  {{day.value}}
+                </div>
+
+                <div v-show="day.value === dayScheduleForm" class="content-item-select content-item-selected">
+                  <em class="fa-solid fa-circle-dot mr-2"></em>
+                  {{day.value}}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="content-time">
@@ -103,6 +159,31 @@
         <label class="label">
           Quais professores serão responsáveis pela turma?
         </label>
+
+
+
+        <!-- <div class="content-select">
+          <div class="select-subject" @click="dispSelectSubject = !dispSelectSubject">
+            {{(dayScheduleForm?dayScheduleForm:"Selecione")}}
+
+            <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSubject"></em>
+            <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
+          </div>
+          <div class="content-options-select" v-if="dispSelectSubject">
+            <div class="content-item-options-select" v-for="day in listDays" :key="day.value" @click="setDayForm(day.value)">
+              <div v-show="day.value !== dayScheduleForm" class="content-item-select">
+                <em class="far fa-circle mr-2"></em>
+                {{day.value}}
+              </div>
+
+              <div v-show="day.value === dayScheduleForm" class="content-item-select content-item-selected">
+                <em class="fa-solid fa-circle-dot mr-2"></em>
+                {{day.value}}
+              </div>
+            </div>
+          </div>
+        </div> -->
+
         <select class="select-subject" v-model="teachersForm">
           <option v-for="professor in subjectForm.professors" :key="professor.userId" :value="professor.userId">{{professor.fullname}}</option>
         </select>
@@ -119,9 +200,17 @@
 
       <div>
         <button
+            v-if="classId === '0'"
             class="btn-create"
             @click="onSubmit()">
             <em class="fa-solid fa-plus mr-2 add-project"></em>Criar turma
+        </button>
+
+        <button
+            v-if="classId !== '0'"
+            class="btn-create"
+            @click="onSubmit()">
+            <em class="fa-solid fa-plus mr-2 add-project"></em>Editar turma
         </button>
 
         <button

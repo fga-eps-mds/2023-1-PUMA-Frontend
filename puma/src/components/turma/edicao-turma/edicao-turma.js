@@ -14,6 +14,7 @@ export default {
   components: {
     ReturnButton,
   },
+
   data() {
     return {
       classService: new ClassService(),
@@ -24,18 +25,56 @@ export default {
       subjectForm: "",
       codeForm: "",
       yearForm: "",
-      semesterForm: "1",
+      semesterForm: "",
       listScheduleForm: [],
-      dayScheduleForm: "Segunda-feira",
+      dayScheduleForm: "",
       startScheduleForm: "",
       endScheduleForm: "",
       teachersForm: [],
       passwordForm: "",
+      classId: this.$route.params.classid,
+
+      dispSelectSubject: false,
+
+      listDays: [
+        { value: 'Segunda-feira' },
+        { value: 'Terça-feira' },
+        { value: 'Quarta-feira' },
+        { value: 'Quinta-feira' },
+        { value: 'Sexta-feira' },
+        { value: 'Sábado' },
+      ],
+      listSemesters: [
+        { name: '1°', value: '1' },
+        { name: '2°', value: '2' },
+        { name: 'Verão', value: 'VERAO' },
+      ],
     };
   },
   async mounted() {
   },
   methods: {
+    setSubjectForm(value) {
+      this.subjectForm = value;
+    },
+    setSemesterForm(value) {
+      this.semesterForm = value;
+    },
+    setDayForm(value) {
+      this.dayScheduleForm = value;
+    },
+    formatSemester() {
+      switch (this.semesterForm) {
+        case '1':
+          return '1°';
+        case '2':
+          return '2°';
+        case 'VERAO':
+          return 'Verão';
+        default:
+          return '-';
+      }
+    },
     getSubjects() {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       this.subjectService.getSubjects().then((response) => {
@@ -65,7 +104,7 @@ export default {
           const classItem = {
             classItem: {
               subjectId: this.subjectForm.subjectid,
-              classCode: this.codeForm,
+              classCode: "T" + this.codeForm,
               year: this.yearForm,
               semester: this.semesterForm,
               password: this.passwordForm,
