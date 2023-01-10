@@ -48,6 +48,15 @@ export default {
                         this.$router.push({ path: '/disciplinas' }).catch(()=>{});
                     },
                 },
+                subjects: {
+                    basePath: '/usuarios',
+                    title: 'Perfil de Usuários',
+                    iconUrl: require('@/assets/subjects.png'),
+                    show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
+                    onclick: () => {
+                        this.$router.push({ path: '/usuario' }).catch(()=>{});
+                    },
+                },
                 keywords: {
                     basePath: '/palavras-chave',
                     title: 'Palavras-Chave',

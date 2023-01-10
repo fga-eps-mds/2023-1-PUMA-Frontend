@@ -1,0 +1,155 @@
+<div class="main-content">
+    <ReturnButton/>
+
+    <div class='main-title'>
+      {{ (operacao === 'editar' || operacao === 'visualizar') ? subject.name : 'Cadastrar Disciplina' }}
+    </div>
+
+    <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
+      <div class="form m-0">
+        <div class="form-col-1">
+          <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">
+            <div role="group" class="group">
+              <label for="name" class="input-label">Nome</label>
+              <input type="text" id="name" maxlength="1020" class="input-textfield"
+                placeholder="Digite o nome para sua disciplina" v-model="name" :disabled=isLoading
+                v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+              <span class="input-error-span" v-for="erro in v.errors">
+                {{ erro }}
+              </span>
+            </div>
+          </ValidationProvider>
+          
+          <div role="group" class="group">
+            <label for="subarea" class="input-label">
+              Área e Subáreas do conhecimento
+            </label>
+            <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
+              label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
+              :searchable="true" :showLabels="true" :closeOnSelect="false" group-values="subareas"
+              group-label="knowledgearea" selectLabel="" deselectLabel="" selectedLabel=""
+              selectGroupLabel="Selecione todas as subáreas desta área"
+              deselectGroupLabel="Remova todas as subáreas desta área" @open="multiSelectPlaceholder = 'Pesquisar'"
+              @input="sortSubareaMultiselectLabels()"
+              @close="isTouchedSubareas = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingSubareas"
+              class="input-multiselect" :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'"
+              :class="(isTouchedSubareas && !subareasSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
+              <template slot="option" slot-scope="scope">
+                <div v-if="!scope.option['$isLabel']" class="option__desc">
+                  <input class="mx-2" type="checkbox" :checked="isSubareaChecked(scope.option)" @focus.prevent
+                    :key="scope.option.subareaid" />
+                  <span class="option__title">{{ scope.option.description }}</span>
+                </div>
+                <div v-if="scope.option['$isLabel']" class="option__desc">
+                  <span class="option__title">{{ scope.option['$groupLabel'] }}</span>
+                </div>
+              </template>
+              <span slot="noResult">
+                Nenhuma subárea encontrada.
+              </span>
+            </multiselect>
+            <span v-if="isTouchedSubareas && !subareasSelected.length" class="input-error-span">
+              Escolha no mínimo uma subárea
+            </span>
+          </div>          
+
+          <div role="group" class="group">
+            <div class="label-flex-box">
+              <label for="keywords" class="input-label">
+                Palavras-chave <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="keywordAlertShow = !keywordAlertShow"/>
+              </label>
+              <b-alert dismissible :show="keywordAlertShow" variant="warning">
+                Palavras-chave conectam sua disciplina ao público externo.
+                Por isso, utilize termos simples e de fácil entendimento.
+              </b-alert>
+            </div>
+            <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keyword" label="keyword"
+              :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
+              :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
+              @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
+              @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra-chave"
+              @close="isTouchedKeywords = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingKeywords"
+              class="input-multiselect" :disabled="isLoadingKeywords || operacao === 'visualizar'"
+              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
+              <template slot="option" slot-scope="scope">
+                <div v-if="!scope.option.isTag" class="option__desc">
+                  <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
+                    :key="scope.option.keyword" />
+                  <span class="option__title">{{ scope.option.keyword }}</span>
+                </div>
+                <div v-if="scope.option.isTag" class="option__desc">
+                  <span class="option__title">{{ scope.option.label }}</span>
+                </div>
+              </template>
+              <span slot="maxElements">
+                Máximo de 6 opções selecionadas. Remova ao menos uma palavra-chave.
+              </span>
+              <span slot="noResult">
+                Nenhuma palavra-chave encontrada.
+              </span>
+            </multiselect>
+            <span v-if="isTouchedKeywords && !keywordsSelected.length" class="input-error-span">
+              Escolha no mínimo uma palavra-chave
+            </span>
+          </div>          
+        </div>
+
+        <div class="form-col-2">
+          <div role="group" class="group">
+            <div class=label-flex-box>
+              <label for="professor" class="input-label">
+                Professores <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="professorAlertShow = !professorAlertShow"/>
+              </label>
+              <b-alert dismissible :show="professorAlertShow" variant="warning">
+                Adicione outros professores que farão parte da disciplina
+              </b-alert>
+            </div>
+            <multiselect id="professor" v-model="professorsSelected" :options="professors" track-by="userid"
+              label="fullname" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderProfessor"
+              :searchable="true" :showLabels="true" :closeOnSelect="false" :max-height="150"
+              @input="sortProfessorMultiselectLabels" selectLabel="" deselectLabel="" selectedLabel=""
+              @open="multiSelectPlaceholder = 'Pesquisar'" :loading="isLoadingProfessors"
+              @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'" class="input-multiselect"
+              :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'"
+              :class="(isTouchedProfessors && !professorsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
+              <template slot="option" slot-scope="scope">
+                <div class="option__desc">
+                  <input class="mx-2" type="checkbox" :checked="isProfessorChecked(scope.option)" @focus.prevent
+                    :key="scope.option.userid" />
+                  <span class="option__title">{{ scope.option.fullname }}</span>
+                </div>
+              </template>
+              <span slot="noResult">
+                Nenhum professor encontrado.
+              </span>
+            </multiselect>
+            <span v-if="isTouchedProfessors && !professorsSelected.length" class="input-error-span">
+              Escolha no mínimo um professor
+            </span>
+          </div>
+          
+          <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="Ementa">
+            <div role="group" class="group">
+              <label for="descricao" class="input-label">Ementa</label>
+              <textarea id="descricao" placeholder="Descreva a ementa da disciplina usando, no mínimo, 200 caracteres."
+                maxlength="1000" rows="10" v-model="courseSyllabus" :disabled=isLoading class="input-textarea"
+                v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+              </textarea>
+              <span class="input-counter">({{courseSyllabus.length}}/1000)</span>
+              <span class="input-error-span" v-for="erro in v.errors">
+                {{ erro }}
+              </span>
+            </div>
+          </ValidationProvider>
+          
+          <div class="div-buttons" v-if="operacao !== 'visualizar'">
+            <input :value="operacao === 'editar' ? 'Editar' : 'Criar'" v-if="!isLoading && operacao !== 'visualizar'"
+              type="submit" class="cadastro-button" @click="onSubmit" />
+
+            <input :value="'Voltar'" v-if="!isLoading && operacao !== 'visualizar'"
+              type="submit" class="cadastro-button cadastro-button-voltar" @click="$router.push({path: '/disciplinas'}).catch(() => {})" />
+          </div>
+        </div>
+      </div>
+    </ValidationObserver>
+</div>

@@ -1,0 +1,34 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tebela de Listagens de Perfis">
+        <tr>
+            <th>Perfil</th>
+            <th>Descrição</th>
+            <th></th>
+        </tr>        
+        
+        <span class="title-list">{{ title }}</span>
+
+        <tr v-for="subject in listSubjects" :key="subject.subjectid">
+            <td>{{subject.name}}</td>
+            <td>
+                <div v-for="professor in subject.professors" :key="professor.userid">
+                    {{professor.fullname}}
+                </div>
+                <div v-if="!subject.professors.length">
+                    -
+                </div>
+            </td>
+            <td class="botao">
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubject(subject.subjectid)">
+                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                </button>
+            </td>
+        </tr>
+
+        <div v-if="!listSubjects.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>
