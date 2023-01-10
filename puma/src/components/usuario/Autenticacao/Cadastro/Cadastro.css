@@ -10,15 +10,31 @@
 
 .div-form {
   height: 90%;
+  background-color: #edf4fc;
+  background-image: url('../../../../assets/backgroundAreaExterna.png');
+  background-size: cover;
 }
 
 .border-card {
-  border: 1px solid #15355E;
-  border-radius: 0px 0px 16px 16px;
+  box-shadow: 1px 1px 7px rgba(20,20,20,.3);
+  border-radius: 8px 8px 8px 8px;
+  max-width: 500px;
+  width: 100%;
+  display: block;
+  margin: 10px auto;
+  background-color: #fff
+}
+
+.title-box {
+  font-size: 20px;
+  text-align: left;
+  color: #404040;
+  padding: 40px 0px 0px 50px;
+  font-weight: bold;
 }
 
 .card {
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
   border-radius: 20px;
   max-height: 80%;
   margin: 20px;
@@ -26,19 +42,8 @@
   width: 725px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   border: none;
   min-width: 500px;
-}
-
-.title-box {
-  font-size: 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  background: rgba(21,53,94,1);
-  padding: 10px;
-  font-weight: bold;
-  color: white;
 }
 
 #register-form {
@@ -67,6 +72,63 @@ option {
   transition: 0.5s;
 }
 
+.next-page {
+    align-items: center;
+    background-color: #fad145;
+    color: #51351f;
+    border: none;
+    border-radius: 7px;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 196.7px;
+    letter-spacing: 0.03em;
+    text-align: center;
+}
+
+.next-page-disabled {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.16);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 196.7px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.previous-page {
+  align-items: center;
+  background-color: #fff;
+  color: #404040;
+  border: 1px solid #FFCE47;
+  border-radius: 7px;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 196.7px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
 .submit-btn {
   align-items: center;
   background-color: #15355e;
@@ -83,6 +145,17 @@ option {
   transition: 0.5s;
   width: 196.7px;
   letter-spacing: 0.03em;
+}
+
+.previous-page:hover {
+    background-color: #6E97CC;
+}
+
+.next-page:hover {
+    background-color: #6E97CC;
+}
+a:hover {
+    color: #6E97CC;
 }
 
 .submit-btn:hover {
@@ -108,11 +181,11 @@ a {
 }
 
 label{
-  color: rgba(21,53,94,1);
+  color: #404040;
   text-align: left;
   flex-direction: column;
-  margin-left: 70px;
-  margin-top: 30px;
+  margin-left: 50px;
+  margin-top: 20px;
   margin-bottom: -20px;
   font-weight: bold;
   float: left;
@@ -122,6 +195,18 @@ label{
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.input-field {
+    align-items: center;
+    border: 1px solid #757671;
+    border-radius: 7px;
+    font-size: 14px;
+    margin-top: 25px;
+    padding: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
 }
 
 .password-img {
@@ -143,13 +228,13 @@ label.required::after {
 
 .password-div {
   align-items: center;
-  border: 1px solid #15355e;
+  border: 1px solid #757671;
   border-radius: 7px;
   font-size: 14px;
   margin-top: 25px;
   padding: 15px;
-  margin-left: 70px;
-  margin-right: 70px;
+  margin-left: 50px;
+  margin-right: 50px;
   display: flex;
 }
 
@@ -170,6 +255,18 @@ label.required::after {
   margin: 20px 0px;
   width: 100%;
   padding: 0px 50px;
+}
+
+.clickable-text-center {
+    font-size: 16px;
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 40px;
+}
+
+.clickable-link {
+  text-decoration: underline;
+  color: #4d4d4d;
 }
 
 @media only screen and (max-width:1000px) {

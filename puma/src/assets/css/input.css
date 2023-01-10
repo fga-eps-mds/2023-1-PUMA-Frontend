@@ -4,7 +4,7 @@
     color: #15355E;
     font-size: 20px;
 }
-  
+
 .input-textarea {
     border: 1px solid #15355e;
     flex-direction: column;
@@ -14,7 +14,7 @@
     width: 100%;
     outline: none;
 }
-  
+
 .input-textfield {
     border: 1px solid #15355e;
     flex-direction: column;
@@ -22,83 +22,83 @@
     border-radius: 5px;
     padding: 15px;
     width: 100%;
-    height: 45px;
+    height: 40px;
     outline: none;
 }
-  
+
 .input-textarea:disabled, .input-textfield:disabled {
     background-color: #fff;
     opacity: .6;
 }
-  
+
 .input-focus:focus, .input-focus:hover {
     border: 1px solid #6E97CC !important;
 }
-  
+
 .input-error {
     border: 1px solid #EB0600;
 }
-  
+
 .input-error-span {
     text-align: left;
     color: #EB0600;
 }
-  
+
 .input-counter {
     float: right;
     font-size: 0.9rem;
     color: #94A6BC;
 }
-  
+
 .input-multiselect >>> .multiselect__tag {
     background: #2c496e;
     font-weight: bold;
     font-size: 16px;
 }
-  
+
 .input-multiselect >>> .multiselect__tags {
     border: 1px solid #15355e;
     outline: none;
 }
-  
+
 .input-multiselect-focus >>> .multiselect__tags:hover {
     border: 1px solid #6E97CC;
 }
-  
+
 .input-multiselect-focus >>> .multiselect__tags:focus-within {
     border: 1px solid #6E97CC;
 }
-  
+
 .input-multiselect-error >>> .multiselect__tags {
     border: 1px solid #EB0600;
 }
-  
+
 .input-multiselect >>> .multiselect__tag-icon {
     background: #2c496e;
     line-height: 25px;
 }
-  
+
 .input-multiselect >>> .multiselect__tag-icon:hover {
     background: #15355e;
 }
-  
+
 .input-multiselect >>> .multiselect__tag-icon:after {
     content: "\D7";
     color: #ccc;
     font-size: 16px;
 }
-  
+
 .input-multiselect >>> .multiselect__tag-icon:hover:after {
     color: #fff;
 }
-  
+
 .input-multiselect >>> .multiselect__select {
     background: transparent !important;
 }
-  
+
 .input-multiselect >>> .multiselect__option--disabled {
     background: #ccc !important;
-    color: #35495e !important; 
+    color: #35495e !important;
     cursor: text;
     pointer-events: none;
 }

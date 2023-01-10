@@ -1,27 +1,15 @@
 <div class="root">
-  <div class="div-visitor-nav">
-    <VisitorNav :navs="navs" />
-  </div>
+  <AreaExternaHeader />
   <div class="w-100 div-form">
     <b-container fluid class="h-100">
       <b-row class="h-100">
-        <b-col cols="3">
-          <b-row align-h="end" align-v="end" class="h-100">
-            <div id='moca_img_div'>
-              <img class="image-page-cadastro" id='moca_img' src='../../../../assets/vetor-cadastro.svg' alt='PUMA'
-                draggable="false" />
-            </div>
-          </b-row>
-        </b-col>
-        <b-col class="row-centro" cols="6">
+        <b-col class="row-centro" cols="12">
           <b-row align-h="center">
             <div class="card">
-              <div class="title-box">
-                <b-row align-h="center">
-                  Cadastro de Usuário
-                </b-row>
-              </div>
               <div class="border-card">
+                <div class="title-box">
+                  Bem Vindo(a) a PUMA
+                </div>
                 <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
                   <form id="register-form">
                     <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-show="isFirstPage">
@@ -86,7 +74,7 @@
                               <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
                           </div>
                         </div>
-                        
+
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
@@ -196,54 +184,44 @@
 
                     <b-container class="div-troca-pagina" fluid v-show="isFirstPage">
                       <b-row>
-                        <b-col />
-                        <b-col cols="8">
-                          <b-row align-h="center">
-                            <font-awesome-icon icon="fa-solid fa-circle" size="2x" style="margin: 10px;">
-                            </font-awesome-icon>
-                            <font-awesome-icon style="margin: 10px;"
-                              icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
-                          </b-row>
-                        </b-col>
                         <b-col>
                           <b-row align-h="center">
                             <em style="cursor: pointer" @click="changePage(1)">
-                              <font-awesome-icon  icon="fa-solid fa-angle-right" size="2x" style="margin: 10px 0px;">
-                              </font-awesome-icon>
+                              <input class="next-page" value="Prosseguir"/>
                             </em>
                           </b-row>
                         </b-col>
                       </b-row>
                     </b-container>
+                    <div class="clickable-text-center create-account" v-show="isFirstPage">
+                      <router-link class="clickable-link" to="/login">
+                        <strong> Voltar a tela inicial </strong>
+                      </router-link>
+                    </div>
 
                     <b-container fluid v-show="!isFirstPage" style="padding:10px;">
                       <b-row>
                         <b-col>
                           <b-row align-h="center">
                             <em style="cursor: pointer" @click="changePage(2)">
-                              <font-awesome-icon icon="fa-solid fa-angle-left" size="2x" style="margin: 10px;">
-                              </font-awesome-icon>
+                              <input v-show="!isLoading && !isFirstPage" type="submit" v-bind:class="{ 'next-page': type==='Aluno' || type==='Professor' || type==='Agente Externo', 'next-page-disabled': !(type==='Aluno' || type==='Professor' || type==='Agente Externo') }" value="Finalizar Cadastro" @click.prevent="onSubmit" form="register-form" />
                             </em>
                           </b-row>
                         </b-col>
-                        <b-col cols="8">
+                      </b-row>
+                      <b-row>
+                        <b-col>
                           <b-row align-h="center">
-                            <em>
-                              <font-awesome-icon style="margin: 10px;"
-                                icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
+                            <em style="cursor: pointer" @click="changePage(2)">
+                              <input class="previous-page" value="Voltar"/>
                             </em>
-                            <font-awesome-icon icon="fa-solid fa-circle" size="2x" style="margin: 10px;">
-                            </font-awesome-icon>
                           </b-row>
                         </b-col>
-                        <b-col />
                       </b-row>
                     </b-container>
 
-                    <input v-show="!isLoading && !isFirstPage" type="submit" class="submit-btn" value="Cadastrar" @click.prevent="onSubmit" form="register-form" />
-
                     <Loading class="loading" v-show='isLoading' />
-
+                    <br/>
                   </form>
                 </ValidationObserver>
               </div>
