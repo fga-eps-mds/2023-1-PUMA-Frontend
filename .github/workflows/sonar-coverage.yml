@@ -13,6 +13,8 @@ jobs:
         fetch-depth: 0
     - name: Get dev
       run:  git fetch origin dev
+    - name: Movendo para diretorio de codigo
+      run:  cd puma
     - name: Instalar dependencias
       run:  npm install
     - name: Instalar Jest
