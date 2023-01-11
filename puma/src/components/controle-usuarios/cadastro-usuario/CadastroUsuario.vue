@@ -1,7 +1,7 @@
-<template src="./cadastro-disciplina.html"></template>
+<template src="./cadastro-usuario.html"></template>
 
-<script src="./cadastro-disciplina.js"></script>
+<script src="./cadastro-usuario.js"></script>
 
-<style src="./cadastro-disciplina.css" scoped></style>
+<style src="./cadastro-usuario.css" scoped></style>
 
 <style src="@/assets/css/input.css" scoped></style>
