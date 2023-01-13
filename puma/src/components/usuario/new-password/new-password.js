@@ -49,5 +49,5 @@ export default {
 extend('regex', {
   // eslint-disable-next-line camelcase
   ...regex,
-  message: 'Precisa ter letras e números',
+  message: 'Para uma senha mais segura utilize a combinação de letras e numeros.',
 });
