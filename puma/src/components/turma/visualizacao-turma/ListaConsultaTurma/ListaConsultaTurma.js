@@ -88,14 +88,12 @@ export default {
       }
       if (listSemester.length > 0) {
         listClassesEditable = [];
-        this.listClassesEditable.map((sub) => {
-          listSemester.map((semester) => {
+        this.listClassesEditable.forEach((sub) => {
+          listSemester.forEach((semester) => {
             if (semester === sub.semester) {
               listClassesEditable.push(sub);
             }
-            return null;
           });
-          return null;
         });
         this.listClassesEditable = listClassesEditable;
       }
@@ -103,14 +101,12 @@ export default {
       listSemester = [];
       if (listYear.length > 0) {
         listClassesEditable = [];
-        this.listClassesEditable.map((sub) => {
-          listYear.map((year) => {
+        this.listClassesEditable.forEach((sub) => {
+          listYear.forEach((year) => {
             if (year === sub.year) {
               listClassesEditable.push(sub);
             }
-            return null;
           });
-          return null;
         });
         this.listClassesEditable = listClassesEditable;
       }

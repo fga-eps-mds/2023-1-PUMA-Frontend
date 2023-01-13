@@ -132,7 +132,7 @@ export default {
       if(this.teachersForm.includes(professor)){
         let teachersForm = [];
         for (let i = 0; i < this.teachersForm.length;) {
-          if (!(this.teachersForm[i] === professor)) {
+          if (this.teachersForm[i] !== professor) {
             teachersForm.push(this.teachersForm[i]);
           }
           i += 1;
@@ -172,7 +172,7 @@ export default {
     removeDay(item) {
       let listScheduleForm = [];
       for (let i = 0; i < this.listScheduleForm.length;) {
-        if (!(this.listScheduleForm[i] === item)) {
+        if (this.listScheduleForm[i] !== item) {
           listScheduleForm.push(this.listScheduleForm[i]);
         }
         i += 1;
@@ -221,32 +221,32 @@ export default {
       });
     },
     async onSubmit() {
+      const regex = /\W/;
       if (this.subjectForm.subjectid === undefined) {
         this.makeToast('ERRO', 'Disciplina não selecionada', 'danger');
         return;
       }
-      if (this.codeForm === undefined || this.codeForm === '') {
+      else if (this.codeForm === undefined || this.codeForm === '') {
         this.makeToast('ERRO', 'Código da disciplina não informado', 'danger');
         return;
       }
-      if (this.yearForm === undefined || this.yearForm === '' || Number(this.yearForm) < 1950 || Number(this.yearForm) > 3000) {
+      else if (this.yearForm === undefined || this.yearForm === '' || Number(this.yearForm) < 1950 || Number(this.yearForm) > 3000) {
         this.makeToast('ERRO', 'Ano da disciplina não informado', 'danger');
         return;
       }
-      if (this.semesterForm === undefined || this.semesterForm === '') {
+      else if (this.semesterForm === undefined || this.semesterForm === '') {
         this.makeToast('ERRO', 'Semestre da disciplina não informado', 'danger');
         return;
       }
-      const regex = /\W/;
-      if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm)) {
+      else if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm)) {
         this.makeToast('ERRO', 'Senha inválida', 'danger');
         return;
       }
-      if (this.teachersForm.length < 1) {
+      else if (this.teachersForm.length < 1) {
         this.makeToast('ERRO', 'Professores não selecionados', 'danger');
         return;
       }
-      if (this.listScheduleForm < 1) {
+      else if (this.listScheduleForm < 1) {
         this.makeToast('ERRO', 'Horários das aulas não informado', 'danger');
         return;
       }

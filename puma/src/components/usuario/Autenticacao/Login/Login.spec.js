@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { shallowMount } from '@vue/test-utils';
-import * as Cookies from 'js-cookie';
 import Login from './Login.vue';
 
 describe('Testando criação do componente "Login"', () => {
