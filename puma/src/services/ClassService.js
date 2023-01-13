@@ -4,17 +4,6 @@ import axios from '../main.js';
 import store from '../store';
 
 export default class ClassService {
-    addClass(classItem) {
-        return new Promise((resolve, reject) => {
-            const auth = store.getters.token;
-            axios.post(`${global.URL_GATEWAY}/class`, classItem, { headers: { auth } }).then((response) => {
-                resolve(response);
-            }).catch((error) => {
-                reject(error);
-            });
-        });
-    }
-
     async getClasses() {
         const auth = store.getters.token;
         const subjects = await axios.get(`${global.URL_GATEWAY}/class`, { headers: { auth } });

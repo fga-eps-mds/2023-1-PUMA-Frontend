@@ -61,7 +61,7 @@ export default {
       if (this.dispMySubjects) {
         listClassesEditable = [];
         this.listClassesEditable.map((sub) => {
-          sub.subject.professors.map((prof) => {
+          sub.teachers.map((prof) => {
             if (prof.userid === this.$store.getters.user.userId) {
               listClassesEditable.push(sub);
             }
@@ -117,7 +117,7 @@ export default {
       listYear = [];
     },
     goToSubject(id) {
-      this.$router.push({ path: `/turma/${id}` });
+      this.$router.push({ path: `/turma/${id}` }).catch(() => {});
     },
     formatSemester(semester) {
       switch (semester) {
@@ -131,13 +131,19 @@ export default {
           return '-';
       }
     },
-    getData() {
+    async getData() {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      this.subjectService.getSubjects().then((response) => {
+      this.subjectService.getSubjects().then(async (response) => {
         this.listSubjects = response.data;
-        this.classService.getClasses().then((res) => {
+        this.classService.getClasses().then(async (res) => {
           this.listClasses = res.data;
+          /* eslint-disable no-await-in-loop */
           for (let i = 0; i < this.listClasses.length;) {
+            await this.classService.getClassById(this.listClasses[i].classid)
+              .then((responseClass) => {
+                this.listClasses[i].teachers = responseClass.data.classItem.teachers;
+              });
+
             for (let j = 0; j < this.listSubjects.length;) {
               if (this.listSubjects[j].subjectid === this.listClasses[i].subjectid) {
                 this.listClasses[i].subject = this.listSubjects[j];
@@ -147,6 +153,7 @@ export default {
             }
             i += 1;
           }
+          /* eslint-enable no-await-in-loop */
           this.listClassesEditable = this.listClasses;
           this.$store.commit('CLOSE_LOADING_MODAL');
         });

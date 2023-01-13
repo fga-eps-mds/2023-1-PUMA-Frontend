@@ -65,6 +65,14 @@
   margin: 0px 0px 5px 0px;
 }
 
+.label-empty {
+  color: #94A6BC;
+}
+
+.label-none {
+  display: none;
+}
+
 .content-select {
   position: relative;
 }
@@ -81,6 +89,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: #404040;
 }
 
 .content-options-select {
@@ -125,6 +134,26 @@
 .content-item-selected {
   background-color: #15355E;
   color: #fff;
+}
+
+.content-professor-select {
+  width: 130px;
+  background-color: #15355E;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 30px;
+  color: #fff;
+  padding: 5px 5px 3px 10px;;
+  margin: -4px 5px 5px 5px;
+}
+
+.content-professor-item-select {
+  width: calc(98% - 20px);
+  overflow: hidden;
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .label-t {
@@ -197,6 +226,10 @@
   background-color: rgba(40,40,40,.1);
 }
 
+.btn-time-red {
+  color: #D10000;
+}
+
 .line {
   display: block;
   margin: 30px auto;
@@ -212,6 +245,10 @@
   width: 150px;
   height: 40px;
   margin: 20px 20px 10px 0px;
+}
+
+.btn-create-enabled {
+  background-color: #15355E;
 }
 
 .btn-cancel {
