@@ -16,21 +16,21 @@ const userState = createPersistedState({
         try {
           Cookies.get(key);
         } catch (err) {
-          // console.error(err);
+          err.toString();
         }
       },
       setItem: (key, value) => {
         try {
           Cookies.set(key, value, { expires: 7, secure: true });
         } catch (err) {
-          // console.error(err);
+          err.toString();
         }
       },
       removeItem: (key) => {
         try {
           Cookies.remove(key);
         } catch (err) {
-          // console.error(err);
+          err.toString();
         }
       },
     },

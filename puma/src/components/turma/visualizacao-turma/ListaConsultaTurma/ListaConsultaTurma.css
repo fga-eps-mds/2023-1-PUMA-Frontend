@@ -15,6 +15,10 @@ table {
     border-collapse: separate;
 }
 
+caption {
+  display: none;
+}
+
 th {
     font-size: 20px;
     color: #15355e;

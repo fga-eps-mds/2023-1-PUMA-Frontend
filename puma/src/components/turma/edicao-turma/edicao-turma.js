@@ -222,11 +222,7 @@ export default {
     },
     async onSubmit() {
       const regex = /\W/;
-      if (this.subjectForm.subjectid === undefined) {
-        this.makeToast('ERRO', 'Disciplina não selecionada', 'danger');
-        return;
-      }
-      else if (this.codeForm === undefined || this.codeForm === '') {
+      if (this.codeForm === undefined || this.codeForm === '') {
         this.makeToast('ERRO', 'Código da disciplina não informado', 'danger');
         return;
       }
@@ -234,20 +230,12 @@ export default {
         this.makeToast('ERRO', 'Ano da disciplina não informado', 'danger');
         return;
       }
-      else if (this.semesterForm === undefined || this.semesterForm === '') {
-        this.makeToast('ERRO', 'Semestre da disciplina não informado', 'danger');
-        return;
-      }
       else if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm)) {
         this.makeToast('ERRO', 'Senha inválida', 'danger');
         return;
       }
-      else if (this.teachersForm.length < 1) {
-        this.makeToast('ERRO', 'Professores não selecionados', 'danger');
-        return;
-      }
-      else if (this.listScheduleForm < 1) {
-        this.makeToast('ERRO', 'Horários das aulas não informado', 'danger');
+      else if (!this.enableSendBtn) {
+        this.makeToast('ERRO', 'Existem campos inválidos ou não preenchidos no formulário', 'danger');
         return;
       }
 
