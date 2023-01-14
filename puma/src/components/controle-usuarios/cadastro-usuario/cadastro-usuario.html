@@ -2,13 +2,16 @@
     <ReturnButton/>
 
     <div class='main-title'>
-      {{ (operacao === 'editar' || operacao === 'visualizar') ? subject.name : 'Cadastrar Disciplina' }}
+      {{ (operacao === 'editar' || operacao === 'visualizar') ? subject.name : 'Criar perfil de usuário' }}
+    </div>
+    <div class="tittle sub-tittle mb-4">
+      Preencha os campos abaixo para adicionar perfis à PUMA, que poderão ser utilizados pelos usuarios para cadastro. 
     </div>
 
     <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
       <div class="form m-0">
         <div class="form-col-1">
-          <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">
+          <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome do perfil">
             <div role="group" class="group">
               <label for="name" class="input-label">Nome do perfil</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
