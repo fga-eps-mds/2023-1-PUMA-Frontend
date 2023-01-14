@@ -168,6 +168,38 @@ const routes = [
     },
   },
   {
+    path: '/controle-usuario',
+    name: 'Perfis de usuário',
+    component: () => import('../components/controle-usuario/consulta-usuario/ConsultaUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/controle-usuario/cadastrar',
+    name: 'Cadastro de Usuário',
+    component: () => import('../components/controle-usuario/cadastro-usuario/CadastroUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/controle-usuario/editar/:id',
+    name: 'Edição de Usuário',
+    component: () => import('../components/controle-usuario/cadastro-usuario/CadastroUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/controle-usuario/visualizar/:id',
+    name: 'Visualização de Usuário',
+    component: () => import('../components/controle-usuario/cadastro-usuario/CadastroUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/palavras-chave',
     name: 'Palavras Chave',
     component: () => import('../components/palavras-chave/KeyWords.vue'),
