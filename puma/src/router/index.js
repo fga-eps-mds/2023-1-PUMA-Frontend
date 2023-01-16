@@ -64,7 +64,7 @@ const routes = [
     },
   },
   {
-    path: '/usuario/recuperacao-senha',
+    path: '/recuperacao-senha',
     name: 'Recuperação Senha',
     component: () => import('../components/usuario/recovery-password/RecoveryPassword.vue'),
     meta: {
@@ -72,7 +72,7 @@ const routes = [
     },
   },
   {
-    path: '/usuario/atualizar-senha',
+    path: '/atualizar-senha',
     name: 'Nova Senha',
     component: () => import('../components/usuario/new-password/NewPassword.vue'),
     meta: {
