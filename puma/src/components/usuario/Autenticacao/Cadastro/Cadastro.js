@@ -5,12 +5,14 @@ import Loading from '../../../shared/loading/Loading.vue';
 import UserService from '../../../../services/UserService';
 import VisitorNav from '../../../../components/VisitorNav/VisitorNav.vue';
 import { validarTelefone, clearMasks } from '../../../../utils/validators-puma';
+import AreaExternaHeader from '../../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 export default {
   name: 'CadastroUsuario',
   components: {
     Loading,
     VisitorNav,
+    AreaExternaHeader,
   },
   mounted() {
     document.title = 'PUMA | Cadastro Usuário';
@@ -63,6 +65,7 @@ export default {
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
           await this.$router.push('/usuario/login');
+        feat/feedback-acoes-usuario
           this.makeToast('Casdastro feito com sucesso!', 'Agora é só fazer login e aproveitar nossos recursos.', 'success');
         }).catch(() => {
           this.isLoading = false;
@@ -144,7 +147,7 @@ export default {
             }
           } else {
             return false;
-          }     
+          }
         } else {
           return false;
         }
@@ -154,7 +157,7 @@ export default {
     },
     verificaSenha(senha, repitaSenha) {
       const letrasMaiusculas = /[A-Z]/;
-      const letrasMinusculas = /[a-z]/; 
+      const letrasMinusculas = /[a-z]/;
       const numeros = /[0-9]/;
       if ((senha === repitaSenha) && (senha.length >= 6)) {
         if ((letrasMaiusculas.test(senha) || letrasMinusculas.test(senha)) && numeros.test(senha)) {

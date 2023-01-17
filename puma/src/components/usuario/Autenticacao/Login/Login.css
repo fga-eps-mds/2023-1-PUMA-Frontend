@@ -10,37 +10,41 @@
 
 .div-form {
     height: 90%;
+    background-color: #edf4fc;
+    background-image: url('../../../../assets/backgroundAreaExterna.png');
+    background-size: cover;
 }
 
 .card {
     background-color: #ffffff;
+    box-shadow: 1px 1px 7px rgba(20,20,20,.3);
     padding: 1px;
-    border: 1px solid #15355E;
-    border-radius: 0px 0px 16px 16px;
-    box-sizing: boder-box;
+    border-radius: 8px 8px 8px 8px;
+    max-width: 500px;
+    display: block;
+    margin: 60px auto;
+}
+
+.title-box {
+    text-align: left;
+    font-size: 20px;
+    padding: 40px 0px 0px 50px;
+    font-weight: bold;
+    color: #323232;
 }
 
 .form {
-    margin-top: 20px;
+    margin-top: 5px;
     width: 725px;
     min-width: 500px;
 }
 
-.title-box {
-    text-align: center;
-    font-size: 20px;
-    border-radius: 16px 16px 0px 0px;
-    background: rgba(21,53,94,1);
-    padding: 10px;
-    font-weight: bold;
-    color: #ffffff;
-}
 
 .title-slot {
     text-align: left;
-    color: #15355E;
-    margin-top: 30px;
-    margin-left: 70px;
+    color: #3f3f41;
+    margin-top: 20px;
+    margin-left: 50px;
     margin-bottom: -20px;
     letter-spacing: 00.035em;
     font-weight: bold;
@@ -75,16 +79,16 @@ option {
 
 .submit-btn {
     align-items: center;
-    background-color: #15355e;
-    color: #ffffff;
+    background-color: #fad145;
+    color: #51351f;
     border: none;
     border-radius: 7px;
-    padding: 5px;
-    font-size: 24px;
+    padding: 8px;
+    font-size: 16px;
     font-weight: 700;
     margin: 0 auto;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     cursor: pointer;
     transition: 0.5s;
     width: 196.7px;
@@ -120,9 +124,14 @@ a:hover {
 }
 
 .clickable-text-center {
-    font-size: 1.1em;
-    margin-bottom: 20px;
+    font-size: 16px;
     text-align: center;
+    color: #4d4d4d;
+}
+
+.clickable-link {
+  text-decoration: underline;
+  color: #4d4d4d;
 }
 
 .error-span {
@@ -137,11 +146,23 @@ a:hover {
 .error-div {
     display: flex;
     flex-direction: column;
-    width: 100%
+    width: 100%;
 }
 
 .invalid {
     border: 1px solid #EB0600 !important;
+}
+
+.input-field {
+    align-items: center;
+    border: 1px solid #757671;
+    border-radius: 7px;
+    font-size: 14px;
+    margin-top: 25px;
+    padding: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
 }
 
 .error{
@@ -154,25 +175,25 @@ a:hover {
 
 .password-div {
     align-items: center;
-    border: 1px solid #15355e;
+    border: 1px solid #757671;
     border-radius: 7px;
     font-size: 14px;
     margin-top: 25px;
     padding: 15px;
-    margin-left: 70px;
-    margin-right: 70px;
+    margin-left: 50px;
+    margin-right: 50px;
     display: flex;
   }
-  
+
 .password-input {
     flex: 1;
     border: none;
 }
-  
+
 .password-input:focus {
     outline: 0;
 }
-  
+
 .eye-option {
     cursor: pointer;
 }

@@ -1,30 +1,33 @@
 <header>
     <div class="headerCorpo">
-        <div class="divLogo">
-            <img src="../../../assets/logo-unb.png" alt="Logo da Plataforma PUMA" onclick="window.location='/'">
+        <div class="divLogo" onclick="window.location='/'">
+            <svg width="180" height="36" viewBox="0 0 180 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.84 35V0.919998H15.144C16.68 0.919998 18.088 1.24 19.368 1.88C20.648 2.52 21.768 3.368 22.728 4.424C23.688 5.48 24.424 6.664 24.936 7.976C25.448 9.288 25.704 10.632 25.704 12.008C25.704 13.896 25.272 15.704 24.408 17.432C23.576 19.128 22.376 20.504 20.808 21.56C19.272 22.616 17.48 23.144 15.432 23.144H6.216V35H0.84ZM6.216 18.392H15.096C16.12 18.392 17.016 18.12 17.784 17.576C18.552 17 19.144 16.232 19.56 15.272C20.008 14.312 20.232 13.224 20.232 12.008C20.232 10.76 19.976 9.656 19.464 8.696C18.952 7.736 18.28 7 17.448 6.488C16.648 5.944 15.768 5.672 14.808 5.672H6.216V18.392ZM59.3543 35.24C56.6343 35.24 54.3303 34.776 52.4423 33.848C50.5863 32.92 49.0823 31.656 47.9303 30.056C46.8103 28.456 45.9783 26.632 45.4343 24.584C44.9223 22.536 44.6663 20.408 44.6663 18.2V0.919998H50.0423V18.2C50.0423 19.768 50.2023 21.288 50.5223 22.76C50.8423 24.2 51.3543 25.496 52.0583 26.648C52.7623 27.8 53.7063 28.712 54.8903 29.384C56.1063 30.056 57.5943 30.392 59.3543 30.392C61.1463 30.392 62.6343 30.056 63.8183 29.384C65.0343 28.68 65.9783 27.752 66.6503 26.6C67.3543 25.416 67.8663 24.104 68.1863 22.664C68.5063 21.224 68.6663 19.736 68.6663 18.2V0.919998H74.0903V18.2C74.0903 20.536 73.8023 22.744 73.2263 24.824C72.6823 26.872 71.8183 28.68 70.6343 30.248C69.4823 31.784 67.9783 33 66.1223 33.896C64.2663 34.792 62.0103 35.24 59.3543 35.24ZM124.296 35V10.712L114.264 29.144H111.096L101.016 10.712V35H95.64V0.919998H101.4L112.68 21.752L123.96 0.919998H129.72V35H124.296ZM161.646 0.919998H166.734L179.982 35H174.318L170.718 25.736H157.566L154.014 35H148.302L161.646 0.919998ZM169.662 21.752L164.19 6.824L158.526 21.752H169.662Z" fill="#15355E"/>
+            </svg>
         </div>
-        <nav>
+        <div class="divMobile" @click="setDispMenu(!dispMenu)">
+            <img src="../../../assets/menuHeader.png" alt="Menu" v-show='!getDispMenu()'>
+            <img src="../../../assets/menuHeaderFechar.png" alt="Menu" v-show='getDispMenu()'>
+        </div>
+        <nav v-bind:class="{ 'none': !getDispMenu(), 'block': getDispMenu() }">
             <ul>
-                <li><a href="/home/sobre"><div v-bind:class="{ currentPage: '/home/sobre' === pagina}">
+                <li><a href="/home/sobre"><div>
                     <span>Sobre</span>
-                    <span>a Puma</span>
                 </div></a></li>
-                <li><a href="/home/disciplinas"><div v-bind:class="{ currentPage: '/home/disciplinas' === pagina}">
-                    <span>Disciplinas</span>
-                    <span>de Projeto</span>
+                <li><a href="/home/disciplinas"><div>
+                    <span>Disciplinas de Projeto</span>
                 </div></a></li>
-                <li><a href="/home/parceiros"><div v-bind:class="{ currentPage: '/home/parceiros' === pagina}">
-                    <span>Parceiros</span>
-                    <span>e Projetos</span>
+                <li><a href="/home/parceiros"><div>
+                    <span>Parceirose e Projetos</span>
                 </div></a></li>
-                <li class="ultimoLi"><a href="/Contato"><div v-bind:class="{ currentPage: '/Contato' === pagina}">
+                <li class="ultimoLi"><a href="/Contato"><div>
                     <span>Contato</span>
                 </div></a></li>
             </ul>
-        </nav>
 
-        <div class="authentication">
-            <button class="login" onclick="window.location='/login'">Entrar</button>
-        </div>
+            <div class="authentication">
+                <button class="login" onclick="window.location='/login'">Login/cadastrar</button>
+            </div>
+        </nav>
     </div>
 </header>
