@@ -17,7 +17,7 @@ export default {
           iconUrl: require('@/assets/menu-2.svg'),
           show: () => this.user.isAdmin,
           onclick: () => {
-            this.$router.push({ path: '/projetos-plataforma' }).catch(() => {});
+            this.$router.push({ path: '/projetos-plataforma' }).catch(() => { });
           },
         },
         subjectProjects: {
@@ -26,7 +26,7 @@ export default {
           iconUrl: require('@/assets/menu-2.svg'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
-            this.$router.push({ path: '/projetos-disciplina' }).catch(() => {});
+            this.$router.push({ path: '/projetos-disciplina' }).catch(() => { });
           },
         },
         myProjects: {
@@ -35,7 +35,7 @@ export default {
           iconUrl: require('@/assets/menu-1.png'),
           show: () => true,
           onclick: () => {
-            this.$router.push({ path: '/meus-projetos' }).catch(() => {});
+            this.$router.push({ path: '/meus-projetos' }).catch(() => { });
           },
         },
         subjects: {
@@ -44,7 +44,16 @@ export default {
           iconUrl: require('@/assets/subjects.png'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
-            this.$router.push({ path: '/disciplinas' }).catch(() => {});
+            this.$router.push({ path: '/disciplinas' }).catch(() => { });
+          },
+        },
+        classItem: {
+          basePath: '/turmas',
+          title: 'Turmas',
+          iconUrl: require('@/assets/menu-5.svg'),
+          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          onclick: () => {
+            this.$router.push({ path: '/turmas' }).catch(() => { });
           },
         },
         keywords: {
@@ -53,7 +62,7 @@ export default {
           iconUrl: require('@/assets/menu-4.svg'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
-            this.$router.push({ path: '/palavras-chave' }).catch(() => {});
+            this.$router.push({ path: '/palavras-chave' }).catch(() => { });
           },
         },
         logout: {
@@ -62,7 +71,7 @@ export default {
           show: () => true,
           onclick: () => {
             this.$store.commit('RESET_USER_STATE');
-            this.$router.push({ path: '/login' }).catch(() => {});
+            this.$router.push({ path: '/login' }).catch(() => { });
           },
         },
       },
@@ -70,7 +79,7 @@ export default {
   },
   methods: {
     redirectToUserProjects() {
-      this.$router.push({ path: '/meus-projetos' }).catch(() => {});
+      this.$router.push({ path: '/meus-projetos' }).catch(() => { });
     },
     showMenuHamburger(element) {
       const content = document.getElementById(element);
