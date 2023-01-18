@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { shallowMount } from '@vue/test-utils';
 import AreaExternaHeader from './AreaExternaHeader.vue';
 

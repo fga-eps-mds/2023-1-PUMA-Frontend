@@ -1,4 +1,4 @@
-<template src="./item-menu-lateral.html"></template>
+<template src="./item-menu-lateral.html" />
 
 <script src="./item-menu-lateral.js"></script>
 

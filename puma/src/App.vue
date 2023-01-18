@@ -1,10 +1,10 @@
 <template>
-  <div id='app'>
+  <div id="app">
     <link
-      href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700,900'
-      rel='stylesheet'
-    />
-    <MenuLateral v-if='isAuthenticated' />
+      href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700,900"
+      rel="stylesheet"
+    >
+    <MenuLateral v-if="isAuthenticated" />
     <ConfirmModal />
     <LoadingModal />
     <router-view />
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-/* eslint-disable */
-import ConfirmModal from '@/components/ConfirmModal/ConfirmModal.vue';
-import LoadingModal from '@/components/LoadingModal/LoadingModal.vue';
+
+import ConfirmModal from './components/ConfirmModal/ConfirmModal.vue';
+import LoadingModal from './components/LoadingModal/LoadingModal.vue';
 import MenuLateral from './components/shared/menu-lateral/MenuLateral.vue';
 
 export default {

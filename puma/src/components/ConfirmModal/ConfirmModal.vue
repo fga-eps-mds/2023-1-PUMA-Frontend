@@ -1,4 +1,4 @@
-<template src="./ConfirmModal.html"></template>
+<template src="./ConfirmModal.html" />
 
 <script src="./ConfirmModal.js"></script>
 

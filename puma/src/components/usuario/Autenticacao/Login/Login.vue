@@ -1,4 +1,4 @@
-<template src="./Login.html"></template>
+<template src="./Login.html" />
 
 <style src="./Login.css" scoped></style>
 

@@ -1,4 +1,4 @@
-<template src="./Sobre.html"></template>
+<template src="./Sobre.html" />
 
 <style src="./Sobre.css"></style>
 
