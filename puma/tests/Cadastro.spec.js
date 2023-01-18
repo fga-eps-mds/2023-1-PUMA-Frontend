@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Cadastro from './Cadastro.vue';
+import Cadastro from '../src/components/usuario/Autenticacao/Cadastro/Cadastro.vue';
 
 describe('Testando criação do componente "Cadastro"', () => {
   it('Renderizando componente', () => {

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import AreaExternaHeader from './AreaExternaHeader.vue';
+import AreaExternaHeader from '../src/components/AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 describe('Testando criação do componente "AreaExternaHeader"', () => {
   it('Renderizando componente', () => {

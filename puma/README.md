@@ -1,6 +1,6 @@
 # PUMA
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2022-1-PUMA-Frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2022-1-PUMA-Frontend) [![vue version](https://img.shields.io/badge/vue-v2.6.11-blue)](https://www.npmjs.com/package/vue/v/2.6.11)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2022-2-PUMA-Frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2022-2-PUMA-Frontend) [![vue version](https://img.shields.io/badge/vue-v2.6.11-blue)](https://www.npmjs.com/package/vue/v/2.6.11)
 
 ## Project setup
 ```
