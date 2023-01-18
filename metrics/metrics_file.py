@@ -23,7 +23,7 @@ def consumer(repository, version):
     m = res.json()
 
     f = open(
-        f'./analytics-raw-data/fga-eps-mds-{repository}-{now.strftime("%m-%d-%Y-%H-%M-%S")}-{version}.json', 'w')
+        f'./analytics-raw-data/fga-eps-mds-{repository}-{now.strftime("%m-%d-%Y-%H-%M-%S")}.json', 'w')
     f.write(json.dumps(m, indent=4))
     f.close()
 
