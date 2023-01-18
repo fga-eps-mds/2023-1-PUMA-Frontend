@@ -64,9 +64,9 @@ export default {
         };
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
-          await this.$router.push('/usuario/login');
+          await this.$router.push('/meus-projetos');
           this.makeToast('SUCESSO', 'Cadastro feito com sucesso!', 'success');
-        }).catch(async () => {
+        }).catch(async (err) => {
           this.isLoading = false;
           this.makeToast('ERRO', 'Uma falha ocorreu ao efetuar o cadastro. Tente novamente.', 'danger');
         });
