@@ -1,4 +1,4 @@
-<template src="./ReturnButton.html"></template>
+<template src="./ReturnButton.html" />
 
 <script src="./ReturnButton.js"></script>
 

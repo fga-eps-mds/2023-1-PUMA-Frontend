@@ -1,4 +1,4 @@
-<template src="./ListaConsultaProjeto.html"></template>
+<template src="./ListaConsultaProjeto.html" />
 
 <script src="./ListaConsultaProjeto.js"></script>
 

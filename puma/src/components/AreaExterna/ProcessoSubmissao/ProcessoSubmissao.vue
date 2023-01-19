@@ -1,4 +1,4 @@
-<template src="./processo-submissao.html"></template>
+<template src="./processo-submissao.html" />
 
 <style src="./processo-submissao.css" scoped></style>
 

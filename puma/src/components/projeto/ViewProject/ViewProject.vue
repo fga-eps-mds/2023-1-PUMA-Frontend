@@ -1,4 +1,4 @@
-<template src="./ViewProject.html"></template>
+<template src="./ViewProject.html" />
 
 <script src="./ViewProject.js"></script>
 

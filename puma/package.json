@@ -8,7 +8,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "start": "npm run serve",
-    "test:watch": "jest --verbose --watch"
+    "test:watch": "jest --verbose --watch",
+    "test:sonar": "CI=1 jest --coverage --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -43,7 +44,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-eslint": "^4.5.19",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-plugin-vuex": "~4.5.0",

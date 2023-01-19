@@ -1,0 +1,270 @@
+<div class="main-content">
+    <ReturnButton/>
+
+    <div class='main-title'>
+      {{classId === '0'?'Criar':'Editar'}} Turma
+    </div>
+
+    <div class="sub-title">
+    Preencha os campos abaixo para {{classId === '0'?'criar':'editar'}} turmas para uma disciplina já existente
+    </div>
+
+    <div class="content-all">
+      <div class="content content-big">
+        <label class="label">
+          Selecione a disciplina para adicionar uma turma
+        </label>
+
+        <div class="content-select">
+          <div class="select-subject" @click="dispSelectSubject = !dispSelectSubject">
+            <span :class="subjectForm?'':'label-empty'">{{(subjectForm?subjectForm.name:"Selecione a disciplina")}}</span>
+
+            <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSubject"></em>
+            <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
+          </div>
+          <div class="content-options-select" v-if="dispSelectSubject">
+            <div class="content-item-options-select" v-for="subjectItem in mySubjects" :key="subjectItem.subjectid" @click="setSubjectForm(subjectItem)">
+              <div v-show="subjectItem !== subjectForm" class="content-item-select">
+                <em class="far fa-circle mr-2"></em>
+                {{subjectItem.name}}
+              </div>
+
+              <div v-show="subjectItem === subjectForm" class="content-item-select content-item-selected">
+                <em class="fa-solid fa-circle-dot mr-2"></em>
+                {{subjectItem.name}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="content content-big">
+        <label class="label">
+          Informe o código da turma, conforme o SIGAA
+        </label>
+        <div class="label-t">
+          T
+        </div>
+        <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="input-text" maxlength="2" @input="validateForm()" placeholder="Digite no máximo dois números" v-model="codeForm">
+        <p class="p-observation">De acordo com o SIGAA, o modelo de turmas é T01, T02...</p>
+      </div>
+
+      <div class="content content-medium">
+        <label class="label">
+          Em qual período a turma será ministrada?
+        </label>
+
+        <div class="content content-small">
+          <label class="label">
+            Ano
+          </label>
+          <input class="input-text input-text-big" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" @input="validateForm()" type="text" placeholder="Digite" v-model="yearForm">
+          <p class="p-observation">Ex.: 2020</p>
+        </div>
+
+        <div class="content content-small">
+          <label class="label">
+            Semestre
+          </label>
+
+
+          <div class="content-select">
+            <div class="select-subject" @click="dispSelectSemester = !dispSelectSemester">
+              <span :class="semesterForm?'':'label-empty'">{{(semesterForm?formatSemester():"Selecione")}}</span>
+
+              <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSemester"></em>
+              <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSemester"></em>
+            </div>
+            <div class="content-options-select" v-if="dispSelectSemester">
+              <div class="content-item-options-select" v-for="semester in listSemesters" :key="semester.value" @click="setSemesterForm(semester.value)">
+                <div v-show="semester.value !== semesterForm" class="content-item-select">
+                  <em class="far fa-circle mr-2"></em>
+                  {{semester.name}}
+                </div>
+
+                <div v-show="semester.value === semesterForm" class="content-item-select content-item-selected">
+                  <em class="fa-solid fa-circle-dot mr-2"></em>
+                  {{semester.name}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content content-very-big">
+        <label class="label">
+          Em qual horário da semana?
+        </label>
+
+        <div class="content content-small">
+          <label class="label">
+            Dia da semana
+          </label>
+
+          <div class="content-select">
+            <div class="select-subject" @click="dispSelectDay = !dispSelectDay">
+              <span :class="dayScheduleForm?'':'label-empty'">{{(dayScheduleForm?dayScheduleForm:"Selecione")}}</span>
+
+              <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectDay"></em>
+              <em class="fas fa-chevron-up arrow-select" v-show="dispSelectDay"></em>
+            </div>
+            <div class="content-options-select" v-if="dispSelectDay">
+              <div class="content-item-options-select" v-for="day in listDays" :key="day.value" @click="setDayForm(day.value)">
+                <div v-show="day.value !== dayScheduleForm" class="content-item-select">
+                  <em class="far fa-circle mr-2"></em>
+                  {{day.value}}
+                </div>
+
+                <div v-show="day.value === dayScheduleForm" class="content-item-select content-item-selected">
+                  <em class="fa-solid fa-circle-dot mr-2"></em>
+                  {{day.value}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-time">
+          <div class="content content-small">
+            <label class="label">
+              Início
+            </label>
+            <input type="text" class="input-text input-text-big" placeholder="00:00" v-model="startScheduleForm">
+          </div>
+
+          <div class="content content-small">
+            <label class="label">
+              Términio
+            </label>
+            <input type="text" class="input-text input-text-big" placeholder="00:00" v-model="endScheduleForm">
+          </div>
+
+          <p class="p-observation">Apenas número no formato HH:MM Ex.: 17:30</p>
+        </div>
+
+        <button
+            class="btn-time"
+            @click="addDay()">
+            <em class="fa-solid fa-plus mr-2 add-project"></em>Adicionar outro dia
+        </button>
+
+        <div v-for="(day, index) in listScheduleForm" :key="day.day+day.start+day.end" >
+          <div class="content content-small">
+            <label class="label">
+              Dia da semana
+            </label>
+
+            <div class="content-select">
+              <div class="select-subject" @click="day.dispSelectDay = !day.dispSelectDay">
+                {{day.day}}
+
+                <em class="fas fa-chevron-down arrow-select" v-show="!day.dispSelectDay"></em>
+                <em class="fas fa-chevron-up arrow-select" v-show="day.dispSelectDay"></em>
+              </div>
+              <div class="content-options-select" v-if="day.dispSelectDay">
+                <div class="content-item-options-select" v-for="days in listDays" :key="days.value" @click="setDayItemForm(days.value, index)">
+                  <div v-show="days.value !== day.day" class="content-item-select">
+                    <em class="far fa-circle mr-2"></em>
+                    {{days.value}}
+                  </div>
+
+                  <div v-show="days.value === day.day" class="content-item-select content-item-selected">
+                    <em class="fa-solid fa-circle-dot mr-2"></em>
+                    {{days.value}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-time">
+            <div class="content content-small">
+              <label class="label">
+                Início
+              </label>
+              <input type="text" class="input-text input-text-big" placeholder="00:00" v-model="listScheduleForm[index].start">
+            </div>
+
+            <div class="content content-small">
+              <label class="label">
+                Términio
+              </label>
+              <input type="text" class="input-text input-text-big" placeholder="00:00" v-model="listScheduleForm[index].end">
+            </div>
+          </div>
+          <button
+              class="btn-time btn-time-red"
+              @click="removeDay(day)">
+              <em class="fa-solid fa-trash mr-2 add-project"></em>Remover dia
+          </button>
+        </div>
+      </div>
+
+      <div class="content content-big">
+        <label class="label">
+          Quais professores serão responsáveis pela turma?
+        </label>
+
+
+
+        <div class="content-select">
+          <div class="select-subject" @click="dispSelectProfessor = !dispSelectProfessor">
+            <div :class="teachersForm.length !== 0?'label-none':'label-empty'">Selecione um ou mais professores</div>
+            <span v-if="subjectForm.professors !== undefined">
+              <span v-for="professor in subjectForm.professors" :key="professor.userid">
+                <span v-for="item in teachersForm" :key="item">
+                  <div v-if="item === professor.userid" class="content-professor-select" @click="setProfessorForm(professor.userid, true)">
+                    <div class="content-professor-item-select">
+                      {{professor.fullname}}
+                    </div>
+                    <em class="fa-solid fa-xmark"></em>
+                  </div>
+                </span>
+              </span>
+            </span>
+
+            <em class="fas fa-chevron-down arrow-select" v-show="!dispSelectSubject"></em>
+            <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
+          </div>
+          <div class="content-options-select" v-if="dispSelectProfessor">
+            <div class="content-item-options-select" v-for="professor in subjectForm.professors" :key="professor.userid" @click="setProfessorForm(professor.userid, false)">
+              <div v-show="!(getProfessorForm(professor.userid))" class="content-item-select">
+                <em class="fa-regular fa-square"></em>
+                {{professor.fullname}}
+              </div>
+
+              <div v-show="getProfessorForm(professor.userid)" class="content-item-select content-item-selected">
+                <em class="fa-solid fa-square-check"></em>
+                {{professor.fullname}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="content content-big">
+        <label class="label">
+          Informe uma senha para seus alunos ingressarem na turma
+        </label>
+        <input class="input-text input-text-medium" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="6" @input="validateForm()" type="text" placeholder="Digite a senha" v-model="passwordForm">
+      </div>
+
+      <div>
+        <button
+            :class="enableSendBtn?'btn-create btn-create-enabled':'btn-create'"
+            @click="onSubmit()">
+            <em class="fa-solid fa-plus mr-2 add-project"></em>{{classId === '0'?'Criar':'Editar'}} Turma
+        </button>
+
+        <button
+            class="btn-cancel"
+            onclick="window.location.href = '/turmas'">
+            Cancelar
+        </button>
+      </div>
+    </div>
+</div>

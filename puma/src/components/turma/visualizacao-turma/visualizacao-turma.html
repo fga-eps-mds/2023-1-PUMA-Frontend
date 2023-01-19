@@ -1,0 +1,70 @@
+
+<div class="main-content hidden-scroll-bar">
+    <h1 class="tittle">
+    Gerenciar turmas
+    </h1>
+
+    <div class="tittle sub-tittle mb-4">
+    Gerencie as turmas existentes em cada disciplina a cada novo semestre
+    </div>
+
+    <div>
+    <button
+        class="btn cd-btn"
+        onclick="window.location.href = '/turma/0'">
+        <em class="fa-solid fa-plus mr-2 add-project"></em>Criar turma para disciplina
+    </button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="input-group">
+      <input
+          v-model="subjectSearch"
+          type="text"
+          id="caixaPesquisa"
+          class="search-input"
+          placeholder="Buscar disciplina">
+      <em class="fas fa-search input-group-prepend search-icon"></em>
+
+      <div class="content-filter">
+        <div class="btn-filter" @click="dispTimeFIlter = !dispTimeFIlter">
+          <em class="fa fa-filter mr-2 add-project"></em>Filtrar por período
+        </div>
+        <div class="content-options-filter" v-if="dispTimeFIlter">
+          <div class="content-btn-filter border">
+            Ano
+            <ul>
+              <li v-for="year in listYears" :key="year.date">
+                <input class="input-checkbox-filter" type="checkbox" v-model="year.selected" />
+                {{year.date}}
+              </li>
+            </ul>
+          </div>
+          <div class="content-btn-filter">
+            Semestre
+            <ul>
+              <li v-for="semester in listSemesters" :key="semester.name">
+                <input class="input-checkbox-filter" type="checkbox" v-model="semester.selected" />
+                {{semester.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkbox">
+        <input class="input-checkbox" type="checkbox" v-model="dispMySubjects" />
+        <label>Mostrar somente minhas disciplinas </label>
+      </div>
+    </div>
+
+    <div class="tabelas">
+      <ListaConsultaTurma class="minhasDisciplinas"
+      :mySubjects="true"
+      :dispMySubjects="dispMySubjects"
+      :listYears="listYears"
+      :listSemesters="listSemesters"
+      :subjectSearch="subjectSearch"/>
+    </div>
+</div>

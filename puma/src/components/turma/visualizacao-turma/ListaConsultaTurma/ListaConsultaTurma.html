@@ -1,0 +1,41 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless">
+        <caption>Tabela de Listagens da Disciplina</caption>
+        <tr>
+            <th>Disciplina</th>
+            <th>Turma</th>
+            <th>Semestre</th>
+            <th>Professores</th>
+            <th></th>
+        </tr>
+
+        <tr v-for="item in listClassesEditable" :key="item.classid">
+            <td>{{item.subject.name}}</td>
+            <td>{{item.classcode}}</td>
+            <td>{{formatSemester(item.semester)}}/{{item.year}}</td>
+            <td>
+                <span v-for="professorSubject in item.subject.professors" :key="professorSubject.userid">
+                  <span v-for="(professorClass, index) in item.teachers" :key="professorClass.userid">
+                    <span v-if="professorSubject.userid === professorClass.userid">
+                      {{professorSubject.fullname}}<span v-if="index < item.teachers.length-1">,</span>
+                    </span>
+                  </span>
+                </span>
+                <div v-if="!item.subject.professors.length">
+                    -
+                </div>
+            </td>
+            <td class="botao">
+              <button
+                  class="btn cd-btn"
+                  @click="goToSubject(item.classid)">
+                  <em class="fa-solid fa-circle-info mr-2 ml-0 icon-detail"></em> Ver detalhes
+              </button>
+            </td>
+        </tr>
+
+        <div v-if="!listClassesEditable.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>

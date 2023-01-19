@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* eslint-disable prefer-destructuring */
 import SubjectService from '../../../services/SubjectService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
@@ -102,8 +101,10 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
     },
-    makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, autoHideDelay: 4000,
+      });
     },
     sortKeywordMultiselectLabels() {
       this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
@@ -112,7 +113,7 @@ export default {
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
     sortProfessorMultiselectLabels(value) {
-      if(value.filter((professor) => professor.userid === this.$store.getters.user.userId).length == 0){
+      if (value.filter((professor) => professor.userid === this.$store.getters.user.userId).length === 0) {
         value.push(this.professors.filter((professor) => professor.userid === this.$store.getters.user.userId)[0]);
       }
       this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
@@ -122,9 +123,9 @@ export default {
       this.isTouchedProfessors = true;
       this.isTouchedSubareas = true;
       return (
-        !!this.keywordsSelected.length ||
-        !!this.subareasSelected.length ||
-        !!this.professorsSelected.length
+        !!this.keywordsSelected.length
+        || !!this.subareasSelected.length
+        || !!this.professorsSelected.length
       );
     },
     isChecked(option) {
@@ -143,7 +144,7 @@ export default {
       for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
     },
     removeDropdownIcons() {
-      let multiselecctsIcon = document.getElementsByClassName('multiselect__select');
+      const multiselecctsIcon = document.getElementsByClassName('multiselect__select');
       while (multiselecctsIcon.length > 0) {
         multiselecctsIcon[0].remove();
       }
