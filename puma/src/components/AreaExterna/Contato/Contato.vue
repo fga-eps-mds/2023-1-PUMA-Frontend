@@ -1,4 +1,4 @@
-<template src="./Contato.html"></template>
+<template src="./Contato.html" />
 
 <script src="./Contato.js"></script>
 

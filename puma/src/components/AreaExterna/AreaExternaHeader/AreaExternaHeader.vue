@@ -1,4 +1,4 @@
-<template src="./AreaExternaHeader.html"></template>
+<template src="./AreaExternaHeader.html" />
 
 <style src="./AreaExternaHeader.css"></style>
 

@@ -1,4 +1,4 @@
-<template src="./edicao-turma.html"></template>
+<template src="./edicao-turma.html" />
 
 <script src="./edicao-turma.js"></script>
 

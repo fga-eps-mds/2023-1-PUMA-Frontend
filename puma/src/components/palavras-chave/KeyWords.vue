@@ -1,4 +1,4 @@
-<template src="./keyWords.html"></template>
+<template src="./keyWords.html" />
 
 <script src="./keyWords.js"></script>
 

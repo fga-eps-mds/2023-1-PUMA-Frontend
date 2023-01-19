@@ -1,6 +1,5 @@
-/* eslint-disable */
 import { shallowMount } from '@vue/test-utils';
-import Login from './Login.vue';
+import Login from '../src/components/usuario/Autenticacao/Login/Login.vue';
 
 describe('Testando criação do componente "Login"', () => {
   it('Renderizando componente', () => {

@@ -1,4 +1,4 @@
-<template src="./new-password.html"></template>
+<template src="./new-password.html" />
 
 <script src="./new-password.js"></script>
 

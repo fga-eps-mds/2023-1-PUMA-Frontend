@@ -1,4 +1,4 @@
-<template src="./cadastro-projeto.html"></template>
+<template src="./cadastro-projeto.html" />
 
 <script src="./cadastro-projeto.js"></script>
 
