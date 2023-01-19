@@ -15,7 +15,6 @@ export default {
     return {
       email: '',
       isLoading: false,
-      hasAuthError: false,
       successEmailReceived: false,
       emailWrongFormat: false,
       emailNotfound: false,
@@ -35,9 +34,6 @@ export default {
     localStorage.email = '';
   },
   methods: {
-    disableError() {
-      this.emailNotfound = false;
-    },
     async enviarEmail() {
       const isValid = await this.$refs.observer.validate();
       if (isValid) {
