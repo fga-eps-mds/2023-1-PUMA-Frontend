@@ -75,11 +75,11 @@ export default {
             this.subjectService.addSubject(subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
-              this.makeToast('SUCESSO', 'Disciplina cadastrada com sucesso', 'success');
+              this.makeToast('Disciplina cadastrada', `A disciplina "${subject.name}" foi cadastrada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch((error) => {
               this.isLoading = false;
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao cadastrar a disciplina', 'danger');
+              this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
@@ -88,11 +88,11 @@ export default {
             this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
-              this.makeToast('SUCESSO', 'Disciplina atualizada com sucesso', 'success');
+              this.makeToast('Disciplina atualizada', `A disciplina "${subject.name}" foi atualizada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch((error) => {
               this.isLoading = false;
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar a disciplina', 'danger');
+              this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           }
@@ -103,7 +103,7 @@ export default {
     },
     makeToast(title, message, variant) {
       this.$bvToast.toast(message, {
-        title, variant, solid: true, autoHideDelay: 4000,
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
       });
     },
     sortKeywordMultiselectLabels() {
@@ -164,7 +164,7 @@ export default {
         }).catch((error) => {
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar as palavras-chave', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras-chave disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
@@ -180,7 +180,7 @@ export default {
         }).catch((error) => {
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = 'Sem subáreas disponíveis';
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar as subáreas', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de subáreas, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
@@ -197,7 +197,7 @@ export default {
         }).catch((error) => {
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = 'Sem professores disponíveis';
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os professores', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
@@ -214,7 +214,7 @@ export default {
           this.courseSyllabus = subject.subject.coursesyllabus;
           resolve();
         }).catch((error) => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados da disciplina', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
