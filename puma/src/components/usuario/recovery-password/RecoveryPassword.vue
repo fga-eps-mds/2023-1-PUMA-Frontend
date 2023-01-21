@@ -1,4 +1,4 @@
-<template src="./recovery-password.html"></template>
+<template src="./recovery-password.html" />
 
 <script src="./recovery-password.js"></script>
 

@@ -1,4 +1,4 @@
-<template src="./consulta-disciplina.html"></template>
+<template src="./consulta-disciplina.html" />
 
 <script src="./consulta-disciplina.js"></script>
 

@@ -1,10 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import * as Cookies from 'js-cookie';
-import Login from './Login.vue';
+import Login from '../src/components/usuario/Autenticacao/Login/Login.vue';
 
 describe('Testando criação do componente "Login"', () => {
   it('Renderizando componente', () => {
-    let wrapper = shallowMount(Login);
+    const wrapper = shallowMount(Login);
     expect(wrapper.exists()).toBe(true);
   });
 });

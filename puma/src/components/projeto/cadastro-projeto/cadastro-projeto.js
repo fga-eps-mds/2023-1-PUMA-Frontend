@@ -1,4 +1,3 @@
-/* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
@@ -44,20 +43,22 @@ export default {
         await this.projectService.addProject(project);
 
         this.$store.commit('CLOSE_LOADING_MODAL');
-        await this.$router.push({ path: `/meus-projetos` });
+        await this.$router.push({ path: '/meus-projetos' });
         this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
     },
-    handleChangeKeywords: function (value) {
-      if (!!!value.find((k) => k.value === this.mainKeyword?.value)) {
+    handleChangeKeywords(value) {
+      if (!value.find((k) => k.value === this.mainKeyword?.value)) {
         this.mainKeyword = null;
       }
     },
-    makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, noAutoHide: true, appendToast: true });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
     },
     isChecked(option) {
       return this.selectedKeywords.some((op) => op.value === option.value);

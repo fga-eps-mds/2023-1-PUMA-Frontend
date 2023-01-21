@@ -1,4 +1,4 @@
-<template src="./loading.html"></template>
+<template src="./loading.html" />
 
 <script src="./loading.js"></script>
 

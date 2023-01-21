@@ -1,9 +1,8 @@
-/* eslint-disable */
 import { extend } from 'vee-validate';
 import { regex } from 'vee-validate/dist/rules';
 import Loading from '../../../shared/loading/Loading.vue';
 import UserService from '../../../../services/UserService';
-import VisitorNav from '../../../../components/VisitorNav/VisitorNav.vue';
+import VisitorNav from '../../../VisitorNav/VisitorNav.vue';
 import { validarTelefone, clearMasks } from '../../../../utils/validators-puma';
 import AreaExternaHeader from '../../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
@@ -65,7 +64,6 @@ export default {
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
           await this.$router.push('/usuario/login');
-        feat/feedback-acoes-usuario
           this.makeToast('Casdastro feito com sucesso!', 'Agora é só fazer login e aproveitar nossos recursos.', 'success');
         }).catch(() => {
           this.isLoading = false;
@@ -117,7 +115,7 @@ export default {
     },
     changePage(x) {
       if (x === 1) {
-        let isOk = this.verificaPreenchimento();
+        const isOk = this.verificaPreenchimento();
         if (isOk === true) {
           this.isFirstPage = !this.isFirstPage;
         } else {
@@ -129,31 +127,26 @@ export default {
     },
     verificaPreenchimento() {
       if (this.name && this.email) {
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        let validEmail = re.test(this.email);
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const validEmail = re.test(this.email);
         if (validEmail === true) {
           if (this.phoneNumber) {
-            let validTelephone = validarTelefone(this.phoneNumber);
+            const validTelephone = validarTelefone(this.phoneNumber);
             if (validTelephone === true) {
-              let validPassword = this.verificaSenha(this.password, this.repeatPassword);
+              const validPassword = this.verificaSenha(this.password, this.repeatPassword);
               if (validPassword === true) {
                 this.showMessage = false;
                 return true;
-              } else {
-                return false;
               }
-            } else {
               return false;
             }
-          } else {
             return false;
           }
-        } else {
           return false;
         }
-      } else {
         return false;
       }
+      return false;
     },
     verificaSenha(senha, repitaSenha) {
       const letrasMaiusculas = /[A-Z]/;
@@ -162,19 +155,17 @@ export default {
       if ((senha === repitaSenha) && (senha.length >= 6)) {
         if ((letrasMaiusculas.test(senha) || letrasMinusculas.test(senha)) && numeros.test(senha)) {
           return true;
-        } else {
-          return false;
         }
-      } else {
         return false;
       }
+      return false;
     },
     mostrarOcultarSenha(element) {
-      let senha = document.getElementById(element);
-      if(senha.type === 'password') {
+      const senha = document.getElementById(element);
+      if (senha.type === 'password') {
         senha.type = 'text';
       } else {
-        senha.type = 'password'
+        senha.type = 'password';
       }
     },
   },

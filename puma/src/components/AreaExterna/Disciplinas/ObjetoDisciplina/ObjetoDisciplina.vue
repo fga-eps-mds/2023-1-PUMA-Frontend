@@ -1,4 +1,4 @@
-<template src="./ObjetoDisciplina.html"></template>
+<template src="./ObjetoDisciplina.html" />
 
 <script src="./ObjetoDisciplina.js"></script>
 

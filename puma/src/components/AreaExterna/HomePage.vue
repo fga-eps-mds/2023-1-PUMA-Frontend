@@ -1,4 +1,4 @@
-<template src="./HomePage.html"></template>
+<template src="./HomePage.html" />
 
 <style src="./HomePage.css"></style>
 

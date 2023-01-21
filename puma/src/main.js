@@ -59,9 +59,9 @@ library.add(faEye, faEyeSlash, faCircle, faCircleRegular, faAngleRight, faAngleL
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.component('multiselect', Multiselect);
-Vue.component('mdbDatatable', mdbDatatable);
+Vue.component('FontAwesomeIcon', FontAwesomeIcon);
+Vue.component('Multiselect', Multiselect);
+Vue.component('MdbDatatable', mdbDatatable);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);
@@ -99,7 +99,7 @@ extend('min', {
   },
   params: ['length'],
   /* eslint-disable max-len */
-  message: (fieldName, placeholders) => `${fieldName} deve ter ao menos ${placeholders.length} caracteres`,
+  message: (fieldName, placeholders) => `Mínimo de ${placeholders.length} caracteres.`,
 });
 
 extend('min_array', {

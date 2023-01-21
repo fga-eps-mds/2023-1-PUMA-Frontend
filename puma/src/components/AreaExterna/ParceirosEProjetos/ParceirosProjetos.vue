@@ -1,4 +1,4 @@
-<template src="./parceiros-projetos.html"></template>
+<template src="./parceiros-projetos.html" />
 
 <style src="./parceiros-projetos.css" scoped></style>
 
