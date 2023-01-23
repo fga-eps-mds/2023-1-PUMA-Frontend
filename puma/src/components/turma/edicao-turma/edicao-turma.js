@@ -56,12 +56,10 @@ export default {
       enableSendBtn: false,
     };
   },
-  async mounted() {
-  },
   methods: {
     getClasses() {
       if (this.classId !== '0') {
-        this.classService.getClassById(this.$route.params.classid).then((response) => {
+        this.classService.getClassById(this.classid).then((response) => {
           for (let i = 0; i < this.mySubjects.length;) {
             if (this.mySubjects[i].subjectid === response.data.classItem.class.subjectid) {
               this.subjectForm = this.mySubjects[i];
@@ -249,12 +247,12 @@ export default {
               password: this.passwordForm,
               classesTeacher: this.teachersForm,
               classesSchedule: this.listScheduleForm,
-              classid: this.$route.params.classid,
+              classid: this.classid,
             },
           };
-          this.classService.updateClass(this.$route.params.classid, classItem).then(async () => {
+          this.classService.updateClass(this.classid, classItem).then(async () => {
             this.isLoading = false;
-            if (this.$route.params.classid === '0') {
+            if (this.classid === '0') {
               this.makeToast('SUCESSO', 'Turma criada com sucesso', 'success');
             } else {
               this.makeToast('SUCESSO', 'Turma atualizada com sucesso', 'success');
@@ -263,14 +261,14 @@ export default {
             window.location.href = '/turmas';
           }).catch((error) => {
             this.isLoading = false;
-            if (this.$route.params.classid === '0') {
+            if (this.classid === '0') {
               this.makeToast('ERRO', 'Infelizmente houve um erro ao criar a turma. Verifique se ela não existe', 'danger');
             } else {
               this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar a turma', 'danger');
             }
             this.$store.commit('CLOSE_LOADING_MODAL');
           });
-      } catch (error) {
+      } catch (err) {
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
     },

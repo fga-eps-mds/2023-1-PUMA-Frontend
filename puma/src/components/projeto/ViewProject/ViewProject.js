@@ -112,7 +112,7 @@ export default {
           selectedSubject: null,
           selectedEvaluation: null,
         };
-
+        // eslint-disable-next-line
         this.subjects = allSubjects.map((s) => ({ value: s.subjectid, text: s.name })).sort((a, b) => a.text.localeCompare(b.text));
         this.initialForm = JSON.parse(JSON.stringify(formData));
         this.form = JSON.parse(JSON.stringify(formData));

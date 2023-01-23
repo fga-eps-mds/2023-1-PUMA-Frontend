@@ -3,7 +3,7 @@ import { regex } from 'vee-validate/dist/rules';
 import Loading from '../../../shared/loading/Loading.vue';
 import UserService from '../../../../services/UserService';
 import VisitorNav from '../../../VisitorNav/VisitorNav.vue';
-import { validarTelefone, clearMasks } from '../../../../utils/validators-puma';
+import { validarTelefone } from '../../../../utils/validators-puma';
 import AreaExternaHeader from '../../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 export default {
@@ -63,9 +63,21 @@ export default {
         };
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
-          await this.$router.push('/meus-projetos');
-          this.makeToast('SUCESSO', 'Cadastro feito com sucesso!', 'success');
-        }).catch(async (err) => {
+          const user = { email: this.email, password: this.password };
+          this.userService.logUserIn(user).then((response) => {
+            this.$store.commit('LOGIN_USER', {
+              userId: response.data.userId,
+              fullName: response.data.fullName,
+              isAdmin: response.data.isAdmin,
+              email: response.data.email,
+              type: response.data.type,
+            });
+            this.$store.commit('SET_TOKEN', response.data.token);
+            this.$router.push('/meus-projetos').catch(() => {});
+          }).catch(() => {
+            this.isLoading = false;
+          });
+        }).catch(async () => {
           this.isLoading = false;
           this.makeToast('ERRO', 'Uma falha ocorreu ao efetuar o cadastro. Tente novamente.', 'danger');
         });

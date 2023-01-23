@@ -23,8 +23,8 @@ export default {
     this.update();
   },
   watch: {
-    '$route.path': function () {
-      this.update();
-    },
+    // '$route.path': function () {
+    //   this.update();
+    // },
   },
 };
