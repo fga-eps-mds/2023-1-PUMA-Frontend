@@ -216,13 +216,8 @@ export default {
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.coursesyllabus;
           resolve();
-<<<<<<< HEAD
-        }).catch(() => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados da disciplina', 'danger');
-=======
         }).catch((error) => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
->>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
           reject();
         });
       });

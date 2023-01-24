@@ -55,12 +55,9 @@ export default {
       enableSendBtn: false,
     };
   },
-<<<<<<< HEAD
-=======
   /* eslint-disable no-empty-function */
   async mounted() {
   },
->>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
   methods: {
     getClasses() {
       if (this.classId !== '0') {

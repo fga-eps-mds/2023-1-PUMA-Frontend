@@ -96,13 +96,8 @@ export default {
         this.titulo = project.name;
         this.descricao = project.problem;
         this.resultadoEsperado = project.expectedresult;
-<<<<<<< HEAD
-      }).catch(() => {
-        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
-=======
       }).catch((error) => {
         this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar projeto, confira sua conexão com servidor e tente novamente', 'danger');
->>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
       });
     },
   },
