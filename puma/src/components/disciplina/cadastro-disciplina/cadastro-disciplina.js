@@ -77,7 +77,7 @@ export default {
               await this.$router.push({ name: 'Disciplinas' });
               this.makeToast('Disciplina cadastrada', `A disciplina "${subject.name}" foi cadastrada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
-            }).catch((error) => {
+            }).catch(() => {
               this.isLoading = false;
               this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
@@ -90,7 +90,7 @@ export default {
               await this.$router.push({ name: 'Disciplinas' });
               this.makeToast('Disciplina atualizada', `A disciplina "${subject.name}" foi atualizada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
-            }).catch((error) => {
+            }).catch(() => {
               this.isLoading = false;
               this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
@@ -113,7 +113,9 @@ export default {
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
     sortProfessorMultiselectLabels(value) {
+      // eslint-disable-next-line
       if (value.filter((professor) => professor.userid === this.$store.getters.user.userId).length === 0) {
+        // eslint-disable-next-line
         value.push(this.professors.filter((professor) => professor.userid === this.$store.getters.user.userId)[0]);
       }
       this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
@@ -161,7 +163,7 @@ export default {
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras-chave disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
@@ -177,7 +179,7 @@ export default {
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = this.subareas.length ? 'Selecione as subáreas do conhecimento que correspondam a disciplina' : 'Sem subáreas disponíveis';
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = 'Sem subáreas disponíveis';
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de subáreas, confira sua conexão com servidor e tente novamente', 'danger');
@@ -190,11 +192,12 @@ export default {
       return new Promise((resolve, reject) => {
         this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
+          // eslint-disable-next-line
           this.professorsSelected = response.data.filter((professor) => professor.userid === this.$store.getters.user.userId);
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = 'Sem professores disponíveis';
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
@@ -213,7 +216,7 @@ export default {
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.coursesyllabus;
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });

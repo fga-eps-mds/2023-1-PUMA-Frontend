@@ -61,13 +61,14 @@ export default {
   methods: {
     getClasses() {
       if (this.classId !== '0') {
-        this.classService.getClassById(this.$route.params.classid).then((response) => {
+        this.classService.getClassById(this.classid).then((response) => {
           for (let i = 0; i < this.mySubjects.length;) {
             if (this.mySubjects[i].subjectid === response.data.classItem.class.subjectid) {
               this.subjectForm = this.mySubjects[i];
             }
             i += 1;
           }
+          /* eslint-disable-next-line */
           this.codeForm = response.data.classItem.class.classcode.substring(1, response.data.classItem.class.classcode.length);
           this.yearForm = response.data.classItem.class.year;
           this.semesterForm = response.data.classItem.class.semester;
@@ -201,7 +202,7 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.separateSubjects();
         this.getClasses();
-      }).catch((err) => {
+      }).catch(() => {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Erro ao recuperar disciplinas', 'danger');
       });
@@ -260,7 +261,7 @@ export default {
           }
           this.$store.commit('CLOSE_LOADING_MODAL');
           window.location.href = '/turmas';
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoading = false;
           if (this.$route.params.classid === '0') {
             this.makeToast('ERRO', 'Infelizmente houve um erro ao criar a turma. Verifique se ela não existe', 'danger');

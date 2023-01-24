@@ -1,5 +1,5 @@
 import ItemMenuLateral from './item-menu-lateral/ItemMenuLateral.vue';
-import USER_CONST from '../../../utils/enums/users.enum.js';
+import USER_CONST from '../../../utils/enums/users.enum';
 
 export default {
   name: 'MenuLateral',
@@ -14,6 +14,7 @@ export default {
         adminProjects: {
           basePath: '/projetos-plataforma',
           title: 'Projetos',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/menu-2.svg'),
           show: () => this.user.isAdmin,
           onclick: () => {
@@ -23,6 +24,7 @@ export default {
         subjectProjects: {
           basePath: '/projetos-disciplina',
           title: 'Projetos das Disciplinas',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/menu-2.svg'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
@@ -32,6 +34,7 @@ export default {
         myProjects: {
           basePath: '/meus-projetos',
           title: 'Meus Projetos',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/menu-1.png'),
           show: () => true,
           onclick: () => {
@@ -41,6 +44,7 @@ export default {
         subjects: {
           basePath: '/disciplinas',
           title: 'Disciplinas',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
@@ -50,6 +54,7 @@ export default {
         classItem: {
           basePath: '/turmas',
           title: 'Turmas',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/menu-5.svg'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
@@ -59,6 +64,7 @@ export default {
         keywords: {
           basePath: '/palavras-chave',
           title: 'Palavras-Chave',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/menu-4.svg'),
           show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
           onclick: () => {
@@ -67,6 +73,7 @@ export default {
         },
         logout: {
           title: 'Sair',
+          // eslint-disable-next-line
           iconUrl: require('@/assets/menu-3.svg'),
           show: () => true,
           onclick: () => {

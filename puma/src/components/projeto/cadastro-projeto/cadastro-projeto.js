@@ -37,6 +37,7 @@ export default {
           status: 'SB',
           createdat: new Date().toISOString(),
           userid: this.$store.getters.user.userId,
+          // eslint-disable-next-line
           keywords: this.selectedKeywords.map((k) => ({ keywordid: k.value, main: k.value === this.mainKeyword?.value })),
         };
 
@@ -95,7 +96,7 @@ export default {
         this.titulo = project.name;
         this.descricao = project.problem;
         this.resultadoEsperado = project.expectedresult;
-      }).catch((error) => {
+      }).catch(() => {
         this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar projeto, confira sua conexão com servidor e tente novamente', 'danger');
       });
     },

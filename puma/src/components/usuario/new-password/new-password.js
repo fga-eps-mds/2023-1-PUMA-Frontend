@@ -16,7 +16,6 @@ export default {
   data() {
     return {
       userService: new UserService(),
-      email: '',
       newPassword: '',
       confirmNewPassword: '',
       isLoading: false,
