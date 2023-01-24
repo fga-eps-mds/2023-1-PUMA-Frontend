@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* eslint-disable prefer-destructuring */
 import SubjectService from '../../../services/SubjectService';
 import ClassService from '../../../services/ClassService';
@@ -22,16 +21,16 @@ export default {
       subjectService: new SubjectService(),
       mySubjects: [],
 
-      subjectForm: "",
-      codeForm: "",
-      yearForm: "",
-      semesterForm: "",
+      subjectForm: '',
+      codeForm: '',
+      yearForm: '',
+      semesterForm: '',
       listScheduleForm: [],
-      dayScheduleForm: "",
-      startScheduleForm: "",
-      endScheduleForm: "",
+      dayScheduleForm: '',
+      startScheduleForm: '',
+      endScheduleForm: '',
       teachersForm: [],
-      passwordForm: "",
+      passwordForm: '',
       classId: this.$route.params.classid,
 
       dispSelectSubject: false,
@@ -56,6 +55,12 @@ export default {
       enableSendBtn: false,
     };
   },
+<<<<<<< HEAD
+=======
+  /* eslint-disable no-empty-function */
+  async mounted() {
+  },
+>>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
   methods: {
     getClasses() {
       if (this.classId !== '0') {
@@ -89,26 +94,26 @@ export default {
       }
     },
     validateForm() {
-      if (this.subjectForm.subjectid !== undefined &&
-          this.codeForm !== undefined &&
-          this.codeForm !== '' &&
-          this.yearForm !== undefined &&
-          this.yearForm !== '' &&
-          Number(this.yearForm) > 1949 &&
-          Number(this.yearForm) < 3001 &&
-          this.semesterForm !== undefined &&
-          this.semesterForm !== '' &&
-          this.passwordForm !== undefined &&
-          this.passwordForm.length === 6 &&
-          this.passwordForm !== '' &&
-          this.teachersForm.length > 0 &&
-          this.listScheduleForm.length > 0) {
-       const regex = /\W/;
-       if(!(regex.test(this.passwordForm))) {
-         this.enableSendBtn = true;
-       } else {
-         this.enableSendBtn = false;
-       }
+      if (this.subjectForm.subjectid !== undefined
+          && this.codeForm !== undefined
+          && this.codeForm !== ''
+          && this.yearForm !== undefined
+          && this.yearForm !== ''
+          && Number(this.yearForm) > 1949
+          && Number(this.yearForm) < 3001
+          && this.semesterForm !== undefined
+          && this.semesterForm !== ''
+          && this.passwordForm !== undefined
+          && this.passwordForm.length === 6
+          && this.passwordForm !== ''
+          && this.teachersForm.length > 0
+          && this.listScheduleForm.length > 0) {
+        const regex = /\W/;
+        if (!(regex.test(this.passwordForm))) {
+          this.enableSendBtn = true;
+        } else {
+          this.enableSendBtn = false;
+        }
       } else {
         this.enableSendBtn = false;
       }
@@ -127,8 +132,8 @@ export default {
       this.validateForm();
     },
     setProfessorForm(professor, select) {
-      if(this.teachersForm.includes(professor)){
-        let teachersForm = [];
+      if (this.teachersForm.includes(professor)) {
+        const teachersForm = [];
         for (let i = 0; i < this.teachersForm.length;) {
           if (this.teachersForm[i] !== professor) {
             teachersForm.push(this.teachersForm[i]);
@@ -139,8 +144,7 @@ export default {
         if (select) {
           this.dispSelectProfessor = !this.dispSelectProfessor;
         }
-      }
-      else {
+      } else {
         this.teachersForm.push(professor);
       }
       this.validateForm();
@@ -155,20 +159,20 @@ export default {
       return false;
     },
     addDay() {
-      let item = {
+      const item = {
         day: this.dayScheduleForm,
         start: this.startScheduleForm,
         end: this.endScheduleForm,
         dispSelectDay: false,
-      }
+      };
       this.listScheduleForm.push(item);
-      this.dayScheduleForm = "";
-      this.startScheduleForm = "";
-      this.endScheduleForm = "";
+      this.dayScheduleForm = '';
+      this.startScheduleForm = '';
+      this.endScheduleForm = '';
       this.validateForm();
     },
     removeDay(item) {
-      let listScheduleForm = [];
+      const listScheduleForm = [];
       for (let i = 0; i < this.listScheduleForm.length;) {
         if (this.listScheduleForm[i] !== item) {
           listScheduleForm.push(this.listScheduleForm[i]);
@@ -224,20 +228,21 @@ export default {
         this.makeToast('ERRO', 'Código da disciplina não informado', 'danger');
         return;
       }
-      else if (this.yearForm === undefined || this.yearForm === '' || Number(this.yearForm) < 1950 || Number(this.yearForm) > 3000) {
+      if (this.yearForm === undefined || this.yearForm === '' || Number(this.yearForm) < 1950 || Number(this.yearForm) > 3000) {
         this.makeToast('ERRO', 'Ano da disciplina não informado', 'danger');
         return;
       }
-      else if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm)) {
+      if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm)) {
         this.makeToast('ERRO', 'Senha inválida', 'danger');
         return;
       }
-      else if (!this.enableSendBtn) {
+      if (!this.enableSendBtn) {
         this.makeToast('ERRO', 'Existem campos inválidos ou não preenchidos no formulário', 'danger');
         return;
       }
 
       try {
+<<<<<<< HEAD
           const classItem = {
             classItem: {
               subjectId: this.subjectForm.subjectid,
@@ -269,11 +274,46 @@ export default {
             this.$store.commit('CLOSE_LOADING_MODAL');
           });
       } catch (err) {
+=======
+        const classItem = {
+          classItem: {
+            subjectId: this.subjectForm.subjectid,
+            classCode: `T${this.codeForm}`,
+            year: this.yearForm,
+            semester: this.semesterForm,
+            password: this.passwordForm,
+            classesTeacher: this.teachersForm,
+            classesSchedule: this.listScheduleForm,
+            classid: this.$route.params.classid,
+          },
+        };
+        this.classService.updateClass(this.$route.params.classid, classItem).then(async () => {
+          this.isLoading = false;
+          if (this.$route.params.classid === '0') {
+            this.makeToast('SUCESSO', 'Turma criada com sucesso', 'success');
+          } else {
+            this.makeToast('SUCESSO', 'Turma atualizada com sucesso', 'success');
+          }
+          this.$store.commit('CLOSE_LOADING_MODAL');
+          window.location.href = '/turmas';
+        }).catch((error) => {
+          this.isLoading = false;
+          if (this.$route.params.classid === '0') {
+            this.makeToast('ERRO', 'Infelizmente houve um erro ao criar a turma. Verifique se ela não existe', 'danger');
+          } else {
+            this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar a turma', 'danger');
+          }
+          this.$store.commit('CLOSE_LOADING_MODAL');
+        });
+      } catch (error) {
+>>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
     },
-    makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, autoHideDelay: 4000,
+      });
     },
   },
 };

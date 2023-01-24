@@ -63,6 +63,7 @@ export default {
         };
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
+<<<<<<< HEAD
           const user = { email: this.email, password: this.password };
           this.userService.logUserIn(user).then((response) => {
             this.$store.commit('LOGIN_USER', {
@@ -78,15 +79,18 @@ export default {
             this.isLoading = false;
           });
         }).catch(async () => {
+=======
+          await this.$router.push('/usuario/login');
+          this.makeToast('Casdastro feito com sucesso!', 'Agora é só fazer login e aproveitar nossos recursos.', 'success');
+        }).catch(() => {
+>>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
           this.isLoading = false;
-          this.makeToast('ERRO', 'Uma falha ocorreu ao efetuar o cadastro. Tente novamente.', 'danger');
+          this.makeToast('Erro ao cadastrar', 'Uma falha ocorreu ao efetuar o cadastro. Confira os dados inseridos e a sua conexão e tente novamente.', 'danger');
         });
       }
     },
-    makeToast(title, message, variant) {
-      this.$bvToast.toast(message, {
-        title, variant, solid: true, autoHideDelay: 4000,
-      });
+    makeToast: function (title, message, variant) {
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, noAutoHide: true, appendToast: true });
     },
     alterarTipoUsuario() {
       if (this.type === 'Aluno' || this.type === 'Professor') {

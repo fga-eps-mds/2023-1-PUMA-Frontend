@@ -29,7 +29,7 @@ export default {
         this.separateSubjects();
       }).catch(() => {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Erro ao recuperar disciplinas', 'danger');
+        this.makeToast('Erro de busca', 'Erro ao recuperar a lista de disciplinas, confira sua conexão com servidor e tente novamente', 'danger');
       });
     },
     separateSubjects() {
@@ -47,7 +47,7 @@ export default {
     },
     makeToast(toastTitle, toastMessage, toastVariant) {
       this.$bvToast.toast(toastMessage, {
-        title: toastTitle, variant: toastVariant, solid: true, autoHideDelay: 4000,
+        title: toastTitle, variant: toastVariant, solid: true, noAutoHide: 5000,
       });
     },
   },

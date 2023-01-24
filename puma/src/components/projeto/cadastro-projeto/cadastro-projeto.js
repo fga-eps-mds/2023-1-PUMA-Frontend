@@ -45,10 +45,10 @@ export default {
 
         this.$store.commit('CLOSE_LOADING_MODAL');
         await this.$router.push({ path: '/meus-projetos' });
-        this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
+        this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
+        this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
     },
     handleChangeKeywords(value) {
@@ -58,7 +58,7 @@ export default {
     },
     makeToast(title, message, variant) {
       this.$bvToast.toast(message, {
-        title, variant, solid: true, autoHideDelay: 4000,
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
       });
     },
     isChecked(option) {
@@ -86,7 +86,7 @@ export default {
       } catch (error) {
         this.multiSelectPlaceholder = 'Sem palavras disponíveis';
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de palavras-chave, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
     getProject(projectId) {
@@ -96,8 +96,13 @@ export default {
         this.titulo = project.name;
         this.descricao = project.problem;
         this.resultadoEsperado = project.expectedresult;
+<<<<<<< HEAD
       }).catch(() => {
         this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+=======
+      }).catch((error) => {
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar projeto, confira sua conexão com servidor e tente novamente', 'danger');
+>>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
       });
     },
   },

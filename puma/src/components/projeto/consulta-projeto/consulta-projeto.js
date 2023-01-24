@@ -44,12 +44,12 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
       }).catch(() => {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Erro ao recuperar projetos', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de projetos, confira sua conexão com servidor e tente novamente', 'danger');
       });
     },
 
     makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, noAutoHide: true, appendToast: true });
     },
   },
 };
