@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import RecoveryPassword from '../src/components/usuario/recovery-password/RecoveryPassword.vue'
+import RecoveryPassword from '../src/components/usuario/recovery-password/RecoveryPassword.vue';
 
 describe('Testando criação do componente "Recuperação de Senha"', () => {
   it('Renderizando componente', () => {

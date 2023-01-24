@@ -216,7 +216,7 @@ export default {
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.coursesyllabus;
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });

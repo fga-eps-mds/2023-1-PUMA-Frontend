@@ -68,6 +68,7 @@ export default {
             }
             i += 1;
           }
+          /* eslint-disable-next-line */
           this.codeForm = response.data.classItem.class.classcode.substring(1, response.data.classItem.class.classcode.length);
           this.yearForm = response.data.classItem.class.year;
           this.semesterForm = response.data.classItem.class.semester;
@@ -201,7 +202,7 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.separateSubjects();
         this.getClasses();
-      }).catch((err) => {
+      }).catch(() => {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Erro ao recuperar disciplinas', 'danger');
       });
@@ -239,39 +240,6 @@ export default {
       }
 
       try {
-<<<<<<< HEAD
-          const classItem = {
-            classItem: {
-              subjectId: this.subjectForm.subjectid,
-              classCode: "T" + this.codeForm,
-              year: this.yearForm,
-              semester: this.semesterForm,
-              password: this.passwordForm,
-              classesTeacher: this.teachersForm,
-              classesSchedule: this.listScheduleForm,
-              classid: this.classid,
-            },
-          };
-          this.classService.updateClass(this.classid, classItem).then(async () => {
-            this.isLoading = false;
-            if (this.classid === '0') {
-              this.makeToast('SUCESSO', 'Turma criada com sucesso', 'success');
-            } else {
-              this.makeToast('SUCESSO', 'Turma atualizada com sucesso', 'success');
-            }
-            this.$store.commit('CLOSE_LOADING_MODAL');
-            window.location.href = '/turmas';
-          }).catch((error) => {
-            this.isLoading = false;
-            if (this.classid === '0') {
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao criar a turma. Verifique se ela não existe', 'danger');
-            } else {
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar a turma', 'danger');
-            }
-            this.$store.commit('CLOSE_LOADING_MODAL');
-          });
-      } catch (err) {
-=======
         const classItem = {
           classItem: {
             subjectId: this.subjectForm.subjectid,
@@ -293,7 +261,7 @@ export default {
           }
           this.$store.commit('CLOSE_LOADING_MODAL');
           window.location.href = '/turmas';
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoading = false;
           if (this.$route.params.classid === '0') {
             this.makeToast('ERRO', 'Infelizmente houve um erro ao criar a turma. Verifique se ela não existe', 'danger');
@@ -303,7 +271,6 @@ export default {
           this.$store.commit('CLOSE_LOADING_MODAL');
         });
       } catch (error) {
->>>>>>> 57a66c848796d9b00f38c775d7e3bc6b770bc2fc
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
     },

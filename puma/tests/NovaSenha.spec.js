@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import NewPassword from '../src/components/usuario/new-password/NewPassword.vue'
+import NewPassword from '../src/components/usuario/new-password/NewPassword.vue';
 
 describe('Testando criação do componente "Nova Senha"', () => {
   it('Renderizando componente', () => {
