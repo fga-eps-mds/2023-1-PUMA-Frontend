@@ -46,7 +46,9 @@ export default {
   methods: {
     async onSubmit() {
       const isValid = await this.$refs.observer.validate();
-      if (isValid) {
+      if (this.password.length < 8) {
+        this.makeToast('Senha fraca', 'Sua senha precisar conter pelo menos 8 caracteres.', 'danger');
+      } else if (isValid) {
         const newUser = {
           name: this.name,
           email: this.email,
