@@ -184,14 +184,6 @@ const routes = [
     },
   },
   {
-    path: '/palavras-chave',
-    name: 'Palavras Chave',
-    component: () => import('../components/palavras-chave/KeyWords.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: '/Contato',
     name: 'Contato',
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
