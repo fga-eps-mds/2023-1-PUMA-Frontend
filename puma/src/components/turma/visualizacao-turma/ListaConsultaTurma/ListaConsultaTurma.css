@@ -1,0 +1,81 @@
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+table {
+    width: 100%;
+    max-width: 1500px;
+    border-collapse: separate;
+}
+
+caption {
+  display: none;
+}
+
+th {
+    font-size: 20px;
+    color: #15355e;
+    font-weight: normal;
+    padding: 0px 0.75rem 0.75rem 0px;
+}
+
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+    padding: 0.75rem 0.75rem 0.75rem 0px;
+}
+
+tr {
+    border-top: hidden;
+    color: #15355e;
+}
+
+.title-list {
+    font-size: 18px;
+    color: #15355e;
+    font-weight: bold;
+}
+
+.demaisDisciplinas thead {
+    font-size: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.botao {
+    text-align: end;
+}
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+    padding: 10px 20px;
+    margin-top: -5px;
+    font-size: 14px;
+    width: 170px;
+}
+
+.icon-detail {
+  color: #fff;
+  background-color: #15355e;
+  border-radius: 30px;
+  border: 1px solid #15355e;
+  top: 2px;
+  position: relative;
+}
+
+.no-results {
+    color: #15355e;
+    font-size: 16px;
+    width: max-content;
+}

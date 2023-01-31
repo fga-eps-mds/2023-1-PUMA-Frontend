@@ -71,7 +71,8 @@ export default {
           title: thisTitle,
           variant: thisVariant,
           solid: true,
-          autoHideDelay: 4000,
+          noAutoHide: true,
+          appendToast: true,
         },
       );
     },
@@ -95,7 +96,7 @@ export default {
           const subjectName = this.subjectsForm.find(
             (s) => s.value === this.form.selectedSubject,
           ).text;
-          this.makeToast('SUCESSO', 'Palavra-Chave editada com sucesso!', 'success');
+          this.makeToast('Palavra-chave editada', `A palavra-chave "${this.form.keywordName}" foi editada com sucesso`, 'success');
           this.listKeyWords = this.listKeyWords.map((kw) => {
             if (kw.keywordid === this.idKeywordEdit) {
               return {
@@ -110,7 +111,7 @@ export default {
       } catch (error) {
         this.openModalEdit = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar editar a palavra-chave', 'danger');
+        this.makeToast('Falha ao editar palavra-chave', 'Infelizmente ocorreu um erro ao tentar editar a palavra-chave, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
 
@@ -138,10 +139,10 @@ export default {
         await this.keywordService.deleteKeyword(this.keywordDelete);
         this.listKeyWords = this.listKeyWords.filter((kw) => kw.keywordid !== this.keywordDelete);
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('SUCESSO', 'Palavra-chave excluída com sucesso!', 'success');
+        this.makeToast('Palavra-chave excluída', 'A palavra-chave foi excluída com sucesso!', 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
+        this.makeToast('Falha ao excluir palavra-chave', 'Infelizmente houve um erro ao tentar excluir a palavra-chave, confira sua conexão com servidor e os dados inseridos e tente novamente mais tarde', 'danger');
       }
     },
 

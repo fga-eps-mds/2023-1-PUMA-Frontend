@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "start": "npm run serve"
+    "start": "npm run serve",
+    "test:watch": "jest --verbose --watch",
+    "test:sonar": "CI=1 jest --coverage --runInBand --detectOpenHandles --forceExit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -21,6 +24,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "font-awesome": "^4.7.0",
+    "jest-sonar": "^0.2.15",
     "js-cookie": "^3.0.1",
     "mdbvue": "^6.7.3",
     "moment": "^2.29.3",
@@ -40,16 +44,21 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-eslint": "^4.5.19",
     "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vue/test-utils": "^1.3.3",
+    "@vue/vue2-jest": "^27.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-vue": "^7.18.0",
-    "vue-template-compiler": "^2.6.11"
+    "jest": "^27.0.5",
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
@@ -63,7 +72,18 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",

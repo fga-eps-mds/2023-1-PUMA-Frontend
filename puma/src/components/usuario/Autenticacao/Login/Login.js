@@ -1,16 +1,16 @@
-/* eslint-disable */
 import { extend } from 'vee-validate';
 import { email, required } from 'vee-validate/dist/rules';
 import UserService from '../../../../services/UserService';
 import Loading from '../../../shared/loading/Loading.vue';
-import VisitorNav from '../../../../components/VisitorNav/VisitorNav.vue';
-import NAV_CONST from '../../../../utils/enums/navigations.enum.js';
+import VisitorNav from '../../../VisitorNav/VisitorNav.vue';
+import AreaExternaHeader from '../../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 export default {
   name: 'LoginUsuario',
   components: {
     Loading,
     VisitorNav,
+    AreaExternaHeader,
   },
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
             type: response.data.type,
           });
           this.$store.commit('SET_TOKEN', response.data.token);
-          this.$router.push('/meus-projetos').catch(()=>{});
+          this.$router.push('/meus-projetos').catch(() => {});
         }).catch(() => {
           this.hasAuthError = true;
           this.isLoading = false;
@@ -51,11 +51,11 @@ export default {
       }
     },
     mostrarOcultarSenha() {
-      let senha = document.getElementById('senha');
-      if(senha.type === 'password') {
+      const senha = document.getElementById('senha');
+      if (senha.type === 'password') {
         senha.type = 'text';
       } else {
-        senha.type = 'password'
+        senha.type = 'password';
       }
     },
   },

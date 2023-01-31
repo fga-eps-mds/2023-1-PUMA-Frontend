@@ -1,7 +1,5 @@
 <div class="root">
-  <div class="div-visitor-nav">
-    <VisitorNav :navs="navs" />
-  </div>
+  <AreaExternaHeader />
   <div class="w-100 div-form">
     <b-container fluid class="h-100">
       <b-row class="h-100">
@@ -9,8 +7,8 @@
         <b-col class="row-centro" cols="6">
           <b-row align-h="center">
             <div class="form">
-              <b-col class="title-box"> Bem Vindo(a) a PUMA! </b-col>
               <b-col class="card">
+                <b-col class="title-box"> Bem Vindo(a) a PUMA </b-col>
                 <div>
                   <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
                     <form id="register-form">
@@ -34,8 +32,8 @@
                                 <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
                             </div>
                           </div>
-                           
-                        
+
+
                           <span class="error-span" v-for="erro in v.errors">
                             {{ erro }}
                           </span>
@@ -48,31 +46,29 @@
                         </span>
                       </div>
 
-                      <div class="clickable-text-left forgot-password">
-                        <router-link to="/usuario/recuperacao-senha">
-                          Esqueci Minha Senha
-                        </router-link>
-                      </div>
-
-                      <div class="clickable-text-left create-account">
-                        <router-link to="/cadastro">
-                          Primeiro Acesso? <strong>Clique Aqui</strong>
-                        </router-link>
-                      </div>
-
                       <input type="submit" class="submit-btn" value="Entrar" v-if='!isLoading' @click.prevent="logar()" form="register-form" />
 
+                      <div class="clickable-text-center forgot-password">
+                        Esqueceu sua senha?<br/>
+                        <router-link class="clickable-link" to="/recuperacao-senha">
+                          <strong> Recupere aqui </strong>
+                        </router-link>
+                      </div>
+
+                      <div class="clickable-text-center create-account">
+                        Não possui cadastro na plataforma?<br/>
+                        <router-link class="clickable-link" to="/cadastro">
+                          <strong> Cadastre-se aqui </strong>
+                        </router-link>
+                      </div>
+
                       <Loading class="loading" v-if='isLoading' />
+                      <br/><br/>
                     </form>
                   </ValidationObserver>
                 </div>
               </b-col>
             </div>
-          </b-row>
-        </b-col>
-        <b-col cols="3" class="h-100">
-          <b-row align-h="start" align-v="end" class="h-100">
-            <img class="image-page-login" src="../../../../assets/vetor-login.png" draggable="false" alt="Imagem meramente decorativa da página de Login da PUMA"/>
           </b-row>
         </b-col>
       </b-row>

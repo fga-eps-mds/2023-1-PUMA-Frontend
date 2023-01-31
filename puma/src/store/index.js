@@ -10,11 +10,31 @@ Vue.use(Vuex);
 
 const userState = createPersistedState({
   paths: ['userStore'],
-  storage: {
-    getItem: (key) => Cookies.get(key),
-    setItem: (key, value) => Cookies.set(key, value, { expires: 7, secure: true }),
-    removeItem: (key) => Cookies.remove(key),
-  },
+  plugins: [createPersistedState({
+    storage: {
+      getItem: (key) => {
+        try {
+          Cookies.get(key);
+        } catch (err) {
+          err.toString();
+        }
+      },
+      setItem: (key, value) => {
+        try {
+          Cookies.set(key, value, { expires: 7, secure: true });
+        } catch (err) {
+          err.toString();
+        }
+      },
+      removeItem: (key) => {
+        try {
+          Cookies.remove(key);
+        } catch (err) {
+          err.toString();
+        }
+      },
+    },
+  })],
 });
 
 const store = new Vuex.Store({

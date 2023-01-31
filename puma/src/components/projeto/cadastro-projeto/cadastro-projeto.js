@@ -1,4 +1,3 @@
-/* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
@@ -38,26 +37,29 @@ export default {
           status: 'SB',
           createdat: new Date().toISOString(),
           userid: this.$store.getters.user.userId,
+          // eslint-disable-next-line
           keywords: this.selectedKeywords.map((k) => ({ keywordid: k.value, main: k.value === this.mainKeyword?.value })),
         };
 
         await this.projectService.addProject(project);
 
         this.$store.commit('CLOSE_LOADING_MODAL');
-        await this.$router.push({ path: `/meus-projetos` });
-        this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
+        await this.$router.push({ path: '/meus-projetos' });
+        this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
+        this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
     },
-    handleChangeKeywords: function (value) {
-      if (!!!value.find((k) => k.value === this.mainKeyword?.value)) {
+    handleChangeKeywords(value) {
+      if (!value.find((k) => k.value === this.mainKeyword?.value)) {
         this.mainKeyword = null;
       }
     },
-    makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
     },
     isChecked(option) {
       return this.selectedKeywords.some((op) => op.value === option.value);
@@ -84,7 +86,7 @@ export default {
       } catch (error) {
         this.multiSelectPlaceholder = 'Sem palavras disponíveis';
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de palavras-chave, confira sua conexão com servidor e tente novamente', 'danger');
       }
     },
     getProject(projectId) {
@@ -94,8 +96,8 @@ export default {
         this.titulo = project.name;
         this.descricao = project.problem;
         this.resultadoEsperado = project.expectedresult;
-      }).catch((error) => {
-        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
+      }).catch(() => {
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar projeto, confira sua conexão com servidor e tente novamente', 'danger');
       });
     },
   },

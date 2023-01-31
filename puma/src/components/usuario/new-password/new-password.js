@@ -2,13 +2,13 @@ import { extend } from 'vee-validate';
 import { regex } from 'vee-validate/dist/rules';
 import UserService from '../../../services/UserService';
 import Loading from '../../shared/loading/Loading.vue';
-import VisitorNav from '../../VisitorNav/VisitorNav.vue';
+import AreaExternaHeader from '../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 export default {
   name: 'LoginUsuario',
   components: {
     Loading,
-    VisitorNav,
+    AreaExternaHeader,
   },
   mounted() {
     document.title = 'PUMA | Atualizar Senha';
@@ -16,7 +16,6 @@ export default {
   data() {
     return {
       userService: new UserService(),
-      email: '',
       newPassword: '',
       confirmNewPassword: '',
       isLoading: false,
@@ -27,6 +26,14 @@ export default {
   },
   created() {
     this.email = localStorage.email;
+  },
+  computed: {
+    isButtonDisabled() {
+      return this.newPassword.length <= 0 && this.confirmNewPassword.length <= 0;
+    },
+    buttonStatus() {
+      return (this.newPassword.length > 0 && this.confirmNewPassword.length > 0) ? 'submit-btn-unlocked' : 'submit-btn';
+    },
   },
 
   methods: {
@@ -44,10 +51,26 @@ export default {
         });
       }
     },
+    mostrarOcultarSenha() {
+      const senha = document.getElementById('newPassword');
+      if (senha.type === 'password') {
+        senha.type = 'text';
+      } else {
+        senha.type = 'password';
+      }
+    },
+    mostrarOcultarRepetirSenha() {
+      const senha = document.getElementById('confirmNewPassword');
+      if (senha.type === 'password') {
+        senha.type = 'text';
+      } else {
+        senha.type = 'password';
+      }
+    },
   },
 };
 extend('regex', {
   // eslint-disable-next-line camelcase
   ...regex,
-  message: 'Precisa ter letras e números',
+  message: 'Sua senha deve conter letras, números e caracteres especiais.',
 });

@@ -1,5 +1,5 @@
-<template src="./Login.html"></template>
-
-<script src="./Login.js"></script>
+<template src="./Login.html" />
 
 <style src="./Login.css" scoped></style>
+
+<script src="./Login.js"></script>

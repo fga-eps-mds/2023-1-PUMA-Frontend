@@ -1,11 +1,13 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
     },
     "extends": [
         "plugin:vue/essential",
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:vue/strongly-recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 12,
@@ -15,5 +17,19 @@
         "vue"
     ],
     "rules": {
-    }
+        "import/extensions": [
+           "warn",
+           "ignorePackages",
+           {
+             "js": "never",
+             "jsx": "never",
+             "ts": "never",
+             "tsx": "never"
+           }
+        ],
+        "no-unused-vars": "warn",
+        "import/no-unresolved": "warn",
+        "global-require": "warn",
+        "max-len": "warn"
+     }
 }

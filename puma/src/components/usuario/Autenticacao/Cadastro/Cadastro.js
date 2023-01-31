@@ -1,16 +1,17 @@
-/* eslint-disable */
 import { extend } from 'vee-validate';
 import { regex } from 'vee-validate/dist/rules';
 import Loading from '../../../shared/loading/Loading.vue';
 import UserService from '../../../../services/UserService';
-import VisitorNav from '../../../../components/VisitorNav/VisitorNav.vue';
-import { validarTelefone, clearMasks } from '../../../../utils/validators-puma';
+import VisitorNav from '../../../VisitorNav/VisitorNav.vue';
+import { validarTelefone } from '../../../../utils/validators-puma';
+import AreaExternaHeader from '../../../AreaExterna/AreaExternaHeader/AreaExternaHeader.vue';
 
 export default {
   name: 'CadastroUsuario',
   components: {
     Loading,
     VisitorNav,
+    AreaExternaHeader,
   },
   mounted() {
     document.title = 'PUMA | Cadastro Usuário';
@@ -62,16 +63,30 @@ export default {
         };
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
-          await this.$router.push('/usuario/login');
-          this.makeToast('SUCESSO', 'Cadastro feito com sucesso!', 'success');
-        }).catch(() => {
+          const user = { email: this.email, password: this.password };
+          this.userService.logUserIn(user).then((response) => {
+            this.$store.commit('LOGIN_USER', {
+              userId: response.data.userId,
+              fullName: response.data.fullName,
+              isAdmin: response.data.isAdmin,
+              email: response.data.email,
+              type: response.data.type,
+            });
+            this.$store.commit('SET_TOKEN', response.data.token);
+            this.$router.push('/meus-projetos').catch(() => {});
+          }).catch(() => {
+            this.isLoading = false;
+          });
+        }).catch(async () => {
           this.isLoading = false;
-          this.makeToast('ERRO', 'Uma falha ocorreu ao efetuar o cadastro. Tente novamente.', 'danger');
+          this.makeToast('Erro ao cadastrar', 'Uma falha ocorreu ao efetuar o cadastro. Confira os dados inseridos e a sua conexão e tente novamente.', 'danger');
         });
       }
     },
-    makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
     },
     alterarTipoUsuario() {
       if (this.type === 'Aluno' || this.type === 'Professor') {
@@ -114,7 +129,7 @@ export default {
     },
     changePage(x) {
       if (x === 1) {
-        let isOk = this.verificaPreenchimento();
+        const isOk = this.verificaPreenchimento();
         if (isOk === true) {
           this.isFirstPage = !this.isFirstPage;
         } else {
@@ -126,52 +141,45 @@ export default {
     },
     verificaPreenchimento() {
       if (this.name && this.email) {
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        let validEmail = re.test(this.email);
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const validEmail = re.test(this.email);
         if (validEmail === true) {
           if (this.phoneNumber) {
-            let validTelephone = validarTelefone(this.phoneNumber);
+            const validTelephone = validarTelefone(this.phoneNumber);
             if (validTelephone === true) {
-              let validPassword = this.verificaSenha(this.password, this.repeatPassword);
+              const validPassword = this.verificaSenha(this.password, this.repeatPassword);
               if (validPassword === true) {
                 this.showMessage = false;
                 return true;
-              } else {
-                return false;
               }
-            } else {
               return false;
             }
-          } else {
             return false;
-          }     
-        } else {
+          }
           return false;
         }
-      } else {
         return false;
       }
+      return false;
     },
     verificaSenha(senha, repitaSenha) {
       const letrasMaiusculas = /[A-Z]/;
-      const letrasMinusculas = /[a-z]/; 
+      const letrasMinusculas = /[a-z]/;
       const numeros = /[0-9]/;
       if ((senha === repitaSenha) && (senha.length >= 6)) {
         if ((letrasMaiusculas.test(senha) || letrasMinusculas.test(senha)) && numeros.test(senha)) {
           return true;
-        } else {
-          return false;
         }
-      } else {
         return false;
       }
+      return false;
     },
     mostrarOcultarSenha(element) {
-      let senha = document.getElementById(element);
-      if(senha.type === 'password') {
+      const senha = document.getElementById(element);
+      if (senha.type === 'password') {
         senha.type = 'text';
       } else {
-        senha.type = 'password'
+        senha.type = 'password';
       }
     },
   },

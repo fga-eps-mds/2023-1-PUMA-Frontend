@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* eslint-disable prefer-destructuring */
 import SubjectService from '../../../services/SubjectService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
@@ -76,11 +75,11 @@ export default {
             this.subjectService.addSubject(subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
-              this.makeToast('SUCESSO', 'Disciplina cadastrada com sucesso', 'success');
+              this.makeToast('Disciplina cadastrada', `A disciplina "${subject.name}" foi cadastrada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
-            }).catch((error) => {
+            }).catch(() => {
               this.isLoading = false;
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao cadastrar a disciplina', 'danger');
+              this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
@@ -89,11 +88,11 @@ export default {
             this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
-              this.makeToast('SUCESSO', 'Disciplina atualizada com sucesso', 'success');
+              this.makeToast('Disciplina atualizada', `A disciplina "${subject.name}" foi atualizada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
-            }).catch((error) => {
+            }).catch(() => {
               this.isLoading = false;
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar a disciplina', 'danger');
+              this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           }
@@ -102,8 +101,10 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
     },
-    makeToast: function (title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
     },
     sortKeywordMultiselectLabels() {
       this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
@@ -112,7 +113,9 @@ export default {
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
     sortProfessorMultiselectLabels(value) {
-      if(value.filter((professor) => professor.userid === this.$store.getters.user.userId).length == 0){
+      // eslint-disable-next-line
+      if (value.filter((professor) => professor.userid === this.$store.getters.user.userId).length === 0) {
+        // eslint-disable-next-line
         value.push(this.professors.filter((professor) => professor.userid === this.$store.getters.user.userId)[0]);
       }
       this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
@@ -122,9 +125,9 @@ export default {
       this.isTouchedProfessors = true;
       this.isTouchedSubareas = true;
       return (
-        !!this.keywordsSelected.length ||
-        !!this.subareasSelected.length ||
-        !!this.professorsSelected.length
+        !!this.keywordsSelected.length
+        || !!this.subareasSelected.length
+        || !!this.professorsSelected.length
       );
     },
     isChecked(option) {
@@ -143,7 +146,7 @@ export default {
       for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
     },
     removeDropdownIcons() {
-      let multiselecctsIcon = document.getElementsByClassName('multiselect__select');
+      const multiselecctsIcon = document.getElementsByClassName('multiselect__select');
       while (multiselecctsIcon.length > 0) {
         multiselecctsIcon[0].remove();
       }
@@ -160,10 +163,10 @@ export default {
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar as palavras-chave', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras-chave disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
@@ -176,10 +179,10 @@ export default {
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = this.subareas.length ? 'Selecione as subáreas do conhecimento que correspondam a disciplina' : 'Sem subáreas disponíveis';
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = 'Sem subáreas disponíveis';
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar as subáreas', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de subáreas, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
@@ -189,14 +192,15 @@ export default {
       return new Promise((resolve, reject) => {
         this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
+          // eslint-disable-next-line
           this.professorsSelected = response.data.filter((professor) => professor.userid === this.$store.getters.user.userId);
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
           resolve();
-        }).catch((error) => {
+        }).catch(() => {
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = 'Sem professores disponíveis';
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os professores', 'danger');
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });
@@ -212,8 +216,8 @@ export default {
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.coursesyllabus;
           resolve();
-        }).catch((error) => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados da disciplina', 'danger');
+        }).catch(() => {
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });

@@ -5,7 +5,7 @@ on:
     branches: 
       - dev
   pull_request:
-    types: [opened, reopened]
+    types: [opened, synchronize, reopened, edited]
 
 jobs:
   build:
@@ -27,6 +27,9 @@ jobs:
     - name: Run lint
       run: npm run lint
 
+    - name: Executar testes
+      run: npm run test:sonar
+    
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:

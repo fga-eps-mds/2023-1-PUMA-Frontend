@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 module.exports = {
   configUser: () => {
     if (process.env.VUE_APP_ENVIRONMENT === 'dev') {
