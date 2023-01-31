@@ -168,35 +168,35 @@ const routes = [
     },
   },
   {
-    path: '/controle-usuario',
+    path: '/tipoUsuario',
     name: 'Perfis de usuário',
-    component: () => import('../components/controle-usuario/consulta-usuario/ConsultaUsuario.vue'),
+    component: () => import('../components/tipoUsuario/consulta-tipoUsuario/ConsultaTipoUsuario.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
   {
-    path: '/controle-usuario/cadastrar',
+    path: '/tipoUsuario/cadastrar',
     name: 'Cadastro de Usuário',
-    component: () => import('../components/controle-usuario/cadastro-usuario/CadastroUsuario.vue'),
+    component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
   {
-    path: '/controle-usuario/editar/:id',
+    path: '/tipoUsuario/editar/:id',
     name: 'Edição de Usuário',
-    component: () => import('../components/controle-usuario/cadastro-usuario/CadastroUsuario.vue'),
+    component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
   {
-    path: '/controle-usuario/visualizar/:id',
+    path: '/tipoUsuario/visualizar/:id',
     name: 'Visualização de Usuário',
-    component: () => import('../components/controle-usuario/cadastro-usuario/CadastroUsuario.vue'),
+    component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
   {

@@ -11,7 +11,7 @@
     <div>
     <button
         class="btn cd-btn my-3"
-        onclick="window.location.href = '/usuarios/cadastrar'">
+        onclick="window.location.href = '/tipoUsuario/cadastrar'">
         <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar perfil de usuário
     </button>
     </div>
@@ -19,8 +19,9 @@
     <div class="tabelas">
     <ListaConsultaUsuario class="meusUsuarios"
         :title="'Seus Usuários'"
-        :dataSubjects="mySubjects"
-        :subjectSearch="subjectSearch"/>
+        :dataUserTypes="myUserTypes"
+        :userTypeSearch="userTypeSearch"/>
 
     <hr class="mb-0 mt-5">
+    </div>
 </div>

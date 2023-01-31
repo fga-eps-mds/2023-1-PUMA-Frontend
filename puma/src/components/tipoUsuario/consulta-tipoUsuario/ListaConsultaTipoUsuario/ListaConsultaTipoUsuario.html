@@ -8,26 +8,26 @@
         
         <span class="title-list">{{ title }}</span>
 
-        <tr v-for="subject in listSubjects" :key="subject.subjectid">
-            <td>{{subject.name}}</td>
+        <tr v-for="usertype in listUsertypes" :key="usertype.usertypeid">
+            <td>{{usertype.name}}</td>
             <td>
-                <div v-for="user in subject.users" :key="user.userid">
+                <div v-for="user in usertype.users" :key="user.userid">
                     {{user.fullname}}
                 </div>
-                <div v-if="!subject.users.length">
+                <div v-if="!usertype.users.length">
                     -
                 </div>
             </td>
             <td class="botao">
                 <button
                     class="btn cd-btn"
-                    @click="goToSubject(subject.subjectid)">
+                    @click="goToUsertype(usertype.usertypeid)">
                     <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
                 </button>
             </td>
         </tr>
 
-        <div v-if="!listSubjects.length" class="no-results align-content-center mt-3">
+        <div v-if="!listUsertypes.length" class="no-results align-content-center mt-3">
             Sem Resultados Disponíveis
         </div>
     </table>

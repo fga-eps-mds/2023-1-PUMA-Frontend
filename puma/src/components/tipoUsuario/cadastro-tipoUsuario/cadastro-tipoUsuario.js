@@ -1,6 +1,6 @@
 /* eslint-disable */
 /* eslint-disable prefer-destructuring */
-import SubjectService from '../../../services/SubjectService';
+import UserService from '../../../services/UserService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
@@ -14,7 +14,8 @@ export default {
       courseSyllabus: '',
       isLoading: false,
       operacao: this.$route.path.split('/', 3)[2],
-      subject: '',
+      userType: '',
+      userService: new UserService(),
     };
   },
   async mounted() {
@@ -37,14 +38,14 @@ export default {
         const isMultiselectValid = this.validateMultiselects();
         if (isFormValid && isMultiselectValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
-          const subject = {
-            subject: {
+          const userType = {
+            userType: {
               name: this.name,
               courseSyllabus: this.courseSyllabus,
             },
           };
           if (this.operacao === 'cadastrar') {
-            this.subjectService.addSubject(subject).then(async () => {
+            this.userService.addUserType(userType).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Usuários' });
               this.makeToast('SUCESSO', 'Usuário cadastrado com sucesso', 'success');
@@ -55,9 +56,9 @@ export default {
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
-            subject.subject.subjectid = parseInt(this.$route.params.id, 10);
-            subject.subject.coursesyllabus = this.courseSyllabus;
-            this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
+            userType.userType.userTypeid = parseInt(this.$route.params.id, 10);
+            userType.userType.coursesyllabus = this.courseSyllabus;
+            this.userService.updateUserType(userType).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Usuários' });
               this.makeToast('SUCESSO', 'Usuário atualizado com sucesso', 'success');
@@ -84,12 +85,12 @@ export default {
       for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
     },
 
-    getSubject(subjectid) {
+    getUserType(userTypeid) {
       return new Promise((resolve, reject) => {
-        this.subjectService.getSubjectById(subjectid).then((response) => {
-          const subject = response.data;
-          this.name = subject.subject.name;
-          this.courseSyllabus = subject.subject.coursesyllabus;
+        this.userService.getUserType(userTypeid).then((response) => {
+          const userType = response.data;
+          this.name = userType.userType.name;
+          this.courseSyllabus = userType.userType.coursesyllabus;
           resolve();
         }).catch((error) => {
           this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do usuário', 'danger');
