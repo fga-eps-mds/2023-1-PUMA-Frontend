@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import VisualizacaoTurma from '../src/components/turma/visualizacao-turma/VisualizacaoTurma.vue';
+import store from '../src/store';
 
 describe('Testando criação do componente "VisualizacaoTurma"', () => {
   it('Renderizando componente', () => {
@@ -9,6 +10,7 @@ describe('Testando criação do componente "VisualizacaoTurma"', () => {
           get: jest.fn().mockReturnValue(null),
           set: jest.fn(),
         },
+        $store: store,
       },
     });
     expect(wrapper.exists()).toBe(true);
@@ -23,6 +25,7 @@ describe('Testando dados do componente "VisualizacaoTurma"', () => {
           get: jest.fn().mockReturnValue(null),
           set: jest.fn(),
         },
+        $store: store,
       },
     });
     expect(wrapper.vm.subjectSearch).toBe(null);
