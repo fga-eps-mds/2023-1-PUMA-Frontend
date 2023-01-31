@@ -1,4 +1,4 @@
-<template src="./cadastro-tipoUsuario.html"></template>
+<template src="./cadastro-tipoUsuario.html" />
 
 <script src="./cadastro-tipoUsuario.js"></script>
 

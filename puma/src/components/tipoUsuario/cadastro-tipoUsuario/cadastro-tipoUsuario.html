@@ -38,26 +38,16 @@
           </ValidationProvider>       
           
           <div class="div-buttons" v-if="operacao !== 'visualizar'">
-            <input :value="operacao === 'editar' ? 'Editar' : 'Criar perfil de usuário'" v-if="!isLoading && operacao !== 'visualizar'"
-              type="submit" class="cadastro-button" @click="onSubmit" />
+            <button
+              :class="enableSendBtn?'btn-create btn-create-enabled':'btn-create'"
+              @click="onSubmit()">
+              <em class="fa-solid fa-plus mr-2 add-project"></em>{{classId === '0'?'Criar':'Editar'}} tipo de usuário 
+            </button>
 
             <input :value="'Voltar'" v-if="!isLoading && operacao !== 'visualizar'"
               type="submit" class="cadastro-button cadastro-button-voltar" @click="$router.push({path: '/disciplinas'}).catch(() => {})" />
           </div>
 
-          <div class="divFooter">
-            <button
-              class="kw-btn-crud-cancel"
-              style="margin-right: 5%;"
-              @click="openModalRegister=false"
-            >
-              Cancelar
-            </button>
-      
-            <button class="kw-btn-confirm" @click="handleAdd()">
-              Criar
-            </button>
-          </div>
         </div>
       </div>
     </ValidationObserver>

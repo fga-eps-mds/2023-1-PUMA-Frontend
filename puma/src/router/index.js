@@ -172,7 +172,7 @@ const routes = [
     name: 'Perfis de usuário',
     component: () => import('../components/tipoUsuario/consulta-tipoUsuario/ConsultaTipoUsuario.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
     },
   },
   {
@@ -180,7 +180,7 @@ const routes = [
     name: 'Cadastro de Usuário',
     component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
     },
   },
   {
@@ -188,7 +188,7 @@ const routes = [
     name: 'Edição de Usuário',
     component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
     },
   },
   {
@@ -196,14 +196,16 @@ const routes = [
     name: 'Visualização de Usuário',
     component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
     meta: {
-      requiresAuth: false,
-      path: '/turma/:classid',
-      name: 'Edição de Turma',
-      component: () => import('../components/turma/edicao-turma/EdicaoTurma.vue'),
-      meta: {
-        requiresAuth: true,
-      },
+      requiresAuth: true,
 
+    },
+  },
+  {
+    path: '/turma/:classid',
+    name: 'Edição de Turma',
+    component: () => import('../components/turma/edicao-turma/EdicaoTurma.vue'),
+    meta: {
+      requiresAuth: true,
     },
   },
   {

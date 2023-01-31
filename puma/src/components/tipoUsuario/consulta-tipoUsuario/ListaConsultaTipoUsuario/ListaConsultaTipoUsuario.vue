@@ -1,4 +1,4 @@
-<template src="./ListaConsultaTipoUsuario.html"></template>
+<template src="./ListaConsultaTipoUsuario.html" />
 
 <script src="./ListaConsultaTipoUsuario.js"></script>
 
