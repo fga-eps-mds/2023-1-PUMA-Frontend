@@ -1,0 +1,92 @@
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.tabelas {
+    margin-top: 50px;
+    max-width: 1300px;
+    width: 100%;
+    align-content: flex-start;
+}
+
+.tabelas hr {
+    width: 100%;
+    max-width: 1300px;
+    display: inline-block;
+    border-bottom: 1px solid #94A6BC;
+}
+
+table {
+    width: 100%;
+    max-width: 1500px;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+}
+
+.botao {
+    text-align: end;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.cd-btn {
+    background-color: #15355e;
+    color: white;
+    border-color: #15355e;
+    padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    background-color: #0A1A2F;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 40px;
+    width: 300px;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 20px;
+    padding-top: 12px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.modal-tittle {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+@media screen and (max-width: 800px) {
+    .search-input {
+        width: 90%;
+        max-width: 300px;
+    }
+}

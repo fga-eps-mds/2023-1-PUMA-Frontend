@@ -1,0 +1,136 @@
+.title {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: 32px;
+}
+
+.form {
+    margin: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    background-color: #F2F2F2;
+    max-width: 1430px;
+    max-height: 346px;
+}
+
+.group {
+    margin-bottom: 30px;
+    max-width: 1095px;
+    margin-right: 311;
+
+}
+
+.cancel-btn {
+    background-color: #ffffff;
+}
+
+.input-textfield {
+    max-width: 551px;
+    font-size: 14px;
+}
+
+.input-textarea {
+    max-width: 1095px;
+    font-size: 14px;
+    margin-right: 311;
+    max-height: 66px;
+}
+
+.input-multiselect >>> .multiselect__option--highlight:after {
+    background-color:  #15355E;
+}
+
+.input-multiselect >>> .multiselect__option--highlight {
+    background-color:  #15355E;
+}
+
+.form-col-1 {
+    flex: 1;
+}
+
+.form-col-2 {
+    flex: 1;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+    .form {
+        flex-direction: column;
+    }
+
+    .form-col-2 {
+        margin-left: 0px;
+    }
+}
+
+.div-buttons {
+    margin-bottom: 48px;
+    text-align: left;
+}
+
+.create-button {
+    --primary: white;
+    --secondary: #15355e;
+    --secondary2: #0A1A2F;
+}
+
+.cancel-button {
+    margin-left: 20px;
+    --primary: #15355e;
+    --secondary: #FFFFFF;
+    --secondary2: #eaeaea;
+}
+
+
+.delete-button {
+    margin-left: 20px;
+    font-size: 16px;
+    --primary: #D10000;
+    --secondary: #F2F2F2;
+}
+
+.animated-button {
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--secondary);
+}
+
+.animated-button2 {
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--secondary);
+}
+
+
+.animated-button:hover {
+    transition: 0.2s;
+    color: var(--secondary);
+    background-color: var(--primary);
+}
+
+.animated-button2:hover {
+    transition: 0.2s;
+    background-color: var(--secondary2);
+}
+
+.popupAlert {
+    display: inline-block;
+    margin-left: 2em;
+}
+
+@media screen and (max-width: 500px) {
+    .div-buttons {
+        display: flex;
+    }
+    .cadastro-button {
+        width: 140px;
+    }
+}

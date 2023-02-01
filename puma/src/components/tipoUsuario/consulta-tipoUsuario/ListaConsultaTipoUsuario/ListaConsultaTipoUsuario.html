@@ -1,0 +1,22 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless">
+        <caption>Tabela de Listagens da Disciplina</caption>
+        <tr>
+            <th class="tittle">Perfil</th>
+            <th class="tittle">Descrição</th>
+            <th></th>
+        </tr>
+        <tr v-for="item in listUserTypes" v-if="listUserTypes.length" :key="item.userTypeId">
+            <td>{{item.typeName}}</td>
+            <td>{{item.description}}</td>
+            <td>
+                <button class="btn cd-btn my-3" @click="goToEditar(item.userTypeId)">
+                    <em class="fa-solid fa-circle-info mr-2 add-project"></em>Ver detalhes
+                </button>
+            </td>
+        </tr>
+        <div v-if="!listUserTypes.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>
