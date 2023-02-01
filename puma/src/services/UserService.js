@@ -56,4 +56,49 @@ export default class UserService {
       callback(error.response);
     });
   }
+
+  getUserType(userTypeId) {
+    return new Promise((resolve, reject) => {
+      const isUndefUserTypeId = userTypeId || '';
+      axios.get(`${global.URL_GATEWAY}/user/userType/${isUndefUserTypeId}`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/userType reject: ${response}`);
+      });
+    });
+  }
+
+  addUserType(newUserType) {
+    return new Promise((resolve, reject) => {
+      axios.post(`${global.URL_GATEWAY}/user/userType`, newUserType).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/userType reject: ${response}`);
+      });
+    });
+  }
+
+  updateUserType(newUserType, callback) {
+    return axios({
+      method: 'put',
+      url: `${global.URL_GATEWAY}/user/userType/${newUserType.userTypeId}`,
+      data: {
+        newUserType,
+      },
+    }).then((res) => {
+      callback(res);
+    }).catch((error) => {
+      callback(error.response);
+    });
+  }
+
+  deleteUserType(userTypeId) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_GATEWAY}/user/userType/${userTypeId}`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/userType reject: ${response}`);
+      });
+    });
+  }
 }

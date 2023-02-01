@@ -61,6 +61,16 @@ export default {
             this.$router.push({ path: '/turmas' }).catch(() => { });
           },
         },
+        userType: {
+          basePath: '/tipoUsuario',
+          title: 'Tipo Usuario',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/menu-4.svg'),
+          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          onclick: () => {
+            this.$router.push({ path: '/tipoUsuario' }).catch(() => { });
+          },
+        },
         keywords: {
           basePath: '/palavras-chave',
           title: 'Palavras-Chave',

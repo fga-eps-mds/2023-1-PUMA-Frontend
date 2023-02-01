@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import ListaConsultaTurma from '../src/components/turma/visualizacao-turma/ListaConsultaTurma/ListaConsultaTurma.vue';
+import store from '../src/store';
 
 describe('Testando criação do componente "EdicaoTurma"', () => {
   it('Renderizando componente', () => {
@@ -9,6 +10,7 @@ describe('Testando criação do componente "EdicaoTurma"', () => {
           get: jest.fn().mockReturnValue(null),
           set: jest.fn(),
         },
+        $store: store,
       },
     });
     expect(wrapper.exists()).toBe(true);
@@ -24,6 +26,7 @@ describe('Testando função de formatação do semestre', () => {
           get: jest.fn().mockReturnValue(null),
           set: jest.fn(),
         },
+        $store: store,
       },
     });
     expect(wrapper.vm.formatSemester('1')).toBe('1°');
