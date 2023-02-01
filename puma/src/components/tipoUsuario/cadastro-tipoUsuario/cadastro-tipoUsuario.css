@@ -1,8 +1,8 @@
-.main-title {
+.title {
     color: #15355E;
     font-weight: bold;
-    font-size: 40px;
-    margin-bottom: 40px;
+    font-size: 32px;
+    margin-bottom: 32px;
 }
 
 .form {
@@ -11,15 +11,32 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    max-width: 1500px;
+    background-color: #F2F2F2;
+    max-width: 1430px;
+    max-height: 346px;
 }
 
 .group {
     margin-bottom: 30px;
+    max-width: 1095px;
+    margin-right: 311;
+
 }
 
 .cancel-btn {
     background-color: #ffffff;
+}
+
+.input-textfield {
+    max-width: 551px;
+    font-size: 14px;
+}
+
+.input-textarea {
+    max-width: 1095px;
+    font-size: 14px;
+    margin-right: 311;
+    max-height: 66px;
 }
 
 .input-multiselect >>> .multiselect__option--highlight:after {
@@ -37,6 +54,7 @@
 .form-col-2 {
     flex: 1;
     margin-left: 20px;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -50,41 +68,56 @@
 }
 
 .div-buttons {
-    margin-top: 40px;
+    margin-bottom: 48px;
     text-align: left;
 }
 
-.cadastro-button {
-    align-items: center;
-    background-color: #15355e;
-    color: #ffffff;
-    border: none;
-    border-radius: 7px;
-    padding: 5px;
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 auto;
-    cursor: pointer;
-    transition: 0.5s;
-    width: 150px;
-    letter-spacing: 0.03em;
-    text-align: center;
+.create-button {
+    --primary: white;
+    --secondary: #15355e;
+    --secondary2: #0A1A2F;
 }
 
-.cadastro-button-voltar {
+.cancel-button {
+    --primary: #15355e;
+    --secondary: #FFFFFF;
+    --secondary2: #eaeaea;
+}
+
+
+.delete-button {
     margin-left: 20px;
-    color: #15355e;
-    border: 1px solid #15355e;
-    background-color: #ffffff;
+    font-size: 16px;
+    --primary: #D10000;
+    --secondary: #F2F2F2;
 }
 
-.cadastro-button:hover {
-    background-color: #6E97CC;
+.animated-button {
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--secondary);
 }
 
-.cadastro-button-voltar:hover {
-    color: #ffffff;
-    background-color: #15355e;
+.animated-button2 {
+    padding: 10px 20px;
+    border-radius: 7px;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background-color: var(--secondary);
+}
+
+
+.animated-button:hover {
+    transition: 0.2s;
+    color: var(--secondary);
+    background-color: var(--primary);
+}
+
+.animated-button2:hover {
+    transition: 0.2s;
+    background-color: var(--secondary2);
 }
 
 .popupAlert {

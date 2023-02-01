@@ -5,7 +5,7 @@
 .tittle {
     color: #15355E;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 32px;
 }
 
 .sub-tittle {
@@ -50,16 +50,15 @@ svg {
 }
 
 .cd-btn {
-    background-color: white;
-    color: #15355e;
+    background-color: #15355e;
+    color: white;
     border-color: #15355e;
     padding: 10px 20px;
 }
 
 .cd-btn:hover {
     transition: 0.2s;
-    color: #17519c;
-    border-color: #17519c;
+    background-color: #0A1A2F;
 }
 
 .search-input {

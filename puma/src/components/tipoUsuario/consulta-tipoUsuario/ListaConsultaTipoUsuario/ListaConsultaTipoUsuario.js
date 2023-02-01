@@ -1,32 +1,38 @@
+import UserService from '../../../../services/UserService';
+
 export default {
-  props: {
-    title: String,
-    dataUserType: Array,
-    userTypeSearch: String,
+  beforeMount() {
+    this.getData();
   },
 
   data: () => ({
-    listUserType: [],
+    listUserTypes: [],
+    userService: new UserService(),
   }),
 
-  watch: {
-    dataUserType() {
-      this.listUserType = this.dataUserType;
-    },
-
-    userTypeSearch() {
-      if (this.userTypeSearch) {
-        this.listUserType = this.dataUserType.filter((item) => (
-          item.name.toLowerCase().includes(this.userTypeSearch.toLowerCase())));
-      } else {
-        this.listUserType = this.dataUserType;
-      }
-    },
+  async mounted() {
+    try {
+      this.getData();
+    } catch (error) {
+      this.$store.commit('CLOSE_LOADING_MODAL');
+    }
   },
 
   methods: {
-    goToSubject(id) {
-      this.$router.push({ path: `/usuarios/visualizar/${id}` });
+    async getData() {
+      this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
+      this.userService.getUserType().then(async (response) => {
+        this.listUserTypes = response.data;
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      });
+    },
+    goToEditar(typeName) {
+      this.$router.push({ path: `/tipoUsuario/editar/${typeName}` }).catch(() => { });
+    },
+    makeToast(toastTitle, toastMessage, toastVariant) {
+      this.$bvToast.toast(toastMessage, {
+        title: toastTitle, variant: toastVariant, solid: true, autoHideDelay: 4000,
+      });
     },
   },
 };

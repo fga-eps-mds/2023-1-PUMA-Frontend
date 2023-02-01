@@ -10,22 +10,18 @@ export default {
   },
   data() {
     return {
-      name: '',
-      courseSyllabus: '',
+      userTypeId: this.$route.params.id,
+      typeName: '',
+      description: '',
       isLoading: false,
       operacao: this.$route.path.split('/', 3)[2],
-      userType: '',
       userService: new UserService(),
     };
   },
   async mounted() {
     try {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      if (this.operacao !== 'cadastrar') {
-        if (this.operacao === 'visualizar') {
-          this.disableForm();
-        }
-      }
+      this.getUserType(this.userTypeId);
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
       this.$store.commit('CLOSE_LOADING_MODAL');
@@ -39,15 +35,15 @@ export default {
         if (isFormValid && isMultiselectValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const userType = {
-            userType: {
-              name: this.name,
-              courseSyllabus: this.courseSyllabus,
-            },
+            userTypeId: this.userTypeId,
+            typeName: this.typeName,
+            description: this.description,
           };
           if (this.operacao === 'cadastrar') {
+            this.isLoading = true;
             this.userService.addUserType(userType).then(async () => {
               this.isLoading = false;
-              await this.$router.push({ name: 'Usuários' });
+              await this.$router.push({ path: '/tipoUsuario' });
               this.makeToast('SUCESSO', 'Usuário cadastrado com sucesso', 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch((error) => {
@@ -56,11 +52,11 @@ export default {
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
-            userType.userType.userTypeid = parseInt(this.$route.params.id, 10);
-            userType.userType.coursesyllabus = this.courseSyllabus;
+            this.isLoading = true;
+
             this.userService.updateUserType(userType).then(async () => {
               this.isLoading = false;
-              await this.$router.push({ name: 'Usuários' });
+              await this.$router.push({ path: '/tipoUsuario' });
               this.makeToast('SUCESSO', 'Usuário atualizado com sucesso', 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch((error) => {
@@ -78,25 +74,22 @@ export default {
       this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000 });
     },
 
-    disableForm() {
-      const inputs = document.getElementsByTagName('input');
-      const textareas = document.getElementsByTagName('textarea');
-      for (let i = 0; i < inputs.length; i += 1) { inputs[i].disabled = true; }
-      for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
-    },
-
-    getUserType(userTypeid) {
+    getUserType(userTypeId) {
       return new Promise((resolve, reject) => {
-        this.userService.getUserType(userTypeid).then((response) => {
+        this.userService.getUserType(userTypeId).then((response) => {
           const userType = response.data;
-          this.name = userType.userType.name;
-          this.courseSyllabus = userType.userType.coursesyllabus;
+          this.typeName = userType.userType.typeName;
+          this.description = userType.userType.description;
           resolve();
         }).catch((error) => {
           this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do usuário', 'danger');
           reject();
         });
       });
+    },
+
+    deleteUserType(userTypeId) {
+      console.log("dont delete");
     },
   },
 };

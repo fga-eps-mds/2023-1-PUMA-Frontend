@@ -1,7 +1,7 @@
 .tittle {
     color: #15355E;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 32px;
 }
 
 .sub-tittle {
@@ -15,10 +15,14 @@ table {
     border-collapse: separate;
 }
 
+caption {
+  display: none;
+}
+
 th {
-    font-size: 25px;
+    font-size: 20px;
     color: #15355e;
-    font-weight: bold;
+    font-weight: normal;
     padding: 0px 0.75rem 0.75rem 0px;
 }
 
@@ -32,6 +36,7 @@ td {
 
 tr {
     border-top: hidden;
+    color: #15355e;
 }
 
 .title-list {
@@ -51,10 +56,29 @@ tr {
 }
 
 .cd-btn {
-    background-color: white;
+    background-color: #fff;
     color: #15355e;
     border-color: #15355e;
     padding: 10px 20px;
+    margin-top: -5px;
+    font-size: 14px;
+    width: 170px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    background-color: #15355e;
+    color: #fff;
+    border-color: #fff;
+}
+
+.icon-detail {
+  color: #fff;
+  background-color: #15355e;
+  border-radius: 30px;
+  border: 1px solid #15355e;
+  top: 2px;
+  position: relative;
 }
 
 .no-results {

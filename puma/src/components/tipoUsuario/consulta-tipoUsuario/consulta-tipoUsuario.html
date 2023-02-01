@@ -12,16 +12,12 @@
     <button
         class="btn cd-btn my-3"
         onclick="window.location.href = '/tipoUsuario/cadastrar'">
-        <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar perfil de usuário
+        <em class="fa-solid fa-plus mr-2 add-project"></em>Criar perfil de usuário
     </button>
     </div>
 
     <div class="tabelas">
-    <ListaConsultaUsuario class="meusUsuarios"
-        :title="'Seus Usuários'"
-        :dataUserTypes="myUserTypes"
-        :userTypeSearch="userTypeSearch"/>
+    <ListaConsultaTipoUsuario class="meusUsuarios"/>
 
-    <hr class="mb-0 mt-5">
     </div>
 </div>

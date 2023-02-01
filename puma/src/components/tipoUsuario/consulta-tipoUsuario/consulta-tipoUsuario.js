@@ -1,5 +1,5 @@
 import UserService from '../../../services/UserService';
-import ListaConsultaUsuario from './ListaConsultaTipoUsuario/ListaConsultaTipoUsuario.vue';
+import ListaConsultaTipoUsuario from './ListaConsultaTipoUsuario/ListaConsultaTipoUsuario.vue';
 
 export default {
   beforeMount() {
@@ -7,7 +7,7 @@ export default {
   },
 
   components: {
-    ListaConsultaUsuario,
+    ListaConsultaTipoUsuario,
   },
 
   data: () => ({

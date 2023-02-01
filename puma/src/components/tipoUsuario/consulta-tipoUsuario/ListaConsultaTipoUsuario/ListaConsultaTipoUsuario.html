@@ -1,33 +1,25 @@
 <div class="mt-4 table-responsive">
-    <table class="table table-borderless" summary="Tebela de Listagens de Perfis">
+    <table class="table table-borderless">
+        <caption>Tabela de Listagens da Disciplina</caption>
         <tr>
-            <th>Perfil</th>
-            <th>Descrição</th>
+            <th class="tittle">Perfil</th>
+            <th class="tittle">Descrição</th>
             <th></th>
-        </tr>        
-        
-        <span class="title-list">{{ title }}</span>
-
-        <tr v-for="usertype in listUsertypes" :key="usertype.usertypeid">
-            <td>{{usertype.name}}</td>
-            <td>
-                <div v-for="user in usertype.users" :key="user.userid">
-                    {{user.fullname}}
-                </div>
-                <div v-if="!usertype.users.length">
-                    -
-                </div>
-            </td>
-            <td class="botao">
-                <button
-                    class="btn cd-btn"
-                    @click="goToUsertype(usertype.usertypeid)">
-                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
-                </button>
-            </td>
         </tr>
-
-        <div v-if="!listUsertypes.length" class="no-results align-content-center mt-3">
+        <div v-if="listUserTypes.length">
+            <tr v-for="item in listUserTypes" :key="item.userTypeId">
+                <td>{{item.typeName}}</td>
+                <td>{{item.description}}</td>
+                <td>
+                    <button
+                        class="btn cd-btn my-3"
+                        @click="goToEditar(item.userTypeId)">
+                        <em class="fa-solid fa-circle-info mr-2 add-project"></em>Ver detalhes
+                    </button>
+                </td>
+            </tr>
+        </div>
+        <div v-if="!listUserTypes.length" class="no-results align-content-center mt-3">
             Sem Resultados Disponíveis
         </div>
     </table>
