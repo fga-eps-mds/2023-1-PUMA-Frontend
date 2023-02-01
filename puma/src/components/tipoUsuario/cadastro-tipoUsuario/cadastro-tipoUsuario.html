@@ -2,7 +2,7 @@
   <ReturnButton />
 
   <div class='title'>
-    {{ (operacao === 'editar') ? typeName : 'Criar perfil de usuário' }}
+    {{ (operacao === 'editar') ? 'Perfil' : 'Criar perfil de usuário' }}
   </div>
   <div class="sub-tittle mb-4">
     Preencha os campos abaixo para adicionar perfis à PUMA, que poderão ser utilizados pelos usuarios para cadastro.
@@ -52,7 +52,7 @@
             v-if="operacao === 'cadastrar'">
             Cancelar
           </button>
-          <button class="animated-button2 cancel-button" @click="deleteUserType(userTypeId)"
+          <button class="animated-button delete-button" @click="deleteUserType(userTypeId)"
             v-if="operacao === 'editar'">
             <em class="fa-solid fa-trash mr-2 add-project"></em>
             Deletar perfil de usuário

@@ -79,6 +79,7 @@
 }
 
 .cancel-button {
+    margin-left: 20px;
     --primary: #15355e;
     --secondary: #FFFFFF;
     --secondary2: #eaeaea;
