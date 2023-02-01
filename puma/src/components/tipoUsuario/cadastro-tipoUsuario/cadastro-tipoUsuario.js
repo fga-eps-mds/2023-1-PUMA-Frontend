@@ -89,7 +89,15 @@ export default {
     },
 
     deleteUserType(userTypeId) {
-      console.log("dont delete");
+      return new Promise((resolve, reject) => {
+        this.userService.getUserType(userTypeId).then((response) => {
+          resolve();
+          this.$router.push({path: '/tipoUsuario'}).catch(() => {});
+        }).catch((error) => {
+          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do usuário', 'danger');
+          reject();
+        });
+      });
     },
   },
 };

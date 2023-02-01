@@ -91,4 +91,15 @@ export default class UserService {
       callback(error.response);
     });
   }
+
+  deleteUserType(userTypeId) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_GATEWAY}/user/userType/${userTypeId}`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/userType reject: ${response}`);
+      });
+    });
+  }
+
 }
