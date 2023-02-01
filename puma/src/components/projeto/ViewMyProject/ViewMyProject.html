@@ -62,10 +62,10 @@
                     <ValidationProvider vid="results" rules="required|min:40" v-slot="{errors}" :bails="false"
                         name="campo">
                         <div role="group" class="group">
-                            <label for="results" class="input-label">Resultados Enfrentados</label>
+                            <label for="results" class="input-label">Resultados Esperados</label>
                             <textarea id="results" rows="6" minlength="40" maxlength="1000"
                                 v-model="form.expectedresult" :disabled="disabled" class="input-textarea"
-                                placeholder="Descreva os resultados desejados"
+                                placeholder="Descreva os resultados esperados."
                                 v-bind:class="{ 'input-focus': !disabled && !errors.length , 'input-error': errors.length }">
                             </textarea>
                             <span class="input-counter">({{form.expectedresult.length}}/1000)</span>
