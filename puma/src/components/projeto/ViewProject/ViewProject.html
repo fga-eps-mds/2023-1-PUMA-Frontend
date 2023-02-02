@@ -45,20 +45,20 @@
                 </div>
 
                 <div role="group" class="group">
-                    <label for="results" class="input-label">Resultado Desejados</label>
-                    <textarea id="results" placeholder="Descreva os resultados desejados" rows="6"
+                    <label for="results" class="input-label">Resultados Esperados</label>
+                    <textarea id="results" placeholder="Descreva os resultados esperados." rows="6"
                         minlength="40" maxlength="1000" v-model="form.expectedresult" :disabled="true"
                         class="input-textarea"></textarea>
                     <span class="input-counter">({{form.expectedresult.length}}/1000)</span>
                 </div>
 
                 <div role="group" class="group">
-                    <label for="keywords" class="input-label">Palavra-Chave</label>
+                    <label for="keywords" class="input-label">Palavras relacionadas com o problema que está enfrentando</label>
                     <multiselect id="keywords" v-model="form.selectedKeywords" :options="keywords"
                         :disabled="true" :multiple="true" track-by="value" label="text" :searchable="true"
                         :showLabels="true" :max="3" :closeOnSelect="false" tagPosition="bottom"
                         selectLabel="" deselectLabel="" selectedLabel=""
-                        placeholder="Pesquise ou selecione uma palavra-chave" class="input-multiselect">
+                        placeholder="Pesquise ou selecione uma palavra." class="input-multiselect">
                         <template slot="option" slot-scope="scope">
                             <div class="option__desc checkbox-label">
                                 <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)"
@@ -67,10 +67,10 @@
                             </div>
                         </template>
                         <span slot="maxElements">
-                            Máximo de 3 opções selecionadas. Remova ao menos uma palavra-chave.
+                            Máximo de 3 opções selecionadas. Remova ao menos uma palavra.
                         </span>
                         <span slot="noResult">
-                            Nenhuma palavra-chave encontrada.
+                            Nenhuma palavra encontrada.
                         </span>
                     </multiselect>
                 </div>

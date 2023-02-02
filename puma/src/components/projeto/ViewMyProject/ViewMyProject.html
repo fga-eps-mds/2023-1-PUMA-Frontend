@@ -75,12 +75,12 @@
 
                     <ValidationProvider vid="keywords" rules="required" v-slot="{errors}">
                         <div role="group" class="group">
-                            <label for="keywords" class="input-label">Palavra-Chave</label>
+                            <label for="keywords" class="input-label">Palavras relacionadas com o problema que está enfrentando</label>
                             <multiselect id="keywords" v-model="form.selectedKeywords" :options="keywords"
                                 :disabled="disabled" :multiple="true" track-by="value" label="text"
                                 :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
                                 tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
-                                placeholder="Pesquise ou selecione uma palavra-chave" class="input-multiselect"
+                                placeholder="Pesquise ou selecione uma palavra." class="input-multiselect"
                                 :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'"
                                 @input="handleChangeKeywords">
                                 <template slot="option" slot-scope="scope">
@@ -91,14 +91,14 @@
                                     </div>
                                 </template>
                                 <span slot="maxElements">
-                                    Máximo de 3 opções selecionadas. Remova ao menos uma palavra-chave.
+                                    Máximo de 3 opções selecionadas. Remova ao menos uma palavra.
                                 </span>
                                 <span slot="noResult">
-                                    Nenhuma palavra-chave encontrada.
+                                    Nenhuma palavra encontrada.
                                 </span>
                             </multiselect>
                             <span class="input-error-span">
-                                {{ errors[0] && 'Escolha no mínimo uma palavra-chave'}}
+                                {{ errors[0] && 'Escolha no mínimo uma palavra'}}
                             </span>
                         </div>
                     </ValidationProvider>
