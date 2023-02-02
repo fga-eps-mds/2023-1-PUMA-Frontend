@@ -1,0 +1,65 @@
+<div class="main-content">
+  <ReturnButton />
+
+  <div class='title'>
+    {{ (operacao === 'editar') ? 'Perfil' : 'Criar perfil de usuário' }}
+  </div>
+  <div class="sub-tittle mb-4">
+    Preencha os campos abaixo para adicionar perfis à PUMA, que poderão ser utilizados pelos usuarios para cadastro.
+  </div>
+
+  <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
+    <div class="form m-0">
+      <div class="form-col-2">
+        <ValidationProvider rules="required|min:3" v-slot="v" :bails="false" name="Nome do perfil">
+          <div role="group" class="group">
+            <label for="name" class="input-label">Nome do perfil</label>
+            <input type="text" id="typeName" maxlength="50" class="input-textfield"
+              placeholder="Informe o nome do perfil que será utilizado pelos usuários da plataforma" v-model="typeName"
+              :disabled=isLoading v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
+            <span class="input-error-span" v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </div>
+        </ValidationProvider>
+
+        <ValidationProvider v-slot="v" :bails="false" name="Ementa">
+          <div role="group" class="group">
+            <label for="descricao" class="input-label">Descrição do perfil</label>
+            <textarea id="descricao"
+              placeholder="Forneça a descrição do perfil desse tipo de usuário. Essa informação aparecerá para os usuários durante a etapa de cadastro"
+              maxlength="300" rows="10" v-model="courseSyllabus" :disabled=isLoading class="input-textarea"
+              v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
+              </textarea>
+            <span class="input-error-span" v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </div>
+        </ValidationProvider>
+
+        <div class="div-buttons">
+          <button class="animated-button2 create-button button-enabled" @click="onSubmit()">
+            <div v-if="operacao === 'cadastrar'">
+              <em class="fa-solid fa-plus mr-2 add-project"></em>
+              Criar tipo de usuário
+            </div>
+            <div v-if="operacao === 'editar'">
+              <em class="fa-solid fa-pen mr-2 add-project"></em>
+              Editar tipo de usuário
+            </div>
+          </button>
+          <button class="animated-button2 cancel-button" @click="$router.push({path: '/tipoUsuario'}).catch(() => {})"
+            v-if="operacao === 'cadastrar'">
+            Cancelar
+          </button>
+          <button class="animated-button delete-button" @click="deleteUserType(userTypeId)"
+            v-if="operacao === 'editar'">
+            <em class="fa-solid fa-trash mr-2 add-project"></em>
+            Deletar perfil de usuário
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </ValidationObserver>
+</div>

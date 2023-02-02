@@ -168,6 +168,39 @@ const routes = [
     },
   },
   {
+    path: '/tipoUsuario',
+    name: 'Perfis de usuário',
+    component: () => import('../components/tipoUsuario/consulta-tipoUsuario/ConsultaTipoUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/tipoUsuario/cadastrar',
+    name: 'Cadastro de Usuário',
+    component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/tipoUsuario/editar/:id',
+    name: 'Edição de Usuário',
+    component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/tipoUsuario/visualizar/:id',
+    name: 'Visualização de Usuário',
+    component: () => import('../components/tipoUsuario/cadastro-tipoUsuario/CadastroTipoUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+
+    },
+  },
+  {
     path: '/turma/:classid',
     name: 'Edição de Turma',
     component: () => import('../components/turma/edicao-turma/EdicaoTurma.vue'),
