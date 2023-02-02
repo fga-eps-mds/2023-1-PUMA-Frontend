@@ -16,12 +16,14 @@
         </div>
 
         <b-row align-v="start" align-h="center" class="h-100">
-          <b-col cols="12">
-            <b-row align-h="center">
+          <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.subjects" />
             </b-row>
             <b-row align-h="center">
-              <ItemMenuLateral :props="menuItems.classItem" />
+              <ItemMenuLateral :props="menuItems.users" />
+            </b-row>
+            <b-row align-h="center">
+              <ItemMenuLateral :props="menuItems.userType" />
             </b-row>
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.subjectProjects" />
@@ -59,7 +61,7 @@
           <ItemMenuLateral :props="menuItems.subjects" />
         </li>
         <li>
-          <ItemMenuLateral :props="menuItems.classItem" />
+          <ItemMenuLateral :props="menuItems.users" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.subjectProjects" />
