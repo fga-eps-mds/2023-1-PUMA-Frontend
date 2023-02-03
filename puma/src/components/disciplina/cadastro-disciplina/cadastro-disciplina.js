@@ -161,12 +161,12 @@ export default {
         this.subjectService.getAvailableKeywordsToSubject().then((response) => {
           this.keywords = response.data;
           this.isLoadingKeywords = false;
-          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
+          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
           resolve();
         }).catch(() => {
           this.isLoadingKeywords = false;
-          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
-          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras-chave disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
+          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
       });

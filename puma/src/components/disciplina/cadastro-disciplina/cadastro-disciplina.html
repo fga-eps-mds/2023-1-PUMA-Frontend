@@ -56,10 +56,10 @@
           <div role="group" class="group">
             <div class="label-flex-box">
               <label for="keywords" class="input-label">
-                Palavras-chave <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="keywordAlertShow = !keywordAlertShow"/>
+                Palavras relacionadas com o problema que está enfrentando <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="keywordAlertShow = !keywordAlertShow"/>
               </label>
               <b-alert dismissible :show="keywordAlertShow" variant="warning">
-                Palavras-chave conectam sua disciplina ao público externo.
+                Estas são as palavras que conectam sua disciplina ao público externo.
                 Por isso, utilize termos simples e de fácil entendimento.
               </b-alert>
             </div>
@@ -67,7 +67,7 @@
               :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
               :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
               @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
-              @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra-chave"
+              @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra relacionada."
               @close="isTouchedKeywords = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingKeywords"
               class="input-multiselect" :disabled="isLoadingKeywords || operacao === 'visualizar'"
               :class="(isTouchedKeywords && !keywordsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
@@ -82,14 +82,14 @@
                 </div>
               </template>
               <span slot="maxElements">
-                Máximo de 6 opções selecionadas. Remova ao menos uma palavra-chave.
+                Máximo de 6 opções selecionadas. Remova ao menos uma palavra.
               </span>
               <span slot="noResult">
-                Nenhuma palavra-chave encontrada.
+                Nenhuma palavra encontrada.
               </span>
             </multiselect>
             <span v-if="isTouchedKeywords && !keywordsSelected.length" class="input-error-span">
-              Escolha no mínimo uma palavra-chave
+              Escolha no mínimo uma palavra.
             </span>
           </div>          
         </div>

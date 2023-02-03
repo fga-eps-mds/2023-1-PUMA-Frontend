@@ -41,8 +41,8 @@
 
           <ValidationProvider rules="required" v-slot="v" :bails="false" name="resultado desejado">
             <div role="group" class="group">
-              <label for="resultado" class="input-label">Resultados Enfrentados</label>
-              <textarea id="resultado" placeholder="Descreva os resultados desejados" rows="5" minlength="40"
+              <label for="resultado" class="input-label">Resultados Esperados</label>
+              <textarea id="resultado" placeholder="Descreva os resultados esperados." rows="5" minlength="40"
                 maxlength="1000" v-model="resultadoEsperado" class="input-textarea"
                 v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }"></textarea>
               <span class="input-counter">({{resultadoEsperado.length}}/1000)</span>
@@ -55,11 +55,11 @@
         <div class="form-col-2">
           <ValidationProvider vid="keywords" rules="required" v-slot="{errors}">
             <div role="group" class="group">
-              <label for="keywords" class="input-label">Palavra-Chave</label>
+              <label for="keywords" class="input-label">Palavras relacionadas com o problema que está enfrentando</label>
               <multiselect id="keywords" v-model="selectedKeywords" :options="keywords" :multiple="true"
                 track-by="value" label="text" :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
                 tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
-                placeholder="Pesquise ou selecione uma palavra-chave" class="input-multiselect"
+                placeholder="Pesquise ou selecione uma palavra." class="input-multiselect"
                 :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'"
                 @input="handleChangeKeywords">
                 <template slot="option" slot-scope="scope">
@@ -73,10 +73,10 @@
                   Máximo de 3 opções selecionadas.
                 </span>
                 <span slot="noResult">
-                  Nenhuma palavra-chave encontrada.
+                  Nenhuma palavra encontrada.
                 </span>
               </multiselect>
-              <span class="input-error-span">{{ errors[0] && 'Escolha no mínimo uma palavra-chave' }}</span>
+              <span class="input-error-span">{{ errors[0] && 'Escolha no mínimo uma palavra' }}</span>
             </div>
           </ValidationProvider>
 
@@ -85,7 +85,7 @@
               <label for="mainKeyword" class="input-label">Palavra-Chave Principal</label>
               <multiselect id="mainKeyword" v-model="mainKeyword" :options="selectedKeywords" :multiple="false"
                 track-by="value" label="text" :searchable="true" :showLabels="true" tagPosition="bottom" selectLabel=""
-                deselectLabel="" selectedLabel="" placeholder="Selecione uma palavra-chave" class="input-multiselect"
+                deselectLabel="" selectedLabel="" placeholder="Selecione uma palavra-chave." class="input-multiselect"
                 :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'">
                 <span slot="noResult">
                   Nenhuma palavra-chave encontrada.
