@@ -108,7 +108,13 @@ export default {
           && this.listScheduleForm.length > 0) {
         const regex = /\W/;
         if (!(regex.test(this.passwordForm))) {
-          this.enableSendBtn = true;
+          const regexNumber = /[0-9]/;
+          const regexText = /[a-zA-Z]/;
+          if (regexNumber.test(this.passwordForm) && regexText.test(this.passwordForm)) {
+            this.enableSendBtn = true;
+          } else {
+            this.enableSendBtn = false;
+          }
         } else {
           this.enableSendBtn = false;
         }
@@ -119,14 +125,17 @@ export default {
     setSubjectForm(value) {
       this.subjectForm = value;
       this.teachersForm = [];
+      this.dispSelectSubject = false;
       this.validateForm();
     },
     setSemesterForm(value) {
       this.semesterForm = value;
+      this.dispSelectSemester = false;
       this.validateForm();
     },
     setDayForm(value) {
       this.dayScheduleForm = value;
+      this.dispSelectDay = false;
       this.validateForm();
     },
     setProfessorForm(professor, select) {
@@ -157,17 +166,26 @@ export default {
       return false;
     },
     addDay() {
-      const item = {
-        day: this.dayScheduleForm,
-        start: this.startScheduleForm,
-        end: this.endScheduleForm,
-        dispSelectDay: false,
-      };
-      this.listScheduleForm.push(item);
-      this.dayScheduleForm = '';
-      this.startScheduleForm = '';
-      this.endScheduleForm = '';
-      this.validateForm();
+      const regex = /[0-9]{2}:[0-9]{2}/;
+      if (!regex.test(this.startScheduleForm)) {
+        this.makeToast('ERRO', 'Horário de início inválido', 'danger');
+      } else if (!regex.test(this.endScheduleForm)) {
+        this.makeToast('ERRO', 'Horário de termínio inválido', 'danger');
+      } else if (this.dayScheduleForm === '') {
+        this.makeToast('ERRO', 'Dia da semana inválido', 'danger');
+      } else {
+        const item = {
+          day: this.dayScheduleForm,
+          start: this.startScheduleForm,
+          end: this.endScheduleForm,
+          dispSelectDay: false,
+        };
+        this.listScheduleForm.unshift(item);
+        this.dayScheduleForm = '';
+        this.startScheduleForm = '';
+        this.endScheduleForm = '';
+        this.validateForm();
+      }
     },
     removeDay(item) {
       const listScheduleForm = [];
@@ -182,6 +200,7 @@ export default {
     },
     setDayItemForm(day, index) {
       this.listScheduleForm[index].day = day;
+      this.listScheduleForm[index].dispSelectDay = false;
     },
     formatSemester() {
       switch (this.semesterForm) {
@@ -227,10 +246,12 @@ export default {
         return;
       }
       if (this.yearForm === undefined || this.yearForm === '' || Number(this.yearForm) < 1950 || Number(this.yearForm) > 3000) {
-        this.makeToast('ERRO', 'Ano da disciplina não informado', 'danger');
+        this.makeToast('ERRO', 'Ano da disciplina inválido', 'danger');
         return;
       }
-      if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm)) {
+      const regexNumber = /[0-9]/;
+      const regexText = /[a-zA-Z]/;
+      if (this.passwordForm === undefined || this.passwordForm === '' || this.passwordForm.length !== 6 || regex.test(this.passwordForm) || !regexNumber.test(this.passwordForm) || !regexText.test(this.passwordForm)) {
         this.makeToast('ERRO', 'Senha inválida', 'danger');
         return;
       }
