@@ -6,3 +6,10 @@ describe('Add subject test', () => {
         expect(subjectService.addSubject('')).resolves.toEqual('');
     })
 })
+
+describe('Get Knowledge Areas', () => {
+    it('Should get knowledge Areas', () => {
+        let subjectService = new SubjectService();
+        expect(subjectService.getKnowledgeAreas()).resolves.toEqual('');
+    })
+})
