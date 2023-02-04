@@ -7,6 +7,13 @@ describe('Add subject test', () => {
     })
 })
 
+describe('Get subject by id', () => {
+    it('Should get subject', () => {
+        let subjectService = new SubjectService();
+        expect(subjectService.getSubjectById(1)).resolves.toEqual('');
+    })
+})
+
 describe('Get Knowledge Areas', () => {
     it('Should get knowledge Areas', () => {
         let subjectService = new SubjectService();
