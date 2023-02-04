@@ -2,7 +2,6 @@ import MenuLateral from '../../src/components/shared/menu-lateral/menu-lateral'
 import store from '../../src/store' 
 import router from '../../src/router'
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import onclick from '../../src/components/shared/menu-lateral/menu-lateral'
 
 const localVue = createLocalVue();
 
