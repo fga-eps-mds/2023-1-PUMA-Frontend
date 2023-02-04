@@ -1,6 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import NewPassword from '../src/components/usuario/new-password/NewPassword.vue';
+import NewPass from '../src/components/usuario/new-password/new-password.js'
 import UserService from '../src/services/UserService'
+
 
 describe('Testando criação do componente "Nova Senha"', () => {
   it('Renderizando componente', () => {
@@ -38,5 +40,20 @@ describe('Update Password', () => {
   let userService = new UserService(); 
   it('Should update password', () => {
       expect(userService.updatePassword('', '', '')).resolves.toEqual('');
+  })
+})
+
+describe('Get Nova Senha data', () => {
+  it('Should get Nova Senha data', () => {
+      let response = {
+        userService: new UserService(),
+        newPassword: '',
+        confirmNewPassword: '',
+        isLoading: false,
+        isEqualsToNewPassword: true,
+        passwordRedefined: false,
+        navs: [{ title: 'Home' }, { title: 'Recuperação de Senha' }],
+      };
+      expect(NewPass.data()).toStrictEqual(response);
   })
 })
