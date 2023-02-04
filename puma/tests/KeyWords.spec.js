@@ -1,4 +1,4 @@
-import KeywordService from '../src/services/KeywordService'
+import KeywordService from '../src/services/KeywordService';
 let keywordService = new KeywordService();
 
 describe('Update Keyword', () => {
