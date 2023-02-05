@@ -1,5 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import RecoveryPassword from '../src/components/usuario/recovery-password/RecoveryPassword.vue';
+import Recovery from '../src/components/usuario/recovery-password/recovery-password.js';
+import UserService from '../src/services/UserService.js';
+
 
 describe('Testando criação do componente "Recuperação de Senha"', () => {
   it('Renderizando componente', () => {
@@ -25,3 +28,19 @@ describe('Testando dados do componente "Recuperação de Senha"', () => {
     expect(wrapper.vm.emailNotfound).toBe(false);
   });
 });
+
+
+describe('Get Recovery data', () => {
+  it('Should get recovery data', () => {
+      let response = {
+        email: '',
+        isLoading: false,
+        successEmailReceived: false,
+        emailWrongFormat: false,
+        emailNotfound: false,
+        userService: new UserService(),
+        navs: [{ title: 'Home' }, { title: 'Recuperação de Senha' }],
+      };
+      expect(Recovery.data()).toStrictEqual(response);
+  })
+})
