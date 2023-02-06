@@ -1,5 +1,5 @@
-import ConsultaDisciplina from '../src/components/disciplina/consulta-disciplina/consulta-disciplina'
-import SubjectService from '../src/services/SubjectService';
+import ConsultaDisciplina from '../../src/components/disciplina/consulta-disciplina/consulta-disciplina'
+import SubjectService from '../../src/services/SubjectService';
 
 describe('Get Consulta Disicplina Data', () => {
     it('Should get Consulta disciplina data', () => {

@@ -1,7 +1,7 @@
-import ConsultaProjetos from '../src/components/projeto/consulta-projeto/consulta-projeto'
-import CadastroProjeto from '../src/components/projeto/cadastro-projeto/cadastro-projeto'
-
-import ProjectService from '../src/services/ProjectService';
+import ConsultaProjetos from '../../src/components/projeto/consulta-projeto/consulta-projeto'
+import CadastroProjeto from '../../src/components/projeto/cadastro-projeto/cadastro-projeto'
+import ListaConsultaProjeto from '../../src/components/projeto/consulta-projeto/ListaConsultaProjeto/ListaConsultaProjeto'
+import ProjectService from '../../src/services/ProjectService';
 
 describe('Get ConsultaProjetos data', () => {
     it('Should get ConsultaProjetos data', () => {
@@ -44,5 +44,14 @@ describe('Get CadastroProjeto data', () => {
             multiSelectPlaceholder: 'Carregando opções...',
           };
         expect(CadastroProjeto.data()).toEqual(response);
+    })
+})
+
+describe('Get ListaConsultaProjeto data', () => {
+    it('Should get ListaConsultaProjeto data', () => {
+        let response = {
+            listProjects: [],
+          };
+        expect(ListaConsultaProjeto.data()).toEqual(response);
     })
 })

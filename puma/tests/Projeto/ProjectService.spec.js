@@ -1,4 +1,4 @@
-import ProjectService from '../src/services/ProjectService'
+import ProjectService from '../../src/services/ProjectService'
 
 let projectService = new ProjectService();
 
