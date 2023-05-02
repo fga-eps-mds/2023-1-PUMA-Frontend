@@ -2,12 +2,14 @@
 
 import axios from '../main.js';
 import store from '../store';
+import dotenv from 'dotenv';
+
 
 export default class KeywordService {
   addKeyword(keyword) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.post(`https://puma20221-api-gateway.herokuapp.com/keyword`, { keyword: keyword }, { headers: { auth } }).then((response) => {
+      axios.post(`${process.env.URL_GATEWAY}/keyword`, { keyword: keyword }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
@@ -17,7 +19,7 @@ export default class KeywordService {
 
   getKeywords() {
     return new Promise((resolve, reject) => {
-      axios.get(`https://puma20221-api-gateway.herokuapp.com/keyword`).then((response) => {
+      axios.get(`${process.env.URL_GATEWAY}/keyword`).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
@@ -28,7 +30,7 @@ export default class KeywordService {
   updateKeyword(keywordid, newKeyword) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.put(`https://puma20221-api-gateway.herokuapp.com/keyword`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
+      axios.put(`${process.env.URL_GATEWAY}/keyword`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
@@ -38,7 +40,7 @@ export default class KeywordService {
 
   deleteKeyword(keywordid) {
     return new Promise((resolve, reject) => {
-      axios.delete(`https://puma20221-api-gateway.herokuapp.com/keyword/${keywordid}`).then((response) => {
+      axios.delete(`${process.env.URL_GATEWAY}/keyword/${keywordid}`).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
@@ -49,7 +51,7 @@ export default class KeywordService {
   addKeywordToSubject(keywordid, subjectid) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.post(`https://puma20221-api-gateway.herokuapp.com/keyword/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
+      axios.post(`${process.env.URL_GATEWAY}/keyword/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
@@ -60,7 +62,7 @@ export default class KeywordService {
   updateSubjectKeyword(keywordid, subjectid) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.put(`https://puma20221-api-gateway.herokuapp.com/keyword/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
+      axios.put(`${process.env.URL_GATEWAY}/keyword/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
