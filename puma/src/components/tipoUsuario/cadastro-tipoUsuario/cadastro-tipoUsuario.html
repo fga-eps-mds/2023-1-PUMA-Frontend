@@ -23,12 +23,12 @@
           </div>
         </ValidationProvider>
 
-        <ValidationProvider v-slot="v" :bails="false" name="Ementa">
+        <ValidationProvider v-slot="v" :bails="false" name="descricao">
           <div role="group" class="group">
             <label for="descricao" class="input-label">Descrição do perfil</label>
             <textarea id="descricao"
               placeholder="Forneça a descrição do perfil desse tipo de usuário. Essa informação aparecerá para os usuários durante a etapa de cadastro"
-              maxlength="300" rows="10" v-model="courseSyllabus" :disabled=isLoading class="input-textarea"
+              maxlength="300" rows="10" v-model="description" :disabled=isLoading class="input-textarea"
               v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
               </textarea>
             <span class="input-error-span" v-for="erro in v.errors">

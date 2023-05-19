@@ -16,28 +16,32 @@ export default {
       disabled: true,
       currentUserAdmin: false,
       initialForm: {
-        projectid: null,
+        projectId: null,
         name: '',
-        createdat: '',
+        createdAt: '',
         problem: '',
-        expectedresult: '',
+        expectedResult: '',
         status: '',
-        statusdesc: '',
+        statusDesc: '',
         feedback: '',
         mainKeyword: null,
         selectedKeywords: [],
         subject: {
-          subjectid: null,
+          subjectId: null,
           name: '',
         },
         user: {
-          userid: null,
-          fullname: '',
+          userId: null,
+          fullName: '',
           email: '',
-          phonenumber: '',
+          phoneNumber: '',
+          updatedAt: '',
+          passwordHash: '',
+          isAdmin: false,
+          createdAt: '',
         },
         semester: {
-          semesterid: null,
+          semesterId: null,
           year: '',
           semester: '',
         },
@@ -96,24 +100,25 @@ export default {
         const {
           Keywords, User, Subject, Semester, ...rest
         } = project;
-        const mainKeyword = Keywords.filter((k) => k.main)[0];
-        const createdat = (new Date(project.createdat)).toLocaleString();
+
+        const mainKeyword = Keywords[0].filter((k) => k.main)[0];
+        const createdAt = (new Date(project.createdAt)).toLocaleString();
         const formData = {
           ...rest,
-          createdat,
+          createdAt,
           feedback: project.feedback || '',
-          statusdesc: this.getDescricao(project.status),
+          statusDesc: this.getDescricao(project.status),
           user: User,
           subject: Subject,
           semester: Semester,
           mainKeyword: mainKeyword && { value: mainKeyword.keywordid, text: mainKeyword.keyword },
-          selectedKeywords: Keywords.map((k) => ({ value: k.keywordid, text: k.keyword }))
+          selectedKeywords: Keywords[0].map((k) => ({ value: k.keywordid, text: k.keyword }))
             .sort((a, b) => a.text.localeCompare(b.text)),
           selectedSubject: null,
           selectedEvaluation: null,
         };
         // eslint-disable-next-line
-        this.subjects = allSubjects.map((s) => ({ value: s.subjectid, text: s.name })).sort((a, b) => a.text.localeCompare(b.text));
+        this.subjects = allSubjects.map((s) => ({ value: s.subjectId, text: s.name })).sort((a, b) => a.text.localeCompare(b.text));
         this.initialForm = JSON.parse(JSON.stringify(formData));
         this.form = JSON.parse(JSON.stringify(formData));
 
@@ -130,7 +135,7 @@ export default {
 
         const projectService = new ProjectService();
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
-        let payload = { projectId: this.form.projectid, feedback: this.form.feedback };
+        let payload = { projectId: this.form.projectId, feedback: this.form.feedback };
         if (this.form.selectedEvaluation?.value === 0) {
           payload = { ...payload, status: 'AC' };
           await projectService.evaluateProject(payload);

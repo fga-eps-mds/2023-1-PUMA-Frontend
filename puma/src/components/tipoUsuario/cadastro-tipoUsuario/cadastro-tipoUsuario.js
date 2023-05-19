@@ -78,8 +78,8 @@ export default {
       return new Promise((resolve, reject) => {
         this.userService.getUserType(userTypeId).then((response) => {
           const userType = response.data;
-          this.typeName = userType.userType.typeName;
-          this.description = userType.userType.description;
+          this.typeName = userType.typeName;
+          this.description = userType.description;
           resolve();
         }).catch((error) => {
           this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do usuário', 'danger');

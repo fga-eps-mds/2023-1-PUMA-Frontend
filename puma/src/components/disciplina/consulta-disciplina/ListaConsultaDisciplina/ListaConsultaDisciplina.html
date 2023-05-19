@@ -8,11 +8,11 @@
         
         <span class="title-list">{{ title }}</span>
 
-        <tr v-for="subject in listSubjects" :key="subject.subjectid">
+        <tr v-for="subject in listSubjects" :key="subject.subjectId">
             <td>{{subject.name}}</td>
             <td>
-                <div v-for="professor in subject.professors" :key="professor.userid">
-                    {{professor.fullname}}
+                <div v-for="professor in subject.professors" :key="professor.userId">
+                    {{professor.fullName}}
                 </div>
                 <div v-if="!subject.professors.length">
                     -
@@ -21,7 +21,7 @@
             <td class="botao">
                 <button
                     class="btn cd-btn"
-                    @click="goToSubject(subject.subjectid)">
+                    @click="goToSubject(subject.subjectId)">
                     <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
                 </button>
             </td>
