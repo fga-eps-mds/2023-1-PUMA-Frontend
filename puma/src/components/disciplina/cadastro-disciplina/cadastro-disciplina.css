@@ -104,4 +104,39 @@
 .image-div {
     display: flex;
     flex-direction: column;
+    background-color: #CECECE;
+    border: #fff 2px;
+    border-radius: 25px;
+    border-style: dashed;
+    height: 282px;
+    width: 267px;
+}
+
+.image-div:hover {
+    border: #15355E 2px;
+    border-style: dashed;
+}
+
+.input-icon-image {
+    height: auto;
+    width: 70px;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+
+.input-label-image {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    color: #15355E;
+}
+
+.input-image {
+    opacity: 0;
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+    z-index: -1;
 }

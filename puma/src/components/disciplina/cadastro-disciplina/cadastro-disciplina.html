@@ -8,9 +8,11 @@
     <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
       <div class="form m-0">
         <div class="form-col-1">
+          <label class="input-label">Imagem de capa</label>
           <div role="group" class="group image-div">
-            <label for="image" class="input-label">Imagem de Capa</label>
-            <input type="file" id="image" name="image" accept="image/*">
+            <img class="input-icon-image" src="../../../assets/download-direto.png" alt="download">
+            <label for="image" class="input-label-image">Escolha um arquivo <br> ou arraste ele aqui</label>
+            <input type="file" class="input-image" id="image" name="image" accept="image/*">
           </div>
 
           <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">
