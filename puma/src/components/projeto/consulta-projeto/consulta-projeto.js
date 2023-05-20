@@ -41,6 +41,8 @@ export default {
       this.projectService.getMyProposals(user).then((response) => {
         this.projects = response.data;
 
+        console.log(this.projects);
+
         this.$store.commit('CLOSE_LOADING_MODAL');
       }).catch(() => {
         this.$store.commit('CLOSE_LOADING_MODAL');

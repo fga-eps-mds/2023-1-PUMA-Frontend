@@ -34,11 +34,11 @@ export default {
     },
     separateSubjects() {
       this.subjects.map((sub) => {
-        sub.professors.map((prof) => {
-          if (prof.userid === this.$store.getters.user.userId) {
+        sub.professors[0].map((prof) => {
+          if (prof.userId === this.$store.getters.user.userId) {
             this.mySubjects.push(sub);
             this.subjects = this.subjects.filter((item) => (
-              item.subjectid !== sub.subjectid));
+              item.subjectId !== sub.subjectId));
           }
           return prof;
         });

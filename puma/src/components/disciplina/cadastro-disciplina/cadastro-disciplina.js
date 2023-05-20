@@ -48,8 +48,6 @@ export default {
         await this.getSubject(this.$route.params.id);
         this.keywords = [...this.keywordsSelected, ...this.keywords];
       }
-      this.keywords.sort((a, b) => a.keyword.localeCompare(b.keyword));
-      this.professors.sort((a, b) => a.fullname.localeCompare(b.fullname));
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
       this.$store.commit('CLOSE_LOADING_MODAL');
@@ -83,8 +81,8 @@ export default {
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
-            subject.subject.subjectid = parseInt(this.$route.params.id, 10);
-            subject.subject.coursesyllabus = this.courseSyllabus;
+            subject.subject.subjectId = parseInt(this.$route.params.id, 10);
+            subject.subject.courseSyllabus = this.courseSyllabus;
             this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
@@ -114,11 +112,11 @@ export default {
     },
     sortProfessorMultiselectLabels(value) {
       // eslint-disable-next-line
-      if (value.filter((professor) => professor.userid === this.$store.getters.user.userId).length === 0) {
+      if (value.filter((professor) => professor.userId === this.$store.getters.user.userId).length === 0) {
         // eslint-disable-next-line
-        value.push(this.professors.filter((professor) => professor.userid === this.$store.getters.user.userId)[0]);
+        value.push(this.professors.filter((professor) => professor.userId === this.$store.getters.user.userId)[0]);
       }
-      this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
+      this.professorsSelected.sort((a, b) => b.fullName.length - a.fullName.length);
     },
     validateMultiselects() {
       this.isTouchedKeywords = true;
@@ -134,10 +132,10 @@ export default {
       return this.keywordsSelected.some((op) => op.keyword === option.keyword);
     },
     isSubareaChecked(option) {
-      return this.subareasSelected.some((op) => op.subareaid === option.subareaid);
+      return this.subareasSelected.some((op) => op.subAreaId === option.subAreaId);
     },
     isProfessorChecked(option) {
-      return this.professorsSelected.some((op) => op.userid === option.userid);
+      return this.professorsSelected.some((op) => op.userId === option.userId);
     },
     disableForm() {
       const inputs = document.getElementsByTagName('input');
@@ -193,7 +191,7 @@ export default {
         this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
           // eslint-disable-next-line
-          this.professorsSelected = response.data.filter((professor) => professor.userid === this.$store.getters.user.userId);
+          this.professorsSelected = response.data.filter((professor) => professor.userId === this.$store.getters.user.userId);
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
           resolve();
@@ -214,7 +212,7 @@ export default {
           this.professorsSelected = subject.professors;
           this.subject = subject.subject;
           this.name = subject.subject.name;
-          this.courseSyllabus = subject.subject.coursesyllabus;
+          this.courseSyllabus = subject.subject.courseSyllabus;
           resolve();
         }).catch(() => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');

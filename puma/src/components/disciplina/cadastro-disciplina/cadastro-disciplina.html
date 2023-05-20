@@ -24,7 +24,7 @@
             <label for="subarea" class="input-label">
               Área e Subáreas do conhecimento
             </label>
-            <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
+            <multiselect id="subarea" v-model="subareasSelected[0]" :options="subareas" track-by="subareaid"
               label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
               :searchable="true" :showLabels="true" :closeOnSelect="false" group-values="subareas"
               group-label="knowledgearea" selectLabel="" deselectLabel="" selectedLabel=""
@@ -37,7 +37,7 @@
               <template slot="option" slot-scope="scope">
                 <div v-if="!scope.option['$isLabel']" class="option__desc">
                   <input class="mx-2" type="checkbox" :checked="isSubareaChecked(scope.option)" @focus.prevent
-                    :key="scope.option.subareaid" />
+                    :key="scope.option.subAreaId" />
                   <span class="option__title">{{ scope.option.description }}</span>
                 </div>
                 <div v-if="scope.option['$isLabel']" class="option__desc">
@@ -63,7 +63,7 @@
                 Por isso, utilize termos simples e de fácil entendimento.
               </b-alert>
             </div>
-            <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keyword" label="keyword"
+            <multiselect id="keywords" v-model="keywordsSelected[0]" :options="keywords" track-by="keyword" label="keyword"
               :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
               :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
               @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
@@ -104,8 +104,8 @@
                 Adicione outros professores que farão parte da disciplina
               </b-alert>
             </div>
-            <multiselect id="professor" v-model="professorsSelected" :options="professors" track-by="userid"
-              label="fullname" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderProfessor"
+            <multiselect id="professor" v-model="professorsSelected[0]" :options="professors" track-by="userId"
+              label="fullName" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderProfessor"
               :searchable="true" :showLabels="true" :closeOnSelect="false" :max-height="150"
               @input="sortProfessorMultiselectLabels" selectLabel="" deselectLabel="" selectedLabel=""
               @open="multiSelectPlaceholder = 'Pesquisar'" :loading="isLoadingProfessors"
@@ -115,8 +115,8 @@
               <template slot="option" slot-scope="scope">
                 <div class="option__desc">
                   <input class="mx-2" type="checkbox" :checked="isProfessorChecked(scope.option)" @focus.prevent
-                    :key="scope.option.userid" />
-                  <span class="option__title">{{ scope.option.fullname }}</span>
+                    :key="scope.option.userId" />
+                  <span class="option__title">{{ scope.option.fullName }}</span>
                 </div>
               </template>
               <span slot="noResult">
