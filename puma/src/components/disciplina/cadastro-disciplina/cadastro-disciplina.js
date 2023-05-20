@@ -159,11 +159,11 @@ export default {
         this.subjectService.getAvailableKeywordsToSubject().then((response) => {
           this.keywords = response.data;
           this.isLoadingKeywords = false;
-          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
+          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras chave para disciplina';
           resolve();
         }).catch(() => {
           this.isLoadingKeywords = false;
-          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
+          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras chave para a disciplina';
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
