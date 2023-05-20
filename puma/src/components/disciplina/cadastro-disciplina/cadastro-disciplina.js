@@ -48,19 +48,9 @@ export default {
         await this.getSubject(this.$route.params.id);
         this.keywords = [...this.keywordsSelected, ...this.keywords];
       }
-      // this.keywords.sort((a, b) => a.keyword.localeCompare(b.keyword));
-      // this.professors.sort((a, b) => a.fullName.localeCompare(b.fullName));
-      console.log('mounted');
-      console.log(this.keywordsSelected);
-      console.log(this.subareasSelected);
-      console.log(this.professorsSelected);
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
       this.$store.commit('CLOSE_LOADING_MODAL');
-      // console.log('mounted');
-      // console.log(this.keywordsSelected);
-      // console.log(this.subareasSelected);
-      // console.log(this.professorsSelected);
     }
   },
   methods: {
@@ -168,8 +158,6 @@ export default {
       return new Promise((resolve, reject) => {
         this.subjectService.getAvailableKeywordsToSubject().then((response) => {
           this.keywords = response.data;
-          console.log('getKeywords');
-          console.log(this.keywords);
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
           resolve();
@@ -186,8 +174,6 @@ export default {
       return new Promise((resolve, reject) => {
         this.subjectService.getKnowledgeAreas().then((response) => {
           this.subareas = response.data;
-          console.log('getSubareas');
-          console.log(this.subareas);
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = this.subareas.length ? 'Selecione as subáreas do conhecimento que correspondam a disciplina' : 'Sem subáreas disponíveis';
           resolve();
@@ -204,8 +190,6 @@ export default {
       return new Promise((resolve, reject) => {
         this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
-          console.log('getProfessors');
-          console.log(this.professors);
           // eslint-disable-next-line
           this.professorsSelected = response.data.filter((professor) => professor.userId === this.$store.getters.user.userId);
           this.isLoadingProfessors = false;
@@ -229,10 +213,6 @@ export default {
           this.subject = subject.subject;
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.courseSyllabus;
-          console.log('getSubject');
-          console.log(this.keywordsSelected);
-          console.log(this.subareasSelected);
-          console.log(this.professorsSelected);
           resolve();
         }).catch(() => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
