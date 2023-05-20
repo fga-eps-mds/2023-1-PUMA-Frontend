@@ -100,3 +100,8 @@
         width: 140px;
     }
 }
+
+.image-div {
+    display: flex;
+    flex-direction: column;
+}
