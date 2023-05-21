@@ -110,6 +110,9 @@
     border-style: dashed;
     height: 282px;
     width: 267px;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .image-div:hover {
@@ -130,6 +133,7 @@
     font-size: 22px;
     font-weight: 500;
     color: #15355E;
+    cursor: pointer;
 }
 
 .input-image {

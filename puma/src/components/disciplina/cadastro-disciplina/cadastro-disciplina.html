@@ -9,10 +9,10 @@
       <div class="form m-0">
         <div class="form-col-1">
           <label class="input-label">Imagem de capa</label>
-          <div role="group" class="group image-div">
+          <div role="group" class="group image-div" v-bind:style="{backgroundImage: `url(${backgroundImg})`}">
             <img class="input-icon-image" src="../../../assets/download-direto.png" alt="download">
             <label for="image" class="input-label-image">Escolha um arquivo <br> ou arraste ele aqui</label>
-            <input type="file" class="input-image" id="image" name="image" accept="image/*">
+            <input type="file" class="input-image" id="image" name="image"accept="image/*" @input="e => handleImage(e.target)">
           </div>
 
           <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">

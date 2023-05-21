@@ -32,6 +32,7 @@ export default {
       subareasSelected: [],
       professorsSelected: [],
       subject: '',
+      backgroundImg: '',
     };
   },
   async mounted() {
@@ -54,6 +55,21 @@ export default {
     }
   },
   methods: {
+    handleImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.makeToast('Erro ao carregar imagem', 'A imagem deve ter no máximo 2MB', 'danger');
+          return;
+        }
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.backgroundImg = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
     async onSubmit() {
       try {
         const isFormValid = await this.$refs.observer.validate();
