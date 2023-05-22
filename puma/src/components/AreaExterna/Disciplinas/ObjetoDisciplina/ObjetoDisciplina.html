@@ -8,7 +8,7 @@
             <div class="div-descricao">
                 <h3 class="descricao-titulo">{{disciplina.subject.name}}</h3>
                 <p class="descricao-conteudo">
-                    {{disciplina.subject.coursesyllabus}}
+                    {{disciplina.subject.courseSyllabus}}
                 </p>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="div-descricao">
                 <h3 class="descricao-titulo">Temas</h3>
                 <p class="descricao-conteudo">
-                    <span v-for="keyword in disciplina.keywords" :key="keyword.keywordid">
+                    <span v-for="keyword in disciplina.keywords[0]" :key="keyword.keywordId">
                         {{keyword.keyword}},
                     </span>
 
