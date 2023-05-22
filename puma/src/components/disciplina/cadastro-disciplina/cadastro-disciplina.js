@@ -23,16 +23,18 @@ export default {
       isLoadingKeywords: false,
       isLoadingSubareas: false,
       isLoadingProfessors: false,
+      isTouchedImage: false,
       isTouchedKeywords: false,
       isTouchedProfessors: false,
       isTouchedSubareas: false,
       keywordAlertShow: false,
       operacao: this.$route.path.split('/', 3)[2],
+      imageSelected: '',
       keywordsSelected: [],
       subareasSelected: [],
       professorsSelected: [],
       subject: '',
-      backgroundImg: '',
+      imageError: false,
     };
   },
   async mounted() {
@@ -58,13 +60,14 @@ export default {
     handleImage(input) {
       if (input.files && input.files[0]) {
         if (input.files[0].size > 2000000) {
-          this.makeToast('Erro ao carregar imagem', 'A imagem deve ter no máximo 2MB', 'danger');
+          this.imageError = true;
           return;
         }
+        this.imageError = false;
         const reader = new FileReader();
 
         reader.onload = (e) => {
-          this.backgroundImg = e.target.result;
+          this.imageSelected = e.target.result;
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -77,6 +80,7 @@ export default {
         if (isFormValid && isMultiselectValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const subject = {
+            image: this.imageSelected,
             subject: {
               name: this.name,
               courseSyllabus: this.courseSyllabus,
