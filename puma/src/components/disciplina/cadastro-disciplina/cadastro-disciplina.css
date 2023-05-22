@@ -78,6 +78,13 @@
     background-color: #ffffff;
 }
 
+.cadastro-button-deletar {
+    margin-left: 20px;
+    color: #15355e;
+    border: 1px solid #15355e;
+    background-color: #ffffff;
+}
+
 .cadastro-button:hover {
     background-color: #6E97CC;
 }
@@ -85,6 +92,11 @@
 .cadastro-button-voltar:hover {
     color: #ffffff;
     background-color: #15355e;
+}
+
+.cadastro-button-deletar:hover {
+    color: #ffffff;
+    background-color: #8d0000;
 }
 
 .popupAlert {
