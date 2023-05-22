@@ -30,6 +30,7 @@ export default {
 
       this.subjectService.getSubjectById(this.idDisciplina).then((response) => {
         this.disciplina = response.data;
+        console.log(this.disciplina);
 
         this.loading = false;
       }).catch((error) => {
