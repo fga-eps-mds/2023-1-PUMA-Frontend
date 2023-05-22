@@ -18,9 +18,6 @@
             <span class="input-error-span" v-if="imageError">
               O tamanho da imagem deve ser menor que 2MB
             </span>
-            <span class="input-error-span" v-if="imageSelected === ''">
-              Escolha uma imagem
-            </span>
           </div>
 
           <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">

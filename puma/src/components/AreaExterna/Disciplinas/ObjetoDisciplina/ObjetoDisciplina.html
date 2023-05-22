@@ -4,7 +4,8 @@
         <div class="div-objeto-disciplina">
             <h2 class="titulo">{{disciplina.subject.name}}</h2>
             <div class="div-img-descricao">
-                <img src="../../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem da Disciplina">
+                <img v-if="!!this.disciplina.subject.image" :src="disciplina.subject.image" class="img-sobre" alt="Imagem da Disciplina" />
+                <img v-else src="../../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem da Disciplina" />
             </div>
 
             <div class="info">

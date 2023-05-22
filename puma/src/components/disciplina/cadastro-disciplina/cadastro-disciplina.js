@@ -80,15 +80,16 @@ export default {
         if (isFormValid && isMultiselectValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const subject = {
-            image: this.imageSelected,
             subject: {
               name: this.name,
               courseSyllabus: this.courseSyllabus,
+              image: this.imageSelected,
             },
             keywords: this.keywordsSelected[0],
             subareas: this.subareasSelected[0],
             professors: this.professorsSelected[0],
           };
+          console.log(subject);
           if (this.operacao === 'cadastrar') {
             this.subjectService.addSubject(subject).then(async () => {
               this.isLoading = false;
@@ -246,6 +247,7 @@ export default {
           this.subject = subject.subject;
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.courseSyllabus;
+          this.imageSelected = subject.subject.image;
           resolve();
         }).catch(() => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
