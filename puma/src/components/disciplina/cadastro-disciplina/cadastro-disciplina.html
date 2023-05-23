@@ -10,10 +10,12 @@
         <div class="form-col-1">
           <div role="group" class="group">
             <label class="input-label">Imagem de capa</label>
-            <div class="image-div" v-bind:style="{backgroundImage: `url(${imageSelected})`}">
-              <img class="input-icon-image" src="../../../assets/download-direto.png" alt="download">
-              <label for="image" class="input-label-image">Escolha um arquivo <br> ou arraste ele aqui</label>
-              <input type="file" class="input-image" id="image" name="image"accept="image/*" @input="e => handleImage(e.target)" :disabled=isLoading>
+            <div class="image-input-container" v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+              <label for="image" class="image-input-label">
+                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+              </label>
+              <input type="file" class="image-input" id="image" name="image"accept="image/*" @input="e => handleImage(e.target)" :disabled=isLoading>
             </div>
             <span class="input-error-span" v-if="imageError">
               O tamanho da imagem deve ser menor que 2MB
