@@ -162,3 +162,44 @@
     overflow: hidden;
     z-index: -1;
 }
+
+.image-input-label-selected {
+    cursor: pointer;
+    padding-top: 90px;
+    padding-bottom: 45px;
+    text-align: center;
+    margin: 0px;
+}
+
+.image-input-label-selected span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #15355E;
+    margin-top: 10px;
+    display: block;
+}
+
+.image-input-container-selected {
+    display: flex;
+    flex-direction: column;
+    background-color: #CECECE;
+    border: #fff 2px;
+    border-radius: 25px;
+    border-style: dashed;
+    width: 250px;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.image-input-label-selected {
+    opacity: 0;
+}
+
+.image-input-container-selected:hover > .image-input-label-selected span {
+    color: #ffffff;
+}
+
+.image-input-container-selected:hover > .image-input-label-selected {
+    opacity: 1;
+}

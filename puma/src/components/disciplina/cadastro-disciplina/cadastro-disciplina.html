@@ -10,7 +10,14 @@
         <div class="form-col-1">
           <div role="group" class="group">
             <label class="input-label">Imagem de capa</label>
-            <div class="image-input-container" v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+            <div v-if="!!imageSelected" class="image-input-container-selected" v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+              <label for="image" class="image-input-label-selected">
+                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+              </label>
+              <input type="file" class="image-input" id="image" name="image"accept="image/*" @input="e => handleImage(e.target)" :disabled=isLoading>
+            </div>
+            <div v-else class="image-input-container" v-bind:style="{backgroundImage: `url(${imageSelected})`}">
               <label for="image" class="image-input-label">
                 <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
                 <span>Escolha um arquivo <br>ou arraste ele aqui</span>
