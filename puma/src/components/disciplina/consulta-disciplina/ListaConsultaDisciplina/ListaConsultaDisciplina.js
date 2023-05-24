@@ -28,5 +28,8 @@ export default {
     goToSubject(id) {
       this.$router.push({ path: `/disciplinas/visualizar/${id}` });
     },
+    goToSubjectEdition(id) {
+      this.$router.push({ path: `/disciplinas/editar/${id}` });
+    },
   },
 };

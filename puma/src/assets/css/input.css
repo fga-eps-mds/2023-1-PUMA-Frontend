@@ -102,3 +102,7 @@
     cursor: text;
     pointer-events: none;
 }
+
+.input-image {
+    width: 100%;
+}

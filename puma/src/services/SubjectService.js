@@ -27,10 +27,10 @@ export default class SubjectService {
         return subject;
     }
 
-    updateSubject(subjectid, subjectBody) {
+    updateSubject(subjectId, subjectBody) {
         return new Promise((resolve, reject) => {
             const auth = store.getters.token;
-            axios.put(`${global.URL_GATEWAY}/subject/${subjectid}`, subjectBody, { headers: { auth } }).then((response) => {
+            axios.put(`${global.URL_GATEWAY}/subject/${subjectId}`, subjectBody, { headers: { auth } }).then((response) => {
                 resolve(response);
             }).catch((error) => {
                 reject(error);
