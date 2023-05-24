@@ -78,6 +78,13 @@
     background-color: #ffffff;
 }
 
+.cadastro-button-deletar {
+    margin-left: 20px;
+    color: #15355e;
+    border: 1px solid #15355e;
+    background-color: #ffffff;
+}
+
 .cadastro-button:hover {
     background-color: #6E97CC;
 }
@@ -85,6 +92,11 @@
 .cadastro-button-voltar:hover {
     color: #ffffff;
     background-color: #15355e;
+}
+
+.cadastro-button-deletar:hover {
+    color: #ffffff;
+    background-color: #8d0000;
 }
 
 .popupAlert {
@@ -99,4 +111,95 @@
     .cadastro-button {
         width: 140px;
     }
+}
+
+.image-input-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #CECECE;
+    border: #fff 2px;
+    border-radius: 25px;
+    border-style: dashed;
+    width: 250px;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.image-input-container:hover {
+    border: #15355E 2px;
+    border-style: dashed;
+}
+
+.image-input-label {
+    cursor: pointer;
+    padding-top: 90px;
+    padding-bottom: 45px;
+    text-align: center;
+    margin: 0px;
+}
+
+.image-input-icon {
+    height: auto;
+    width: 70px;
+    margin: 0 auto;
+    display: block;
+}
+
+.image-input-label span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #15355E;
+    margin-top: 10px;
+    display: block;
+}
+
+.image-input {
+    opacity: 0;
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.image-input-label-selected {
+    cursor: pointer;
+    padding-top: 90px;
+    padding-bottom: 45px;
+    text-align: center;
+    margin: 0px;
+}
+
+.image-input-label-selected span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #15355E;
+    margin-top: 10px;
+    display: block;
+}
+
+.image-input-container-selected {
+    display: flex;
+    flex-direction: column;
+    background-color: #CECECE;
+    border: #fff 2px;
+    border-radius: 25px;
+    border-style: dashed;
+    width: 250px;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.image-input-label-selected {
+    opacity: 0;
+}
+
+.image-input-container-selected:hover > .image-input-label-selected span {
+    color: #ffffff;
+}
+
+.image-input-container-selected:hover > .image-input-label-selected {
+    opacity: 1;
 }

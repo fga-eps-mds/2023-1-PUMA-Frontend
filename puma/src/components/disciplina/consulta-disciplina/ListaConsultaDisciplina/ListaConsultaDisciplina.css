@@ -55,6 +55,8 @@ tr {
     color: #15355e;
     border-color: #15355e;
     padding: 10px 20px;
+
+    margin-right: 10px;
 }
 
 .no-results {

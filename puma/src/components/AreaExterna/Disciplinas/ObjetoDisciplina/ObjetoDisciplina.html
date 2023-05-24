@@ -1,28 +1,36 @@
 <section>
     <div v-if="loading" class="loading"></div>
     <div v-else>
-        <div class="div-img-descricao">
-            <div class="div-img-sobre">
-                <img src="../../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem da Disciplina">
+        <div class="div-objeto-disciplina">
+            <h2 class="titulo">{{disciplina.subject.name}}</h2>
+            <div class="div-img-descricao">
+                <img v-if="!!this.disciplina.subject.image" :src="disciplina.subject.image" class="img-sobre" alt="Imagem da Disciplina" />
+                <img v-else src="../../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem da Disciplina" />
             </div>
-            <div class="div-descricao">
-                <h3 class="descricao-titulo">{{disciplina.subject.name}}</h3>
-                <p class="descricao-conteudo">
-                    {{disciplina.subject.coursesyllabus}}
-                </p>
+
+            <div class="info">
+                <h3 class="subtitulo">Ementa</h3>
+                <p class="texto">{{disciplina.subject.courseSyllabus}}</p>
             </div>
-        </div>
 
-        <div class="div-img-descricao">
-            <div class="div-descricao">
-                <h3 class="descricao-titulo">Temas</h3>
-                <p class="descricao-conteudo">
-                    <span v-for="keyword in disciplina.keywords" :key="keyword.keywordid">
-                        {{keyword.keyword}},
-                    </span>
+            <div class="info">
+                <h3 class="subtitulo">Palavras-chave da disciplina</h3>
+                <ul class="keywords-list">
+                    <li class="texto keyword-item" v-for="keyword in disciplina.keywords[0]" :key="keyword.keywordId">
+                        {{keyword.keyword}}
+                    </li>
+                </ul>
+            </div>
 
-                    <span v-if="disciplina.keywords.length == 0">Sem Temas Cadastados</span>
-                </p>
+            <div class="info">
+                <h3 class="subtitulo">Professores responsáveis pela disciplina</h3>
+                <div class="div-professors">
+                    <div class="card-professor" v-for="professor in disciplina.professors[0]" :key="professor.userId">
+                        <img src="../../../../assets/imagemTemporaria.png" class="img-professor" alt="Imagem do Professor">
+                        <p class="texto">{{professor.fullName}}</p>
+                        <p class="texto">{{professor.email}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
