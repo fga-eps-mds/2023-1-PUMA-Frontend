@@ -221,6 +221,11 @@ const routes = [
     name: 'Contato',
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
+  {
+    path: '/sobre/editar',
+    name: 'Editar sobre',
+    component: () => import('../components/sobre/updatePumaInfo/UpdatePumaInfo.vue'),
+  },
 ];
 
 const router = new VueRouter({
