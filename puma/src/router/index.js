@@ -224,7 +224,7 @@ const routes = [
   {
     path: '/sobre/editar',
     name: 'Editar sobre',
-    component: () => import('../components/sobre/updatePumaInfo/UpdatePumaInfo.vue'),
+    component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
   },
 ];
 
