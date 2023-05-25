@@ -38,7 +38,7 @@
             <div role="group" class="group">
               <label for="name" class="input-label">Nome do contato</label>
               <input type="text" id="typeName" maxlength="50" class="input-textfield"
-                placeholder="Informe o nome do contato que será exibido no ambiente externo" v-model="typeName"
+                placeholder="Informe o nome do contato que será exibido no ambiente externo" v-model="name"
                 :disabled=isLoading v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
               <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
@@ -50,7 +50,7 @@
             <div role="group" class="group">
               <label for="descricao" class="input-label">Contato</label>
               <input type="text" id="typeName" maxlength="50" class="input-textfield"
-                placeholder="Informe o e-mail do contato que será exibido no ambiente externo" v-model="typeName"
+                placeholder="Informe o e-mail do contato que será exibido no ambiente externo" v-model="contact"
                 :disabled=isLoading v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
               <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}

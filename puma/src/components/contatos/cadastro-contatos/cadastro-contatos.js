@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* eslint-disable prefer-destructuring */
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
+import ContactService from '../../../services/ContactService';
 
 export default {
   name: 'CadastroContato',
@@ -9,23 +10,39 @@ export default {
   },
   data() {
     return {
-      userTypeId: this.$route.params.id,
-      typeName: '',
-      description: '',
+      name: '',
+      contact: '',
       isLoading: false,
       operacao: this.$route.path.split('/', 3)[2],
+      contactService: new ContactService(),
     };
   },
   async mounted() {
     try {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      this.getUserType(this.userTypeId);
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
       this.$store.commit('CLOSE_LOADING_MODAL');
     }
   },
   methods: {
+    async onSubmit() {
+      try {
+        const contact = {
+          name: this.name,
+          email: this.contact
+        };
+        this.contactService.addContact(contact).then(async () => {
+          this.makeToast('Contato cadastrado', `O contato "${contact.name}" foi cadastrado com sucesso`, 'success');
+          this.$store.commit('CLOSE_LOADING_MODAL');
+        }).catch(() => {
+          this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar o contato "${contact.name}", confira sua conexão com servidor e tente novamente`, 'danger');
+          this.$store.commit('CLOSE_LOADING_MODAL');
+        });
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }
+    },
     /* async onSubmit() {
       try {
         const isFormValid = await this.$refs.observer.validate();

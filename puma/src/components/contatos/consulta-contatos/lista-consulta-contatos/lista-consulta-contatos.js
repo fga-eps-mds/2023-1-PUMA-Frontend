@@ -1,7 +1,7 @@
 export default {
   props: {
     title: String,
-    dataSubjects: Array,
+    dataContacts: Array,
     contactsSearch: String,
   },
 
