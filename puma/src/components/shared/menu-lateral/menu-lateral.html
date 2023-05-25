@@ -24,10 +24,10 @@
               <ItemMenuLateral :props="menuItems.classItem" />
             </b-row>
             <b-row align-h="center">
-              <ItemMenuLateral :props="menuItems.users" />
+              <ItemMenuLateral :props="menuItems.userType" />
             </b-row>
             <b-row align-h="center">
-              <ItemMenuLateral :props="menuItems.userType" />
+              <ItemMenuLateral :props="menuItems.contacts" />
             </b-row>
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.subjectProjects" />
@@ -63,6 +63,9 @@
       <ul>
         <li>
           <ItemMenuLateral :props="menuItems.subjects" />
+        </li>
+        <li>
+          <ItemMenuLateral :props="menuItems.contacts" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.users" />

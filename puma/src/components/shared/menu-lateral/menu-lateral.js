@@ -71,6 +71,16 @@ export default {
             this.$router.push({ path: '/tipoUsuario' }).catch(() => { });
           },
         },
+        contacts: {
+          basePath: '/infoContatos',
+          title: 'Contato',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/contacts.svg'),
+          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          onclick: () => {
+            this.$router.push({ path: '/infoContatos' }).catch(() => { });
+          },
+        },
         logout: {
           title: 'Sair',
           // eslint-disable-next-line

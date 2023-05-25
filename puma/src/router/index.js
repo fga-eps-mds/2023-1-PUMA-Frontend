@@ -221,6 +221,22 @@ const routes = [
     name: 'Contato',
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
+  {
+    path: '/infoContatos',
+    name: 'Informações de contato',
+    component: () => import('../components/contatos/consulta-contatos/ConsultaContatos.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/infoContatos/cadastrar',
+    name: 'Cadastro de Contato',
+    component: () => import('../components/contatos/cadastro-contatos/CadastroContatos.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
