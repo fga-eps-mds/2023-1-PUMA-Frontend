@@ -17,4 +17,24 @@ export default class ContactService {
             });
         });
     }
+
+    deleteContact(id) {
+        return new Promise((resolve, reject) => {
+            axios.delete(`${global.URL_GATEWAY}/contact/delete/${id}`).then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
+    updateContact(id, contact) {
+        return new Promise((resolve, reject) => {
+            axios.put(`${global.URL_GATEWAY}/contact/update/${id}`, contact).then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            });
+        })
+    }
 }

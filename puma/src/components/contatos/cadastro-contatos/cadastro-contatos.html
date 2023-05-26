@@ -59,13 +59,13 @@
           </ValidationProvider>
   
           <div class="div-buttons">
-            <button class="animated-button2 create-button button-enabled" @click="onSubmit()">
+            <button class="animated-button2 create-button button-enabled" @click="handleClick()">
               <div>
                 <em class="fa-solid fa-pen mr-2 add-project"></em>
-                Editar contato
+                {{ buttonLabel }}
               </div>
             </button>
-            <button class="animated-button delete-button" @click="deleteUserType(userTypeId)"">
+            <button class="animated-button delete-button" @click="deleteContact()"">
             <em class="fa-solid fa-trash mr-2 add-project"></em>
                 Deletar contato
             </button>

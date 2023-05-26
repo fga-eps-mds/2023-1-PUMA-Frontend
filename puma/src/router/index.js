@@ -231,7 +231,8 @@ const routes = [
   },
   {
     path: '/infoContatos/cadastrar',
-    name: 'Cadastro de Contato',
+    name: 'contact_register',
+    props: true,
     component: () => import('../components/contatos/cadastro-contatos/CadastroContatos.vue'),
     meta: {
       requiresAuth: true,
