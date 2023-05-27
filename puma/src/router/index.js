@@ -234,6 +234,14 @@ const routes = [
     name: 'Editar sobre',
     component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
   },
+  {
+    path: '/sobre/cadastra-saiba-mais',
+    name: 'Cadastro de Saiba Mais',
+    component: () => import('../components/sobre/SaibaMais/cadastra-saiba-mais/CadastraSaibaMais.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
