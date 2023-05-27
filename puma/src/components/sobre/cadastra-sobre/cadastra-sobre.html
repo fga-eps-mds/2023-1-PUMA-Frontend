@@ -1,0 +1,167 @@
+<div class="main-content">
+    <ReturnButton />
+
+    <div class='title'>
+        Sobre a PUMA
+    </div>
+
+    <div class="title sub-title mb-4">
+        Preencha os campos abaixo adicionar informações referentes à PUMA, que poderão ser utilizados pelos usuários
+        para visualizar informações da PUMA.
+    </div>
+
+    <ValidationObserver ref="observer" v-slot="{ handleSubmit }" @submit="handleSubmit(submitForm)">
+        <div class="form m-0">
+            <div class="form-col-1">
+
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <label for="description" class="input-label">Descrição</label>
+                        <textarea id="description" class="input-textarea"
+                            placeholder="Informe a descrição sobre a PUMA que será exibida no ambiente externo usando, no mínimo, 100 caracteres."
+                            maxlength="1000" rows="10" v-model="description ">
+                      </textarea>
+                        <span class="input-counter">({{ description.length }}/1000)</span>
+                        <span class="input-error-span" v-if="errors.length">
+                            {{ errors[0] }}
+                        </span>
+                    </div>
+                </ValidationProvider>
+
+                <div role="group" class="group">
+                    <div class="label-flex-box">
+                        <label for="professor" class="input-label">
+                            Idealizadores
+                            <font-awesome-icon icon="fa-solid fa-circle-info" role="button"
+                                @click="professorAlertShow = !professorAlertShow" />
+                        </label>
+                        <b-alert dismissible :show="professorAlertShow" variant="warning">
+                            Adicione outros idealizadores da PUMA
+                        </b-alert>
+                    </div>
+                    <multiselect id="professor" v-model="professorsSelected[0]" :options="professors" track-by="userId"
+                        label="fullName" :multiple="true" open-direction="bottom"
+                        :placeholder="multiSelectPlaceholderProfessor" :searchable="true" :show-labels="true"
+                        :close-on-select="false" :max-height="150" @input="sortProfessorMultiselectLabels"
+                        select-label="" deselect-label="" selected-label="" @open="multiSelectPlaceholder = 'Pesquisar'"
+                        :loading="isLoadingProfessors"
+                        @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'"
+                        class="input-multiselect"
+                        :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'"
+                        :class="(isTouchedProfessors && !professorsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
+                        <template slot="option" slot-scope="scope">
+                            <div class="option__desc">
+                                <input class="mx-2" type="checkbox" :checked="isProfessorChecked(scope.option)"
+                                    @focus.prevent :key="scope.option.userId" />
+                                <span class="option__title">{{ scope.option.fullName }}</span>
+                            </div>
+                        </template>
+                        <span slot="noResult">
+                            Nenhum idealizador encontrado.
+                        </span>
+                    </multiselect>
+                    <span v-if="isTouchedProfessors && !professorsSelected.length" class="input-error-span">
+                        Escolha no mínimo um professor
+                    </span>
+                </div>
+
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <label for="methodology" class="input-label">Metodologia</label>
+                        <textarea id="methodology" class="input-textarea"
+                            placeholder="Forneça as metodologias utilizadas na plataforma da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                            maxlength="1000" rows="10" v-model="methodology ">
+                      </textarea>
+                        <span class="input-counter">({{ methodology.length }}/1000)</span>
+                        <span class="input-error-span" v-if="errors.length">
+                            {{ errors[0] }}
+                        </span>
+                    </div>
+                </ValidationProvider>
+
+            </div>
+
+            <div class="form-col-2">
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <div class="goals">
+                            <label for="goals" class="input-label">Objetivos</label>
+                            <textarea id="goals" class="input-textarea"
+                                placeholder="Forneça os objetivos da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                                maxlength="1000" rows="10" v-model="goals ">
+                          </textarea>
+                            <span class="input-counter">({{ goals.length }}/1000)</span>
+                            <span class="input-error-span" v-if="errors.length">
+                                {{ errors[0] }}
+                            </span>
+                        </div>
+                    </div>
+                </ValidationProvider>
+
+
+                <div class="form-sub-col">
+                    <div class="form-sub-col-1">
+                        <div role="group" class="group">
+                            <label class="input-label">Imagem de metodologia</label>
+                            <div v-if="!!imageSelected" class="image-input-container-selected"
+                                v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                                <label for="image" class="image-input-label-selected">
+                                    <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                    <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                                </label>
+                                <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                                    @input="e => handleImage(e.target)" :disabled=isLoading>
+                            </div>
+                            <div v-else class="image-input-container"
+                                v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                                <label for="image" class="image-input-label">
+                                    <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                    <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                                </label>
+                                <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                                    @input="e => handleImage(e.target)" :disabled=isLoading>
+                            </div>
+                            <span class="input-error-span" v-if="imageError">
+                                O tamanho da imagem deve ser menor que 2MB
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-sub-col-2">
+                        <div role="group" class="group">
+                            <label class="input-label">Imagem de objetivos</label>
+                            <div v-if="!!imageSelected" class="image-input-container-selected"
+                                v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                                <label for="image" class="image-input-label-selected">
+                                    <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                    <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                                </label>
+                                <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                                    @input="e => handleImage(e.target)" :disabled=isLoading>
+                            </div>
+                            <div v-else class="image-input-container"
+                                v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                                <label for="image" class="image-input-label">
+                                    <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                    <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                                </label>
+                                <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                                    @input="e => handleImage(e.target)" :disabled=isLoading>
+                            </div>
+                            <span class="input-error-span" v-if="imageError">
+                                O tamanho da imagem deve ser menor que 2MB
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-buttons">
+            <input :value="operacao === 'editar' ? 'Editar' : 'Criar'" v-if="!isLoading && operacao !== 'visualizar'"
+                type="submit" class="cadastro-button" @click="onSubmit" />
+
+            <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
+                @click="$router.push({path: '/sobre'}).catch(() => {})" />
+        </div>
+    </ValidationObserver>
+</div>

@@ -1,0 +1,70 @@
+<div class="main-content hidden-scroll-bar">
+  <div class='title'>
+    Sobre a PUMA
+  </div>
+
+  <div class="title sub-title mb-4">
+    Veja as informações de Sobre a PUMA existentes na plataforma e os gerencie.
+  </div>
+
+  <div class="div-buttons">
+    <button class="btn cd-btn" onclick="window.location.href = '/sobre/editar'">
+      <em class="fa-solid fa-plus mr-2 add-project"></em>Editar sobre
+    </button>
+
+    <button class="btn cd-btn ml-3" onclick="window.location.href = '/sobre/editar'">
+      <em class="fa-solid fa-plus mr-2 add-project"></em>Criar Saiba Mais
+    </button>
+  </div>
+
+  <div role="group" class="group">
+    <div class='topics'>
+      Descrição
+    </div>
+    <div class='text' v-for="info in pumaInfos" :key="info.infoId">
+      {{ info.description }}
+    </div>
+  </div>
+
+  <div class="form m-0">
+    <div class="form-col-1">
+      <div role="group" class="group">
+        <div class='topics'>
+          Objetivos
+        </div>
+        <div class='text' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.goal }}
+        </div>
+      </div>
+      <div role="group" class="group">
+        <div class='topics'>
+          Idealizadores
+        </div>
+        <div class='text' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.goal }}
+        </div>
+      </div>
+    </div>
+    <div class="form-col-2">
+      <div role="group" class="group">
+        <div class='topics'>
+          Metodologia
+        </div>
+        <div class='text' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.methodology }}
+        </div>
+      </div>
+      <div role="group" class="group">
+        <div class='topics'>
+          Saiba mais
+        </div>
+        <div class='text' v-for="info in pumaMoreInfos" :key="info.title">
+          <h5><b>{{ info.title }}</b></h5>
+          {{info.description}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

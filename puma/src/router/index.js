@@ -221,6 +221,27 @@ const routes = [
     name: 'Contato',
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
+  {
+    path: '/sobre',
+    name: 'Sobre',
+    component: () => import('../components/sobre/consulta-sobre/ConsultaSobre.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/sobre/editar',
+    name: 'Editar sobre',
+    component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
+  },
+  {
+    path: '/sobre/cadastra-saiba-mais',
+    name: 'Cadastro de Saiba Mais',
+    component: () => import('../components/sobre/SaibaMais/cadastra-saiba-mais/CadastraSaibaMais.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
