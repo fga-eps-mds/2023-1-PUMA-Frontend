@@ -392,14 +392,12 @@
 .select-professors {
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #fff;
   color: black;
   max-width: 1095px;
   max-height: 346px;
   margin-right: 311;
-
   border: 1px solid #15355E;
 }
 

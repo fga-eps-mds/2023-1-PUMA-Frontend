@@ -53,11 +53,11 @@ export default {
         this.buttonLabel = 'Cadastrar contato';
       }
     },
-    handleClick() {
+    async handleClick() {
       if (this.isEditing) {
-        this.onUpdate();
+        await this.onUpdate();
       } else {
-        this.onSubmit();
+        await this.onSubmit();
       }
     },
     async onSubmit() {
