@@ -251,6 +251,14 @@ const routes = [
     },
   },
   {
+    path: '/infoContatos/visualizar/:id',
+    name: 'Visualização ou Edição de Contatos',
+    component: () => import('../components/contatos/cadastro-contatos/CadastroContatos.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/sobre/cadastra-saiba-mais',
     name: 'Cadastro de Saiba Mais',
     component: () => import('../components/sobre/SaibaMais/cadastra-saiba-mais/CadastraSaibaMais.vue'),

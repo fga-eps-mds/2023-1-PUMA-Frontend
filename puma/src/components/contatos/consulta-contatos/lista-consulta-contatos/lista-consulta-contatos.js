@@ -25,13 +25,8 @@ export default {
   },
 
   methods: {
-    goToContact(id, name, contact) {
-      this.$router.push({
-        name: 'contact_register',
-        params: {
-          id, name, contact, isEditing: true,
-        },
-      });
+    goToContact(id) {
+      this.$router.push({ path: `/infoContatos/visualizar/${id}` });
     },
   },
 };
