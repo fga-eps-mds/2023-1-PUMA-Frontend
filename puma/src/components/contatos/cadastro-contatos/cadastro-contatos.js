@@ -2,6 +2,7 @@
 /* eslint-disable prefer-destructuring */
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 import ContactService from '../../../services/ContactService';
+import SubjectService from '../../../services/SubjectService';
 
 export default {
   beforeMount() {
@@ -13,19 +14,28 @@ export default {
   },
   data() {
     return {
-      id: '',
       name: '',
       contact: '',
       buttonLabel: '',
+      professorFullName: '',
       isLoading: false,
       isEditing: false,
-      operacao: this.$route.path.split('/', 3)[2],
       contactService: new ContactService(),
+      subjectService: new SubjectService(),
+      professors: [],
+      contacts: [],
+      selectedContact: {},
+      operacao: this.$route.path.split('/', 3)[2],
     };
   },
   async mounted() {
     try {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
+      await this.getProfessors();
+      await this.getContacts();
+      if(this.operacao === 'visualizar') {
+        this.findSelectedContact();
+      }
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
       this.$store.commit('CLOSE_LOADING_MODAL');
@@ -60,6 +70,7 @@ export default {
           this.makeToast('Contato cadastrado', `O contato "${contact.name}" foi cadastrado com sucesso`, 'success');
           this.buttonLabel = 'Editar contato'
           this.$store.commit('CLOSE_LOADING_MODAL');
+          await this.$router.push({ name: 'Informações de contato' });
         }).catch(() => {
           this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar o contato "${contact.name}", confira sua conexão com servidor e tente novamente`, 'danger');
           this.$store.commit('CLOSE_LOADING_MODAL');
@@ -74,9 +85,9 @@ export default {
     async deleteContact() {
       try {
         await this.contactService.deleteContact(this.$route.params.id);
-        this.$router.go(-1);
+        await this.$router.push({ name: 'Informações de contato' });
       } catch (error) {
-        this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar o contato "${error}", confira sua conexão com servidor e tente novamente`, 'danger');
+        this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao deletar o contato "${error}", confira sua conexão com servidor e tente novamente`, 'danger');
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
     },
@@ -88,12 +99,42 @@ export default {
         };
         this.contactService.updateContact(this.id, contactItem).then(async () => {
           this.makeToast('Contato atualizado', `O contato "${this.name}" foi atualizado com sucesso`, 'success');
+        await this.$router.push({ name: 'Informações de contato' });
         }).catch((error) => {
           this.makeToast('Contato atualizado', `O contato "${error}" foi atualizado com sucesso`, 'success');
         });
       } catch (error) {
         this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar o contato "${contact.name}", confira sua conexão com servidor e tente novamente`, 'danger');
       };
+    },
+    getProfessors() {
+      this.isLoadingProfessors = true;
+      return new Promise((resolve, reject) => {
+        this.subjectService.getProfessors().then((response) => {
+          this.professors = response.data;
+          resolve();
+        }).catch(() => {
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
+          reject();
+        });
+      });
+    },
+    getContacts() {
+      return new Promise((resolve, reject) => {
+        this.contactService.getContacts().then((response) => {
+          this.contacts = response.data;
+          resolve();
+        }).catch(() => {
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
+          reject();
+        });
+      });
+    },
+    findSelectedContact() {
+      this.selectedContact = this.contacts.filter(item => item.contactId === parseInt(this.$route.params.id));
+
+      this.name = this.selectedContact[0].name;
+      this.contact = this.selectedContact[0].email;
     },
   },
 };
