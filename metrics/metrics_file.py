@@ -1,41 +1,43 @@
-import requests
-import sys
 import json
+import sys
+import urllib.request
 from datetime import datetime
-import os
-
-now = datetime.now()
-
-base_url = 'https://sonarcloud.io/api/measures/component_tree?component=fga-eps-mds_'
-file_name = 'fga-eps-mds-2022-2-PUMA'
-
-metrics = ['files', 'functions', 'complexity', 'comment_lines_density', 'duplicated_lines_density',
-           'coverage', 'ncloc', 'tests', 'test_errors', 'test_failures', 'test_execution_time', 'security_rating']
 
 
-def consumer(repository, version):
-    metrics_str = ",".join(metrics)
+def generate_metrics():
+    base_url = "https://sonarcloud.io/api/measures/component_tree?component=fga-eps-mds_"
+    prefix = "fga-eps-mds"
+    metrics = [
+        "files",
+        "functions",
+        "complexity",
+        "comment_lines_density",
+        "duplicated_lines_density",
+        "coverage",
+        "ncloc",
+        "tests",
+        "test_errors",
+        "test_failures",
+        "test_execution_time",
+        "security_rating"
+    ]
 
-    res = requests.get(base_url+repository +
-                       '&metricKeys='+metrics_str)
-    print(res.status_code, res.text)
+    # DO NOT CHANGE ANYTHING FROM HERE
+    repository_name = sys.argv[1]
+    repository_version = sys.argv[2]
+    underlined_repo_name = repository_name[:16] + \
+        repository_name[16:].replace('-', "_")
+    url = base_url + repository_name + f"&metricKeys={','.join(metrics)}"
+    with urllib.request.urlopen(url) as res:
+        data = json.load(res)
+        date = datetime.now()
+        date_padrao_hilmer = f"{date.month}-{date.day}-{date.year}-{date.hour}-{date.minute}-{date.second}"
 
-    m = res.json()
-
-    f = open(
-        f'./analytics-raw-data/fga-eps-mds-{repository}-{now.strftime("%m-%d-%Y-%H-%M-%S")}-{version}.json', 'w')
-    f.write(json.dumps(m, indent=4))
-    f.close()
+        filename = f"{prefix}-{underlined_repo_name}-{date_padrao_hilmer}-{repository_version}.json"
+        print(filename)
+        with open(filename, "w") as file:
+            json.dump(data, file)
 
 
-if __name__ == '__main__':
-    folder = 'analytics-raw-data'
-    create_folder = os.path.exists(folder)
-
-    if not create_folder:
-        os.makedirs(folder)
-
-    repository = sys.argv[1]
-    version = sys.argv[2]
-
-    consumer(repository, version)
+if __name__ == "__main__":
+    generate_metrics()

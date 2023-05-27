@@ -23,15 +23,18 @@ export default {
       isLoadingKeywords: false,
       isLoadingSubareas: false,
       isLoadingProfessors: false,
+      isTouchedImage: false,
       isTouchedKeywords: false,
       isTouchedProfessors: false,
       isTouchedSubareas: false,
       keywordAlertShow: false,
       operacao: this.$route.path.split('/', 3)[2],
+      imageSelected: '',
       keywordsSelected: [],
       subareasSelected: [],
       professorsSelected: [],
       subject: '',
+      imageError: false,
     };
   },
   async mounted() {
@@ -54,6 +57,22 @@ export default {
     }
   },
   methods: {
+    handleImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imageSelected = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
     async onSubmit() {
       try {
         const isFormValid = await this.$refs.observer.validate();
@@ -64,20 +83,22 @@ export default {
             subject: {
               name: this.name,
               courseSyllabus: this.courseSyllabus,
+              image: this.imageSelected,
             },
-            keywords: this.keywordsSelected,
-            subareas: this.subareasSelected,
-            professors: this.professorsSelected,
+            keywords: this.keywordsSelected[0],
+            subareas: this.subareasSelected[0],
+            professors: this.professorsSelected[0],
           };
+          console.log(subject);
           if (this.operacao === 'cadastrar') {
             this.subjectService.addSubject(subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
-              this.makeToast('Disciplina cadastrada', `A disciplina "${subject.name}" foi cadastrada com sucesso`, 'success');
+              this.makeToast('Disciplina cadastrada', `A disciplina "${this.name}" foi cadastrada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch(() => {
               this.isLoading = false;
-              this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
+              this.makeToast('Falha ao cadastrar', `Infelizmente houve um erro ao cadastrar a disciplina "${this.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
@@ -86,11 +107,11 @@ export default {
             this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
-              this.makeToast('Disciplina atualizada', `A disciplina "${subject.name}" foi atualizada com sucesso`, 'success');
+              this.makeToast('Disciplina atualizada', `A disciplina "${this.name}" foi atualizada com sucesso`, 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch(() => {
               this.isLoading = false;
-              this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar a disciplina "${subject.name}", confira sua conexão com servidor e tente novamente`, 'danger');
+              this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar a disciplina "${this.name}", confira sua conexão com servidor e tente novamente`, 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           }
@@ -98,6 +119,19 @@ export default {
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
+    },
+    async deleteSubject() {
+      const subjectId = parseInt(this.$route.params.id, 10);
+      this.subjectService.deleteSubject(subjectId).then(async () => {
+        this.isLoading = false;
+        await this.$router.push({ name: 'Disciplinas' });
+        this.makeToast('Disciplina deletada', `A disciplina "${this.name}" foi deletada com sucesso`, 'success');
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }).catch(() => {
+        this.isLoading = false;
+        this.makeToast('Falha ao deletar', `Infelizmente houve um erro ao deletar a disciplina "${this.name}", confira sua conexão com servidor e tente novamente`, 'danger');
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      });
     },
     makeToast(title, message, variant) {
       this.$bvToast.toast(message, {
@@ -159,11 +193,11 @@ export default {
         this.subjectService.getAvailableKeywordsToSubject().then((response) => {
           this.keywords = response.data;
           this.isLoadingKeywords = false;
-          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
+          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras chave para disciplina';
           resolve();
         }).catch(() => {
           this.isLoadingKeywords = false;
-          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras relacionadas com o problema que está enfrentando';
+          this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras chave para a disciplina';
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de palavras disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
           reject();
         });
@@ -191,7 +225,7 @@ export default {
         this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
           // eslint-disable-next-line
-          this.professorsSelected = response.data.filter((professor) => professor.userId === this.$store.getters.user.userId);
+          this.professorsSelected.push(response.data.filter((professor) => professor.userId === this.$store.getters.user.userId));
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
           resolve();
@@ -213,6 +247,7 @@ export default {
           this.subject = subject.subject;
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.courseSyllabus;
+          this.imageSelected = subject.subject.image;
           resolve();
         }).catch(() => {
           this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de disciplinas disponíveis, confira sua conexão com servidor e tente novamente', 'danger');

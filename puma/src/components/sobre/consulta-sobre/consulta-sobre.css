@@ -1,0 +1,101 @@
+.title {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.topics {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.text {
+    font-size: 20px;
+    font-weight: normal;
+    color: #15355E;
+}
+
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+.form {
+    margin: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    max-width: 1500px;
+}
+
+.group {
+    margin-bottom: 30px;
+}
+
+.cancel-btn {
+    background-color: #ffffff;
+}
+
+.input-multiselect >>> .multiselect__option--highlight:after {
+    background-color:  #15355E;
+}
+
+.input-multiselect >>> .multiselect__option--highlight {
+    background-color:  #15355E;
+}
+
+.form-col-1 {
+    flex: 1;
+}
+
+.form-col-2 {
+    flex: 1;
+    margin-left: 20px;
+    
+}
+
+.form-sub-col {
+    display: flex;
+}
+
+.form-sub-col-1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-sub-col-2 {
+    flex: 1;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.cd-btn {
+    background-color: #15355e;
+    color: #fff;
+    border-color: #15355e;
+    padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    background-color: #0A1A2F;
+}
+
+.btn-margin {
+    margin-top: 100px;
+}

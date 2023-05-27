@@ -1,15 +1,15 @@
 <div class="mt-4 table-responsive">
-    <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+    <table class="table table-borderless" summary="Tabela de listagem de Saiba Mais">
         <tr>
-            <th>Nome</th>
-            <th>Professores</th>
+            <th>Título</th>
+            <th>Descrição</th>
             <th></th>
         </tr>        
         
         <span class="title-list">{{ title }}</span>
 
-        <tr v-for="subject in listSubjects" :key="subject.subjectId">
-            <td>{{subject.name}}</td>
+        <tr v-for="info in pumaInfos" :key="subject.subjectId">
+            <td>{{info.More}}</td>
             <td>
                 <div v-for="professor in subject.professors[0]" :key="professor.userId">
                     {{professor.fullName}}

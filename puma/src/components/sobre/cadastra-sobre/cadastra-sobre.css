@@ -1,8 +1,13 @@
-.main-title {
+.title {
     color: #15355E;
     font-weight: bold;
     font-size: 40px;
     margin-bottom: 40px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: normal;
 }
 
 .form {
@@ -37,6 +42,24 @@
 .form-col-2 {
     flex: 1;
     margin-left: 20px;
+    
+}
+
+.form-sub-col {
+    display: flex;
+}
+
+.form-sub-col-1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-sub-col-2 {
+    flex: 1;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 1200px) {
@@ -202,4 +225,8 @@
 
 .image-input-container-selected:hover > .image-input-label-selected {
     opacity: 1;
+}
+
+.input-textarea {
+    height: 50%;
 }
