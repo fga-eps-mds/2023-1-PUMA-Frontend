@@ -10,7 +10,6 @@
         para visualizar informações da PUMA.
     </div>
 
-
     <ValidationObserver ref="observer" v-slot="{ handleSubmit }" @submit="handleSubmit(submitForm)">
         <div class="form m-0">
             <div class="form-col-1">
@@ -127,7 +126,7 @@
                             </span>
                         </div>
                     </div>
-                    
+
                     <div class="form-sub-col-2">
                         <div role="group" class="group">
                             <label class="input-label">Imagem de objetivos</label>
@@ -156,6 +155,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="div-buttons">
+            <input :value="operacao === 'editar' ? 'Editar' : 'Criar'" v-if="!isLoading && operacao !== 'visualizar'"
+                type="submit" class="cadastro-button" @click="onSubmit" />
+
+            <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
+                @click="$router.push({path: '/sobre'}).catch(() => {})" />
         </div>
     </ValidationObserver>
 </div>

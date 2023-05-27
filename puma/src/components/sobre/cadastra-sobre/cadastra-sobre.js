@@ -1,5 +1,6 @@
 /* eslint-disable*/
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
+import SubjectService from '../../../services/SubjectService';
 
 export default {
   name: 'EditarSobre',
@@ -21,6 +22,7 @@ export default {
       imageSelected: '',
       imageError: false,
       isLoading: false,
+          subjectService: new SubjectService(),
     };
   },
   methods: {
@@ -51,5 +53,71 @@ export default {
 
       reader.readAsDataURL(input.files[0]);
     }
+  },
+  validateMultiselects() {
+    this.isTouchedKeywords = true;
+    this.isTouchedProfessors = true;
+    this.isTouchedSubareas = true;
+    return (
+      !!this.keywordsSelected.length
+      || !!this.subareasSelected.length
+      || !!this.professorsSelected.length
+    );
+  },
+  isChecked(option) {
+    return this.keywordsSelected.some((op) => op.keyword === option.keyword);
+  },
+  isSubareaChecked(option) {
+    return this.subareasSelected.some((op) => op.subAreaId === option.subAreaId);
+  },
+  isProfessorChecked(option) {
+    return this.professorsSelected.some((op) => op.userId === option.userId);
+  },
+  getProfessors() {
+    this.isLoadingProfessors = true;
+    return new Promise((resolve, reject) => {
+      this.subjectService.getProfessors().then((response) => {
+        this.professors = response.data;
+        // eslint-disable-next-line
+        this.professorsSelected.push(response.data.filter((professor) => professor.userId === this.$store.getters.user.userId));
+        this.isLoadingProfessors = false;
+        this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
+        resolve();
+      }).catch(() => {
+        this.isLoadingProfessors = false;
+        this.multiSelectPlaceholderProfessor = 'Sem professores disponíveis';
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
+        reject();
+      });
+    });
+  },
+  async onSubmit() {
+    try {
+      const isFormValid = await this.$refs.observer.validate();
+      const isMultiselectValid = this.validateMultiselects();
+      if (isFormValid && isMultiselectValid) {
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
+        const about = {
+          about: {
+            description: this.description,
+            goals: this.goals,
+            methodology: this.methodology,
+          },
+        };
+          this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
+            this.isLoading = false;
+            await this.$router.push({ name: 'Disciplinas' });
+            this.makeToast('Sobre atualizado', `O Sobre a PUMA foi atualizada com sucesso`, 'success');
+            this.$store.commit('CLOSE_LOADING_MODAL');
+          }).catch(() => {
+            this.isLoading = false;
+            this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar o Sobre a PUMA", confira sua conexão com servidor e tente novamente`, 'danger');
+            this.$store.commit('CLOSE_LOADING_MODAL');
+          });
+      }
+    } catch (error) {
+      this.$store.commit('CLOSE_LOADING_MODAL');
+    }
+
   },
 };
