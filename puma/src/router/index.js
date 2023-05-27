@@ -226,7 +226,8 @@ const routes = [
     path: '/infoContatos',
     name: 'Informações de contato',
     component: () => import('../components/contatos/consulta-contatos/ConsultaContatos.vue'),
-
+  },
+  {
     path: '/sobre',
     name: 'Sobre',
     component: () => import('../components/sobre/consulta-sobre/ConsultaSobre.vue'),
@@ -236,16 +237,17 @@ const routes = [
     },
   },
   {
+    path: '/sobre/editar',
+    name: 'Editar sobre',
+    component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
+  },
+  {
     path: '/infoContatos/cadastrar',
     name: 'contact_register',
     props: true,
     component: () => import('../components/contatos/cadastro-contatos/CadastroContatos.vue'),
     meta: {
       requiresAuth: true,
-
-      path: '/sobre/editar',
-      name: 'Editar sobre',
-      component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
     },
   },
   {
