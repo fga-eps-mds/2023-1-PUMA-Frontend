@@ -236,7 +236,6 @@ const routes = [
     },
   },
   {
-
     path: '/infoContatos/cadastrar',
     name: 'contact_register',
     props: true,
@@ -248,6 +247,7 @@ const routes = [
       name: 'Editar sobre',
       component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
     },
+  },
   {
     path: '/sobre/cadastra-saiba-mais',
     name: 'Cadastro de Saiba Mais',

@@ -89,7 +89,6 @@ export default {
             subareas: this.subareasSelected[0],
             professors: this.professorsSelected[0],
           };
-          console.log(subject);
           if (this.operacao === 'cadastrar') {
             this.subjectService.addSubject(subject).then(async () => {
               this.isLoading = false;

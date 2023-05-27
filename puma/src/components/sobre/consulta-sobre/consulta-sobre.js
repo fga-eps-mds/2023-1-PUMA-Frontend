@@ -16,8 +16,6 @@ export default {
     getPuma_Infos() {
       this.pumaInfoService.getPuma_Infos().then((response) => {
         this.pumaInfos = response.data;
-        // console.log('responsedata');
-        // console.log(response.data.moreInfos);
       }).catch((e) => {
         console.log(e);
       });
@@ -31,8 +29,6 @@ export default {
           };
           this.pumaMoreInfos.push(obj);
         });
-        console.log(this.pumaMoreInfos);
-        console.log(response.data.moreInfos);
       }).catch((e) => {
         console.log(e);
       });
