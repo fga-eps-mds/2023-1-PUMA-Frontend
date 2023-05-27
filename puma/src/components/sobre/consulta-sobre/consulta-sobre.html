@@ -58,12 +58,13 @@
         <div class='topics'>
           Saiba mais
         </div>
-        <div class='text' v-for="info in pumaInfos" :key="info.infoId">
-          {{ info.goal }}
+        <div class='text' v-for="info in pumaMoreInfos" :key="info.title">
+          <h5><b>{{ info.title }}</b></h5>
+          {{info.description}}
         </div>
       </div>
     </div>
   </div>
 
-  
+
 </div>
