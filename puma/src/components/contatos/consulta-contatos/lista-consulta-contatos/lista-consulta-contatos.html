@@ -4,15 +4,13 @@
             <th>Nome</th>
             <th>Contato</th>
             <th></th>
-        </tr>        
-        
+        </tr>
+
         <tr v-for="contact in listContacts" :key="contact.contactId">
             <td>{{contact.name}}</td>
             <td>{{contact.email}}</td>
             <td class="botao">
-                <button
-                    class="btn cd-btn"
-                    @click="goToContact(contact.contactId, contact.name, contact.email)">
+                <button class="btn cd-btn" @click="goToContact(contact.contactId, contact.name, contact.email)">
                     <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
                 </button>
             </td>

@@ -244,10 +244,10 @@ const routes = [
     meta: {
       requiresAuth: true,
 
-    path: '/sobre/editar',
-    name: 'Editar sobre',
-    component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
-  },
+      path: '/sobre/editar',
+      name: 'Editar sobre',
+      component: () => import('../components/sobre/cadastra-sobre/CadastraSobre.vue'),
+    },
   {
     path: '/sobre/cadastra-saiba-mais',
     name: 'Cadastro de Saiba Mais',
