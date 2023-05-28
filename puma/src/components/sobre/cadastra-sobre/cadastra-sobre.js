@@ -77,6 +77,13 @@ export default {
       try {
         const moreInfos = this.pumaInfo.moreInfos;
         const teachers = this.pumaInfo.teachers;
+       teachers.forEach(teacher => {
+          if (this.professorsSelected[0].includes(teacher)) {
+            teacher.isIdealizer = true;
+          } else {
+           teacher.isIdealizer = false;
+          }
+        });
         const topics = this.pumaInfo.topics;
         const pumaItem = this.pumaInfo['0'];
         const newPumaItem = {
@@ -103,20 +110,6 @@ export default {
           this.makeToast('Falha ao atualizar', 'Atualização falhou!', 'danger');
           this.$store.commit('CLOSE_LOADING_MODAL');
         });
-        console.log(teachers[0])
-        console.log( this.professorsSelected[0])
-        console.log('DESIFAJHA', this.professorsSelected[0].includes(teachers[0]))
-        for (let i = 0; i < teachers.length; i++) {
-          if (this.professorsSelected[0].includes(teachers[i])) {
-            const newTeacher = teachers[i];
-            newTeacher.isIdealizer = true;
-            await this.userService.updateIdealizer(teachers[i].userId, newTeacher);
-          } else {
-            const newTeacher = teachers[i];
-            newTeacher.isIdealizer = false;
-            await this.userService.updateIdealizer(teachers[i].userId, newTeacher);
-          }
-        };
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
       }
@@ -126,12 +119,6 @@ export default {
         title, variant, solid: true, noAutoHide: true, appendToast: true,
       });
     },
-    // sortKeywordMultiselectLabels() {
-    //   this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
-    // },
-    // sortSubareaMultiselectLabels() {
-    //   this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
-    // },
     sortProfessorMultiselectLabels(value) {
       // eslint-disable-next-line
       if (value.filter((professor) => professor.userId === this.$store.getters.user.userId).length === 0) {
