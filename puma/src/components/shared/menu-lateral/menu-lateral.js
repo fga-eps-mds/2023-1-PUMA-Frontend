@@ -51,6 +51,16 @@ export default {
             this.$router.push({ path: '/disciplinas' }).catch(() => { });
           },
         },
+        about: {
+          basePath: '/sobre',
+          title: 'Informações e Objetivos',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/subjects.png'),
+          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          onclick: () => {
+            this.$router.push({ path: '/sobre' }).catch(() => { });
+          },
+        },
         classItem: {
           basePath: '/turmas',
           title: 'Turmas',
