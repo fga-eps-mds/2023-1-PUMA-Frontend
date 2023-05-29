@@ -1,9 +1,10 @@
-/* eslint-disable*/
+/* eslint-disable */
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
-import SubjectService from '../../../services/SubjectService';
+import PumaInfoService from '../../../services/PumaInfoService';
+import UserService from '../../../services/UserService';
 
 export default {
-  name: 'EditarSobre',
+  name: 'CadastroDisciplina',
   components: {
     ReturnButton,
   },
@@ -12,20 +13,112 @@ export default {
       description: '',
       methodology: '',
       goals: '',
-      professorAlertShow: false,
-      professorsSelected: [],
       professors: [],
+      professorAlertShow: false,
+      pumaInfo: [],
+      pumaInfoService: new PumaInfoService(),
+      userService: new UserService(),
       multiSelectPlaceholderProfessor: 'Carregando opções...',
+      isLoading: false,
       isLoadingProfessors: false,
+      isTouchedImage: false,
+      isTouchedKeywords: false,
       isTouchedProfessors: false,
       operacao: this.$route.path.split('/', 3)[2],
       imageSelected: '',
+      imageSelected2: '',
+      professorsSelected: [],
+      subject: '',
       imageError: false,
-      isLoading: false,
-          subjectService: new SubjectService(),
     };
   },
+  async mounted() {
+    try {
+      await this.getProfessors();
+      console.log(this.professors);
+    } catch (error) {
+      console.log(error);
+    }
+  },
   methods: {
+    handleMetImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imageSelected = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    handleObjImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imageSelected2 = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    async onSubmit() {
+      try {
+        const moreInfos = this.pumaInfo.moreInfos;
+        const teachers = this.pumaInfo.teachers;
+       teachers.forEach(teacher => {
+          if (this.professorsSelected[0].includes(teacher)) {
+            teacher.isIdealizer = true;
+          } else {
+           teacher.isIdealizer = false;
+          }
+        });
+        const topics = this.pumaInfo.topics;
+        const pumaItem = this.pumaInfo['0'];
+        const newPumaItem = {
+          description: this.description,
+          goal: this.goals,
+          goalImage: this.imageSelected2,
+          infoId: pumaItem.infoId,
+          methodology: this.methodology,
+          methodologyImage: this.imageSelected,
+        };
+        const newObj = {
+          pumaItem: newPumaItem,
+          topics: topics,
+          moreInfos: moreInfos,
+          teachers: teachers,
+        };
+        this.pumaInfoService.updatePuma_Info(newObj).then(async () => {
+          this.isLoading = false;
+          await this.$router.push({ name: 'Sobre' });
+          this.makeToast('Objetivos da Puma', 'Atualização realizada com sucesso', 'success');
+          this.$store.commit('CLOSE_LOADING_MODAL');
+        }).catch(() => {
+          this.isLoading = false;
+          this.makeToast('Falha ao atualizar', 'Atualização falhou!', 'danger');
+          this.$store.commit('CLOSE_LOADING_MODAL');
+        });
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }
+    },
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
+    },
     sortProfessorMultiselectLabels(value) {
       // eslint-disable-next-line
       if (value.filter((professor) => professor.userId === this.$store.getters.user.userId).length === 0) {
@@ -34,90 +127,45 @@ export default {
       }
       this.professorsSelected.sort((a, b) => b.fullName.length - a.fullName.length);
     },
+    validateMultiselects() {
+      this.isTouchedSubareas = true;
+      return (
+        !!this.professorsSelected.length
+      );
+    },
     isProfessorChecked(option) {
       return this.professorsSelected.some((op) => op.userId === option.userId);
     },
-  },
-  handleImage(input) {
-    if (input.files && input.files[0]) {
-      if (input.files[0].size > 2000000) {
-        this.imageError = true;
-        return;
+    disableForm() {
+      const inputs = document.getElementsByTagName('input');
+      const textareas = document.getElementsByTagName('textarea');
+      for (let i = 0; i < inputs.length; i += 1) { inputs[i].disabled = true; }
+      for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
+    },
+    removeDropdownIcons() {
+      const multiselecctsIcon = document.getElementsByClassName('multiselect__select');
+      while (multiselecctsIcon.length > 0) {
+        multiselecctsIcon[0].remove();
       }
-      this.imageError = false;
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        this.imageSelected = e.target.result;
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  },
-  validateMultiselects() {
-    this.isTouchedKeywords = true;
-    this.isTouchedProfessors = true;
-    this.isTouchedSubareas = true;
-    return (
-      !!this.keywordsSelected.length
-      || !!this.subareasSelected.length
-      || !!this.professorsSelected.length
-    );
-  },
-  isChecked(option) {
-    return this.keywordsSelected.some((op) => op.keyword === option.keyword);
-  },
-  isSubareaChecked(option) {
-    return this.subareasSelected.some((op) => op.subAreaId === option.subAreaId);
-  },
-  isProfessorChecked(option) {
-    return this.professorsSelected.some((op) => op.userId === option.userId);
-  },
-  getProfessors() {
-    this.isLoadingProfessors = true;
-    return new Promise((resolve, reject) => {
-      this.subjectService.getProfessors().then((response) => {
-        this.professors = response.data;
-        // eslint-disable-next-line
-        this.professorsSelected.push(response.data.filter((professor) => professor.userId === this.$store.getters.user.userId));
-        this.isLoadingProfessors = false;
-        this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
-        resolve();
-      }).catch(() => {
-        this.isLoadingProfessors = false;
-        this.multiSelectPlaceholderProfessor = 'Sem professores disponíveis';
-        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
-        reject();
+    },
+    getProfessors() {
+      this.isLoadingProfessors = true;
+      return new Promise((resolve, reject) => {
+        this.pumaInfoService.getPuma_Infos().then((response) => {
+          this.pumaInfo = response.data;
+          this.professors = this.pumaInfo.teachers;
+          // eslint-disable-next-line
+          this.professorsSelected.push(response.data.teachers.filter((professor) => professor.userId === this.$store.getters.user.userId));
+          this.isLoadingProfessors = false;
+          this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
+          resolve();
+        }).catch(() => {
+          this.isLoadingProfessors = false;
+          this.multiSelectPlaceholderProfessor = 'Sem professores disponíveis';
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar a lista de professores disponíveis, confira sua conexão com servidor e tente novamente', 'danger');
+          reject();
+        });
       });
-    });
-  },
-  async onSubmit() {
-    try {
-      const isFormValid = await this.$refs.observer.validate();
-      const isMultiselectValid = this.validateMultiselects();
-      if (isFormValid && isMultiselectValid) {
-        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
-        const about = {
-          about: {
-            description: this.description,
-            goals: this.goals,
-            methodology: this.methodology,
-          },
-        };
-          this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
-            this.isLoading = false;
-            await this.$router.push({ name: 'Disciplinas' });
-            this.makeToast('Sobre atualizado', `O Sobre a PUMA foi atualizada com sucesso`, 'success');
-            this.$store.commit('CLOSE_LOADING_MODAL');
-          }).catch(() => {
-            this.isLoading = false;
-            this.makeToast('Falha ao atualizar', `Infelizmente houve um erro ao atualizar o Sobre a PUMA", confira sua conexão com servidor e tente novamente`, 'danger');
-            this.$store.commit('CLOSE_LOADING_MODAL');
-          });
-      }
-    } catch (error) {
-      this.$store.commit('CLOSE_LOADING_MODAL');
-    }
-
+    },
   },
 };

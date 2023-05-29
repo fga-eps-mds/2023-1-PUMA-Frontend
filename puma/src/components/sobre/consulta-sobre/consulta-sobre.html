@@ -40,8 +40,8 @@
         <div class='topics'>
           Idealizadores
         </div>
-        <div class='text' v-for="info in pumaInfos" :key="info.infoId">
-          {{ info.goal }}
+        <div class='text' v-for="info in pumaInfos.teachers" :key="info.infoId">
+          <h5><b>{{ info.fullName}}</b></h5>
         </div>
       </div>
     </div>

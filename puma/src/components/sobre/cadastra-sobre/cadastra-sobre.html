@@ -39,15 +39,17 @@
                             Adicione outros idealizadores da PUMA
                         </b-alert>
                     </div>
-                    <multiselect id="professor" v-model="professorsSelected[0]" :options="professors" track-by="userId"
+                    {{professors}}
+                    <multiselect v-model="selected" :options="array"/>
+                    <multiselect id="professor" v-model="professorsSelected" :options="professors" track-by="userId"
                         label="fullName" :multiple="true" open-direction="bottom"
                         :placeholder="multiSelectPlaceholderProfessor" :searchable="true" :show-labels="true"
-                        :close-on-select="false" :max-height="150" @input="sortProfessorMultiselectLabels"
+                        :close-on-select="false" :max-height="150" @input="sortProfessorMultiselectLabels()"
                         select-label="" deselect-label="" selected-label="" @open="multiSelectPlaceholder = 'Pesquisar'"
                         :loading="isLoadingProfessors"
                         @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'"
                         class="input-multiselect"
-                        :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'"
+                        :disabled="isLoadingProfessors || !professors.length"
                         :class="(isTouchedProfessors && !professorsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
                         <template slot="option" slot-scope="scope">
                             <div class="option__desc">
