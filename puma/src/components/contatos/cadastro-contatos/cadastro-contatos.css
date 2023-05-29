@@ -8,12 +8,13 @@
 .form {
   margin: 5px;
   border-radius: 5px;
-  box-sizing: border-box;
+  padding: 10px;
+  box-sizing: content-box;
   display: flex;
   flex-direction: row;
   background-color: #F2F2F2;
   max-width: 1430px;
-  max-height: 346px;
+  max-height: 500px;
 }
 
 .group {
@@ -40,13 +41,18 @@
 }
 
 .form-col-1 {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-col-2 {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 100%;
   margin-left: 20px;
-  margin-top: 20px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -404,6 +410,12 @@
 .select-professors:focus {
   outline: none;
   border-color: #66afe9;
+}
+
+.contato {
+  margin-bottom: 30px;
+  max-width: 1095px;
+  margin-right: 311;
 }
 
 .card-div {
