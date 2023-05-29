@@ -226,6 +226,7 @@ const routes = [
     name: 'Novos Professores',
     component: () => import('../components/NewTeachers/NewTeachers.vue'),
   },
+  {
     path: '/infoContatos',
     name: 'Informações de contato',
     component: () => import('../components/contatos/consulta-contatos/ConsultaContatos.vue'),
