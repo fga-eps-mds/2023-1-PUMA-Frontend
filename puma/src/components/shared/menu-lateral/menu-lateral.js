@@ -85,7 +85,7 @@ export default {
           basePath: '/NovosProfessores',
           title: 'Novos Professores',
           // eslint-disable-next-line
-          iconUrl: require('@/assets/menu-2.svg'),
+          iconUrl: require('@/assets/subjects.png'),
           show: () => true,
           onclick: () => {
             this.$router.push({ path: '/NovosProfessores' }).catch(() => { });
