@@ -222,7 +222,11 @@ const routes = [
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
   {
-
+    path: '/NovosProfessores',
+    name: 'Novos Professores',
+    component: () => import('../components/NewTeachers/NewTeachers.vue'),
+  },
+  {
     path: '/infoContatos',
     name: 'Informações de contato',
     component: () => import('../components/contatos/consulta-contatos/ConsultaContatos.vue'),
@@ -231,7 +235,6 @@ const routes = [
     path: '/sobre',
     name: 'Sobre',
     component: () => import('../components/sobre/consulta-sobre/ConsultaSobre.vue'),
-
     meta: {
       requiresAuth: true,
     },

@@ -12,7 +12,7 @@
                 </div>
                 <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
                   <form id="register-form">
-                    <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-show="isFirstPage">
+                    <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-show="!isFirstPage">
                       <label class="required">Nome</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"
@@ -23,18 +23,21 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email" v-show="isFirstPage">
+                    <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email" v-show="!isFirstPage">
                       <label class="required">E-mail</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"
                           class="input-field" />
-                        <span class="error-span" v-for="erro in v.errors">
+                        <span v-if="errors.length === 0" class="error-span" v-for="erro in v.errors">
+                          {{ erro }}
+                        </span>
+                        <span class="error-span" v-for="erro in errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider :rules="{required: true, min: 14, phoneNumber:true}" v-slot="v" :bails="false" mode="eager" name="telefone" v-show="isFirstPage">
+                    <ValidationProvider :rules="{required: true, min: 14, phoneNumber:true}" v-slot="v" :bails="false" mode="eager" name="telefone" v-show="!isFirstPage">
                       <label class="required">Telefone</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'"
@@ -46,7 +49,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider :rules="{required: true, min: 6, regex: /(?=.*[a-zA-Z])(?=.*[0-9])/ }" v-slot="v" :bails="false" v-show="isFirstPage">
+                    <ValidationProvider :rules="{required: true, min: 6, regex: /(?=.*[a-zA-Z])(?=.*[0-9])/ }" v-slot="v" :bails="false" v-show="!isFirstPage">
                       <label class="required">Senha</label>
                       <div class="error-div">
                         <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
@@ -63,7 +66,7 @@
                     </ValidationProvider>
 
                     <ValidationProvider :rules="{required: true, confirmed: {target: password}}" v-slot="v"
-                      :bails="false" v-show="isFirstPage">
+                      :bails="false" v-show="!isFirstPage">
                       <label class="required label-repeat-password">Repita sua senha</label>
                       <div class="error-div">
                         <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
@@ -81,7 +84,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider rules="required" v-slot="v" :bails="false" v-show="!isFirstPage">
+                    <ValidationProvider rules="required" v-slot="v" :bails="false" v-show="isFirstPage">
                       <label class="required">Tipo de usuário</label>
                       <div class="error-div">
                         <select v-on:change="alterarTipoUsuario()" :class="v.classes" v-model="type" name="tipo"
@@ -99,7 +102,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && !isFirstPage"
+                    <ValidationProvider v-show="hasMatricula && isFirstPage"
                       :rules="{required: hasMatricula, min: { length: type === 'Aluno' ? 10 : 7 }}" v-slot="v"
                       validate-on="blur" :bails="false" name="matrícula">
                       <label class="required">Matrícula</label>
@@ -112,7 +115,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isExternalAgent && !isFirstPage" :rules="{required: isExternalAgent}"
+                    <ValidationProvider v-show="isExternalAgent && isFirstPage" :rules="{required: isExternalAgent}"
                       v-slot="v" :bails="false">
                       <label class="required">Tipo de Agente Externo</label>
                       <div class="error-div">
@@ -130,7 +133,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
+                    <ValidationProvider v-show="isJuridical && isFirstPage" :rules="{required: isJuridical}" v-slot="v"
                       :bails="false">
                       <label class="required">Noma da empresa</label>
                       <div class="error-div">
@@ -142,7 +145,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isJuridical && !isFirstPage"
+                    <ValidationProvider v-show="isJuridical && isFirstPage"
                       :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
                       <label class="required">CNPJ</label>
                       <div class="error-div">
@@ -154,7 +157,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
+                    <ValidationProvider v-show="isJuridical && isFirstPage" :rules="{required: isJuridical}" v-slot="v"
                       :bails="false">
                       <label class="required">Razão social</label>
                       <div class="error-div">
@@ -166,7 +169,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isPhysical && !isFirstPage"
+                    <ValidationProvider v-show="isPhysical && isFirstPage"
                       :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
                       <label class="required">CPF</label>
                       <div class="error-div">
@@ -178,7 +181,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <span v-show="showMessage && isFirstPage" class="error-span">
+                    <span v-show="showMessage && !isFirstPage" class="error-span">
                       Preencha Todos os Campos
                     </span>
 
@@ -203,7 +206,7 @@
                       <b-row>
                         <b-col>
                           <b-row align-h="center">
-                            <em style="cursor: pointer" @click="changePage(2)">
+                            <em style="cursor: pointer" @click="changePage(2, false)">
                               <input v-show="!isLoading && !isFirstPage" type="submit" v-bind:class="{ 'next-page': type==='Aluno' || type==='Professor' || type==='Agente Externo', 'next-page-disabled': !(type==='Aluno' || type==='Professor' || type==='Agente Externo') }" value="Finalizar Cadastro" @click.prevent="onSubmit" form="register-form" />
                             </em>
                           </b-row>
@@ -212,7 +215,7 @@
                       <b-row>
                         <b-col>
                           <b-row align-h="center">
-                            <em style="cursor: pointer" @click="changePage(2)">
+                            <em style="cursor: pointer" @click="changePage(2, true)">
                               <input class="previous-page" value="Voltar"/>
                             </em>
                           </b-row>

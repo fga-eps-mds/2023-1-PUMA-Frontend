@@ -1,0 +1,23 @@
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+.teachers {
+    display: flex;
+    flex-direction: row;
+}
+
+.teacher {
+    margin-right: 40px;
+}
+
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}

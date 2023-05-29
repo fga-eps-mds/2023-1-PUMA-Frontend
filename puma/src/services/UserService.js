@@ -111,4 +111,24 @@ export default class UserService {
       });
     });
   }
+
+  getPendingTeachers() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/user/teacher/pending`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`user/teacher/pending reject: ${response}`);
+      });
+    });
+  }
+
+  updateStatusTeacher(userId, accept) {
+    return new Promise((resolve, reject) => {
+      axios.patch(`${global.URL_GATEWAY}/user/teacher/pending/${userId}`, { accept }).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`user/teacher/pending reject: ${response}`);
+      });
+    });
+  }
 }

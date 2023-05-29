@@ -1,0 +1,132 @@
+.card-professor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 222px;
+    height: 453px;
+    border: 1px solid rgba(19, 62, 121, 0.34);
+    border-radius: 8px;
+    margin-right: 25px;
+}
+
+.teacher-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 222px;
+    height: 277px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.tempTeacherImage {
+
+    width: 222px;
+    height: 277px;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+}
+
+.nameNButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 222px;
+    height: 176px;
+    padding: 16px 0px;
+    gap: 16px;
+    
+    
+    background: #FFFFFF;
+    border: 1px solid rgba(19, 62, 121, 0.34);
+    border-radius: 0px 0px 8px 8px;
+}
+
+.teacher-name {
+    width: 222px;
+    height: 16px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+
+    text-align: center;
+
+    color: #133E79;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.buttonAccept {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 16px;
+
+    width: 139px;
+    height: 48px;
+
+    background: #15355E;
+    border: 1px;
+    border-radius: 5px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.textAccept {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+}
+
+.textRefuse {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.02em;
+    color: #D10000;
+}
+
+.buttonRefuse {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 16px;
+    background-color: #FFFFFF;
+
+    width: 139px;
+    height: 48px;
+
+    border: 1px solid #D10000;
+    border-radius: 5px;
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}

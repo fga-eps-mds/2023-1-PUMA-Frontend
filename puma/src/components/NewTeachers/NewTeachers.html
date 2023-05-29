@@ -1,0 +1,18 @@
+
+<div class="main-content hidden-scroll-bar">
+    <h1 class="tittle">
+    Gerenciamento de Professores
+    </h1>
+
+    <div class="tittle sub-tittle mb-4">
+    Realise o aceite de novos professores que desejam ingressar na plataforma.
+    </div>
+
+    <h2 class="tittle">
+    Professores que desejam ingressar
+    </h2>
+
+    <div class = "teachers">
+        <TeacherCard v-for = "teacher in teachers" :name = "teacher.fullName" :userId="teacher.userId" class = "teacher"></TeacherCard>
+    </div>
+</div>
