@@ -236,7 +236,6 @@ const routes = [
     path: '/sobre',
     name: 'Sobre',
     component: () => import('../components/sobre/consulta-sobre/ConsultaSobre.vue'),
-
     meta: {
       requiresAuth: true,
     },
