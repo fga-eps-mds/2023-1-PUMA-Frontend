@@ -13,6 +13,6 @@
     </h2>
 
     <div class = "teachers">
-        <TeacherCard v-for = "teacher in teachers" :name = "teacher.name" class = "teacher"></TeacherCard>
+        <TeacherCard v-for = "teacher in teachers" :name = "teacher.fullName" :userId="teacher.userId" class = "teacher"></TeacherCard>
     </div>
 </div>

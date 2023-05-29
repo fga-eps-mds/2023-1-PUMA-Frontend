@@ -6,11 +6,11 @@
         <div class = teacher-name>
             {{ name }}
         </div>
-        <button class=buttonAccept>
+        <button class=buttonAccept @click="acceptOrDeny(userId, true)">
             <img class=iconAccept src="../../../assets/verifica2.svg">
             <div class=textAccept>Aceitar</div>
         </button>
-        <button class=buttonRefuse>
+        <button class=buttonRefuse @click="acceptOrDeny(userId, false)">
             <img class=iconRefuse src="../../../assets/cancela.svg">
             <div class=textRefuse>Recusar</div>
         </button>

@@ -41,6 +41,8 @@ export default {
       isExternalAgent: false,
       navs: [{ title: 'Home' }, { title: 'Login' }, { title: 'Cadastro' }],
       showMessage: false,
+      isProfessor: false,
+      errors: [],
     };
   },
   methods: {
@@ -48,7 +50,7 @@ export default {
       const isValid = await this.$refs.observer.validate();
       if (this.password.length < 8) {
         this.makeToast('Senha fraca', 'Sua senha precisar conter pelo menos 8 caracteres.', 'danger');
-      } else if (isValid) {
+      } else if (isValid && this.errors.length === 0) {
         const newUser = {
           name: this.name,
           email: this.email,
@@ -92,6 +94,9 @@ export default {
     },
     alterarTipoUsuario() {
       if (this.type === 'Aluno' || this.type === 'Professor') {
+        if (this.type === 'Professor') {
+          this.isProfessor = true;
+        }
         this.hasMatricula = true;
         this.isExternalAgent = false;
         this.isJuridical = false;
@@ -129,22 +134,31 @@ export default {
     clearMask(maskedValue) {
       return maskedValue.replace(/_|-|\(|\)|\.|\/|\s/g, '');
     },
-    changePage(x) {
+    changePage(x, voltar) {
       if (x === 1) {
+        this.isFirstPage = !this.isFirstPage;
+      } else if (x === 2) {
         const isOk = this.verificaPreenchimento();
-        if (isOk === true) {
+        if (voltar) {
+          this.isFirstPage = !this.isFirstPage;
+        } else if (isOk === true) {
           this.isFirstPage = !this.isFirstPage;
         } else {
           this.showMessage = true;
         }
-      } else if (x === 2) {
-        this.isFirstPage = !this.isFirstPage;
       }
     },
     verificaPreenchimento() {
+      this.errors = [];
       if (this.name && this.email) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const validEmail = re.test(this.email);
+        const reProfessorUnb = /^[a-zA-Z0-9_]+@unb\.br$/;
+        let validEmail = false;
+        if (this.type === 'Professor') {
+          validEmail = reProfessorUnb.test(this.email);
+        } else {
+          validEmail = re.test(this.email);
+        }
         if (validEmail === true) {
           if (this.phoneNumber) {
             const validTelephone = validarTelefone(this.phoneNumber);
@@ -159,6 +173,9 @@ export default {
             return false;
           }
           return false;
+        }
+        if (this.type === 'Professor') {
+          this.errors.push('O email de professor deve ser no modelo xxx@unb.br');
         }
         return false;
       }
