@@ -78,6 +78,16 @@ export default class UserService {
     });
   }
 
+  updateIdealizer(userId, obj) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/${userId}`, obj).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/user reject: ${response}`);
+      });
+    });
+  }
+
   updateUserType(newUserType, callback) {
     return axios({
       method: 'put',

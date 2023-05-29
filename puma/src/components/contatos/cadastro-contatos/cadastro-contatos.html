@@ -1,0 +1,84 @@
+<div class="main-content">
+  <ReturnButton />
+
+  <div class='title'>
+    Editar contato
+  </div>
+  <div class="sub-title mb-4">
+    Preencha os campos abaixo para editar informações de contato do PUMA, que poderão ser visualizadas pelos usuarios no
+    ambiente externo.
+  </div>
+
+  <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
+    <div class="form m-0">
+      <div class="form-col-1">
+        <div role="group" class="group">
+          <div class=label-flex-box>
+            <label for="professor" class="input-label">
+              Professores
+            </label>
+          </div>
+          <select class="select-professors">
+            <option class="placeholder-select-professors" value="" disabled selected hidden>Selecione o professor que
+              deseja tornar um contato no ambiente externo</option>
+            <option class="option-select-professors" v-for="professor of professors">{{ professor.fullName }}</option>
+          </select>
+        </div>
+        <ValidationProvider rules="required|min:3" v-slot="v" :bails="false" name="Nome do perfil">
+          <div role="group" class="group">
+            <label for="name" class="input-label">Nome do contato</label>
+            <input type="text" id="typeName" maxlength="50" class="input-textfield"
+              placeholder="Informe o nome do contato que será exibido no ambiente externo" v-model="name"
+              :disabled=isLoading v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
+            <span class="input-error-span" v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </div>
+        </ValidationProvider>
+
+        <ValidationProvider v-slot="v" :bails="false" name="descricao">
+          <div role="group" class="group">
+            <label for="descricao" class="input-label">Contato</label>
+            <input type="text" id="typeName" maxlength="50" class="input-textfield"
+              placeholder="Informe o e-mail do contato que será exibido no ambiente externo" v-model="contact"
+              :disabled=isLoading v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
+            <span class="input-error-span" v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </div>
+        </ValidationProvider>
+
+        <div class="div-buttons">
+          <button class="animated-button2 create-button button-enabled" @click="handleClick()">
+            <div>
+              <em class="fa-solid fa-pen mr-2 add-project"></em>
+              {{ buttonLabel }}
+            </div>
+          </button>
+          <button class="animated-button delete-button" @click="deleteContact()"">
+            <em class=" fa-solid fa-trash mr-2 add-project"></em>
+            Deletar contato
+          </button>
+          <button class="animated-button2 cancel-button" @click="$router.go(-1)"">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      
+        <div class=" form-col-2">
+            <div class="contato">
+              <div class="card-div">
+                <div class="card-text-div">
+                  <div class="card-text-name">
+                    {{ name }}
+                  </div>
+                  <div class="card-text-email">
+                    {{ contact }}
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </ValidationObserver>
+</div>

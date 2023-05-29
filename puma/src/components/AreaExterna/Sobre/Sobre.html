@@ -3,24 +3,18 @@
     <div class="corpo">
         <h1>Sobre a PUMA</h1>
         <p class="paragrafo-sobre">
-            A PUMA conecta empresas e empresarios com os alunos e professores da Engenharia de Produção da Universidade de Brasília, de forma que problemas reais vivenciados pelas empresas possam ser trabalhados dentro de sala de aula.
+            {{ description }}
         </p>
 
         <div class="div-img-descricao">
             <div class="div-img-sobre">
-                <img src="../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem ilustrativa sobre a PUMA">
+                <img :src="goalImage" class="img-sobre" alt="Imagem ilustrativa sobre a PUMA">
             </div>
             <div class="div-descricao">
                 <h3 class="descricao-titulo">Objetivos</h3>
-                <ul class="descricao-conteudo p-sobre-ul">
-                    <li class="p-sobre-li">Divulgar os resultados dos melhores projetos;</li>
-                    <li class="p-sobre-li">Manter uma base de stakeholders;</li>
-                    <li class="p-sobre-li">Avaliar a satisfação das partes interessadas com os projetos entregues;</li>
-                    <li class="p-sobre-li">Aumentar o número de partes interessadas através da facilitação da submissão de projetos;</li>
-                    <li class="p-sobre-li">Automatizar parte do processo de avaliação dos alunos;</li>
-                    <li class="p-sobre-li">Avaliar a evolução do desempenho dos alunos em relaçãoas técnicas e competências transversais durante as disciplinas de PSPs;</li>
-                    <li class="p-sobre-li">Medir a eficiência da metodologia PBL.</li>
-                </ul>
+                <p class="descricao-conteudo p-sobre-ul">
+                    {{ goal }}
+                </p>
             </div>
         </div>
 
@@ -28,122 +22,25 @@
             <div class="div-descricao">
                 <h3 class="descricao-titulo">Metodologia PBL</h3>
                 <p class="descricao-conteudo">
-                    Recentemente o PBL foi introduzido em diversos campos de ensino e vem crescendo bastante seu uso no ensino de engenharia. A abordagem PBL incentiva os alunos a “aprender fazendo na prática”.
+                    {{ methodology }}
                 </p>
             </div>            
             <div class="div-img-sobre-oposta img-secundaria">
-                <img src="../../../assets/imagemTemporaria.png" class="img-sobre-oposta" alt="Imagem ilustrativa sobre a Metodologia PBL da PUMA">
+                <img :src="methodologyImage" class="img-sobre-oposta" alt="Imagem ilustrativa sobre a Metodologia PBL da PUMA">
             </div>
         </div>
-
-        <div class="div-img-descricao">
-            <div class="div-img-sobre img-secundaria">
-                <img src="../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem ilustrativa sobre a Colaboração Internacional da PUMA">
-            </div>
-            <div class="div-descricao">
-                <h3 class="descricao-titulo">Colaboração Internacional</h3>
-                <p class="descricao-conteudo">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at eleifend ex, in dapibus augue. Nulla dignissim sollicitudin turpis at congue. Etiam a tempor arcu. Cras nulla massa, hendrerit in semper id, lobortis sed nulla. Aliquam consectetur,                 </p>
-            </div>
-        </div>
-
         <div class="div-mais-informacoes">
             <h3 class="descricao-titulo">Mais informações</h3>
-
-            <div class="p-sobre-lista" @click="showInformacao('informacao-1')">
-                <span>
-                    Problem Based Learning (PBL)
-                    <em class="arrow down"></em>
-                </span>
-            </div>
-            <div id="informacao-1" class="descricao-conteudo informacao-item">
-                <p>A PUMA integra os insumos e resultados dos projetos desenvolvidos
-                     pelos alunos durante a graduação, sendo a porta de entrada das 
-                     demandas dos stakeholders a serem trabalhadas pelos alunos na 
-                     resolução de problemas reais.
-                </p>
-                <p>
-                    Dessa forma, a PUMA está fortemente voltado ao incentivo e a 
-                    cultura acadêmica para o uso da Tecnologia da Informação e 
-                    Comunicação (TIC) como instrumento útil para o desenvolvimento 
-                    do ensino e da aprendizagem, visando permitir a medição da 
-                    eficácia do PBL e a coleta de feedbacks e informações substanciais 
-                    e seguras para o redirecionamento das disciplinas de projetos ao 
-                    longo dos anos. 
-                </p>
-                <p>
-                    Com isso, a PUMA auxilia os cursos de graduação no acompanhamento 
-                    das exigências do mercado para alinhamento das expectativas de 
-                    todos os stakeholders.
-                </p>
-                <p>
-                    A plataforma PUMA está sendo desenvolvida por uma equipe multidisciplinar 
-                    composta por três áreas de Engenharia: Software, Produção e Computação.
-                </p>
-            </div>
-
-            <div class="p-sobre-lista" @click="showInformacao('informacao-2')">
-                <span>
-                    Problem Based Learning (PBL)
-                    <em class="arrow down"></em>
-                </span>
-            </div>
-            <div id="informacao-2" class="descricao-conteudo informacao-item">
-                <p>A PUMA integra os insumos e resultados dos projetos desenvolvidos
-                    pelos alunos durante a graduação, sendo a porta de entrada das 
-                    demandas dos stakeholders a serem trabalhadas pelos alunos na 
-                    resolução de problemas reais.
-               </p>
-               <p>
-                   Dessa forma, a PUMA está fortemente voltado ao incentivo e a 
-                   cultura acadêmica para o uso da Tecnologia da Informação e 
-                   Comunicação (TIC) como instrumento útil para o desenvolvimento 
-                   do ensino e da aprendizagem, visando permitir a medição da 
-                   eficácia do PBL e a coleta de feedbacks e informações substanciais 
-                   e seguras para o redirecionamento das disciplinas de projetos ao 
-                   longo dos anos. 
-               </p>
-               <p>
-                   Com isso, a PUMA auxilia os cursos de graduação no acompanhamento 
-                   das exigências do mercado para alinhamento das expectativas de 
-                   todos os stakeholders.
-               </p>
-               <p>
-                   A plataforma PUMA está sendo desenvolvida por uma equipe multidisciplinar 
-                   composta por três áreas de Engenharia: Software, Produção e Computação.
-               </p>
-            </div>
-
-            <div class="p-sobre-lista" @click="showInformacao('informacao-3')">
-                <span>
-                    Problem Based Learning (PBL)
-                    <em class="arrow down"></em>
-                </span>
-            </div>
-            <div id="informacao-3" class="descricao-conteudo informacao-item">
-                <p>A PUMA integra os insumos e resultados dos projetos desenvolvidos
-                    pelos alunos durante a graduação, sendo a porta de entrada das 
-                    demandas dos stakeholders a serem trabalhadas pelos alunos na 
-                    resolução de problemas reais.
-               </p>
-               <p>
-                   Dessa forma, a PUMA está fortemente voltado ao incentivo e a 
-                   cultura acadêmica para o uso da Tecnologia da Informação e 
-                   Comunicação (TIC) como instrumento útil para o desenvolvimento 
-                   do ensino e da aprendizagem, visando permitir a medição da 
-                   eficácia do PBL e a coleta de feedbacks e informações substanciais 
-                   e seguras para o redirecionamento das disciplinas de projetos ao 
-                   longo dos anos. 
-               </p>
-               <p>
-                   Com isso, a PUMA auxilia os cursos de graduação no acompanhamento 
-                   das exigências do mercado para alinhamento das expectativas de 
-                   todos os stakeholders.
-               </p>
-               <p>
-                   A plataforma PUMA está sendo desenvolvida por uma equipe multidisciplinar 
-                   composta por três áreas de Engenharia: Software, Produção e Computação.
-               </p>
+            <div v-for="item in pumaMoreInfos" :key="item.moreInfoId">
+                <div class="p-sobre-lista" @click="showInformacao(item.moreInfoId)">
+                    <span>
+                        {{item.title}}
+                        <em class="arrow down"></em>
+                    </span>
+                </div>
+                <div :id="item.moreInfoId" class="descricao-conteudo informacao-item">
+                   <p>{{item.description}}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -3,8 +3,8 @@
     <div class="logo">
       <b-container fluid class="h-100">
         <b-row align-v="center" align-h="center" class="h-100">
-          <img @click="redirectToUserProjects" src="../../../assets/logo-white.svg"
-            draggable="false" alt="Logo da Plataforma PUMA">
+          <img @click="redirectToUserProjects" src="../../../assets/logo-white.svg" draggable="false"
+            alt="Logo da Plataforma PUMA">
         </b-row>
       </b-container>
     </div>
@@ -27,13 +27,16 @@
               <ItemMenuLateral :props="menuItems.classItem" />
             </b-row>
             <b-row align-h="center">
-              <ItemMenuLateral :props="menuItems.users" />
-            </b-row>
-            <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.userType" />
             </b-row>
             <b-row align-h="center">
+              <ItemMenuLateral :props="menuItems.contacts" />
+            </b-row>
+            <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.subjectProjects" />
+            </b-row>
+            <b-row align-h="center">
+              <ItemMenuLateral :props="menuItems.about" />
             </b-row>
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.adminProjects" />
@@ -71,10 +74,16 @@
           <ItemMenuLateral :props="menuItems.subjects" />
         </li>
         <li>
+          <ItemMenuLateral :props="menuItems.contacts" />
+        </li>
+        <li>
           <ItemMenuLateral :props="menuItems.users" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.subjectProjects" />
+        </li>
+        <li>
+          <ItemMenuLateral :props="menuItems.about" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.adminProjects" />

@@ -1,0 +1,39 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tabela de listagem de Saiba Mais">
+        <tr>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th></th>
+        </tr>        
+        
+        <span class="title-list">{{ title }}</span>
+
+        <tr v-for="info in pumaInfos" :key="subject.subjectId">
+            <td>{{info.More}}</td>
+            <td>
+                <div v-for="professor in subject.professors[0]" :key="professor.userId">
+                    {{professor.fullName}}
+                </div>
+                <div v-if="!subject.professors.length">
+                    -
+                </div>
+            </td>
+            <td class="botao">
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubject(subject.subjectId)">
+                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                </button>
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubjectEdition(subject.subjectId)">
+                    Editar
+                </button>
+            </td>
+        </tr>
+
+        <div v-if="!listSubjects.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>

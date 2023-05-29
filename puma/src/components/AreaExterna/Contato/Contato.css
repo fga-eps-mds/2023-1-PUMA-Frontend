@@ -5,11 +5,12 @@
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 400;
-    letter-spacing: -0.02em;
     margin: 0px;
-    color: rgba(2, 16, 33, 0.8);
+    color: #15355E;
+    line-height: 37.5px;
+    letter-spacing: -2%;
 }
 
 .contato-titulo {
@@ -40,4 +41,69 @@ h1 {
     opacity: 1;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.contato-text {
+    font-size: 16px;
+    padding-top: 24px;
+    color: #15355E;
+}
+
+.card-div {
+    width: 222px;
+    height: 357px;
+    background-image: url('../../../assets/imagemTemporaria.png');
+    background-size: contain;
+    border: 1px solid #133E7957;
+    border-radius: 8px;
+    margin-top: 33px;
+    margin-right: 24px;
+    position: relative;
+}
+
+.card-text-div {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top: 1px solid #133E7957;
+}
+
+.card-text-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #133E79;
+    padding-top: 16px;
+    text-align: center;
+}
+
+.card-text-email {
+    font-size: 14px;
+    font-weight: 400;
+    color: #133E79;
+    padding-top: 16px;
+    text-align: center;
+}
+
+span {
+    display: inline-block;
+}
+
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 56%;
+    position: relative;
+    height: 0;
+    padding-top: 24px;
+}
+
+.map-responsive iframe {
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }

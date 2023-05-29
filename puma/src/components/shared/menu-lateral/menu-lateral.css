@@ -75,9 +75,11 @@ ul {
     .menu-padrao {
         display: none;
     }
+
     .root {
         min-width: 350px;
     }
+
     .usuario-logado {
         margin: 10px 25px;
         padding-bottom: 10px;
