@@ -81,6 +81,16 @@ export default {
             this.$router.push({ path: '/login' }).catch(() => { });
           },
         },
+        newTeacher: {
+          basePath: '/NovosProfessores',
+          title: 'Novos Professores',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/menu-2.svg'),
+          show: () => true,
+          onclick: () => {
+            this.$router.push({ path: '/NovosProfessores' }).catch(() => { });
+          },
+        },
       },
     };
   },

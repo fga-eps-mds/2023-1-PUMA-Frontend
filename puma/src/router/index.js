@@ -221,6 +221,16 @@ const routes = [
     name: 'Contato',
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
+  {
+    path: '/NovosProfessores',
+    name: 'Novos Professores',
+    component: () => import('../components/NewTeachers/NewTeachers.vue'),
+  },
+  {
+    path: '/CardProfessor:idTeacher',
+    name: 'Card Professor',
+    component: () => import('../components/NewTeachers/TeacherCard/TeacherCard.vue'),
+  },
 ];
 
 const router = new VueRouter({
