@@ -1,0 +1,23 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tabela de Listagem de Contatos">
+        <tr>
+            <th>Nome</th>
+            <th>Contato</th>
+            <th></th>
+        </tr>
+
+        <tr v-for="contact in listContacts" :key="contact.contactId">
+            <td>{{contact.name}}</td>
+            <td>{{contact.email}}</td>
+            <td class="botao">
+                <button class="btn cd-btn" @click="goToContact(contact.contactId)">
+                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                </button>
+            </td>
+        </tr>
+
+        <div v-if="!listContacts.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>

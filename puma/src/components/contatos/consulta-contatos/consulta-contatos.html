@@ -1,0 +1,13 @@
+<div class="main-content hidden-scroll-bar">
+    <h1 class="title">
+        Informações de contato
+    </h1>
+    <div class="title sub-title mb-4">
+        Veja as informações de contatos existentes na plataforma e os gerencie.
+    </div>
+    <button class="btn cd-btn" onclick="window.location.href = '/infoContatos/cadastrar'">
+        <em class="fa-solid fa-plus mr-2 add-project"></em>Criar contato
+    </button>
+    <ListaConsultaContatos class="meusContatos" :title="'Contatos'" :dataContacts="contacts"
+        :contactsSearch="contactsSearch" />
+</div>

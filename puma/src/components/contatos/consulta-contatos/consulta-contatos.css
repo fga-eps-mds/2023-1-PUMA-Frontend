@@ -1,0 +1,17 @@
+.title {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.cd-btn {
+    background-color: #15355e;
+    color: #fff;
+    border-color: #15355e;
+    padding: 10px 20px;
+}

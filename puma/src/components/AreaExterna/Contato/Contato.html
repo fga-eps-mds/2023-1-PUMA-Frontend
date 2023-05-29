@@ -1,19 +1,35 @@
 <section>
-    <AreaExternaHeader :pagina="Contato"/>
+    <AreaExternaHeader :pagina="Contato" />
     <div class="corpo">
         <h1>Contatos</h1>
-
+        <div class="contato-text">Entre em contato com os responsáveis pela Plataforma</div>
+        <span v-for="contact in contacts" :key="contact.contactId" class="contato">
+            <div class="card-div">
+                <div class="card-text-div">
+                    <div class="card-text-name">
+                        {{contact.name}}
+                    </div>
+                    <div class="card-text-email">
+                        {{contact.email}}
+                    </div>
+                </div>
+            </div>
+        </span>
         <div v-for="contato in contatos" :key="contato.nome" class="contato">
             <div class="div-contato">
                 <h3 class="contato-titulo">{{contato.nome}}</h3>
-                
+
                 <div v-if="contato.endereco" class="contato-email">
                     <span class="contato-topico">Endereço: </span><span>{{contato.endereco}}</span>
                 </div>
-                <div v-if="contato.email">
-                    <span class="contato-topico">Email: </span><span class="email-puma">{{contato.email}}</span>
-                </div>
             </div>
+        </div>
+        <div class="map-responsive">
+            <iframe
+                title="Mapa"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3839.762978245398!2d-47.877470711144994!3d-15.763673100000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3bb9198826b9%3A0x9f89ebd519d93f5!2sFaculdade%20de%20Tecnologia%20-%20FT!5e0!3m2!1spt-BR!2sbr!4v1685030044570!5m2!1spt-BR!2sbr"
+                width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
 </section>

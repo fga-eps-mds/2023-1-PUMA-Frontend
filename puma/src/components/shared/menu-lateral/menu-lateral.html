@@ -3,8 +3,8 @@
     <div class="logo">
       <b-container fluid class="h-100">
         <b-row align-v="center" align-h="center" class="h-100">
-          <img @click="redirectToUserProjects" src="../../../assets/logo-white.svg"
-            draggable="false" alt="Logo da Plataforma PUMA">
+          <img @click="redirectToUserProjects" src="../../../assets/logo-white.svg" draggable="false"
+            alt="Logo da Plataforma PUMA">
         </b-row>
       </b-container>
     </div>
@@ -24,10 +24,10 @@
               <ItemMenuLateral :props="menuItems.classItem" />
             </b-row>
             <b-row align-h="center">
-              <ItemMenuLateral :props="menuItems.users" />
+              <ItemMenuLateral :props="menuItems.userType" />
             </b-row>
             <b-row align-h="center">
-              <ItemMenuLateral :props="menuItems.userType" />
+              <ItemMenuLateral :props="menuItems.contacts" />
             </b-row>
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.subjectProjects" />
@@ -66,6 +66,9 @@
       <ul>
         <li>
           <ItemMenuLateral :props="menuItems.subjects" />
+        </li>
+        <li>
+          <ItemMenuLateral :props="menuItems.contacts" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.users" />
