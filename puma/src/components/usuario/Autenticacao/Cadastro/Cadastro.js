@@ -29,6 +29,9 @@ export default {
       companyName: '',
       socialReason: '',
       cpf: '',
+      university: '',
+      departament: '',
+      course: '',
       type: '',
       externalAgentType: '',
       passwordTypeText: false,
@@ -36,6 +39,9 @@ export default {
       isFirstPage: true,
       isLoading: false,
       hasMatricula: false,
+      hasUniversity: false,
+      hasDepartament: false,
+      hasCourse: false,
       isJuridical: false,
       isPhysical: false,
       isExternalAgent: false,
@@ -62,6 +68,9 @@ export default {
           externalAgentType: this.externalAgentType,
           cnpj: this.clearMask(this.cnpj),
           cpf: this.clearMask(this.cpf),
+          university: this.university,
+          departament: this.departament,
+          course: this.course,
           companyName: this.companyName,
           socialReason: this.socialReason,
         };
@@ -98,6 +107,9 @@ export default {
           this.isProfessor = true;
         }
         this.hasMatricula = true;
+        this.hasUniversity = true;
+        this.hasDepartament = true;
+        this.hasCourse = true;
         this.isExternalAgent = false;
         this.isJuridical = false;
         this.isPhysical = false;
