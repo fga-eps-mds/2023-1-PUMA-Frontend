@@ -1,3 +1,4 @@
+/* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
@@ -17,6 +18,7 @@ export default {
       selectedKeywords: [],
       projectService: new ProjectService(),
       multiSelectPlaceholder: 'Carregando opções...',
+      projectImages: [],
     };
   },
   beforeMount() {
@@ -50,6 +52,32 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
+    },
+    onFileChange(e) {
+      var selectedFiles = e.target.files;
+      for (let i=0; i < selectedFiles.length; i++)
+      {
+    	this.projectImages.push(selectedFiles[i]);
+	  }
+	  for (let i=0; i<this.projectImages.length; i++)
+	  {
+		    let reader = new FileReader(); //instantiate a new file reader
+		    reader.addEventListener('load', function(){
+		      this.$refs['image' + parseInt( i )][0].src = reader.result;
+		    }.bind(this), false);  //add event listener
+
+    	reader.readAsDataURL(this.projectImages[i]);
+	   }
+
+	   // console.log(this.images);
+    },
+    removeImage (i) {
+      // alert(i);
+
+    	var arrayImages = this.projectImages;
+    	var index = arrayImages.indexOf(arrayImages[i]);
+		  arrayImages.splice(index, i);
+   
     },
     handleChangeKeywords(value) {
       if (!value.find((k) => k.value === this.mainKeyword?.value)) {

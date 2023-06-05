@@ -53,47 +53,41 @@
           </ValidationProvider>
         </div>
         <div class="form-col-2">
-          <ValidationProvider vid="keywords" rules="required" v-slot="{errors}">
+          <ValidationProvider rules="required" v-slot="v" :bails="false" name="objetivos">
             <div role="group" class="group">
-              <label for="keywords" class="input-label">Palavras relacionadas com o problema que está enfrentando</label>
-              <multiselect id="keywords" v-model="selectedKeywords" :options="keywords" :multiple="true"
-                track-by="value" label="text" :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
-                tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
-                placeholder="Pesquise ou selecione uma palavra." class="input-multiselect"
-                :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'"
-                @input="handleChangeKeywords">
-                <template slot="option" slot-scope="scope">
-                  <div class="option__desc checkbox-label">
-                    <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
-                      :key="scope.option.value" />
-                    <span class="option__title">{{ scope.option.text }}</span>
+              <label for="objetivo" class="input-label">Objetivos</label>
+              <textarea id="resultado" placeholder="Descreva os objetivos do projeto." rows="5" minlength="40"
+                maxlength="1000" v-model="resultadoEsperado" class="input-textarea"
+                v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }"></textarea>
+              <span class="input-counter">({{resultadoEsperado.length}}/1000)</span>
+              <span class="input-error-span" v-for="erro in v.errors">
+                {{ erro }}
+              </span>
+            </div>
+          </ValidationProvider>
+          <div>
+            <label for="projectImages" class="input-label">Imagens do Projeto</label>
+            <div>
+              <input type="file" multiple @change="onFileChange" /><br><br>
+          
+              <div>
+                <div>
+                  <div v-for="(projectImages, key) in projectImages">
+                    <div class="" :id="key">
+                      <button type="button" @click="removeImage(key)">
+                      &times;
+                      </button>
+                    <img class="preview img-thumbnail" v-bind:ref="'projectImages' +parseInt( key )" /> 
+                    {{ projectImages.name }}
+                    </div>
                   </div>
-                </template>
-                <span slot="maxElements">
-                  Máximo de 3 opções selecionadas.
-                </span>
-                <span slot="noResult">
-                  Nenhuma palavra encontrada.
-                </span>
-              </multiselect>
-              <span class="input-error-span">{{ errors[0] && 'Escolha no mínimo uma palavra' }}</span>
+                </div>
+              </div>
+            
             </div>
-          </ValidationProvider>
+          
+          </div>
 
-          <ValidationProvider vid="main-keyword" rules="required" v-slot="{errors}">
-            <div role="group" class="group">
-              <label for="mainKeyword" class="input-label">Palavra-Chave Principal</label>
-              <multiselect id="mainKeyword" v-model="mainKeyword" :options="selectedKeywords" :multiple="false"
-                track-by="value" label="text" :searchable="true" :showLabels="true" tagPosition="bottom" selectLabel=""
-                deselectLabel="" selectedLabel="" placeholder="Selecione uma palavra-chave." class="input-multiselect"
-                :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'">
-                <span slot="noResult">
-                  Nenhuma palavra-chave encontrada.
-                </span>
-              </multiselect>
-              <span class="input-error-span">{{ errors[0] }}</span>
-            </div>
-          </ValidationProvider>
           <div class="div-buttons" v-if="operacao !== 'visualizar'">
             <input :value="'Criar'" type="submit" class="cadastro-button" @click="onSubmit"/>
 
