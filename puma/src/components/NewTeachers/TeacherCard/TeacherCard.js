@@ -27,6 +27,9 @@ export default {
       if (phoneNumber.length === 11) {
         return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 7)}-${phoneNumber.slice(7)}`;
       }
+      if (phoneNumber.length === 10) {
+        return `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, 6)}-${phoneNumber.slice(6)}`;
+      }
       return this.telefone;
     },
   },
