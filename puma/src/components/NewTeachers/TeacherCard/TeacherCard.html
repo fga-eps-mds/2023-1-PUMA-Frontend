@@ -4,7 +4,25 @@
     </div><br>
     <div class=nameNButtons>
         <div class = teacher-name>
-            {{ name }}
+            Professor(a): {{ name }}
+        </div>
+        <div class = teacher-name>
+            Matrícula: {{ matricula }}
+        </div>
+        <div class = teacher-name>
+            Email: {{ email }}
+        </div>
+        <div class = teacher-name>
+            Telefone: {{ formattedPhoneNumber }}
+        </div>
+        <div class = teacher-name>
+            Universidade: {{ university }}
+        </div>
+        <div class = teacher-name>
+            Departamento: {{ departament }}
+        </div>
+        <div class = teacher-name>
+            Curso: {{ course }}
         </div>
         <button class=buttonAccept @click="acceptOrDeny(userId, true)">
             <img class=iconAccept src="../../../assets/verifica2.svg">
