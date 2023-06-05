@@ -133,7 +133,8 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'" validate-on="blur" :bails="false" v-slot="v" name="university">
+                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'"
+                    :rules="{required: hasUniversity, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="university">
                       <label class="required">Universidade</label>
                       <div class="error-div">
                         <input
@@ -144,7 +145,8 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'" validate-on="blur" :bails="false" v-slot="v" name="departament">
+                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'"
+                    :rules="{required: hasDepartament, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="departament">
                       <label class="required">Departamento</label>
                       <div class="error-div">
                         <input
@@ -155,7 +157,8 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'" validate-on="blur" :bails="false" v-slot="v" name="course">
+                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'"
+                    :rules="{required: hasCourse, min: { length: 5}}" validate-on="blur" :bails="false" v-slot="v" name="course">
                       <label class="required">Curso</label>
                       <div class="error-div">
                         <input

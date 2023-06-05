@@ -39,6 +39,9 @@ export default {
       isFirstPage: true,
       isLoading: false,
       hasMatricula: false,
+      hasUniversity: false,
+      hasDepartament: false,
+      hasCourse: false,
       isJuridical: false,
       isPhysical: false,
       isExternalAgent: false,
@@ -104,6 +107,9 @@ export default {
           this.isProfessor = true;
         }
         this.hasMatricula = true;
+        this.hasUniversity = true;
+        this.hasDepartament = true;
+        this.hasCourse = true;
         this.isExternalAgent = false;
         this.isJuridical = false;
         this.isPhysical = false;
