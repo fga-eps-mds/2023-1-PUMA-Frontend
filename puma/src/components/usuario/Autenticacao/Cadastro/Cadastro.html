@@ -133,6 +133,42 @@
                       </div>
                     </ValidationProvider>
 
+                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'"
+                    :rules="{required: hasUniversity, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="university">
+                      <label class="required">Universidade</label>
+                      <div class="error-div">
+                        <input
+                          :class="v.classes" id="university" placeholder="Digite sua universidade" class="input-field" v-model="university" />
+                        <span class="error-span" v-for="erro in v.errors">
+                          {{ erro }}
+                        </span>
+                      </div>
+                    </ValidationProvider>
+
+                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'"
+                    :rules="{required: hasDepartament, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="departament">
+                      <label class="required">Departamento</label>
+                      <div class="error-div">
+                        <input
+                          :class="v.classes" id="departament" placeholder="Digite seu departamento" class="input-field" v-model="departament"/>
+                        <span class="error-span" v-for="erro in v.errors">
+                          {{ erro }}
+                        </span>
+                      </div>
+                    </ValidationProvider>
+
+                    <ValidationProvider v-show="hasMatricula && isFirstPage && type === 'Professor'"
+                    :rules="{required: hasCourse, min: { length: 5}}" validate-on="blur" :bails="false" v-slot="v" name="course">
+                      <label class="required">Curso</label>
+                      <div class="error-div">
+                        <input
+                          :class="v.classes" id="course" placeholder="Digite seu curso" class="input-field" v-model="course" />
+                        <span class="error-span" v-for="erro in v.errors">
+                          {{ erro }}
+                        </span>
+                      </div>
+                    </ValidationProvider>
+
                     <ValidationProvider v-show="isJuridical && isFirstPage" :rules="{required: isJuridical}" v-slot="v"
                       :bails="false">
                       <label class="required">Noma da empresa</label>
