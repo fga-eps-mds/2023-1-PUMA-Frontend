@@ -1,5 +1,6 @@
 /* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
+import PartnerProjectService from '../../../services/PartnerProjectService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
@@ -11,18 +12,21 @@ export default {
     return {
       titulo: '',
       descricao: '',
+      objetivos: '',
       resultadoEsperado: '',
       formIsValid: '',
       keywords: [],
       mainKeyword: null,
       selectedKeywords: [],
       projectService: new ProjectService(),
+      partnerProjectService: new PartnerProjectService(),
       multiSelectPlaceholder: 'Carregando opções...',
       projectImages: [],
+      projectImagesUrls: [],
     };
   },
   beforeMount() {
-    this.getKeywords();
+    // this.getKeywords();
   },
   methods: {
     async onSubmit() {
@@ -30,47 +34,55 @@ export default {
         const isFormValid = await this.$refs.observer.validate();
         if (!isFormValid) return;
 
-        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
+        // this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
 
         const project = {
-          name: this.titulo,
+          title: this.titulo,
           problem: this.descricao,
-          expectedresult: this.resultadoEsperado,
-          status: 'SB',
-          createdat: new Date().toISOString(),
-          userid: this.$store.getters.user.userId,
+          expectedResult: this.resultadoEsperado,
+          objectives: this.objetivos,
+          projectImages: this.projectImagesUrls.join('&-&'),
+          projectPdf: ''
           // eslint-disable-next-line
-          keywords: this.selectedKeywords.map((k) => ({ keywordid: k.value, main: k.value === this.mainKeyword?.value })),
         };
+        await this.partnerProjectService.addProject(project)
 
-        await this.projectService.addProject(project);
-
-        this.$store.commit('CLOSE_LOADING_MODAL');
-        await this.$router.push({ path: '/meus-projetos' });
+        // await this.projectService.addProject(project)re.commit('CLOSE_LOADING_MODAL');
+        // await this.$router.push({ path: '/meus-projetos' });
         this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
     },
-    onFileChange(e) {
+    async onFileChange(e) {
+      console.log(e)
       var selectedFiles = e.target.files;
+      let image
+      console.log(selectedFiles.length)
       for (let i=0; i < selectedFiles.length; i++)
       {
-    	this.projectImages.push(selectedFiles[i]);
+    	  this.getBase64(selectedFiles[i], i);
+        // console.log(image)
+        // this.projectImagesUrls.push(image)
 	  }
-	  for (let i=0; i<this.projectImages.length; i++)
-	  {
-		    let reader = new FileReader(); //instantiate a new file reader
-		    reader.addEventListener('load', function(){
-		      this.$refs['image' + parseInt( i )][0].src = reader.result;
-		    }.bind(this), false);  //add event listener
+    console.log(this.projectImagesUrls)
 
-    	reader.readAsDataURL(this.projectImages[i]);
-	   }
 
-	   // console.log(this.images);
     },
+    async getBase64(file, i) {
+      console.log(i)
+      var reader = new FileReader();
+      console.log("file", file)
+      reader.onload = (e) => {
+        this.projectImagesUrls.push(e.target.result);
+      };
+      reader.readAsDataURL(file)
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+   }, 
+   
     removeImage (i) {
       // alert(i);
 

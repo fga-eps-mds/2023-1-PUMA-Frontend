@@ -56,10 +56,10 @@
           <ValidationProvider rules="required" v-slot="v" :bails="false" name="objetivos">
             <div role="group" class="group">
               <label for="objetivo" class="input-label">Objetivos</label>
-              <textarea id="resultado" placeholder="Descreva os objetivos do projeto." rows="5" minlength="40"
-                maxlength="1000" v-model="resultadoEsperado" class="input-textarea"
+              <textarea id="objetivos" placeholder="Descreva os objetivos do projeto." rows="5" minlength="40"
+                maxlength="1000" v-model="objetivos" class="input-textarea"
                 v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }"></textarea>
-              <span class="input-counter">({{resultadoEsperado.length}}/1000)</span>
+              <span class="input-counter">({{objetivos.length}}/1000)</span>
               <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
