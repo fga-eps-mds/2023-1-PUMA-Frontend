@@ -81,6 +81,16 @@ export default {
             this.$router.push({ path: '/login' }).catch(() => { });
           },
         },
+        subjectProjects: {
+          basePath: '/DestaquesEdit',
+          title: 'DestaquesEdit',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/menu-2.svg'),
+          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          onclick: () => {
+            this.$router.push({ path: '/DestaquesEdit' }).catch(() => { });
+          },
+        },
       },
     };
   },

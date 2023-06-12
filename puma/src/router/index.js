@@ -221,6 +221,14 @@ const routes = [
     name: 'Contato',
     component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
+  {
+    path: '/DestaqueEdit',
+    name: 'DestaqueEdit',
+    component: () => import('../components/AreaExterna/DestaqueEdit/DestaqueEdit.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
