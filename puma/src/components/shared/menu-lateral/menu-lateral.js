@@ -26,7 +26,7 @@ export default {
           title: 'Projetos das Disciplinas',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-2.svg'),
-          show: () => true,
+          show: () => this.user.permission.canCreateDiscipline,
           onclick: () => {
             this.$router.push({ path: '/projetos-disciplina' }).catch(() => { });
           },
@@ -46,7 +46,7 @@ export default {
           title: 'Disciplinas',
           // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
-          show: () => true,
+          show: () => this.user.permission.canCreateDiscipline,
           onclick: () => {
             this.$router.push({ path: '/disciplinas' }).catch(() => { });
           },
@@ -56,7 +56,7 @@ export default {
           title: 'Informações e Objetivos',
           // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
-          show: () => true,
+          show: () => this.user.permission.canEditExternalEnvironment,
           onclick: () => {
             this.$router.push({ path: '/sobre' }).catch(() => { });
           },
@@ -76,7 +76,7 @@ export default {
           title: 'Tipo Usuario',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-4.svg'),
-          show: () => true,
+          show: () => this.user.permission.canGiveUserType,
           onclick: () => {
             this.$router.push({ path: '/tipoUsuario' }).catch(() => { });
           },
@@ -86,7 +86,7 @@ export default {
           title: 'Contato',
           // eslint-disable-next-line
           iconUrl: require('@/assets/contacts.svg'),
-          show: () => true,
+          show: () => this.user.permission.canEditExternalEnvironment,
           onclick: () => {
             this.$router.push({ path: '/infoContatos' }).catch(() => { });
           },
@@ -106,7 +106,7 @@ export default {
           title: 'Novos Professores',
           // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
-          show: () => true,
+          show: () => this.user.permission.canAcceptTeacher,
           onclick: () => {
             this.$router.push({ path: '/NovosProfessores' }).catch(() => { });
           },
