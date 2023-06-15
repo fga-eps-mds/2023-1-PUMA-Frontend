@@ -1,73 +1,47 @@
 /* eslint-disable*/
+import PartnerProjectService from '../../../services/PartnerProjectService';
 import AreaExternaHeader from '../AreaExternaHeader/AreaExternaHeader.vue';
-import InfoParceiro from '../InfoParceiro/InfoParceiro.vue';
+
 export default {
   components: {
     AreaExternaHeader,
-    InfoParceiro,
   },
-
+  beforeMount() {
+    this.getProjects();
+  },
   data() {
     return {
-      infoParceiros: [
-      {
-        name: 'Exército Brasileiro',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },
-      {
-        name: 'Exército Brasileiro 2',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },
-      {
-        name: 'Exército Brasileiro 3',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },
-      {
-        name: 'Exército Brasileiro 4',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },
-      {
-        name: 'Exército Brasileiro 5',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },
-      {
-        name: 'Exército Brasileiro 6',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },
-      {
-        name: 'Exército Brasileiro 7',
-        description: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        website: 'https://www.google.com',
-        projectScope: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        projectKeyResults: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores obcaecati perspiciatis ut omnis sunt vel inventore corporis! Id ad, aliquam voluptatem ipsam nobis corporis accusamus perferendis dolor magnam nihil.', 'Nobis corporis, quae totam nam pariatur eaque voluptatibus veritatis exercitationem assumenda, nesciunt illo? Magnam labore sapiente pariatur quisquam praesentium ea eveniet distinctio nihil modi. Deleniti perferendis esse voluptatem quam molestiae.'],
-        logo: 'https://blog.iprocess.com.br/wp-content/uploads/2021/11/placeholder.png'
-      },],
-      paginaAtual: '/home/parceiros',
-      parceiro: 0
-    };
+      partnerProjectService: new PartnerProjectService(),
+      projects: '',
+      currentProject: '',
+      currentProjectImages: []
+    }
   },
+  methods: {
+    async getProjects(){
+      await this.partnerProjectService.getProjects().then((response) => {
+        this.projects = response.data.response;
+        this.currentProject = response.data.response[0];
+        this.projects.forEach(element => {
+          element.newImages = element.projectImages.split('&-&')
+        });
+        console.log(this.projects)
+      }).catch(() => {
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar os projetos, confira sua conexão com servidor e tente novamente', 'danger');
+      });
+    },
+    async onCardClick(id) {
+      this.currentProjectImages = []
+      await this.partnerProjectService.getProject(id).then((response) => {
+        this.currentProject = response.data.response[0];
+        let images = this.currentProject.projectImages.split("&-&")
+        images.forEach(element => {
+          this.currentProjectImages.push(element)
+        });
+        console.log("Images", this.currentProjectImages)
+      }).catch(() => {
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar os projetos, confira sua conexão com servidor e tente novamente', 'danger');
+      });
+    }
+  }
 };
