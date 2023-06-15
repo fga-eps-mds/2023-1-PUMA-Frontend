@@ -1,0 +1,24 @@
+
+<div class="main-content hidden-scroll-bar">
+    <h1 class="tittle">
+    Conteúdos de Destaque
+    </h1>
+
+    <div class="sub-tittle mb-4">
+    Crie conteúdos e atribua o status de destaque a eles
+    </div>
+
+    <div>
+    <button
+        class="btn cd-btn my-3"
+        onclick="window.location.href = '/destaques/cadastrar'">
+        <em class="fa-solid fa-plus mr-2 create-content"></em>Criar conteúdo
+    </button>
+    </div>
+
+    <div class="tabelas">
+        <ListaTabelaDestaque class="tabelaDestaque"
+        :dataBanners="banners"/>
+        </div>
+    </div>
+</div>

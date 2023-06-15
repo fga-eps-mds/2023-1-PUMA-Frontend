@@ -1,0 +1,25 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+        <span class="title-list">{{ title }}</span>
+
+        <tr v-for="banner in listBanners" :key="banner.bannerId">
+            <td>{{banner.title}}</td>
+            <td class="botao">
+                <button
+                    class="btn cd-btn"
+                    @click="editBanner(banner.bannerId)">
+                    <em class="fa-solid fa-pen mr-2 ml-0"></em>Editar conteúdo
+                </button>
+                <button
+                    class="btn cd-btn-warn"
+                    @click="deleteBanner(banner.bannerId)">
+                    <em class="fa fa-trash mr-2 ml-0"></em>Deletar
+                </button>
+            </td>
+        </tr>
+
+        <div v-if="!listBanners.length" class="no-results align-content-center mt-3">
+            Sem Resultados Disponíveis
+        </div>
+    </table>
+</div>

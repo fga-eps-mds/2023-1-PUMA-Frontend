@@ -111,6 +111,17 @@ export default {
             this.$router.push({ path: '/NovosProfessores' }).catch(() => { });
           },
         },
+        highlights: {
+          basePath: '/destaques',
+          title: 'Destaques',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/class.svg'),
+          // show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => true,
+          onclick: () => {
+            this.$router.push({ path: '/destaques' }).catch(() => { });
+          },
+        },
       },
     };
   },
