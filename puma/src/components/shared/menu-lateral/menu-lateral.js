@@ -73,7 +73,7 @@ export default {
         },
         userType: {
           basePath: '/tipoUsuario',
-          title: 'Tipo Usuario',
+          title: 'Controle de perfis',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-4.svg'),
           show: () => this.user.permission.canGiveUserType,
