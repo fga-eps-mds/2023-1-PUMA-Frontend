@@ -26,7 +26,8 @@
                 <h3 class="subtitulo">Professores responsáveis pela disciplina</h3>
                 <div class="div-professors">
                     <div class="card-professor" v-for="professor in disciplina.professors[0]" :key="professor.userId">
-                        <img src="../../../../assets/imagemTemporaria.png" class="img-professor" alt="Imagem do Professor">
+                        <img v-if="!!professor.image" :src="professor.image" class="img-professor" alt="Imagem do Professor" />
+                        <img v-else src="../../../../assets/imagemTemporaria.png" class="img-professor" alt="Imagem do Professor">
                         <p class="texto">{{professor.fullName}}</p>
                         <p class="texto">{{professor.email}}</p>
                     </div>
