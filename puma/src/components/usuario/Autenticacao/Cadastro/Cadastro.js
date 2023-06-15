@@ -88,7 +88,7 @@ export default {
               fullName: response.data.fullName,
               isAdmin: response.data.isAdmin,
               email: response.data.email,
-              type: response.data.type,
+              permission: response.data.permission,
             });
             this.$store.commit('SET_TOKEN', response.data.token);
             this.$router.push('/meus-projetos').catch(() => {});
