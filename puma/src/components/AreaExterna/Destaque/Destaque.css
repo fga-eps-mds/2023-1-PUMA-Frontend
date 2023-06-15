@@ -22,11 +22,14 @@ border-radius:10px ;
 .text{
   color: white;
   width: 500px;
+  padding-bottom: 20px;
 }
 
 .title{
   color:  white;
-
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 24px;
 }
 
 .link{

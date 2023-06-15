@@ -38,6 +38,16 @@ export default class BannerService {
         });
     }
 
+    getHighlightBanner() {
+        return new Promise((resolve, reject) => {
+          axios.get(`${global.URL_GATEWAY}/banner/highlight`).then((response) => {
+            resolve(response);
+          }).catch((error) => {
+            reject(error);
+          });
+        });
+    }
+
     // updateContact(id, contact) {
     //     return new Promise((resolve, reject) => {
     //         axios.put(`${global.URL_GATEWAY}/contact/update/${id}`, contact).then((response) => {

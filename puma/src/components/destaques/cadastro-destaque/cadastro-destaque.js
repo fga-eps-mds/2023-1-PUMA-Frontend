@@ -27,6 +27,7 @@ export default {
     try {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       if (this.operacao === 'editar') {
+        this.isLoading = true;
         await this.getBanner(this.bannerId);
       }
       this.$store.commit('CLOSE_LOADING_MODAL');
@@ -68,6 +69,7 @@ export default {
       this.imageSelected = banner.bannerImage;
       this.link = banner.buttonLink;
       this.buttonLabel = banner.buttonLabel;
+      this.isLoading = false;
     },
 
     async onSubmit() {
@@ -95,12 +97,12 @@ export default {
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
-            banner.banner.bannerId = parseInt(this.$route.params.id, 10);
-            banner.banner.description = this.description;
-            banner.banner.isEmphasis = this.isEmphasis;
-            banner.banner.bannerImage = this.imageSelected;
-            banner.banner.bannerLink = this.buttonLink;
-            banner.banner.buttonLabel = this.buttonLabel;
+            banner.bannerId = parseInt(this.$route.params.id, 10);
+            banner.description = this.description;
+            banner.isEmphasis = this.isEmphasis;
+            banner.bannerImage = this.imageSelected;
+            banner.bannerLink = this.buttonLink;
+            banner.buttonLabel = this.buttonLabel;
             this.bannerService.updateBanner(this.$route.params.id, banner).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Destaques' });
