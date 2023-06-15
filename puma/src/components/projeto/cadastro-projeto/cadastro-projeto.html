@@ -83,10 +83,12 @@
                   </div>
                 </div>
               </div>
-            
             </div>
-          
           </div>
+          <div>
+            <label for="projectImages" class="input-label">PDF do Projeto</label>
+          </div>
+          <input type="file" name="upload" accept="application/pdf" @change="onPDFSubmit"/><br><br>
 
           <div class="div-buttons" v-if="operacao !== 'visualizar'">
             <input :value="'Criar'" type="submit" class="cadastro-button" @click="onSubmit"/>

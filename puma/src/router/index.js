@@ -120,11 +120,27 @@ const routes = [
     },
   },
   {
-    path: '/meus-projetos/cadastrar',
-    name: 'Cadastro de Projeto',
-    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
+    path: '/projetos-parceiros',
+    name: 'Projetos Parceiros',
+    component: () => import('../components/projeto/consulta-projeto-parceiro/ConsultaProjeto.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/projetos-parceiros/visualizar/:id',
+    name: 'Visualizar Projeto Parceiro',
+    component: () => import('../components/projeto/edita-projeto-parceiro/EditaProjeto.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/projetos-parceiros/cadastrar',
+    name: 'Cadastro de Projeto Parceiro',
+    component: () => import('../components/projeto/cadastro-projeto-parceiro/CadastroProjeto.vue'),
+    meta: {
+      requiresAuth: false,
     },
   },
   {

@@ -23,6 +23,7 @@ export default {
       multiSelectPlaceholder: 'Carregando opções...',
       projectImages: [],
       projectImagesUrls: [],
+      pdf: '',
     };
   },
   beforeMount() {
@@ -34,21 +35,16 @@ export default {
         const isFormValid = await this.$refs.observer.validate();
         if (!isFormValid) return;
 
-        // this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
-
         const project = {
           title: this.titulo,
           problem: this.descricao,
           expectedResult: this.resultadoEsperado,
           objectives: this.objetivos,
           projectImages: this.projectImagesUrls.join('&-&'),
-          projectPdf: ''
-          // eslint-disable-next-line
+          projectPdf: this.pdf
         };
         await this.partnerProjectService.addProject(project)
 
-        // await this.projectService.addProject(project)re.commit('CLOSE_LOADING_MODAL');
-        // await this.$router.push({ path: '/meus-projetos' });
         this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
@@ -58,17 +54,24 @@ export default {
     async onFileChange(e) {
       console.log(e)
       var selectedFiles = e.target.files;
-      let image
       console.log(selectedFiles.length)
       for (let i=0; i < selectedFiles.length; i++)
       {
     	  this.getBase64(selectedFiles[i], i);
-        // console.log(image)
-        // this.projectImagesUrls.push(image)
 	  }
     console.log(this.projectImagesUrls)
 
 
+    },
+    async onPDFSubmit(e) {
+      console.log(e)
+      var pdfFile = e.target.files[0];
+      console.log(pdfFile)
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        this.pdf = e.target.result;
+      };
+      reader.readAsDataURL(pdfFile)
     },
     async getBase64(file, i) {
       console.log(i)
