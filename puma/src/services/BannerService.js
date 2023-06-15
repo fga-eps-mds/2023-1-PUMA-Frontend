@@ -48,13 +48,13 @@ export default class BannerService {
         });
     }
 
-    // updateContact(id, contact) {
-    //     return new Promise((resolve, reject) => {
-    //         axios.put(`${global.URL_GATEWAY}/contact/update/${id}`, contact).then((response) => {
-    //             resolve(response);
-    //         }).catch((error) => {
-    //             reject(error);
-    //         });
-    //     })
-    // }
+    updateBanner(id, banner) {
+      return new Promise((resolve, reject) => {
+        axios.put(`${global.URL_GATEWAY}/banner/${id}`, banner).then((response) => {
+          resolve(response);
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    }
 }

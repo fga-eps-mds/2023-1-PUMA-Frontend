@@ -18,7 +18,7 @@ export default {
       operacao: this.$route.path.split('/', 3)[2],
       imageSelected: '',
       buttonLabel: '',
-      link: '',
+      buttonLink: '',
       imageError: false,
       isEmphasis: false,
     };
@@ -52,9 +52,12 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
+
     async getBanner(id) {
-      this.bannerService.getBannerById(id).then(async (response) => {
-        this.setInputs(response);
+      this.bannerService.getBannerById(id).then((response) => {
+        this.isLoading = false;
+        this.setInputs(response.data.bannerItem);
+        this.makeToast('Falha ao consultar', `Infelizmente houve um erro ao consultar o banner "${response.data.bannerId}", confira sua conexão com servidor e tente novamente`, 'danger');
       }).catch(() => {
         this.isLoading = false;
         this.makeToast('Falha ao consultar', `Infelizmente houve um erro ao consultar o banner "${this.bannerId}", confira sua conexão com servidor e tente novamente`, 'danger');
@@ -67,9 +70,8 @@ export default {
       this.description = banner.description;
       this.isEmphasis = banner.isEmphasis;
       this.imageSelected = banner.bannerImage;
-      this.link = banner.buttonLink;
+      this.buttonLink = banner.bannerLink;
       this.buttonLabel = banner.buttonLabel;
-      this.isLoading = false;
     },
 
     async onSubmit() {
@@ -103,7 +105,7 @@ export default {
             banner.bannerImage = this.imageSelected;
             banner.bannerLink = this.buttonLink;
             banner.buttonLabel = this.buttonLabel;
-            this.bannerService.updateBanner(this.$route.params.id, banner).then(async () => {
+            this.bannerService.updateBanner(banner.bannerId, banner).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Destaques' });
               this.makeToast('Banner atualizado', `O banner "${this.title}" foi atualizado com sucesso`, 'success');

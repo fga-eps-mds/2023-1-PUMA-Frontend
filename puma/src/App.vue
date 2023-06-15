@@ -6,7 +6,7 @@
     >
     <MenuLateral v-if="isAuthenticated" />
     <ConfirmModal />
-    <LoadingModal />
+    <!-- <LoadingModal /> -->
     <router-view />
   </div>
 </template>
@@ -14,14 +14,14 @@
 <script>
 
 import ConfirmModal from './components/ConfirmModal/ConfirmModal.vue';
-import LoadingModal from './components/LoadingModal/LoadingModal.vue';
+// import LoadingModal from './components/LoadingModal/LoadingModal.vue';
 import MenuLateral from './components/shared/menu-lateral/MenuLateral.vue';
 
 export default {
   components: {
     MenuLateral,
     ConfirmModal,
-    LoadingModal,
+    // LoadingModal,
   },
   methods: {
     updateSessionStatus() {

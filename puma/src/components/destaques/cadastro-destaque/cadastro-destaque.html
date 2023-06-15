@@ -65,7 +65,7 @@
             <div role="group" class="group">
               <label for="name" class="input-label">Texto do botão</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
-                placeholder="Digite o nome para o botão do destaque" v-model="buttonLabel" :disabled=isLoading
+                placeholder="Digite o nome para o botão do destaque" v-model="buttonLabel"
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
               <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
@@ -77,7 +77,7 @@
             <div role="group" class="group">
               <label for="name" class="input-label">Link</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
-                placeholder="Insira o link para o botão" v-model="buttonLink" :disabled=isLoading
+                placeholder="Insira o link para o botão" v-model="buttonLink"
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
               <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
@@ -86,11 +86,8 @@
           </ValidationProvider>    
           
           <div class="div-buttons" v-if="operacao !== 'visualizar'">
-            <input :value="operacao === 'editar' ? 'Editar' : 'Criar'" v-if="!isLoading && operacao !== 'visualizar'"
+            <input :value="operacao === 'editar' ? 'Editar' : 'Criar'" v-if="operacao !== 'visualizar'"
               type="submit" class="cadastro-button" @click="onSubmit" />
-
-            <input :value="'Voltar'" v-if="!isLoading && operacao !== 'visualizar'"
-              type="submit" class="cadastro-button cadastro-button-voltar" @click="$router.push({path: '/destaques'}).catch(() => {})" />
           </div>
         </div>
       </div>

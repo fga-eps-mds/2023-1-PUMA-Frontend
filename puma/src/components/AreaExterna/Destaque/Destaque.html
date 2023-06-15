@@ -3,6 +3,7 @@
   <div class="info">
     <span class="title">{{ banner.title }}</span>
     <p class="text"> {{ banner.description }} </p>
-    <button class="link" onclick="window.open(banner.buttonLink)">{{ banner.buttonLabel }}</button>
+    <!-- <button class="link" onclick="location.href = banner.bannerLink;">{{ banner.buttonLabel }}</button> -->
+    <a class="link" :href="banner.bannerLink">{{banner.buttonLabel}}</a>
   </div>
 </div>
