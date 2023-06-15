@@ -1,0 +1,47 @@
+.highlight{
+  padding: 15px;
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+
+.img{
+width:330px;
+height: 215px;
+border-radius:10px ;
+}
+
+.info{
+  margin-top: 25px;
+}
+.text{
+  color: white;
+  width: 500px;
+}
+
+.title{
+  color:  white;
+
+}
+
+.link{
+  font-weight: bold;
+  color:#133E79;
+  background-color: #FFCE47;
+  padding: 10px 25px; 
+}
+
+@media (max-width:700px) {
+  .highlight{
+    height: 600px;
+    flex-direction: column;
+  }
+  .text{
+    width: 330px;
+  }
+}
