@@ -11,6 +11,7 @@ export default {
     return {
       banner: {},
       loading: false,
+      showBanner: false,
       bannerService: new BannerService(),
     };
   },
@@ -19,8 +20,9 @@ export default {
     async getBanner() {
       this.bannerService.getHighlightBanner().then((response) => {
         this.banner = response.data;
-        this.loading = false;
-      }).catch(() => {
+        this.showBanner = true;
+      }).catch((error) => {
+        this.showBanner = false;
       });
     },
     goToLink() {
