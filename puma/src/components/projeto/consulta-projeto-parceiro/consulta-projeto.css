@@ -1,0 +1,59 @@
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+.title {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+    padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 40px;
+    width: 300px;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 20px;
+    padding-top: 12px;
+}
+
+.modal-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.tabelas {
+    margin-top: 50px;
+    max-width: 1300px;
+    width: 100%;
+    align-content: flex-start;
+}
+
+@media screen and (max-width: 800px) {
+    .search-input {
+        width: 90%;
+        max-width: 300px;
+    }
+}

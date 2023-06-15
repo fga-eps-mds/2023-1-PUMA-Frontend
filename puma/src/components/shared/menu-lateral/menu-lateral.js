@@ -41,6 +41,16 @@ export default {
             this.$router.push({ path: '/meus-projetos' }).catch(() => { });
           },
         },
+        partnerProjects: {
+          basePath: '/projetos-parceiros',
+          title: 'Projetos Parceiros',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/menu-1.png'),
+          show: () => true,
+          onclick: () => {
+            this.$router.push({ path: '/projetos-parceiros' }).catch(() => { });
+          },
+        },
         subjects: {
           basePath: '/disciplinas',
           title: 'Disciplinas',
