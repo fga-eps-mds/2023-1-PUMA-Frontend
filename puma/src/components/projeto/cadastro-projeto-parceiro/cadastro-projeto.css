@@ -1,0 +1,189 @@
+.main-title {
+  color: #15355E;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.form {
+  margin: 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  max-width: 1500px;
+}
+
+.group {
+  margin-bottom: 30px;
+}
+
+.text-description {
+  color:#15355e;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.text-example {
+  font-weight: 700;
+}
+
+.form-col-1 {
+  flex: 1;
+}
+
+.form-col-2 {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.div-buttons {
+  margin-top: 40px;
+  text-align: right;
+}
+
+.cadastro-button {
+  align-items: center;
+  background-color: #15355e;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 150px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.cadastro-button-voltar {
+  margin-left: 20px;
+  color: #15355e;
+  border: 1px solid #15355e;
+  background-color: #ffffff;
+}
+
+.cadastro-button:hover {
+  background-color: #6E97CC;
+}
+
+.cadastro-button-voltar:hover {
+  color: #ffffff;
+  background-color: #15355e;
+}
+
+@media screen and (max-width: 1200px) {
+  .form {
+      flex-direction: column;
+  }
+
+  .form-col-2 {
+      margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .div-buttons {
+      display: flex;
+  }
+  .cadastro-button {
+      width: 140px;
+  }
+}.main-title {
+  color: #15355E;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.form {
+  margin: 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  max-width: 1500px;
+}
+
+.group {
+  margin-bottom: 30px;
+}
+
+.text-description {
+  color:#15355e;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.text-example {
+  font-weight: 700;
+}
+
+.form-col-1 {
+  flex: 1;
+}
+
+.form-col-2 {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.div-buttons {
+  margin-top: 40px;
+  text-align: right;
+}
+
+.cadastro-button {
+  align-items: center;
+  background-color: #15355e;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 150px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.cadastro-button-voltar {
+  margin-left: 20px;
+  color: #15355e;
+  border: 1px solid #15355e;
+  background-color: #ffffff;
+}
+
+.cadastro-button:hover {
+  background-color: #6E97CC;
+}
+
+.cadastro-button-voltar:hover {
+  color: #ffffff;
+  background-color: #15355e;
+}
+
+@media screen and (max-width: 1200px) {
+  .form {
+      flex-direction: column;
+  }
+
+  .form-col-2 {
+      margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .div-buttons {
+      display: flex;
+  }
+  .cadastro-button {
+      width: 140px;
+  }
+}
