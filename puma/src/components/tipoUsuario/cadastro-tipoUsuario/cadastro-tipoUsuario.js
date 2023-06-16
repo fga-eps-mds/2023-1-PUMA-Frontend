@@ -4,7 +4,7 @@ import UserService from '../../../services/UserService';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
-  name: 'CadastroUsuario',
+  name: 'CadastroPerfil',
   components: {
     ReturnButton,
   },
@@ -12,7 +12,13 @@ export default {
     return {
       userTypeId: this.$route.params.id,
       typeName: '',
-      description: '',
+      canEditExternalEnvironment: false,
+      canCreateDiscipline: false,
+      canAcceptTeacher: false,
+      canRevokeUserType: false,
+      canGiveUserType: false,
+      canEditPermission: false,
+      canDeleteUserType: false,
       isLoading: false,
       operacao: this.$route.path.split('/', 3)[2],
       userService: new UserService(),
@@ -31,24 +37,29 @@ export default {
     async onSubmit() {
       try {
         const isFormValid = await this.$refs.observer.validate();
-        const isMultiselectValid = this.validateMultiselects();
-        if (isFormValid && isMultiselectValid) {
+        if (isFormValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const userType = {
             userTypeId: this.userTypeId,
             typeName: this.typeName,
-            description: this.description,
+            canEditExternalEnvironment: this.canEditExternalEnvironment,
+            canCreateDiscipline: this.canCreateDiscipline,
+            canAcceptTeacher: this.canAcceptTeacher,
+            canRevokeUserType: this.canRevokeUserType,
+            canGiveUserType: this.canGiveUserType,
+            canEditPermission: this.canEditPermission,
+            canDeleteUserType: this.canDeleteUserType,
           };
           if (this.operacao === 'cadastrar') {
             this.isLoading = true;
             this.userService.addUserType(userType).then(async () => {
               this.isLoading = false;
               await this.$router.push({ path: '/tipoUsuario' });
-              this.makeToast('SUCESSO', 'Usuário cadastrado com sucesso', 'success');
+              this.makeToast('SUCESSO', 'Perfil cadastrado com sucesso', 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch((error) => {
               this.isLoading = false;
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao cadastrar o usuário', 'danger');
+              this.makeToast('ERRO', 'Infelizmente houve um erro ao cadastrar o perfil', 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           } else if (this.operacao === 'editar') {
@@ -57,11 +68,11 @@ export default {
             this.userService.updateUserType(userType).then(async () => {
               this.isLoading = false;
               await this.$router.push({ path: '/tipoUsuario' });
-              this.makeToast('SUCESSO', 'Usuário atualizado com sucesso', 'success');
+              this.makeToast('SUCESSO', 'Perfil atualizado com sucesso', 'success');
               this.$store.commit('CLOSE_LOADING_MODAL');
             }).catch((error) => {
               this.isLoading = false;
-              this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar os dados do usuário', 'danger');
+              this.makeToast('ERRO', 'Infelizmente houve um erro ao atualizar os dados do perfil', 'danger');
               this.$store.commit('CLOSE_LOADING_MODAL');
             });
           }
@@ -79,10 +90,16 @@ export default {
         this.userService.getUserType(userTypeId).then((response) => {
           const userType = response.data;
           this.typeName = userType.typeName;
-          this.description = userType.description;
+          this.canEditExternalEnvironment = userType.canEditExternalEnvironment;
+          this.canCreateDiscipline = userType.canCreateDiscipline;
+          this.canAcceptTeacher = userType.canAcceptTeacher;
+          this.canRevokeUserType = userType.canRevokeUserType;
+          this.canGiveUserType = userType.canGiveUserType;
+          this.canEditPermission = userType.canEditPermission;
+          this.canDeleteUserType = userType.canDeleteUserType;
           resolve();
         }).catch((error) => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do usuário', 'danger');
+          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do perfil', 'danger');
           reject();
         });
       });
@@ -94,7 +111,7 @@ export default {
           resolve();
           this.$router.push({path: '/tipoUsuario'}).catch(() => {});
         }).catch((error) => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do usuário', 'danger');
+          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do perfil', 'danger');
           reject();
         });
       });
