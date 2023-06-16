@@ -13,7 +13,6 @@
     flex-direction: row;
     background-color: #F2F2F2;
     max-width: 1430px;
-    max-height: 346px;
 }
 
 .group {
@@ -70,6 +69,26 @@
 .div-buttons {
     margin-bottom: 48px;
     text-align: left;
+}
+
+.form-check {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.form-check input {
+    height: 20px;
+    width: 20px;
+    margin-right: 15px;
+    transform: translateY(-0.075em);
+}
+
+.form-check label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #15355E;
+    margin: 0;
 }
 
 .create-button {
