@@ -107,11 +107,11 @@ export default {
 
     deleteUserType(userTypeId) {
       return new Promise((resolve, reject) => {
-        this.userService.getUserType(userTypeId).then((response) => {
+        this.userService.deleteUserType(userTypeId).then((response) => {
           resolve();
           this.$router.push({path: '/tipoUsuario'}).catch(() => {});
         }).catch((error) => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao recuperar os dados do perfil', 'danger');
+          this.makeToast('ERRO', 'Infelizmente houve um erro ao deletar o perfil', 'danger');
           reject();
         });
       });
