@@ -286,6 +286,30 @@ const routes = [
 
     },
   },
+  {
+    path: '/destaques',
+    name: 'Destaques',
+    component: () => import('../components/destaques/lista-destaque/ListaDestaque.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/destaques/cadastrar',
+    name: 'Cadastrar destaque',
+    component: () => import('../components/destaques/cadastro-destaque/CadastroDestaque.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/destaques/editar/:id',
+    name: 'Editar destaque',
+    component: () => import('../components/destaques/cadastro-destaque/CadastroDestaque.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({

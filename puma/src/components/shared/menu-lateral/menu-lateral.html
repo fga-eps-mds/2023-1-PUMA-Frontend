@@ -48,6 +48,9 @@
               <ItemMenuLateral :props="menuItems.myProjects" />
             </b-row>
             <b-row align-h="center">
+              <ItemMenuLateral :props="menuItems.highlights" />
+            </b-row>
+            <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.logout" />
             </b-row>
           </b-col>
@@ -93,6 +96,9 @@
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.myProjects" />
+        </li>
+        <li>
+          <ItemMenuLateral :props="menuItems.highlights" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.logout" />
