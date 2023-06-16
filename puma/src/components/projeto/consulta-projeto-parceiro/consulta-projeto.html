@@ -1,0 +1,39 @@
+<div class="main-content hidden-scroll-bar">
+    <ReturnButton></ReturnButton>
+    <div class="title">Projetos
+    </div>
+      <div class="mt-4 table-responsive">
+        <table class="table table-borderless" summary="Tebela de Listagem dos Projetos">
+            <tr>
+                <th>Título</th>
+                <th>Última alteração em</th>
+            </tr>
+    
+            <tr v-for="project in listProjects" :key="project.projectid">
+                <td>{{project.title}}</td>
+                <td>{{project.createdAt}}</td>
+
+                <td class="botao">
+                    <button
+                        class="btn cd-btn"
+                        @click="goToProject(project.projectId)">
+                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                    </button>
+                    <button
+                        style="margin-left: 2rem;"
+                        class="btn btn-danger"
+                        @click="deleteProject(project.projectId)">Deletar</button>
+                </td>
+            </tr>
+    
+            <div v-if="!listProjects.length" class="no-results align-content-center mt-3">
+                Sem Resultados Disponíveis
+            </div>
+            <div>
+                <button
+                    class="btn cd-btn"
+                    @click="$router.push({path: '/projetos-parceiros/cadastrar'}).catch(() => {})">Criar um novo projeto</button>
+            </div>
+        </table>
+    </div>
+</div>

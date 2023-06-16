@@ -34,13 +34,15 @@ export default {
 
         this.userService.logUserIn(user).then((response) => {
           this.isLoading = false;
+          console.log('login ---->');
+          console.log(response.data);
 
           this.$store.commit('LOGIN_USER', {
             userId: response.data.userId,
             fullName: response.data.fullName,
             isAdmin: response.data.isAdmin,
             email: response.data.email,
-            type: response.data.type,
+            permission: response.data.permission,
           });
           this.$store.commit('SET_TOKEN', response.data.token);
           this.$router.push('/meus-projetos').catch(() => {});

@@ -1,21 +1,75 @@
 <section>
     <AreaExternaHeader :pagina="paginaAtual"/>
-
     <div class="corpo">
-        <h1>Parceiros e Projetos</h1>
+        <h1>Projetos</h1>
         <p class="paragrafo-sobre">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at eleifend ex, in dapibus augue. Nulla dignissim sollicitudin turpis at congue. Clique em um projeto para saber mais informações
+            Selecione um projeto para saber mais
         </p>
-        
         <div class="icons-parceiros">
-            <div class="icon-parceiro" v-for="(parceiroInfo, index) in infoParceiros">
-                <input type="radio" v-model="parceiro" :value="index" :id="index"/>
-                <label :for="index">
-                    <img :src="parceiroInfo.logo" :alt="parceiroInfo.name">
-                </label>
+            <div class="icon-parceiro" v-for="project in projects" :key="project.projectId">
+
+                <b-card
+                    class="project-card"
+                    :title="project.title"
+                    :img-src="project.newImages[0]"
+                    img-alt="Image"
+                    img-top
+                    tag="article"
+                    style="max-width: 15rem; margin-left: 3rem;"
+                    @click="onCardClick(project.projectId)"
+                >
+                </b-card>
+                <br>
+
+                
+                <!-- <img src="" alt="">
+                    <p>{{project.title}}</p> -->
+                </div>
             </div>
-        </div>
-        
-        <InfoParceiro v-for="(parceiroInfo, index) in infoParceiros" :key="parceiroInfo.name" v-bind:info="parceiroInfo" v-show="parceiro === index"/>
+            <div>
+                <div v-if="currentProject.projectImages != ''" style="margin: 0 auto;">
+                    <b-carousel
+                      id="carousel-1"
+                      v-model="slide"
+                      :interval="4000"
+                      controls
+                      indicators
+                      background="#ababab"
+                      style="text-shadow: 1px 1px 2px #333;max-width: 50rem; max-height: 25rem; margin: 0 auto; margin-top: 5rem;"
+                      @sliding-start="onSlideStart"
+                      @sliding-end="onSlideEnd"
+                    >         
+                      <!-- Slides with image only -->
+                      <b-carousel-slide v-for="image in currentProjectImages" :key="index"
+                      :img-src="image"></b-carousel-slide>
+                
+                    </b-carousel>
+                  </div>
+                <div class="div-descricao" style="margin-top: 10rem; display: block !important;" >
+                    <h3 class="descricao-titulo">Descrição do Problema</h3><br>
+                    <p class="descricao-conteudo p-sobre-ul">
+                        {{currentProject.problem}}
+                    </p>
+                </div>
+                <div class="div-descricao" style="margin-top: 10rem; display: block !important;" >
+                    <h3 class="descricao-titulo">Objetivos do Projeto</h3><br>
+                    <p class="descricao-conteudo p-sobre-ul">
+                        {{currentProject.objectives}}
+                    </p>
+                </div>
+                <div class="div-descricao" style="margin-top: 10rem; display: block !important;" >
+                    <h3 class="descricao-titulo">Principais resultados alcançados</h3><br>
+                    <p class="descricao-conteudo p-sobre-ul">
+                        {{currentProject.expectedResult}}
+                    </p>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <b-button 
+                    :href="currentProject.pdf"
+                    :download="currentProject.title"
+                     style="justify-content: center;" variant="outline-primary">Baixe o relatório completo do projeto</b-button>
+                </div>
+            </div>
+            <br>
     </div>
 </section>

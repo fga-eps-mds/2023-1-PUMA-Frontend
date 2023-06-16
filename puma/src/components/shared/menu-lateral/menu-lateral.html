@@ -9,7 +9,7 @@
       </b-container>
     </div>
     <div class="menu-container">
-      <b-container fluid class="h-100">
+      <b-container fluid class="h-100" style="overflow: scroll;">
         <div class="usuario-logado">
           <span>Olá {{this.$store.getters.user.type}}(a)</span>
           <h5 class="font-weight-bold">{{this.$store.getters.user.fullName}}</h5>
@@ -28,6 +28,9 @@
             </b-row>
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.userType" />
+            </b-row>
+            <b-row align-h="center">
+              <ItemMenuLateral :props="menuItems.partnerProjects" />
             </b-row>
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.contacts" />

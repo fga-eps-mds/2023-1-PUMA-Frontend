@@ -34,9 +34,10 @@ export default {
       course: '',
       type: '',
       externalAgentType: '',
+      image: '',
       passwordTypeText: false,
       repeatPasswordTypeText: false,
-      isFirstPage: true,
+      page: 3,
       isLoading: false,
       hasMatricula: false,
       hasUniversity: false,
@@ -47,6 +48,7 @@ export default {
       isExternalAgent: false,
       navs: [{ title: 'Home' }, { title: 'Login' }, { title: 'Cadastro' }],
       showMessage: false,
+      imageError: false,
       isProfessor: false,
       errors: [],
     };
@@ -56,6 +58,8 @@ export default {
       const isValid = await this.$refs.observer.validate();
       if (this.password.length < 8) {
         this.makeToast('Senha fraca', 'Sua senha precisar conter pelo menos 8 caracteres.', 'danger');
+      } else if (this.image === '') {
+        this.makeToast('Foto não selecionada', 'Selecione uma foto para o seu perfil.', 'danger');
       } else if (isValid && this.errors.length === 0) {
         const newUser = {
           name: this.name,
@@ -73,6 +77,7 @@ export default {
           course: this.course,
           companyName: this.companyName,
           socialReason: this.socialReason,
+          image: this.image,
         };
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
@@ -83,7 +88,7 @@ export default {
               fullName: response.data.fullName,
               isAdmin: response.data.isAdmin,
               email: response.data.email,
-              type: response.data.type,
+              permission: response.data.permission,
             });
             this.$store.commit('SET_TOKEN', response.data.token);
             this.$router.push('/meus-projetos').catch(() => {});
@@ -146,17 +151,37 @@ export default {
     clearMask(maskedValue) {
       return maskedValue.replace(/_|-|\(|\)|\.|\/|\s/g, '');
     },
-    changePage(x, voltar) {
-      if (x === 1) {
-        this.isFirstPage = !this.isFirstPage;
-      } else if (x === 2) {
+    handleImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.image = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+    changePage(voltar) {
+      if (this.page === 1) {
+        this.page = 2;
+      } else if (this.page === 2) {
         const isOk = this.verificaPreenchimento();
         if (voltar) {
-          this.isFirstPage = !this.isFirstPage;
-        } else if (isOk === true) {
-          this.isFirstPage = !this.isFirstPage;
-        } else {
+          this.page = 1;
+        } else if (isOk !== true) {
           this.showMessage = true;
+        } else {
+          this.page = 3;
+        }
+      } else if (this.page === 3) {
+        if (voltar) {
+          this.page = 2;
         }
       }
     },

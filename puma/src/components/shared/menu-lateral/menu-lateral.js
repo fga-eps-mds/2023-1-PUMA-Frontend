@@ -26,7 +26,7 @@ export default {
           title: 'Projetos das Disciplinas',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-2.svg'),
-          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => this.user.permission.canCreateDiscipline,
           onclick: () => {
             this.$router.push({ path: '/projetos-disciplina' }).catch(() => { });
           },
@@ -41,12 +41,22 @@ export default {
             this.$router.push({ path: '/meus-projetos' }).catch(() => { });
           },
         },
+        partnerProjects: {
+          basePath: '/projetos-parceiros',
+          title: 'Projetos Parceiros',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/menu-1.png'),
+          show: () => true,
+          onclick: () => {
+            this.$router.push({ path: '/projetos-parceiros' }).catch(() => { });
+          },
+        },
         subjects: {
           basePath: '/disciplinas',
           title: 'Disciplinas',
           // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
-          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => this.user.permission.canCreateDiscipline,
           onclick: () => {
             this.$router.push({ path: '/disciplinas' }).catch(() => { });
           },
@@ -56,7 +66,7 @@ export default {
           title: 'Informações e Objetivos',
           // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
-          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => this.user.permission.canEditExternalEnvironment,
           onclick: () => {
             this.$router.push({ path: '/sobre' }).catch(() => { });
           },
@@ -66,7 +76,7 @@ export default {
           title: 'Turmas',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-5.svg'),
-          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => true,
           onclick: () => {
             this.$router.push({ path: '/turmas' }).catch(() => { });
           },
@@ -76,7 +86,7 @@ export default {
           title: 'Tipo Usuario',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-4.svg'),
-          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => this.user.permission.canGiveUserType,
           onclick: () => {
             this.$router.push({ path: '/tipoUsuario' }).catch(() => { });
           },
@@ -86,7 +96,7 @@ export default {
           title: 'Contato',
           // eslint-disable-next-line
           iconUrl: require('@/assets/contacts.svg'),
-          show: () => [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type),
+          show: () => this.user.permission.canEditExternalEnvironment,
           onclick: () => {
             this.$router.push({ path: '/infoContatos' }).catch(() => { });
           },
@@ -106,7 +116,7 @@ export default {
           title: 'Novos Professores',
           // eslint-disable-next-line
           iconUrl: require('@/assets/subjects.png'),
-          show: () => true,
+          show: () => this.user.permission.canAcceptTeacher,
           onclick: () => {
             this.$router.push({ path: '/NovosProfessores' }).catch(() => { });
           },
