@@ -1,0 +1,150 @@
+<div class="main-content">
+    <ReturnButton/>
+    <div class='title'>
+        Editar Parceiro
+    </div>
+
+    <div class="title sub-title mb-4">
+        Sobre o parceiro
+    </div>
+
+    <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
+        <div class="container-geral">
+            <div class="body-container">
+                <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome do Parceiro">
+                    <div class="form-group1">
+                        <div role="group" class="group">
+                        <label for="name" class="input-label">Nome</label>
+                        <input type="text" id="name" maxlength="1020" class="input-textfield"
+                            placeholder="Nome do parceiro" v-model="name" :disabled=isLoading
+                            v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+                        <span class="input-error-span" v-for="erro in v.errors">
+                            {{ erro }}
+                        </span>
+                        </div>
+                    </div>
+                </ValidationProvider>
+
+                <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Descrição do Parceiro">
+                    <div class="form-group1">
+                        <div role="group" class="group">
+                        <label for="name" class="input-label">Descrição do Parceiro</label>
+                        <input type="text" id="description" maxlength="1020" class="input-textfield big-input-textfield"
+                            placeholder="Descrição do parceiro" v-model="description" :disabled=isLoading
+                            v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+                        <span class="input-error-span" v-for="erro in v.errors">
+                            {{ erro }}
+                        </span>
+                        </div>
+                    </div>
+                </ValidationProvider>
+        
+            <div class="title sub-title mb-4">
+                Projetos Vinculados ao Parceiro
+            </div>
+            <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome do Projeto">
+                <div class="form-group1">
+                    <div role="group" class="group">
+                    <label for="name" class="input-label">Nome do Projeto</label>
+                    <input type="text" id="name" maxlength="1020" class="input-textfield"
+                        placeholder="Nome do Projeto" v-model="project" :disabled=isLoading
+                        v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+                    <span class="input-error-span" v-for="erro in v.errors">
+                        {{ erro }}
+                    </span>
+                    </div>
+                </div>
+            </ValidationProvider>
+
+            <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Descrição do Projeto">
+                <div class="form-group1">
+                    <div role="group" class="group">
+                    <label for="name" class="input-label">Descrição do Projeto</label>
+                    <input type="text" id="description" maxlength="1020" class="input-textfield big-input-textfield"
+                        placeholder="Descrição do parceiro" v-model="description" :disabled=isLoading
+                        v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+                    <span class="input-error-span" v-for="erro in v.errors">
+                        {{ erro }}
+                    </span>
+                    </div>
+                </div>
+            </ValidationProvider>
+
+        </div class="form-group2">
+        <div class="form-sub-col">
+          <div class="form-sub-col-1">
+              <div role="group" class="group">
+                  <label class="input-label">Imagem do Logotipo do Parceiro</label>
+                  <div v-if="!!imageSelected" class="image-input-container-selected"
+                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                      <label for="image" class="image-input-label-selected">
+                          <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                          <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                      </label>
+                      <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                          @input="e => handleImage(e.target)" :disabled=isLoading>
+                  </div>
+                  <div v-else class="image-input-container"
+                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                      <label for="image" class="image-input-label">
+                          <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                          <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                      </label>
+                      <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                          @input="e => handleImage(e.target)" :disabled=isLoading>
+                  </div>
+                  <span class="input-error-span" v-if="imageError">
+                      O tamanho da imagem deve ser menor que 2MB
+                  </span>
+              </div>
+          </div>
+
+          <div class="form-sub-col-2">
+              <div role="group" class="group">
+                  <label class="input-label">Imagem do Projeto</label>
+                  <div v-if="!!imageSelected" class="image-input-container-selected"
+                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                      <label for="image" class="image-input-label-selected">
+                          <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                          <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                      </label>
+                      <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                          @input="e => handleImage(e.target)" :disabled=isLoading>
+                  </div>
+                  <div v-else class="image-input-container"
+                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                      <label for="image" class="image-input-label">
+                          <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                          <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                      </label>
+                      <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                          @input="e => handleImage(e.target)" :disabled=isLoading>
+                  </div>
+                  <span class="input-error-span" v-if="imageError">
+                      O tamanho da imagem deve ser menor que 2MB
+                  </span>
+              </div>
+              <div class="div-buttons">
+                <input :value="'Editar'" type="submit" class="cadastro-button" @click="onSubmit"/>
+                <input :value="'Deletar'" type="submit" class="delete-button" @click="onSubmit"/>
+                <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
+                    @click="$router.push({path: '/sobre'}).catch(() => {})" />
+
+            </div>  
+          </div>
+      </div>
+
+        </div>
+
+              
+        
+        
+    </ValidationObserver>
+
+
+    <div class="container"></div>
+
+
+
+
+</div>

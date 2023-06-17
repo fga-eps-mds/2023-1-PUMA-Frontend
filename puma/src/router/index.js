@@ -319,6 +319,14 @@ const routes = [
       requiresAuth: false,
     },
   },
+  {
+    path: '/parceiros/editar/',
+    name: 'Editar Parceiro',
+    component: () => import('../components/parceiros/edit-parceiros/EditParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
