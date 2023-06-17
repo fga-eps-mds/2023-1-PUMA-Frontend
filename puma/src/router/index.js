@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -308,6 +309,14 @@ const routes = [
     component: () => import('../components/destaques/cadastro-destaque/CadastroDestaque.vue'),
     meta: {
       requiresAuth: true,
+    },
+  },
+  {
+    path: '/parceiros/cadastrar/',
+    name: 'Cadastrar Parceiro',
+    component: () => import('../components/parceiros/cadastra-parceiros/CadastraParceiro.vue'),
+    meta: {
+      requiresAuth: false,
     },
   },
 ];
