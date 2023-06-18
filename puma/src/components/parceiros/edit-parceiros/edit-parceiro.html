@@ -5,7 +5,7 @@
     </div>
 
     <div class="title sub-title mb-4">
-        Sobre o parceiro
+        Sobre o Parceiro
     </div>
 
     <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
@@ -25,16 +25,17 @@
                     </div>
                 </ValidationProvider>
 
-                <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Descrição do Parceiro">
+                <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="Descrição do Parceiro">
                     <div class="form-group1">
                         <div role="group" class="group">
-                        <label for="name" class="input-label">Descrição do Parceiro</label>
-                        <input type="text" id="description" maxlength="1020" class="input-textfield big-input-textfield"
-                            placeholder="Descrição do parceiro" v-model="description" :disabled=isLoading
-                            v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
-                        <span class="input-error-span" v-for="erro in v.errors">
-                            {{ erro }}
-                        </span>
+                            <label for="description" class="input-label">Descrição do Parceiro</label>
+                            <textarea id="description" placeholder="Descrição do Parceiro"
+                                maxlength="1000" rows="7" cols="85" v-model="descricao" class="input-textfield big-input-textfield"
+                                v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
+                            </textarea>
+                            <span class="input-error-span" v-for="erro in v.errors">
+                                {{ erro }}
+                            </span>
                         </div>
                     </div>
                 </ValidationProvider>
@@ -56,16 +57,17 @@
                 </div>
             </ValidationProvider>
 
-            <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Descrição do Projeto">
+            <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="Descrição do Projeto">
                 <div class="form-group1">
                     <div role="group" class="group">
-                    <label for="name" class="input-label">Descrição do Projeto</label>
-                    <input type="text" id="description" maxlength="1020" class="input-textfield big-input-textfield"
-                        placeholder="Descrição do parceiro" v-model="description" :disabled=isLoading
-                        v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
-                    <span class="input-error-span" v-for="erro in v.errors">
-                        {{ erro }}
-                    </span>
+                        <label for="descricao" class="input-label">Descrição do Projeto</label>
+                        <textarea id="descricao" placeholder="Forneça uma descrição sobre o Projeto desenvolvido com o parceiro"
+                            maxlength="1000" rows="7" cols="85" v-model="descricao" class="input-textfield big-input-textfield"
+                            v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
+                        </textarea>
+                        <span class="input-error-span" v-for="erro in v.errors">
+                            {{ erro }}
+                        </span>
                     </div>
                 </div>
             </ValidationProvider>
@@ -123,18 +125,20 @@
                   <span class="input-error-span" v-if="imageError">
                       O tamanho da imagem deve ser menor que 2MB
                   </span>
-              </div>
-              <div class="div-buttons">
-                <input :value="'Editar'" type="submit" class="cadastro-button" @click="onSubmit"/>
-                <input :value="'Deletar'" type="submit" class="delete-button" @click="onSubmit"/>
-                <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
-                    @click="$router.push({path: '/sobre'}).catch(() => {})" />
-
-            </div>  
+              </div> 
           </div>
+          <div class="filler"></div>
       </div>
 
         </div>
+
+        <div class="div-buttons">
+            <input :value="'Editar'" type="submit" class="cadastro-button" @click="onSubmit"/>
+            <input :value="'Deletar'" type="submit" class="delete-button" @click="onSubmit"/>
+            <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
+                @click="$router.push({path: '/sobre'}).catch(() => {})" />
+
+        </div> 
 
               
         

@@ -16,7 +16,6 @@
 	flex-direction: row;
 }
 .body-container{
-    padding: 15px;
 	width: 60%
 }
 /* .form-group1{
@@ -34,15 +33,18 @@
 }
 .input-textfield{
     width: 90%;
-    border: 2px solid #15355E;
-    border-radius: 6px;
+    border: 1px solid #15355E;
+    border-radius: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 13px 16px;
+    padding: 13px;
     gap: 24px;
 }
 .input-textfield::placeholder{
+    flex: none;
+    order: 0;
+    flex-grow: 0;
     position: absolute;
     color: #15355E;
 }
@@ -51,6 +53,11 @@
 }
 
 .big-input-textfield{
+    box-sizing: border-box;
+    
+    display: flex;
+    align-items: flex-start;
+    padding: 13px 0px 13px 16px;
     height: 163px;
 }
 .group{
@@ -78,9 +85,10 @@
     flex-direction: column;
     background-color: #CECECE;
     border: #fff 2px;
-    border-radius: 25px;
+    border-radius: 20px;
     border-style: dashed;
-    width: 250px;
+    width: 269px;
+    height: 236px;
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
@@ -93,7 +101,7 @@
 
 .image-input-label {
     cursor: pointer;
-    padding-top: 90px;
+    padding-top: 60px;
     padding-bottom: 45px;
     text-align: center;
     margin: 0px;
@@ -164,6 +172,10 @@
     opacity: 1;
 }
 
+.filler {
+    height: 47px;
+}
+
 /* Buttons */
 .div-buttons {
     margin-top: 40px;
@@ -178,7 +190,7 @@
     padding: 5px;
     font-size: 24px;
     font-weight: 700;
-    margin: 0 auto;
+    margin-left: 300px;
     cursor: pointer;
     transition: 0.5s;
     width: 150px;
@@ -187,10 +199,10 @@
   }
   
 .cadastro-button-voltar {
-margin-left: 20px;
-color: #15355e;
-border: 1px solid #15355e;
-background-color: #ffffff;
+    margin-left: 20px;
+    color: #15355e;
+    border: 1px solid #15355e;
+    background-color: #ffffff;
 }
 
 .cadastro-button:hover {
