@@ -25,7 +25,8 @@ export default {
     };
   },
   created() {
-    this.email = localStorage.email;
+    const currentUrl = new URL(window.location.href);
+    this.token = currentUrl.searchParams.get('token');
   },
   computed: {
     isButtonDisabled() {
@@ -43,8 +44,8 @@ export default {
     async updatePassword() {
       const isValid = await this.$refs.observer.validate();
 
-      if (isValid && this.isEqualsToNewPassword === true && this.newPassword.length > 0) {
-        this.userService.updatePassword(this.email, this.newPassword, (res) => {
+      if (isValid && this.isEqualsToNewPassword === true && this.newPassword.length > 0 && this.token) {
+        this.userService.updatePassword(this.token, this.newPassword, (res) => {
           if (res.status === 200) {
             this.passwordRedefined = true;
           }

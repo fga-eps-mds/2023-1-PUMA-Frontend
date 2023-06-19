@@ -43,10 +43,10 @@ export default class UserService {
     });
   }
 
-  updatePassword(email, password, callback) {
+  updatePassword(token, password, callback) {
     return axios({
       method: 'put',
-      url: `${global.URL_GATEWAY}/user/password/${email}`,
+      url: `${global.URL_GATEWAY}/user/password/${token}`,
       data: {
         password,
       },
