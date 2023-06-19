@@ -11,6 +11,7 @@ export default {
     return {
       name: '',
       courseSyllabus: '',
+      courseDescription: '',
       keywords: [],
       subareas: [],
       professors: [],
@@ -83,6 +84,7 @@ export default {
             subject: {
               name: this.name,
               courseSyllabus: this.courseSyllabus,
+              courseDescription: this.courseDescription,
               image: this.imageSelected,
             },
             keywords: this.keywordsSelected[0],
@@ -103,6 +105,7 @@ export default {
           } else if (this.operacao === 'editar') {
             subject.subject.subjectId = parseInt(this.$route.params.id, 10);
             subject.subject.courseSyllabus = this.courseSyllabus;
+            subject.subject.courseDescription = this.courseDescription;
             this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
@@ -246,6 +249,7 @@ export default {
           this.subject = subject.subject;
           this.name = subject.subject.name;
           this.courseSyllabus = subject.subject.courseSyllabus;
+          this.courseDescription = subject.subject.courseDescription;
           this.imageSelected = subject.subject.image;
           resolve();
         }).catch(() => {

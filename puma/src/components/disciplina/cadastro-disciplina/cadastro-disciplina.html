@@ -29,7 +29,7 @@
             </span>
           </div>
 
-          <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">
+          <ValidationProvider rules="required|min:2" v-slot="v" :bails="false" name="Nome da disciplina">
             <div role="group" class="group">
               <label for="name" class="input-label">Nome</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
@@ -149,6 +149,20 @@
             </span>
           </div>
           
+          <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="Descricao">
+            <div role="group" class="group">
+              <label for="descricao" class="input-label">Descrição</label>
+              <textarea id="descricao" placeholder="Descreva a disciplina usando, no mínimo, 200 caracteres."
+                maxlength="1000" rows="10" v-model="courseDescription" :disabled=isLoading class="input-textarea"
+                v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+              </textarea>
+              <span class="input-counter">({{courseDescription.length}}/1000)</span>
+              <span class="input-error-span" v-for="erro in v.errors">
+                {{ erro }}
+              </span>
+            </div>
+          </ValidationProvider>
+
           <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="Ementa">
             <div role="group" class="group">
               <label for="descricao" class="input-label">Ementa</label>
