@@ -312,6 +312,14 @@ const routes = [
     },
   },
   {
+    path: '/parceiros/',
+    name: 'Parceiros',
+    component: () => import('../components/parceiros/consulta-parceiros/consulta-parceiros.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/parceiros/cadastrar/',
     name: 'Cadastrar Parceiro',
     component: () => import('../components/parceiros/cadastra-parceiros/CadastraParceiro.vue'),

@@ -1,0 +1,65 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+        <tr>
+            <th>
+                Parceiro
+            </th>
+            <th>Nome</th>
+            <th>a</th>
+            <th>a</th>
+        </tr>
+        <tr>
+            <td>
+                <img src="../../../../assets/imagemTemporaria.png" class="imgTeste">
+            </td>
+            <td class="tittle sub-tittle mb-4">parceiro teste</td>
+            <td class="botao">
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubject(subject.subjectId)">
+                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                </button>
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubjectEdition(subject.subjectId)">
+                    Editar
+                </button>
+            </td>
+        </tr>
+          
+    </table>
+    <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+        <tr>
+            <th>
+                Parceiro
+            </th>
+            <th>Nome</th>
+            <th>a</th>
+            <th>a</th>
+        </tr>
+        <tr v-for="Partner in listPartners" :key="partner.id">
+            <td>
+                {{ Partner.image }}
+            </td>
+            <td class="tittle sub-tittle mb-4">{{ Partner.name }}</td>
+            <td class="botao">
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubject(subject.subjectId)">
+                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                </button>
+                <button
+                    class="btn cd-btn"
+                    @click="goToSubjectEdition(subject.subjectId)">
+                    Editar
+                </button>
+            </td>
+        </tr>
+          
+    </table> 
+    <ul id="app"> {{ name }}
+        <li v-for="partner in parceiros" :key="parceiro">
+            {{ partner }}
+        </li>
+    </ul>
+</div>

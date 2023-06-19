@@ -92,13 +92,13 @@ export default {
           },
         },
         partners: {
-          basePath: '/parceiros/cadastrar',
+          basePath: '/parceiros',
           title: 'Parceiros',
           // eslint-disable-next-line
           iconUrl: require('@/assets/menu-6.svg'),
           show: () => this.user.permission.canGiveUserType,
           onclick: () => {
-            this.$router.push({ path: '/parceiros/cadastrar' }).catch(() => { });
+            this.$router.push({ path: '/parceiros' }).catch(() => { });
           },
         },
         contacts: {
