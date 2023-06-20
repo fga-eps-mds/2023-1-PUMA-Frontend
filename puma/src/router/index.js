@@ -335,6 +335,14 @@ const routes = [
       requiresAuth: false,
     },
   },
+  {
+    path: '/parceiros/sobre',
+    name: 'Sobre Parceiro',
+    component: () => import('../components/parceiros/sobre-parceiros/SobreParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
 ];
 
 const router = new VueRouter({
