@@ -12,7 +12,7 @@
                 </div>
                 <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
                   <form id="register-form">
-                    <ValidationProvider :rules="required|image" v-slot="{ errors }" :bails="false" v-show="page === 3">
+                    <ValidationProvider v-slot="{ errors }" :bails="false" v-show="page === 3">
                       <label class="required">Foto de perfil do usuário</label>
                       <div class="error-div">
                         <div class="image-input-container" v-bind:style="{backgroundImage: `url(${image})`}">
@@ -20,7 +20,7 @@
                             <img class="image-input-icon" src="../../../../assets/download-direto.png" alt="ícone">
                             <span>Escolha um arquivo <br>ou arraste ele aqui</span>
                           </label>
-                          <input type="file" class="image-input" id="image" accept="image/*" @input="e => handleImage(e.target)" :disabled=isLoading>
+                          <input type="file" class="image-input" id="image" accept="image/*" @change="handleImage($event.target)" :disabled="isLoading">
                         </div>
                         <span class="error-span" v-if="imageError">
                           O tamanho da imagem deve ser menor que 2MB
@@ -148,7 +148,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1 && type === 'Professor'"
+                    <ValidationProvider v-show="hasMatricula && page === 1"
                     :rules="{required: hasUniversity, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="university">
                       <label class="required">Universidade</label>
                       <div class="error-div">
@@ -160,7 +160,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1 && type === 'Professor'"
+                    <ValidationProvider v-show="hasMatricula && page === 1"
                     :rules="{required: hasDepartament, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="departament">
                       <label class="required">Departamento</label>
                       <div class="error-div">
@@ -172,7 +172,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1 && type === 'Professor'"
+                    <ValidationProvider v-show="hasMatricula && page === 1"
                     :rules="{required: hasCourse, min: { length: 5}}" validate-on="blur" :bails="false" v-slot="v" name="course">
                       <label class="required">Curso</label>
                       <div class="error-div">
