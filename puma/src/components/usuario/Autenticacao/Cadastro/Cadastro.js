@@ -37,7 +37,7 @@ export default {
       image: '',
       passwordTypeText: false,
       repeatPasswordTypeText: false,
-      page: 3,
+      page: 1,
       isLoading: false,
       hasMatricula: false,
       hasUniversity: false,
