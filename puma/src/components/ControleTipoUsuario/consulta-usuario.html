@@ -1,0 +1,55 @@
+<div class="main-content hidden-scroll-bar">
+    <div class="title">
+      Usuários
+    </div>
+
+    <div class="title sub-title mb-4">
+      Gerencie os tipos de perfil dos usuários da aplicação
+    </div>
+
+    <!-- <div class="input-group">
+        <input
+            v-model="projectSearch"
+            type="text"
+            id="caixaPesquisa"
+            class="search-input"
+            placeholder="Pesquise por uma disciplina">
+        <em class="fas fa-search input-group-prepend search-icon"></em>
+    </div> -->
+
+    <div class="tabelas">
+        <table class="table table-borderless" summary="Tabela de listagem dos usuários da aplicação">
+            <tr class="table-header">
+                <th>Nome</th>
+                <th>Perfil de Usuário</th>
+                <th></th>
+                <th></th>
+            </tr>
+    
+            <tr v-for="user in users" :key="user.userId">
+                <td>{{user.fullName}}</td>
+                <td>{{user.userTypeName}}</td>
+    
+                <td class="tbl-btn">
+                    <button
+                        class="btn cd-btn"
+                        @click="goToProject(project.projectId)">
+                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Deletar Usuário
+                    </button>
+                </td>
+    
+                <td class="tbl-btn">
+                    <button
+                        class="btn cd-btn"
+                        @click="goToProject(project.projectId)">
+                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Revogar Perfil
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn-div">
+        <button class="btn cd-btn">Editar usuários</button>
+        <button class="btn cd-btn">Cancelar</button>
+    </div>
+</div>

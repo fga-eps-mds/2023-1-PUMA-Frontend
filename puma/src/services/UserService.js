@@ -88,17 +88,13 @@ export default class UserService {
     });
   }
 
-  updateUserType(newUserType, callback) {
-    return axios({
-      method: 'put',
-      url: `${global.URL_GATEWAY}/user/userType/${newUserType.userTypeId}`,
-      data: {
-        newUserType,
-      },
-    }).then((res) => {
-      callback(res);
-    }).catch((error) => {
-      callback(error.response);
+  updateUserType(newUserType) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/userType/${newUserType.userTypeId}`, newUserType).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/user/userType/:userTypeId update reject: ${response}`);
+      });
     });
   }
 
@@ -128,6 +124,16 @@ export default class UserService {
         resolve(response);
       }).catch((response) => {
         reject(`user/teacher/pending reject: ${response}`);
+      });
+    });
+  }
+
+  getAllUsers() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/user/all`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`user/all reject: ${response}`);
       });
     });
   }
