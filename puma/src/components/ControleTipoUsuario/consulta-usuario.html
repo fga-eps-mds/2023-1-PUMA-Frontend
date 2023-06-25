@@ -28,28 +28,42 @@
     
             <tr v-for="user in users" :key="user.userId">
                 <td>{{user.fullName}}</td>
-                <td>{{user.userTypeName}}</td>
+                <td>
+                    <div class="userTypes">
+                        <select class="userTypes">
+                            <option 
+                                v-for="userType in userTypes" :key="userType.userTypeId" 
+                                :selected="userType.userTypeId === user.userTypeId"
+                            >
+                                {{ userType.typeName }}
+                            </option>
+                        </select>
+                    </div>
+                </td>
     
                 <td class="tbl-btn">
                     <button
-                        class="btn cd-btn"
-                        @click="goToProject(project.projectId)">
-                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Deletar Usuário
+                        class="btn cd-btn tbl-btns"
+                        @click="deleteUser(user.userId)">
+                        <em class="fa-solid fa-trash mr-2 ml-0"></em>Deletar Usuário
                     </button>
                 </td>
     
                 <td class="tbl-btn">
                     <button
-                        class="btn cd-btn"
-                        @click="goToProject(project.projectId)">
-                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Revogar Perfil
+                        class="btn cd-btn tbl-btns"
+                        @click="revokeUserPermissions(user.userId)">
+                        <em class="fa-solid fa-times mr-2 ml-0"></em>Revogar Perfil
                     </button>
                 </td>
             </tr>
         </table>
     </div>
     <div class="btn-div">
-        <button class="btn cd-btn">Editar usuários</button>
+        <button 
+            class="btn edit-btn">
+            <em class="fa-solid fa-check mr-1"></em>Editar usuários
+        </button>
         <button class="btn cd-btn">Cancelar</button>
     </div>
 </div>
