@@ -80,7 +80,7 @@
                     </div>
                 </ValidationProvider>
             </div>
-            <div class="form-col-2">
+            <div class="form-col-1">
                 <ValidationProvider rules="required|min:100" v-slot="{ errors }">
                     <div role="group" class="group">
                         <div class="goals">
@@ -99,7 +99,7 @@
                 <div class="form-sub-col">
                     <div class="form-sub-col-1">
                         <div role="group" class="group">
-                            <label class="input-label">Imagem de metodologia</label>
+                            <label class="input-label">Imagem do tópico 1</label>
                             <div v-if="!!imageSelected" class="image-input-container-selected"
                                 v-bind:style="{backgroundImage: `url(${imageSelected})`}">
                                 <label for="image" class="image-input-label-selected">
@@ -126,7 +126,7 @@
 
                     <div class="form-sub-col-2">
                         <div role="group" class="group">
-                            <label class="input-label">Imagem de objetivos</label>
+                            <label class="input-label">Imagem do tópico 2</label>
                             <div v-if="!!imageSelected2" class="image-input-container-selected"
                                 v-bind:style="{backgroundImage: `url(${imageSelected2})`}">
                                 <label for="imageobj" class="image-input-label-selected">

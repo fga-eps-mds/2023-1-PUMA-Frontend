@@ -23,6 +23,17 @@
     margin-bottom: 30px;
 }
 
+.group .input-label {
+    width: 208px;
+    height: 51px;
+    top: 268px;
+    left: 325px;
+    border: 1px solid #15355E;
+    border-radius: 5px;
+    padding: 13px 16px;
+    gap: 24px;
+  }
+
 .cancel-btn {
     background-color: #ffffff;
 }
@@ -41,7 +52,6 @@
 
 .form-col-2 {
     flex: 1;
-    margin-left: 20px;
     
 }
 
@@ -57,7 +67,6 @@
 
 .form-sub-col-2 {
     flex: 1;
-    margin-left: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -156,6 +165,8 @@
 
 .image-input-label {
     cursor: pointer;
+    Width: 263px;
+    Height: 186px;
     padding-top: 90px;
     padding-bottom: 45px;
     text-align: center;
@@ -163,18 +174,21 @@
 }
 
 .image-input-icon {
-    height: auto;
-    width: 70px;
+    height: 36px;
+    width: 36px;
     margin: 0 auto;
     display: block;
 }
 
 .image-input-label span {
-    font-size: 18px;
-    font-weight: 500;
+    Width: 120px;
+    Height: 28.62px;
+    font-size: 12px;
+    font-weight: 400;
     color: #15355E;
     margin-top: 10px;
     display: block;
+    text-align: center;
 }
 
 .image-input {
@@ -228,5 +242,10 @@
 }
 
 .input-textarea {
-    height: 50%;
-}
+    width: 592px;
+    height: 215px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 13px 16px;
+    gap: 24px;
+  }
