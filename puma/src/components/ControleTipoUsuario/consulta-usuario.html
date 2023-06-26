@@ -29,11 +29,11 @@
             <tr v-for="user in users" :key="user.userId">
                 <td>{{user.fullName}}</td>
                 <td>
-                    <div class="userTypes">
-                        <select class="userTypes">
+                    <div class="userTypesDiv">
+                        <select class="userTypes" v-model="userTypesSelected[user.userId]" @change="handleSelectChange(user)">
                             <option 
-                                v-for="userType in userTypes" :key="userType.userTypeId" 
-                                :selected="userType.userTypeId === user.userTypeId"
+                                v-for="userType in userTypes" :key="userType.userTypeId"
+                                :value="userType.userTypeId"
                             >
                                 {{ userType.typeName }}
                             </option>
@@ -61,9 +61,15 @@
     </div>
     <div class="btn-div">
         <button 
-            class="btn edit-btn">
+            class="btn edit-btn"
+            @click="changeUserTypes()">
             <em class="fa-solid fa-check mr-1"></em>Editar usuários
         </button>
-        <button class="btn cd-btn">Cancelar</button>
+        <button 
+            class="btn cd-btn"
+            @click="cancelChanges()"
+        >
+            Cancelar
+        </button>
     </div>
 </div>

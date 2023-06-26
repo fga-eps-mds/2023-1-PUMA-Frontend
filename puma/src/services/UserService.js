@@ -137,4 +137,24 @@ export default class UserService {
       });
     });
   }
+
+  revokeUserPermissions(userId) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/revoke/${userId}`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`user/revoke/${userId} reject: ${response}`);
+      });
+    });
+  }
+
+  changeUserTypes(users) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/userTypes/change`, users).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`userTypes/change reject: ${response}`);
+      });
+    });
+  }
 }
