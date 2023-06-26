@@ -17,7 +17,7 @@
     font-weight: normal;
 }
 
-/* .search-input {
+.search-input {
     height: 40px;
     padding-left: 40px;
     width: 300px;
@@ -29,7 +29,7 @@
     z-index: 3;
     margin-left: 20px;
     padding-top: 12px;
-} */
+}
 
 .modal-title {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -51,12 +51,12 @@
     position: sticky;
 }
 
-/* @media screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
     .search-input {
         width: 90%;
         max-width: 300px;
     }
-} */
+}
 
 table {
     width: 100%;

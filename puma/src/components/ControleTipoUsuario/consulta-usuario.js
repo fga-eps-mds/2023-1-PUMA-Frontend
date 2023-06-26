@@ -1,5 +1,4 @@
 /* eslint-disable*/
-import Vue from 'vue';
 import UserService from '../../services/UserService';
 
 export default {
@@ -12,7 +11,15 @@ export default {
       userService: new UserService(),
       usersAcessibleById: [],
       userTypesSelected: [],
+      usersSearch: '',
+      filteredUsers: [],
     };
+  },
+
+  watch: {
+    usersSearch() {
+      this.filterUsers();
+    }
   },
   
   beforeMount() {
@@ -24,6 +31,7 @@ export default {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       this.userService.getAllUsers().then((response) => {
         var tempUsers = JSON.parse(JSON.stringify(response.data));
+        this.filteredUsers = JSON.parse(JSON.stringify(response.data));
 
         this.userService.getUserType().then((response) => {
           this.userTypes = response.data;
@@ -76,7 +84,18 @@ export default {
     },
 
     sortUserNames() {
-      this.users.sort((a, b) => a.fullName.localeCompare(b.fullName));
+      this.filteredUsers.sort((a, b) => a.fullName.localeCompare(b.fullName));
+    },
+
+    filterUsers() {
+      if (!this.usersSearch) {
+        this.filteredUsers = this.users;
+        this.sortUserNames();
+      } else {
+        this.filteredUsers = this.users.filter(user =>
+          user.fullName.toLowerCase().startsWith(this.usersSearch.toLowerCase())
+        );
+      }
     },
 
     makeToast: function (title, message, variant) {
