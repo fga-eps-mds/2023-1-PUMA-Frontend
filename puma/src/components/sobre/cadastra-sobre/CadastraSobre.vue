@@ -12,12 +12,12 @@
     </div>
 
     <ValidationObserver ref="observer" v-slot="{ handleSubmit }" @submit="handleSubmit(submitForm)">
-        <div class="form m-0">
-            <div class="form-col-1">
+        <div class="form-col">
+            <div class="form-subcol-1">
 
                 <ValidationProvider rules="required|min:100" v-slot="{ errors }">
                     <div role="group" class="group">
-                        <label for="description" class="input-label">Descrição</label>
+                        <textarea for="description" class="input-label">Descrição</textarea>
                         <textarea id="description" class="input-textarea"
                             placeholder="Informe a descrição sobre a PUMA que será exibida no ambiente externo usando, no mínimo, 100 caracteres."
                             maxlength="1000" rows="10" v-model="description ">
@@ -29,6 +29,39 @@
                     </div>
                 </ValidationProvider>
 
+                <div class="form-subcol-2">
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <div class="goals">
+                            <textarea for="goals" class="input-label">Objetivos</textarea>
+                            <textarea id="goals" class="input-textarea"
+                                placeholder="Forneça os objetivos da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                                maxlength="1000" rows="10" v-model="goals ">
+                          </textarea>
+                            <span class="input-counter">({{ goals.length }}/1000)</span>
+                            <span class="input-error-span" v-if="errors.length">
+                                {{ errors[0] }}
+                            </span>
+                        </div>
+                    </div>
+                </ValidationProvider>
+                <div class="form-subcol-3"></div>
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <textarea for="methodology" class="input-label">Metodologia</textarea>
+                        <textarea id="methodology" class="input-textarea"
+                            placeholder="Forneça as metodologias utilizadas na plataforma da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                            maxlength="1000" rows="10" v-model="methodology ">
+                      </textarea>
+                        <span class="input-counter">({{ methodology.length }}/1000)</span>
+                        <span class="input-error-span" v-if="errors.length">
+                            {{ errors[0] }}
+                        </span>
+                    </div>
+                </ValidationProvider>
+            </div>
+            </div>
+            <div class="form-col-2">
                 <div role="group" class="group">
                     <div class="label-flex-box">
                         <label for="professor" class="input-label">
@@ -64,38 +97,7 @@
                     <span v-if="isTouchedProfessors && !professorsSelected.length" class="input-error-span">
                         Escolha no mínimo um professor
                     </span>
-                </div>
-
-                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
-                    <div role="group" class="group">
-                        <label for="methodology" class="input-label">Metodologia</label>
-                        <textarea id="methodology" class="input-textarea"
-                            placeholder="Forneça as metodologias utilizadas na plataforma da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
-                            maxlength="1000" rows="10" v-model="methodology ">
-                      </textarea>
-                        <span class="input-counter">({{ methodology.length }}/1000)</span>
-                        <span class="input-error-span" v-if="errors.length">
-                            {{ errors[0] }}
-                        </span>
-                    </div>
-                </ValidationProvider>
             </div>
-            <div class="form-col-1">
-                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
-                    <div role="group" class="group">
-                        <div class="goals">
-                            <label for="goals" class="input-label">Objetivos</label>
-                            <textarea id="goals" class="input-textarea"
-                                placeholder="Forneça os objetivos da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
-                                maxlength="1000" rows="10" v-model="goals ">
-                          </textarea>
-                            <span class="input-counter">({{ goals.length }}/1000)</span>
-                            <span class="input-error-span" v-if="errors.length">
-                                {{ errors[0] }}
-                            </span>
-                        </div>
-                    </div>
-                </ValidationProvider>
                 <div class="form-sub-col">
                     <div class="form-sub-col-1">
                         <div role="group" class="group">
@@ -138,6 +140,33 @@
                             </div>
                             <div v-else class="image-input-container"
                                 v-bind:style="{backgroundImage: `url(${imageSelected2})`}">
+                                <label for="imageobj" class="image-input-label">
+                                    <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                    <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                                </label>
+                                <input type="file" class="image-input" id="imageobj" name="imageobj" accept="image/*"
+                                    @input="e => handleObjImage(e.target)" :disabled=isLoading>
+                            </div>
+                            <span class="input-error-span" v-if="imageError">
+                                O tamanho da imagem deve ser menor que 2MB
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-sub-col-3">
+                        <div role="group" class="group">
+                            <label class="input-label">Imagem do tópico 3</label>
+                            <div v-if="!!imageSelected3" class="image-input-container-selected"
+                                v-bind:style="{backgroundImage: `url(${imageSelected3})`}">
+                                <label for="imageobj" class="image-input-label-selected">
+                                    <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                    <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                                </label>
+                                <input type="file" class="image-input" id="imageobj" name="imageobj" accept="image/*"
+                                    @input="e => handleObjImage(e.target)" :disabled=isLoading>
+                            </div>
+                            <div v-else class="image-input-container"
+                                v-bind:style="{backgroundImage: `url(${imageSelected3})`}">
                                 <label for="imageobj" class="image-input-label">
                                     <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
                                     <span>Escolha um arquivo <br>ou arraste ele aqui</span>
