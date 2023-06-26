@@ -23,7 +23,6 @@
                 <th>Nome</th>
                 <th>Perfil de Usuário</th>
                 <th></th>
-                <th></th>
             </tr>
     
             <tr v-for="user in filteredUsers" :key="user.userId">
@@ -39,14 +38,6 @@
                             </option>
                         </select>
                     </div>
-                </td>
-    
-                <td class="tbl-btn">
-                    <button
-                        class="btn cd-btn tbl-btns"
-                        @click="deleteUser(user.userId)">
-                        <em class="fa-solid fa-trash mr-2 ml-0"></em>Deletar Usuário
-                    </button>
                 </td>
     
                 <td class="tbl-btn">
