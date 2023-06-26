@@ -1,0 +1,66 @@
+<div class="main-content hidden-scroll-bar">
+    <div class="title">
+      Usuários
+    </div>
+
+    <div class="title sub-title mb-4">
+      Gerencie os tipos de perfil dos usuários da aplicação
+    </div>
+
+    <div class="input-group">
+        <input
+            v-model="usersSearch"
+            type="text"
+            id="caixaPesquisa"
+            class="search-input"
+            placeholder="Pesquise por um usuário">
+        <em class="fas fa-search input-group-prepend search-icon"></em>
+    </div>
+
+    <div class="tabelas">
+        <table class="table table-borderless" summary="Tabela de listagem dos usuários da aplicação">
+            <tr class="table-header">
+                <th>Nome</th>
+                <th>Perfil de Usuário</th>
+                <th></th>
+            </tr>
+    
+            <tr v-for="user in filteredUsers" :key="user.userId">
+                <td>{{user.fullName}}</td>
+                <td>
+                    <div class="userTypesDiv">
+                        <select class="userTypes" v-model="userTypesSelected[user.userId]" @change="handleSelectChange(user)">
+                            <option 
+                                v-for="userType in userTypes" :key="userType.userTypeId"
+                                :value="userType.userTypeId"
+                            >
+                                {{ userType.typeName }}
+                            </option>
+                        </select>
+                    </div>
+                </td>
+    
+                <td class="tbl-btn">
+                    <button
+                        class="btn cd-btn tbl-btns"
+                        @click="revokeUserPermissions(user.userId)">
+                        <em class="fa-solid fa-times mr-2 ml-0"></em>Revogar Perfil
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="btn-div">
+        <button 
+            class="btn edit-btn"
+            @click="changeUserTypes()">
+            <em class="fa-solid fa-check mr-1"></em>Editar usuários
+        </button>
+        <button 
+            class="btn cd-btn"
+            @click="cancelChanges()"
+        >
+            Cancelar
+        </button>
+    </div>
+</div>
