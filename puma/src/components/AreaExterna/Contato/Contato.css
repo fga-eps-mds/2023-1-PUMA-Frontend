@@ -52,8 +52,8 @@ h1 {
 .card-div {
     width: 222px;
     height: 357px;
-    background-image: url('../../../assets/imagemTemporaria.png');
     background-size: contain;
+    background-repeat: no-repeat;
     border: 1px solid #133E7957;
     border-radius: 8px;
     margin-top: 33px;
