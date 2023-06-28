@@ -26,6 +26,8 @@ export default {
       contacts: [],
       selectedContact: {},
       operacao: this.$route.path.split('/', 3)[2],
+      selectedProfessor: {},
+      image: '',
     };
   },
   async mounted() {
@@ -35,6 +37,7 @@ export default {
       await this.getContacts();
       if(this.operacao === 'visualizar') {
         this.findSelectedContact();
+        this.isEditing = true;
       }
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
@@ -50,7 +53,7 @@ export default {
         this.isEditing = this.$route.params.isEditing;
         this.buttonLabel = 'Editar contato';
       } else {
-        this.buttonLabel = 'Cadastrar contato';
+        this.buttonLabel = 'Cadastrar';
       }
     },
     async handleClick() {
@@ -64,7 +67,8 @@ export default {
       try {
         const contact = {
           name: this.name,
-          email: this.contact
+          email: this.contact,
+          image: this.image,
         };
         this.contactService.addContact(contact).then(async () => {
           this.makeToast('Contato cadastrado', `O contato "${contact.name}" foi cadastrado com sucesso`, 'success');
@@ -96,8 +100,9 @@ export default {
         const contactItem = {
           name: this.name,
           email: this.contact,
+          image: this.image,
         };
-        this.contactService.updateContact(this.id, contactItem).then(async () => {
+        this.contactService.updateContact(this.$route.params.id, contactItem).then(async () => {
           this.makeToast('Contato atualizado', `O contato "${this.name}" foi atualizado com sucesso`, 'success');
         await this.$router.push({ name: 'Informações de contato' });
         }).catch((error) => {
@@ -135,6 +140,7 @@ export default {
 
       this.name = this.selectedContact[0].name;
       this.contact = this.selectedContact[0].email;
+      this.image = this.selectedContact[0].image;
     },
   },
 };
