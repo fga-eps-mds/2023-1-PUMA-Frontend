@@ -4,7 +4,7 @@
         <h1>Contatos</h1>
         <div class="contato-text">Entre em contato com os responsáveis pela Plataforma</div>
         <span v-for="contact in contacts" :key="contact.contactId" class="contato">
-            <div class="card-div" v-bind:style="{backgroundImage: `url(${contact.image})`}">
+            <div class="card-div" v-bind:style="{backgroundImage: `url(${contact.image})`, 'background-size': 'cover', 'background-position': 'center'} ">
                 <div class="card-text-div">
                     <div class="card-text-name">
                         {{contact.name}}
