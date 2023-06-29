@@ -23,7 +23,7 @@
             <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
           </div>
           <div class="content-options-select" v-if="dispSelectSubject">
-            <div class="content-item-options-select" v-for="subjectItem in mySubjects" :key="subjectItem.subjectid" @click="setSubjectForm(subjectItem)">
+            <div class="content-item-options-select" v-for="subjectItem in mySubjects" :key="subjectItem.subjectId" @click="setSubjectForm(subjectItem)">
               <div v-show="subjectItem !== subjectForm" class="content-item-select">
                 <em class="far fa-circle mr-2"></em>
                 {{subjectItem.name}}
@@ -213,11 +213,11 @@
           <div class="select-subject" @click="dispSelectProfessor = !dispSelectProfessor">
             <div :class="teachersForm.length !== 0?'label-none':'label-empty'">Selecione um ou mais professores</div>
             <span v-if="subjectForm.professors !== undefined">
-              <span v-for="professor in subjectForm.professors" :key="professor.userid">
+              <span v-for="professor in subjectForm.professors" :key="professor.userId">
                 <span v-for="item in teachersForm" :key="item">
-                  <div v-if="item === professor.userid" class="content-professor-select" @click="setProfessorForm(professor.userid, true)">
+                  <div v-if="item === professor.userId" class="content-professor-select" @click="setProfessorForm(professor.userId, true)">
                     <div class="content-professor-item-select">
-                      {{professor.fullname}}
+                      {{professor.fullName}}
                     </div>
                     <em class="fa-solid fa-xmark"></em>
                   </div>
@@ -229,15 +229,15 @@
             <em class="fas fa-chevron-up arrow-select" v-show="dispSelectSubject"></em>
           </div>
           <div class="content-options-select" v-if="dispSelectProfessor">
-            <div class="content-item-options-select" v-for="professor in subjectForm.professors" :key="professor.userid" @click="setProfessorForm(professor.userid, false)">
-              <div v-show="!(getProfessorForm(professor.userid))" class="content-item-select">
+            <div class="content-item-options-select" v-for="professor in subjectForm.professors" :key="professor.userId" @click="setProfessorForm(professor.userId, false)">
+              <div v-show="!(getProfessorForm(professor.userId))" class="content-item-select">
                 <em class="fa-regular fa-square"></em>
-                {{professor.fullname}}
+                {{professor.fullName}}
               </div>
 
-              <div v-show="getProfessorForm(professor.userid)" class="content-item-select content-item-selected">
+              <div v-show="getProfessorForm(professor.userId)" class="content-item-select content-item-selected">
                 <em class="fa-solid fa-square-check"></em>
-                {{professor.fullname}}
+                {{professor.fullName}}
               </div>
             </div>
           </div>

@@ -9,14 +9,14 @@
             <th></th>
         </tr>
 
-        <tr v-for="item in listClassesEditable" :key="item.classid">
+        <tr v-for="item in listClassesEditable" :key="item.classId">
             <td>{{item.subject.name}}</td>
             <td>{{item.classcode}}</td>
             <td>{{formatSemester(item.semester)}}/{{item.year}}</td>
             <td>
-                <span v-for="professorSubject in item.subject.professors" :key="professorSubject.userid">
-                  <span v-for="(professorClass, index) in item.teachers" :key="professorClass.userid">
-                    <span v-if="professorSubject.userid === professorClass.userid">
+                <span v-for="professorSubject in item.subject.professors" :key="professorSubject.userId">
+                  <span v-for="(professorClass, index) in item.teachers" :key="professorClass.userId">
+                    <span v-if="professorSubject.userId === professorClass.userId">
                       {{professorSubject.fullname}}<span v-if="index < item.teachers.length-1">,</span>
                     </span>
                   </span>

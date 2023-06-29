@@ -61,9 +61,9 @@ export default {
   methods: {
     getClasses() {
       if (this.classId !== '0') {
-        this.classService.getClassById(this.classid).then((response) => {
+        this.classService.getClassById(this.classId).then((response) => {
           for (let i = 0; i < this.mySubjects.length;) {
-            if (this.mySubjects[i].subjectid === response.data.classItem.class.subjectid) {
+            if (this.mySubjects[i].subjectId === response.data.classItem.class.subjectId) {
               this.subjectForm = this.mySubjects[i];
             }
             i += 1;
@@ -74,7 +74,7 @@ export default {
           this.semesterForm = response.data.classItem.class.semester;
 
           for (let i = 0; i < response.data.classItem.teachers.length;) {
-            this.teachersForm.push(response.data.classItem.teachers[i].userid);
+            this.teachersForm.push(response.data.classItem.teachers[i].userId);
             i += 1;
           }
 
@@ -92,7 +92,7 @@ export default {
       }
     },
     validateForm() {
-      if (this.subjectForm.subjectid !== undefined
+      if (this.subjectForm.subjectId !== undefined
           && this.codeForm !== undefined
           && this.codeForm !== ''
           && this.yearForm !== undefined
@@ -218,6 +218,7 @@ export default {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       this.subjectService.getSubjects().then((response) => {
         this.subjects = response.data;
+        console.log(this.subejcts);
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.separateSubjects();
         this.getClasses();
@@ -229,10 +230,10 @@ export default {
     separateSubjects() {
       this.subjects.map((sub) => {
         sub.professors.map((prof) => {
-          if (prof.userid === this.$store.getters.user.userId) {
+          if (prof.userId === this.$store.getters.user.userId) {
             this.mySubjects.push(sub);
             this.subjects = this.subjects.filter((item) => (
-              item.subjectid !== sub.subjectid));
+              item.subjectId !== sub.subjectId));
           }
           return prof;
         });
@@ -263,26 +264,27 @@ export default {
       try {
         const classItem = {
           classItem: {
-            subjectId: this.subjectForm.subjectid,
+            subjectId: this.subjectForm.subjectId,
             classCode: `T${this.codeForm}`,
             year: this.yearForm,
             semester: this.semesterForm,
             password: this.passwordForm,
             classesTeacher: this.teachersForm,
             classesSchedule: this.listScheduleForm,
-            classid: this.$route.params.classid,
+            classId: this.$route.params.classid,
           },
         };
         this.classService.updateClass(this.$route.params.classid, classItem).then(async () => {
           this.isLoading = false;
-          if (this.$route.params.classid === '0') {
+          if (this.$route.params.classId === '0') {
             this.makeToast('SUCESSO', 'Turma criada com sucesso', 'success');
           } else {
             this.makeToast('SUCESSO', 'Turma atualizada com sucesso', 'success');
           }
           this.$store.commit('CLOSE_LOADING_MODAL');
           window.location.href = '/turmas';
-        }).catch(() => {
+        }).catch((error) => {
+          console.log(error);
           this.isLoading = false;
           if (this.$route.params.classid === '0') {
             this.makeToast('ERRO', 'Infelizmente houve um erro ao criar a turma. Verifique se ela não existe', 'danger');

@@ -11,7 +11,7 @@
         <tr v-for="subject in listSubjects" :key="subject.subjectId">
             <td>{{subject.name}}</td>
             <td>
-                <div v-for="professor in subject.professors[0]" :key="professor.userId">
+                <div v-for="professor in subject.professors" :key="professor.userId">
                     {{professor.fullName}}
                 </div>
                 <div v-if="!subject.professors.length">
