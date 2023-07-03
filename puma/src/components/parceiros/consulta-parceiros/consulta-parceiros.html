@@ -1,0 +1,42 @@
+
+<div class="main-content hidden-scroll-bar">
+    <h1 class="tittle">
+    Parceiros
+    </h1>
+
+    <div class="tittle sub-tittle mb-4">
+    Parceiros Cadastrados na Plataforma
+    </div>
+
+    <div>
+    <button
+        class="btn cd-btn my-3"
+        onclick="window.location.href = '/disciplinas/cadastrar'">
+        <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar Parceiro
+    </button>
+    <button
+        class="btn cd-btn my-3"
+        onclick="window.location.href = '/disciplinas/cadastrar'">
+        <em class="fa-solid fa-plus-square mr-2 add-project"></em>Editar Parceiros Exibidos no Ambiente Externo
+    </button>
+    </div>
+
+    <div class="input-group">
+        <input
+            v-model="subjectSearch"
+            type="text"
+            id="caixaPesquisa"
+            class="search-input"
+            placeholder="Pesquisar Parceiros">
+        <em class="fas fa-search input-group-prepend search-icon"></em>
+    </div>
+
+    <div class="tabelas">
+    <ListaConsultaDisciplina class="demaisDisciplinas"
+    :title="'Outras Disciplinas'"
+    :dataSubjects="subjects"
+    :subjectSearch="subjectSearch"/>
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    <ListaParceiros class="parceiros"></ListaParceiros>
+    </div>
+</div>
