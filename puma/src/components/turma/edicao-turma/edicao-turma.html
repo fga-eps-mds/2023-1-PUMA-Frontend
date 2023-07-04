@@ -245,8 +245,12 @@
       </div>
 
       <div class="line"></div>
+      <label>
+        <input type="checkbox" v-model="isPublic">
+        Turma pública
+      </label><br>
 
-      <div class="content content-big">
+      <div class="content content-big" v-if="!isPublic">
         <label class="label">
           Informe uma senha para seus alunos ingressarem na turma
         </label>
@@ -255,6 +259,7 @@
 
       <div>
         <button
+            :disable="!passwordForm"
             :class="enableSendBtn?'btn-create btn-create-enabled':'btn-create'"
             @click="onSubmit()">
             <em class="fa-solid fa-plus mr-2 add-project"></em>{{classId === '0'?'Criar':'Editar'}} Turma
