@@ -32,7 +32,7 @@ export default {
       teachersForm: [],
       passwordForm: '',
       classId: this.$route.params.classid,
-
+      isPublic: false,
       dispSelectSubject: false,
       dispSelectSemester: false,
       dispSelectDay: false,
