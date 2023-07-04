@@ -26,6 +26,7 @@
 }
 
 .title-box {
+  position: relative;
   font-size: 20px;
   text-align: left;
   color: #404040;
@@ -401,4 +402,15 @@ label.required::after {
 
 .image-input-container-selected:hover > .image-input-label-selected {
   opacity: 1;
+}
+
+.sucesso{
+position: relative;
+left: 35%;
+}
+
+.poscadastro{
+  margin-top: 20px;
+  margin-left: 40px;
+  font-size: 24px;
 }

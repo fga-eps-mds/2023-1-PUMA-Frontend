@@ -8,8 +8,11 @@
             <div class="card">
               <div class="border-card">
                 <div class="title-box">
-                  Bem Vindo(a) a PUMA
+                  <span v-show="page != 4">Bem-Vindo a PUMA</span>
+                  <img class="sucesso" src="../../../../assets/sucesso.svg" alt="" v-show="page === 4">
                 </div>
+
+                <h2 class="poscadastro" v-show="page === 4">Seu cadastro foi realizado com sucesso</h2>
                 <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
                   <form id="register-form">
                     <ValidationProvider v-slot="{ errors }" :bails="false" v-show="page === 3">
@@ -31,8 +34,7 @@
                     <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-show="page === 2">
                       <label class="required">Nome</label>
                       <div class="error-div">
-                        <input v-on:change="verificaPreenchimento()" v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"
-                          class="input-field" />
+                        <input v-on:change="verificaPreenchimento()" v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes" class="input-field" />
                         <span class="error-span" for="name" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
@@ -42,8 +44,7 @@
                     <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email" v-show="page === 2">
                       <label class="required">E-mail</label>
                       <div class="error-div">
-                        <input v-on:change="verificaPreenchimento()" v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"
-                          class="input-field" />
+                        <input v-on:change="verificaPreenchimento()" v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes" class="input-field" />
                         <span v-if="errors.length === 0" class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
@@ -56,9 +57,7 @@
                     <ValidationProvider :rules="{required: true, min: 14, phoneNumber:true}" v-slot="v" :bails="false" mode="eager" name="telefone" v-show="page === 2">
                       <label class="required">Telefone</label>
                       <div class="error-div">
-                        <input v-on:change="verificaPreenchimento()" v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'"
-                          v-model="phoneNumber" id="phoneNumber" placeholder="Telefone" :class="v.classes"
-                          class="input-field" />
+                        <input v-on:change="verificaPreenchimento()" v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'" v-model="phoneNumber" id="phoneNumber" placeholder="Telefone" :class="v.classes" class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
@@ -69,10 +68,9 @@
                       <label class="required">Senha</label>
                       <div class="error-div">
                         <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
-                          <input v-on:change="verificaPreenchimento()" :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha"
-                          placeholder="Mínimo 6 caracteres com letras e números" :class="v.classes" class="password-input" />
+                          <input v-on:change="verificaPreenchimento()" :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha" placeholder="Mínimo 6 caracteres com letras e números" :class="v.classes" class="password-input" />
                           <div class="eye-option" @click="mostrarOcultarSenha('senha')">
-                              <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
+                            <font-awesome-icon icon="fa-solid fa-eye"></font-awesome-icon>
                           </div>
                         </div>
                         <span class="error-span">
@@ -85,11 +83,9 @@
                       <label class="required label-repeat-password">Repita sua senha</label>
                       <div class="error-div">
                         <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
-                          <input v-on:change="verificaPreenchimento()" :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword"
-                          name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha"
-                          :class="v.classes" class="password-input" />
+                          <input v-on:change="verificaPreenchimento()" :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword" name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha" :class="v.classes" class="password-input" />
                           <div class="eye-option" @click="mostrarOcultarSenha('repeatPassword')">
-                              <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
+                            <font-awesome-icon icon="fa-solid fa-eye"></font-awesome-icon>
                           </div>
                         </div>
 
@@ -102,8 +98,7 @@
                     <ValidationProvider rules="required" v-slot="v" :bails="false" v-show="page === 1">
                       <label class="required">Tipo de usuário</label>
                       <div class="error-div">
-                        <select v-on:change="alterarTipoUsuario()" :class="v.classes" v-model="type" name="tipo"
-                          id="tipo" class="input-field">
+                        <select v-on:change="alterarTipoUsuario()" :class="v.classes" v-model="type" name="tipo" id="tipo" class="input-field">
                           <option value="" selected class="disabled">
                             Selecione
                           </option>
@@ -117,25 +112,20 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1"
-                      :rules="{required: hasMatricula, min: { length: type === 'Aluno' ? 10 : 7 }}" v-slot="v"
-                      validate-on="blur" :bails="false" name="matrícula">
+                    <ValidationProvider v-show="hasMatricula && page === 1" :rules="{required: hasMatricula, min: { length: type === 'Aluno' ? 10 : 7 }}" v-slot="v" validate-on="blur" :bails="false" name="matrícula">
                       <label class="required">Matrícula</label>
                       <div class="error-div">
-                        <input v-mask="type === 'Aluno' ? '##/#######' : '#######'" v-model="matricula"
-                          :class="v.classes" id="matricula" placeholder="Digite sua matrícula" class="input-field" />
+                        <input v-mask="type === 'Aluno' ? '##/#######' : '#######'" v-model="matricula" :class="v.classes" id="matricula" placeholder="Digite sua matrícula" class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isExternalAgent && page === 1" :rules="{required: isExternalAgent}"
-                      v-slot="v" :bails="false">
+                    <ValidationProvider v-show="isExternalAgent && page === 1" :rules="{required: isExternalAgent}" v-slot="v" :bails="false">
                       <label class="required">Tipo de Agente Externo</label>
                       <div class="error-div">
-                        <select v-on:change="alterarTipoAgenteExterno()" v-model="externalAgentType" :class="v.classes"
-                          class="input-field">
+                        <select v-on:change="alterarTipoAgenteExterno()" v-model="externalAgentType" :class="v.classes" class="input-field">
                           <option value="" class="disabled">
                             Selecione
                           </option>
@@ -148,84 +138,70 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1"
-                    :rules="{required: hasUniversity, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="university">
+                    <ValidationProvider v-show="hasMatricula && page === 1" :rules="{required: hasUniversity, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="university">
                       <label class="required">Universidade</label>
                       <div class="error-div">
-                        <input
-                          :class="v.classes" id="university" placeholder="Digite sua universidade" class="input-field" v-model="university" />
+                        <input :class="v.classes" id="university" placeholder="Digite sua universidade" class="input-field" v-model="university" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1"
-                    :rules="{required: hasDepartament, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="departament">
+                    <ValidationProvider v-show="hasMatricula && page === 1" :rules="{required: hasDepartament, min: { length: 3}}" validate-on="blur" :bails="false" v-slot="v" name="departament">
                       <label class="required">Departamento</label>
                       <div class="error-div">
-                        <input
-                          :class="v.classes" id="departament" placeholder="Digite seu departamento" class="input-field" v-model="departament"/>
+                        <input :class="v.classes" id="departament" placeholder="Digite seu departamento" class="input-field" v-model="departament" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="hasMatricula && page === 1"
-                    :rules="{required: hasCourse, min: { length: 5}}" validate-on="blur" :bails="false" v-slot="v" name="course">
+                    <ValidationProvider v-show="hasMatricula && page === 1" :rules="{required: hasCourse, min: { length: 5}}" validate-on="blur" :bails="false" v-slot="v" name="course">
                       <label class="required">Curso</label>
                       <div class="error-div">
-                        <input
-                          :class="v.classes" id="course" placeholder="Digite seu curso" class="input-field" v-model="course" />
+                        <input :class="v.classes" id="course" placeholder="Digite seu curso" class="input-field" v-model="course" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isJuridical && page === 1" :rules="{required: isJuridical}" v-slot="v"
-                      :bails="false">
+                    <ValidationProvider v-show="isJuridical && page === 1" :rules="{required: isJuridical}" v-slot="v" :bails="false">
                       <label class="required">Noma da empresa</label>
                       <div class="error-div">
-                        <input v-model.trim="companyName" :class="v.classes" name="nome da empresa" id="companyName"
-                          type="name" placeholder="Digite o nome da empresa" class="input-field" />
+                        <input v-model.trim="companyName" :class="v.classes" name="nome da empresa" id="companyName" type="name" placeholder="Digite o nome da empresa" class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isJuridical && page === 1"
-                      :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
+                    <ValidationProvider v-show="isJuridical && page === 1" :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
                       <label class="required">CNPJ</label>
                       <div class="error-div">
-                        <input v-mask="'##.###.###/####-##'" :class="v.classes" id="cnpj" v-model="cnpj"
-                          placeholder="Digite o CNPJ da empresa" class="input-field" />
+                        <input v-mask="'##.###.###/####-##'" :class="v.classes" id="cnpj" v-model="cnpj" placeholder="Digite o CNPJ da empresa" class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isJuridical && page === 1" :rules="{required: isJuridical}" v-slot="v"
-                      :bails="false">
+                    <ValidationProvider v-show="isJuridical && page === 1" :rules="{required: isJuridical}" v-slot="v" :bails="false">
                       <label class="required">Razão social</label>
                       <div class="error-div">
-                        <input v-model.trim="socialReason" :class="v.classes" type="name" id="socialReason"
-                          placeholder="Digite a razão social da empresa" class="input-field" />
+                        <input v-model.trim="socialReason" :class="v.classes" type="name" id="socialReason" placeholder="Digite a razão social da empresa" class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider v-show="isPhysical && page === 1"
-                      :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
+                    <ValidationProvider v-show="isPhysical && page === 1" :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
                       <label class="required">CPF</label>
                       <div class="error-div">
-                        <input v-mask="'###.###.###-##'" :class="v.classes" v-model="cpf" id="cpf"
-                          placeholder="Digite seu CPF" class="input-field" />
+                        <input v-mask="'###.###.###-##'" :class="v.classes" v-model="cpf" id="cpf" placeholder="Digite seu CPF" class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
@@ -241,7 +217,7 @@
                         <b-col>
                           <b-row align-h="center" v-show="page < 3">
                             <em style="cursor: pointer" @click="changePage(false)">
-                              <input class="next-page" value="Prosseguir"/>
+                              <input class="next-page" value="Prosseguir" />
                             </em>
                           </b-row>
                           <b-row align-h="center" v-show="page === 3">
@@ -253,15 +229,35 @@
                       </b-row>
                       <b-row>
                         <b-col>
-                          <b-row align-h="center" v-show="page > 1">
+                          <b-row align-h="center" v-show="page > 1 && page != 4">
                             <em style="cursor: pointer" @click="changePage(true)">
-                              <input class="previous-page" value="Voltar"/>
+                              <input class="previous-page" value="Voltar" />
                             </em>
                           </b-row>
                         </b-col>
                       </b-row>
                     </b-container>
-                    
+                    <b-container fluid class="div-troca-pagina">
+                      <b-row>
+                        <b-col>
+                          <b-row align-h="center" v-show="page > 3 && page == 4">
+                            <em style="cursor: pointer" @click="goToLogin()">
+                              <input class="next-page" value="Fazer login" />
+                            </em>
+                          </b-row>
+                        </b-col>
+                      </b-row>
+                      <b-row>
+                        <b-col>
+                          <b-row align-h="center" v-show="page > 1 && page == 4">
+                            <em style="cursor: pointer" @click="goToInitialPage()">
+                              <input class="previous-page" value="Voltar a pagina inicial" />
+                            </em>
+                          </b-row>
+                        </b-col>
+                      </b-row>
+                    </b-container>
+
                     <div class="clickable-text-center create-account" v-show="page === 1">
                       <router-link class="clickable-link" to="/login">
                         <strong> Voltar a tela inicial </strong>
@@ -269,7 +265,7 @@
                     </div>
 
                     <Loading class="loading" v-show='isLoading' />
-                    <br/>
+                    <br />
                   </form>
                 </ValidationObserver>
               </div>
