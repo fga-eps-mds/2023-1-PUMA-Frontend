@@ -16,8 +16,8 @@
                         <div role="group" class="group">
                         <label for="name" class="input-label">Nome</label>
                         <input type="text" id="name" maxlength="1020" class="input-textfield"
-                            placeholder="Nome do parceiro" v-model="name" :disabled=isLoading
-                            v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+                            placeholder="Nome do parceiro" v-model="name"
+                            v-bind:class="{ 'input-focus': !v.errors.length, 'input-error': v.errors.length }">
                         <span class="input-error-span" v-for="erro in v.errors">
                             {{ erro }}
                         </span>
@@ -48,7 +48,7 @@
                     <div role="group" class="group">
                     <label for="name" class="input-label">Nome do Projeto</label>
                     <input type="text" id="name" maxlength="1020" class="input-textfield"
-                        placeholder="Nome do Projeto" v-model="project" :disabled=isLoading
+                        placeholder="Nome do Projeto" v-model="project"
                         v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
                     <span class="input-error-span" v-for="erro in v.errors">
                         {{ erro }}
@@ -78,54 +78,51 @@
               <div role="group" class="group">
                   <label class="input-label">Imagem do Logotipo do Parceiro</label>
                   <div v-if="!!imageSelected" class="image-input-container-selected"
-                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                      v-bind:style="{backgroundImage: `url(${partnerImage})`}">
                       <label for="image" class="image-input-label-selected">
                           <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
                           <span>Escolha um arquivo <br>ou arraste ele aqui</span>
                       </label>
                       <input type="file" class="image-input" id="image" name="image" accept="image/*"
-                          @input="e => handleImage(e.target)" :disabled=isLoading>
+                          @input="e => handleImage(e.target)">
                   </div>
                   <div v-else class="image-input-container"
-                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
+                      v-bind:style="{backgroundImage: `url(${partnerImage})`}">
                       <label for="image" class="image-input-label">
                           <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
                           <span>Escolha um arquivo <br>ou arraste ele aqui</span>
                       </label>
                       <input type="file" class="image-input" id="image" name="image" accept="image/*"
-                          @input="e => handleImage(e.target)" :disabled=isLoading>
+                          @input="e => handleImage(e.target)" >
                   </div>
                   <span class="input-error-span" v-if="imageError">
                       O tamanho da imagem deve ser menor que 2MB
                   </span>
               </div>
+              <div>
+                <label for="projectImages" class="input-label">Imagens do Projeto</label>
+                <div>
+                  <input type="file" multiple @change="onFileChange" /><br><br>
+              
+                  <div>
+                    <div>
+                      <div v-for="(projectImages, key) in projectImages">
+                        <div class="" :id="key">
+                          <button type="button" @click="removeImage(key)">
+                          &times;
+                          </button>
+                        <img class="preview img-thumbnail" v-bind:ref="'projectImages' +parseInt( key )" /> 
+                        {{ projectImages.name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
 
           <div class="form-sub-col-2">
-              <div role="group" class="group">
-                  <label class="input-label">Imagem do Projeto</label>
-                  <div v-if="!!imageSelected" class="image-input-container-selected"
-                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
-                      <label for="image" class="image-input-label-selected">
-                          <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
-                          <span>Escolha um arquivo <br>ou arraste ele aqui</span>
-                      </label>
-                      <input type="file" class="image-input" id="image" name="image" accept="image/*"
-                          @input="e => handleImage(e.target)" :disabled=isLoading>
-                  </div>
-                  <div v-else class="image-input-container"
-                      v-bind:style="{backgroundImage: `url(${imageSelected})`}">
-                      <label for="image" class="image-input-label">
-                          <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
-                          <span>Escolha um arquivo <br>ou arraste ele aqui</span>
-                      </label>
-                      <input type="file" class="image-input" id="image" name="image" accept="image/*"
-                          @input="e => handleImage(e.target)" :disabled=isLoading>
-                  </div>
-                  <span class="input-error-span" v-if="imageError">
-                      O tamanho da imagem deve ser menor que 2MB
-                  </span>
-              </div> 
+
           </div>
           <div class="filler"></div>
       </div>
