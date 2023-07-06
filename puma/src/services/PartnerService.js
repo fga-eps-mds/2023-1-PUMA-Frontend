@@ -6,7 +6,7 @@ import store from '../store';
 export default class PartnerProjectService {
   getPartners() {
     return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/partners`).then((response) => {
+      axios.get(`${global.URL_GATEWAY}/partner`).then((response) => {
         resolve(response);
       }).catch((error) => {
         console.log(error)
@@ -18,7 +18,7 @@ export default class PartnerProjectService {
   getPartner(partnerId) {
     const auth = store.getters.token;
     return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/partners/${partnerId}`, { headers: { auth } }).then((response) => {
+      axios.get(`${global.URL_GATEWAY}/partner/${partnerId}`, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         console.log(error)
@@ -44,7 +44,7 @@ export default class PartnerProjectService {
     const auth = store.getters.token;
     console.log("teste service")
     return new Promise((resolve, reject) => {
-      axios.put(`${global.URL_GATEWAY}/partners/${partnerId}`, data, { headers: { auth } }).then((response) => {
+      axios.put(`${global.URL_GATEWAY}/partner/${partnerId}`, data, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         console.log(error)
@@ -56,7 +56,7 @@ export default class PartnerProjectService {
   addPartners(project) {
     const auth = store.getters.token;
     return new Promise((resolve, reject) => {
-      axios.post(`${global.URL_GATEWAY}/partners`, partner, { headers: { auth } }).then((response) => {
+      axios.post(`${global.URL_GATEWAY}/partner`, project, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         console.log(error)

@@ -16,6 +16,7 @@ export default {
       partnerImage: '',
       projectImages: [],
       imageSelected: '',
+      partnerService: new PartnerService()
     };
   },
   beforeMount() {
@@ -29,14 +30,13 @@ export default {
 
         const project = {
           name: this.name,
-          partnerDescription: this.partnerDescription,
+          description: this.partnerDescription,
           projectName: this.projectName,
           projectDescription: this.projectDescription,
-          partnerImage: this.partnerImage,
+          enterpriseLogo: this.partnerImage,
           projectImages: this.projectImages.join('&-&')
         };
-        await this.PartnerService.addPartners(project)
-        // console.log("colose do project:", project);
+        await this.partnerService.addPartners(project)
 
         this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
