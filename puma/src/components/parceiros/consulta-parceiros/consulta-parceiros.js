@@ -2,15 +2,16 @@
 import SubjectService from '../../../services/SubjectService';
 import PartnerService from '../../../services/PartnerService';
 import ListaParceiros from './ListaParceiros/ListaParceiros.vue';
+import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
-
+  name: 'ConsultaParceiros',
+  components: {
+    ReturnButton,
+    ListaParceiros,
+  },
   beforeMount() {
     this.getPartners();
-  },
-
-  components: {
-    ListaParceiros,
   },
 
   data: () => ({
