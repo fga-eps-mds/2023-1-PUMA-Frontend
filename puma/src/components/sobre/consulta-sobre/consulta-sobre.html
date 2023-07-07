@@ -18,8 +18,8 @@
   </div>
 
   <div role="group" class="group">
-    <div class='topics'>
-      Descrição
+    <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+      {{ info.titleDescription }}
     </div>
     <div class='text' v-for="info in pumaInfos" :key="info.infoId">
       {{ info.description }}
@@ -29,26 +29,26 @@
   <div class="form m-0">
     <div class="form-col-1">
       <div role="group" class="group">
-        <div class='topics'>
-          Objetivos
+        <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.titleGoal }}
         </div>
         <div class='text' v-for="info in pumaInfos" :key="info.infoId">
           {{ info.goal }}
         </div>
       </div>
       <div role="group" class="group">
-        <div class='topics'>
-          Idealizadores
+        <div class='text' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.titleTeachers }}
         </div>
         <div class='text' v-for="info in pumaInfos.teachers" :key="info.infoId">
-          <h5><b>{{ info.fullName}}</b></h5>
+          <h5><b>{{ info.fullName }}</b></h5>
         </div>
       </div>
     </div>
     <div class="form-col-2">
       <div role="group" class="group">
-        <div class='topics'>
-          Metodologia
+        <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.titleMethodology }}
         </div>
         <div class='text' v-for="info in pumaInfos" :key="info.infoId">
           {{ info.methodology }}

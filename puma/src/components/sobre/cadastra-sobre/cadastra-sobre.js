@@ -30,6 +30,11 @@ export default {
       professorsSelected: [],
       subject: '',
       imageError: false,
+      titleDescription: '',
+      titleMethodology: '',
+      titleGoal: '',
+      titleTeachers: '',
+      descriptionImage: ''
     };
   },
   async mounted() {
@@ -77,20 +82,24 @@ export default {
       try {
         const moreInfos = this.pumaInfo.moreInfos;
         const teachers = this.pumaInfo.teachers;
-       teachers.forEach(teacher => {
+        teachers.forEach(teacher => {
           if (this.professorsSelected[0].includes(teacher)) {
             teacher.isIdealizer = true;
           } else {
-           teacher.isIdealizer = false;
+            teacher.isIdealizer = false;
           }
         });
         const topics = this.pumaInfo.topics;
         const pumaItem = this.pumaInfo['0'];
         const newPumaItem = {
-          description: this.description,
-          goal: this.goals,
-          goalImage: this.imageSelected2,
           infoId: pumaItem.infoId,
+          titleDescription: this.titleDescription,
+          description: this.description,
+          descriptionImage: this.descriptionImage,
+          goal: this.goals,
+          titleGoal: this.titleGoal,
+          goalImage: this.imageSelected2,
+          titleMethodology: this.titleMethodology,
           methodology: this.methodology,
           methodologyImage: this.imageSelected,
         };
