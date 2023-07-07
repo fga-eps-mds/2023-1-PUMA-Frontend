@@ -16,7 +16,7 @@
                         <div role="group" class="group">
                         <label for="name" class="input-label">Nome</label>
                         <input type="text" id="name" maxlength="1020" class="input-textfield"
-                            placeholder="Nome do parceiro" v-model="name"
+                            placeholder="Nome do parceiro" v-model="partner.name"
                             v-bind:class="{ 'input-focus': !v.errors.length, 'input-error': v.errors.length }">
                         <span class="input-error-span" v-for="erro in v.errors">
                             {{ erro }}
@@ -30,7 +30,7 @@
                         <div role="group" class="group">
                             <label for="description" class="input-label">Descrição do Parceiro</label>
                             <textarea id="description" placeholder="Descrição do Parceiro"
-                                maxlength="1000" rows="7" cols="85" v-model="descricao" class="input-textfield big-input-textfield"
+                                maxlength="1000" rows="7" cols="85" v-model="partner.description" class="input-textfield big-input-textfield"
                                 v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
                             </textarea>
                             <span class="input-error-span" v-for="erro in v.errors">
@@ -48,8 +48,8 @@
                     <div role="group" class="group">
                     <label for="name" class="input-label">Nome do Projeto</label>
                     <input type="text" id="name" maxlength="1020" class="input-textfield"
-                        placeholder="Nome do Projeto" v-model="project"
-                        v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+                        placeholder="Nome do Projeto" v-model="partner.projectName"
+                        v-bind:class="{ 'input-focus': !v.errors.length, 'input-error': v.errors.length }">
                     <span class="input-error-span" v-for="erro in v.errors">
                         {{ erro }}
                     </span>
@@ -62,7 +62,7 @@
                     <div role="group" class="group">
                         <label for="descricao" class="input-label">Descrição do Projeto</label>
                         <textarea id="descricao" placeholder="Forneça uma descrição sobre o Projeto desenvolvido com o parceiro"
-                            maxlength="1000" rows="7" cols="85" v-model="descricao" class="input-textfield big-input-textfield"
+                            maxlength="1000" rows="7" cols="85" v-model="partner.projectDescription" class="input-textfield big-input-textfield"
                             v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
                         </textarea>
                         <span class="input-error-span" v-for="erro in v.errors">
@@ -77,8 +77,8 @@
           <div class="form-sub-col-1">
               <div role="group" class="group">
                   <label class="input-label">Imagem do Logotipo do Parceiro</label>
-                  <div v-if="!!imageSelected" class="image-input-container-selected"
-                      v-bind:style="{backgroundImage: `url(${partnerImage})`}">
+                  <div v-if="!partnerImage" class="image-input-container-selected"
+                      v-bind:style="{backgroundImage: `url(${partner.enterpriseLogo})`}">
                       <label for="image" class="image-input-label-selected">
                           <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
                           <span>Escolha um arquivo <br>ou arraste ele aqui</span>
@@ -95,9 +95,6 @@
                       <input type="file" class="image-input" id="image" name="image" accept="image/*"
                           @input="e => handleImage(e.target)" >
                   </div>
-                  <span class="input-error-span" v-if="imageError">
-                      O tamanho da imagem deve ser menor que 2MB
-                  </span>
               </div>
               <div>
                 <label for="projectImages" class="input-label">Imagens do Projeto</label>
@@ -106,13 +103,12 @@
               
                   <div>
                     <div>
-                      <div v-for="(projectImages, key) in projectImages">
+                      <div v-for="(img, key) in projectImages">
                         <div class="" :id="key">
                           <button type="button" @click="removeImage(key)">
                           &times;
                           </button>
-                        <img class="preview img-thumbnail" v-bind:ref="'projectImages' +parseInt( key )" /> 
-                        {{ projectImages.name }}
+                        <img class="preview img-thumbnail" :src="img" style="height: 80px; width: 100px;" v-bind:ref="'projectImages' +parseInt( key )" /> 
                         </div>
                       </div>
                     </div>
@@ -133,7 +129,7 @@
             <input :value="'Editar'" type="submit" class="cadastro-button" @click="onSubmit"/>
             <input :value="'Deletar'" type="submit" class="delete-button" @click="onSubmit"/>
             <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
-                @click="$router.push({path: '/sobre'}).catch(() => {})" />
+                @click="$router.push({path: '/parceiros'}).catch(() => {})" />
 
         </div> 
 

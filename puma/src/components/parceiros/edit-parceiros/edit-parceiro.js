@@ -8,8 +8,15 @@ export default {
   components: {
     ReturnButton,
   },
+  beforeMount() {   
+    this.getPartner();
+  },
   data() {
     return {
+      imageError: '',
+      partnerService: new PartnerService(),
+      partnerId: '',
+      partner: '',
       name: '',
       partnerDescription: '',
       projectName: '',
@@ -21,17 +28,30 @@ export default {
   },
 
   methods: {
-    async getProject(){
-      this.partnerId = this.$route.params.partnerId;
-      await this.PartnerService.getProject(this.partnerId).then((response) => {
-      this.name = response.data.response[0]
-      this.projectName = this.partner.name
-      this.projectDescription = this.partner.projectDescription
-      this.partnerImage = this.partner.partnerImage
-      this.projectImages = this.partner.projectImages
+    async getPartner(){
+      this.partnerId = this.$route.params.id;
+      await this.partnerService.getPartner(this.partnerId).then((response) => {
+      this.partner = response.data
+      this.partnerImage = response.data.partnerImage
+      if(this.partner.projectImages.length > 0) {
+        this.projectImages = this.partner.projectImages.split("&-&")
+      }
+      else {
+        this.partner.projectImages = []
+      }
+      console.log(this.projectImages)
       }).catch((e) => {
         console.log(e);
       });
+
+    },
+    async onFileChange(e) {
+      var selectedFiles = e.target.files;
+      console.log(selectedFiles.length)
+      for (let i=0; i < selectedFiles.length; i++)
+      {
+    	  this.getBase64(selectedFiles[i], i);
+	  }
 
     },
     async onSubmit() {
@@ -39,20 +59,18 @@ export default {
         const isFormValid = await this.$refs.observer.validate();
         if (!isFormValid) return;
 
-        const project = {
-          name: this.name,
-          projectName: this.projectName,
-          projectDescription: this.projectDescription,
-          partnerImage: this.partnerImage,
+        const partner = {
+          ...this.partner,
+          enterpriseLogo: this.partnerImage,  
           projectImages: this.projectImages.join('&-&')
         };
-        await this.PartnerService.updateProject(this.partnerId, project)
+        await this.partnerService.updatePartners(this.partnerId, partner)
 
-        this.makeToast('Projeto editado', `O projeto "${project.name}" foi editado com sucesso`, 'success');
+        this.makeToast('Projeto editado', `O projeto "${partner.name}" foi editado com sucesso`, 'success');
+        this.$router.push({ path: `/parceiros/` });
       } catch (error) {
         this.makeToast('Falha ao editar projeto', 'Infelizmente houve um erro ao atualizar o projeto, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
-      this.$router.push({ path: `/projetos-parceiros/` });
     },
     async onFileChange(e) {
       var selectedFiles = e.target.files;
@@ -62,22 +80,14 @@ export default {
 	  }
 
     },
-    async onPDFSubmit(e) {
-      console.log(e)
-      var pdfFile = e.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (e) => {
-        this.pdf = e.target.result;
-      };
-      reader.readAsDataURL(pdfFile)
-    },
     async getBase64(file, i) {
       var reader = new FileReader();
       reader.onload = (e) => {
-        this.projectImagesUrls.push(e.target.result);
+        this.projectImages.push(e.target.result);
       };
       reader.readAsDataURL(file)
       reader.onerror = function (error) {
+        console.log(this.projectImages)
         console.log('Error: ', error);
       };
    }, 
@@ -86,6 +96,30 @@ export default {
       this.$bvToast.toast(message, {
         title, variant, solid: true, noAutoHide: true, appendToast: true,
       });
+    },
+    removeImage (i) {
+      // alert(i);
+
+    	var arrayImages = this.projectImages;
+    	var index = arrayImages.indexOf(arrayImages[i]);
+		  arrayImages.splice(index, i);
+   
+    },
+    handleImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.partnerImage = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
     },
   },
 };
