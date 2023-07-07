@@ -328,9 +328,17 @@ const routes = [
     },
   },
   {
-    path: '/parceiros/editar/',
+    path: '/parceiros/editar/:id',
     name: 'Editar Parceiro',
     component: () => import('../components/parceiros/edit-parceiros/EditParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/detalhes/:id',
+    name: 'Detalhes Parceiro',
+    component: () => import('../components/parceiros/detalhes-parceiros/DetalheParceiro.vue'),
     meta: {
       requiresAuth: false,
     },
