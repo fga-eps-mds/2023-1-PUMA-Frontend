@@ -32,10 +32,12 @@ td {
     text-align: start;
     min-width: 200px;
     padding: 0.75rem 0.75rem 0.75rem 0px;
+    align-items: center;
 }
 
 tr {
     border-top: hidden;
+    align-items: center;
 }
 
 .title-list {

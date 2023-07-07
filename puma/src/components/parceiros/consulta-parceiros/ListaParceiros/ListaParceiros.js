@@ -1,35 +1,32 @@
-export default {
-  name: 'ListaParceiros',
+/* eslint-disable */
+import PartnerService from '../../../../services/PartnerService';
+// import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
+export default {
   props: {
-    name: 'a',
+    title: String,
+    dataSubjects: Array,
+    subjectSearch: String,
+  },
+  name: 'ListaParceiros',
+  // components: {
+  //   ReturnButton,
+  // },
+  data () {
+    return {
+      partnerService: new PartnerService(),
+      partners: [],
+      listSubjects: [],
+    }
   },
 
-  data: () => ({
-    return: {
-      listPartners: [
-        {
-          id: 1, image: '../../../../assets/imagemTemporaria.png', name: 'Parceiro 1',
-        },
-        {
-          id: 2, image: '../../../../assets/imagemTemporaria.png', name: 'Parceiro 2',
-        },
-        {
-          id: 3, image: '../../../../assets/imagemTemporaria.png', name: 'Parceiro 3',
-        },
-        {
-          id: 4, image: '../../../../assets/imagemTemporaria.png', name: 'Parceiro 4',
-        },
-      ],
-      parceiros: ['a', 'b', 'c', 'd'],
-    },
-  }),
-
+  beforeMount() {
+    this.getPartners();
+  },
   watch: {
     dataSubjects() {
       this.listSubjects = this.dataSubjects;
     },
-
     subjectSearch() {
       if (this.subjectSearch) {
         this.listSubjects = this.dataSubjects.filter((item) => (
@@ -39,13 +36,27 @@ export default {
       }
     },
   },
-
+  
   methods: {
-    goToSubject(id) {
-      this.$router.push({ path: `/parceiros/cadastrar/${id}` });
+    getPartners() {
+      this.partnerService.getPartners().then((response) => {
+        this.partners = response.data;
+        console.log(this.partners)
+      }).catch((e) => {
+        console.log(e)
+        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de parceiros, confira sua conexão com servidor e tente novamente', 'danger');
+      });
     },
-    goToSubjectEdition(id) {
+    partnerDetail(id) {
+      this.$router.push({ path: `/parceiros/detalhes/${id}` });
+    },
+    editPartner(id) {
       this.$router.push({ path: `/parceiros/editar/${id}` });
+    },
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, {
+        title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
     },
   },
 };
