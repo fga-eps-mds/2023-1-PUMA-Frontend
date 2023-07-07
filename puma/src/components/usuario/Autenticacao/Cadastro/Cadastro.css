@@ -404,13 +404,22 @@ label.required::after {
   opacity: 1;
 }
 
-.sucesso{
-position: relative;
-left: 35%;
+.poscadastro {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
 }
 
-.poscadastro{
-  margin-top: 20px;
-  margin-left: 40px;
+.poscadastro span {
+  display: block;
+  margin-top: 25px;
   font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sucesso {
+  height: 75px;
+  position: relative;
+  margin: 0 auto;
 }
