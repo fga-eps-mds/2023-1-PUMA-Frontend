@@ -1,0 +1,55 @@
+<div class="main-container hidden-scroll-bar">
+    <ReturnButton/>
+    <h1 class="tittle">
+        Parceiros
+    </h1>
+    
+    <div class="tittle sub-tittle mb-4">
+        Selecione os parceiros que deseja exibir na página inicial
+    </div>
+    <div class="mt-4 table-responsive" style="padding-top: 30px;">
+        <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+            <tr>
+                <th>
+                    Parceiro
+                </th>
+                <th>Nome</th>
+                <th>Exibir na Home</th>
+                <th></th>
+            </tr>
+            <tr v-for="partner in partners" :key="partner.partnerId">
+                <td>
+                    <img class="imgTeste" style="margin-bottom: 20px;" :src="partner.enterpriseLogo"/>
+                </td>
+                <td class="tittle sub-tittle mb-4" style="align-items: center !important;"><p>{{ partner.name }}</p></td>
+                <td>
+                    <input type="checkbox" v-model="partner.showOnHome">
+                    <label style="padding-left: 5px;" for="checkbox">Exibir na home</label>
+                </td>
+
+                <td class="botao">
+                    <button
+                        class="btn cd-btn"
+                        @click="partnerDetail(partner.partnerId)">
+                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                    </button>
+                    <!-- <button
+                        class="btn cd-btn"
+                        @click="editPartner(partner.partnerId)">
+                        Editar
+                    </button> -->
+                </td>
+            </tr>
+            
+        </table> 
+        <div class="div-buttons">
+            <input :value="'Salvar'" type="submit" class="cadastro-button" @click="editPartner()"/>
+        </div>     
+        
+        <!-- <ul id="app"> {{ name }}
+            <li v-for="partner in parceiros" :key="parceiro">
+                {{ partner }}
+            </li>
+        </ul> -->
+    </div>
+</div>
