@@ -11,7 +11,7 @@
     <div>
     <button
         class="btn cd-btn my-3"
-        onclick="window.location.href = '/disciplinas/cadastrar'">
+        onclick="window.location.href = '/parceiros/cadastrar'">
         <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar Parceiro
     </button>
     <button
@@ -32,11 +32,11 @@
     </div>
 
     <div class="tabelas">
-    <ListaConsultaDisciplina class="demaisDisciplinas"
-    :title="'Outras Disciplinas'"
-    :dataSubjects="subjects"
-    :subjectSearch="subjectSearch"/>
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    <ListaParceiros class="parceiros"></ListaParceiros>
+    <ListaParceiros class="parceiros"
+    :title="'Parceiros'"
+    :dataSubjects="partners"
+    :subjectSearch="subjectSearch"
+    />
+    <!-- <ListaParceiros class="parceiros"></ListaParceiros> -->
     </div>
 </div>
