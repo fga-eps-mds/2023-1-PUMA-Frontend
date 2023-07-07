@@ -72,6 +72,16 @@ export default {
         this.makeToast('Falha ao editar projeto', 'Infelizmente houve um erro ao atualizar o projeto, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
       }
     },
+    async deletePartner(id) {
+      try {
+        await this.partnerService.deletePartners(id);
+        this.makeToast('Projeto deletado', `O projeto foi deletado com sucesso`, 'success');
+        this.$router.push({ path: `/parceiros` });
+      } catch (error) {
+        console.log(error);
+        this.makeToast('Falha ao deletar o  projeto', 'Infelizmente houve um erro ao deletar o projeto', 'danger');
+      }
+    },
     async onFileChange(e) {
       var selectedFiles = e.target.files;
       for (let i=0; i < selectedFiles.length; i++)

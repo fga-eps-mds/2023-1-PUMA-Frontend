@@ -127,7 +127,7 @@
 
         <div class="div-buttons">
             <input :value="'Editar'" type="submit" class="cadastro-button" @click="onSubmit"/>
-            <input :value="'Deletar'" type="submit" class="delete-button" @click="onSubmit"/>
+            <input :value="'Deletar'" type="submit" class="delete-button" @click="deletePartner(partner.partnerId)"/>
             <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
                 @click="$router.push({path: '/parceiros'}).catch(() => {})" />
 

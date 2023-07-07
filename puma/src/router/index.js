@@ -344,9 +344,9 @@ const routes = [
     },
   },
   {
-    path: '/parceiros/sobre',
-    name: 'Sobre Parceiro',
-    component: () => import('../components/parceiros/sobre-parceiros/SobreParceiro.vue'),
+    path: '/parceiros/destacar',
+    name: 'Destacar Parceiro',
+    component: () => import('../components/parceiros/consulta-parceiros/SelectParceiros/SelectParceiros.vue'),
     meta: {
       requiresAuth: false,
     },
