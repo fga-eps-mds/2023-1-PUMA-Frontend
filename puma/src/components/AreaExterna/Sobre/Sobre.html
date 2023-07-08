@@ -1,17 +1,31 @@
 <section>
-    <AreaExternaHeader :pagina="paginaAtual"/>
+    <AreaExternaHeader :pagina="paginaAtual" />
     <div class="corpo">
         <h1>Sobre a PUMA</h1>
-        <p class="paragrafo-sobre">
-            {{ description }}
-        </p>
+
+        <div class="div-img-descricao">
+            <div class="div-descricao">
+                <h3 class="descricao-titulo">
+                    {{ titleDescription }}
+                </h3>
+                <p class="descricao-conteudo p-sobre-ul">
+                    {{ description }}
+                </p>
+            </div>
+            <div class="div-img-sobre-oposta img-secundaria">
+                <img :src="descriptionImage" class="img-sobre-oposta"
+                    alt="Imagem ilustrativa sobre a Metodologia PBL da PUMA">
+            </div>
+        </div>
 
         <div class="div-img-descricao">
             <div class="div-img-sobre">
                 <img :src="goalImage" class="img-sobre" alt="Imagem ilustrativa sobre a PUMA">
             </div>
             <div class="div-descricao">
-                <h3 class="descricao-titulo">Objetivos</h3>
+                <h3 class="descricao-titulo">
+                    {{ titleGoal }}
+                </h3>
                 <p class="descricao-conteudo p-sobre-ul">
                     {{ goal }}
                 </p>
@@ -20,15 +34,19 @@
 
         <div class="div-img-descricao">
             <div class="div-descricao">
-                <h3 class="descricao-titulo">Metodologia PBL</h3>
+                <h3 class="descricao-titulo"> 
+                    {{ titleMethodology }}
+                </h3>
                 <p class="descricao-conteudo">
                     {{ methodology }}
                 </p>
-            </div>            
+            </div>
             <div class="div-img-sobre-oposta img-secundaria">
-                <img :src="methodologyImage" class="img-sobre-oposta" alt="Imagem ilustrativa sobre a Metodologia PBL da PUMA">
+                <img :src="methodologyImage" class="img-sobre-oposta"
+                    alt="Imagem ilustrativa sobre a Metodologia PBL da PUMA">
             </div>
         </div>
+
         <div class="div-mais-informacoes">
             <h3 class="descricao-titulo">Mais informações</h3>
             <div v-for="item in pumaMoreInfos" :key="item.moreInfoId">
@@ -39,7 +57,7 @@
                     </span>
                 </div>
                 <div :id="item.moreInfoId" class="descricao-conteudo informacao-item">
-                   <p>{{item.description}}</p>
+                    <p>{{item.description}}</p>
                 </div>
             </div>
         </div>
