@@ -27,14 +27,14 @@ export default {
       operacao: this.$route.path.split('/', 3)[2],
       imageSelected: '',
       imageSelected2: '',
+      imageSelected3: '',
       professorsSelected: [],
       subject: '',
       imageError: false,
       titleDescription: '',
       titleMethodology: '',
       titleGoal: '',
-      titleTeachers: '',
-      descriptionImage: ''
+      titleTeachers: ''
     };
   },
   async mounted() {
@@ -78,6 +78,22 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
+    handleDesImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imageSelected3 = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
     async onSubmit() {
       try {
         const moreInfos = this.pumaInfo.moreInfos;
@@ -95,7 +111,7 @@ export default {
           infoId: pumaItem.infoId,
           titleDescription: this.titleDescription,
           description: this.description,
-          descriptionImage: this.descriptionImage,
+          descriptionImage: this.imageSelected3,
           goal: this.goals,
           titleGoal: this.titleGoal,
           goalImage: this.imageSelected2,

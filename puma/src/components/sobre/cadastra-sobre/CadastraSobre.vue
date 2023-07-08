@@ -16,7 +16,7 @@
                 <div class="form-col-1">
 
                     <ValidationProvider rules="required|min:100" v-slot="{ errors }">
-                        <div role="group" class="group">
+                        <div role="group" class="group" style="width: 45%;">
                             <input v-model="titleDescription" type="text" placeholder="Descrição" class="input-textfield">
                         </div>
                         <div role="group" class="group">
@@ -31,10 +31,121 @@
                         </div>
                     </ValidationProvider>
 
+                    <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                        <div role="group" class="group">
+                            <div role="group" class="group" style="width: 45%;">
+                                <input v-model="titleGoal" type="text" placeholder="Objetivos" class="input-textfield">
+                            </div>
+                            <div class="goals">
+                                <textarea id="goals" class="input-textarea"
+                                    placeholder="Forneça os objetivos da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                                    maxlength="1000" rows="10" v-model="goals">
+                          </textarea>
+                                <span class="input-counter">({{ goals.length }}/1000)</span>
+                                <span class="input-error-span" v-if="errors.length">
+                                    {{ errors[0] }}
+                                </span>
+                            </div>
+                        </div>
+                    </ValidationProvider>
+
+                    <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                        <div role="group" class="group" style="width: 45%;">
+                            <input v-model="titleMethodology" type="text" placeholder="Metodologia" class="input-textfield">
+                        </div>
+                        <div role="group" class="group">
+                            <textarea id="methodology" class="input-textarea"
+                                placeholder="Forneça as metodologias utilizadas na plataforma da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                                maxlength="1000" rows="10" v-model="methodology">
+                      </textarea>
+                            <span class="input-counter">({{ methodology.length }}/1000)</span>
+                            <span class="input-error-span" v-if="errors.length">
+                                {{ errors[0] }}
+                            </span>
+                        </div>
+                    </ValidationProvider>
+                </div>
+                <div class="form-col-2">
+                    <div role="group" class="group">
+                        <label class="input-label">Imagem tópico 1</label>
+                        <div v-if="!!imageSelected3" class="image-input-container-selected"
+                            v-bind:style="{ backgroundImage: `url(${imageSelected3})` }">
+                            <label for="imagedes" class="image-input-label-selected">
+                                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                            </label>
+                            <input type="file" class="image-input" id="imagedes" name="imagedes" accept="image/*"
+                                @input="e => handleDesImage(e.target)" :disabled=isLoading>
+                        </div>
+                        <div v-else class="image-input-container" v-bind:style="{ backgroundImage: `url(${imageSelected3})` }">
+                            <label for="imagedes" class="image-input-label">
+                                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                            </label>
+                            <input type="file" class="image-input" id="imagedes" name="imagedes" accept="image/*"
+                                @input="e => handleDesImage(e.target)" :disabled=isLoading>
+                        </div>
+                        <span class="input-error-span" v-if="imageError">
+                            O tamanho da imagem deve ser menor que 2MB
+                        </span>
+                    </div>
+
+                    <div role="group" class="group">
+                        <label class="input-label">Imagem tópico 2</label>
+                        <div v-if="!!imageSelected2" class="image-input-container-selected"
+                            v-bind:style="{ backgroundImage: `url(${imageSelected2})` }">
+                            <label for="imageobj" class="image-input-label-selected">
+                                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                            </label>
+                            <input type="file" class="image-input" id="imageobj" name="imageobj" accept="image/*"
+                                @input="e => handleObjImage(e.target)" :disabled=isLoading>
+                        </div>
+                        <div v-else class="image-input-container"
+                            v-bind:style="{ backgroundImage: `url(${imageSelected2})` }">
+                            <label for="imageobj" class="image-input-label">
+                                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                            </label>
+                            <input type="file" class="image-input" id="imageobj" name="imageobj" accept="image/*"
+                                @input="e => handleObjImage(e.target)" :disabled=isLoading>
+                        </div>
+                        <span class="input-error-span" v-if="imageError">
+                            O tamanho da imagem deve ser menor que 2MB
+                        </span>
+                    </div>
+
+                    <div role="group" class="group">
+                        <label class="input-label">Imagem tópico 3</label>
+                        <div v-if="!!imageSelected" class="image-input-container-selected"
+                            v-bind:style="{ backgroundImage: `url(${imageSelected})` }">
+                            <label for="image" class="image-input-label-selected">
+                                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                            </label>
+                            <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                                @input="e => handleMetImage(e.target)" :disabled=isLoading>
+                        </div>
+                        <div v-else class="image-input-container" v-bind:style="{ backgroundImage: `url(${imageSelected})` }">
+                            <label for="image" class="image-input-label">
+                                <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
+                                <span>Escolha um arquivo <br>ou arraste ele aqui</span>
+                            </label>
+                            <input type="file" class="image-input" id="image" name="image" accept="image/*"
+                                @input="e => handleMetImage(e.target)" :disabled=isLoading>
+                        </div>
+                        <span class="input-error-span" v-if="imageError">
+                            O tamanho da imagem deve ser menor que 2MB
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-col-3">
                     <div role="group" class="group">
                         <div class="label-flex-box">
                             <div role="group" class="group">
-                                <input v-model="titleTeachers" type="text" placeholder="Idealizadores" class="input-textfield">
+                                <input v-model="titleTeachers" type="text" placeholder="Idealizadores"
+                                    class="input-textfield">
                             </div>
                         </div>
                         <multiselect id="professor" v-model="professorsSelected[0]" :options="professors" track-by="userId"
@@ -61,104 +172,13 @@
                             Escolha no mínimo um professor
                         </span>
                     </div>
-
-                    <ValidationProvider rules="required|min:100" v-slot="{ errors }">
-                        <div role="group" class="group" style="width: 45%;">
-                            <input v-model="titleMethodology" type="text" placeholder="Metodologia" class="input-textfield">
-                        </div>
-                        <div role="group" class="group">
-                            <textarea id="methodology" class="input-textarea"
-                                placeholder="Forneça as metodologias utilizadas na plataforma da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
-                                maxlength="1000" rows="10" v-model="methodology">
-                      </textarea>
-                            <span class="input-counter">({{ methodology.length }}/1000)</span>
-                            <span class="input-error-span" v-if="errors.length">
-                                {{ errors[0] }}
-                            </span>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="form-col-2">
-                    <ValidationProvider rules="required|min:100" v-slot="{ errors }">
-                        <div role="group" class="group">
-                            <div role="group" class="group" style="width: 45%;">
-                                <input v-model="titleGoal" type="text" placeholder="Objetivos" class="input-textfield">
-                            </div>
-                            <div class="goals">
-                                <textarea id="goals" class="input-textarea"
-                                    placeholder="Forneça os objetivos da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
-                                    maxlength="1000" rows="10" v-model="goals">
-                          </textarea>
-                                <span class="input-counter">({{ goals.length }}/1000)</span>
-                                <span class="input-error-span" v-if="errors.length">
-                                    {{ errors[0] }}
-                                </span>
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                    <div class="form-sub-col">
-                        <div class="form-sub-col-1">
-                            <div role="group" class="group">
-                                <label class="input-label">Imagem de metodologia</label>
-                                <div v-if="!!imageSelected" class="image-input-container-selected"
-                                v-bind:style="{backgroundImage: `url(${imageSelected})`}">
-                                    <label for="image" class="image-input-label-selected">
-                                        <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
-                                        <span>Escolha um arquivo <br>ou arraste ele aqui</span>
-                                    </label>
-                                    <input type="file" class="image-input" id="image" name="image" accept="image/*"
-                                        @input="e => handleMetImage(e.target)" :disabled=isLoading>
-                                </div>
-                                <div v-else class="image-input-container"
-                                v-bind:style="{backgroundImage: `url(${imageSelected})`}">
-                                    <label for="image" class="image-input-label">
-                                        <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
-                                        <span>Escolha um arquivo <br>ou arraste ele aqui</span>
-                                    </label>
-                                    <input type="file" class="image-input" id="image" name="image" accept="image/*"
-                                        @input="e => handleMetImage(e.target)" :disabled=isLoading>
-                                </div>
-                                <span class="input-error-span" v-if="imageError">
-                                    O tamanho da imagem deve ser menor que 2MB
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-sub-col-2">
-                            <div role="group" class="group">
-                                <label class="input-label">Imagem de objetivos</label>
-                                <div v-if="!!imageSelected2" class="image-input-container-selected"
-                                v-bind:style="{backgroundImage: `url(${imageSelected2})`}">
-                                    <label for="imageobj" class="image-input-label-selected">
-                                        <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
-                                        <span>Escolha um arquivo <br>ou arraste ele aqui</span>
-                                    </label>
-                                    <input type="file" class="image-input" id="imageobj" name="imageobj" accept="image/*"
-                                        @input="e => handleObjImage(e.target)" :disabled=isLoading>
-                                </div>
-                                <div v-else class="image-input-container"
-                                v-bind:style="{backgroundImage: `url(${imageSelected2})`}">
-                                    <label for="imageobj" class="image-input-label">
-                                        <img class="image-input-icon" src="../../../assets/download-direto.png" alt="ícone">
-                                        <span>Escolha um arquivo <br>ou arraste ele aqui</span>
-                                    </label>
-                                    <input type="file" class="image-input" id="imageobj" name="imageobj" accept="image/*"
-                                        @input="e => handleObjImage(e.target)" :disabled=isLoading>
-                                </div>
-                                <span class="input-error-span" v-if="imageError">
-                                    O tamanho da imagem deve ser menor que 2MB
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="div-buttons">
-            <input :value="'Editar'"
-                type="submit" class="cadastro-button" @click="onSubmit" />
+                <input :value="'Editar'" type="submit" class="cadastro-button" @click="onSubmit" />
 
                 <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
-                @click="$router.push({path: '/sobre'}).catch(() => {})" />
+                    @click="$router.push({ path: '/sobre' }).catch(() => { })" />
             </div>
         </ValidationObserver>
     </div>
