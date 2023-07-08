@@ -4,7 +4,10 @@ import PumaInfoService from '../../../services/PumaInfoService';
 import UserService from '../../../services/UserService';
 
 export default {
-  name: 'CadastroDisciplina',
+  beforeMount() {
+    this.getPuma_Infos();
+  },
+  name: 'CadastroSobre',
   components: {
     ReturnButton,
   },
@@ -40,16 +43,35 @@ export default {
   async mounted() {
     try {
       await this.getProfessors();
-      console.log(this.professors);
+      // console.log(this.professors);
     } catch (error) {
       console.log(error);
     }
   },
   methods: {
+    async getPuma_Infos(){
+      this.id = this.$route.params.id;
+      await this.pumaInfoService.getPuma_Infos(this.id).then((response) => {
+        this.pumaItem = response.data['0']
+        this.infoId = this.pumaItem.infoId
+        this.titleDescription = this.pumaItem.titleDescription
+        this.description = this.pumaItem.description
+        this.imageSelected3 = this.pumaItem.descriptionImage
+        this.goals = this.pumaItem.goal
+        this.titleGoal = this.pumaItem.titleGoal
+        this.goalImage = this.pumaItem.goalImage
+        this.imageSelected2 = this.pumaItem.goalImage
+        this.methodology = this.pumaItem.methodology
+        this.imageSelected = this.pumaItem.methodologyImage
+        this.titleTeachers = this.pumaItem.titleTeachers
+      }).catch((e) => {
+        console.log(e);
+      });
+    },
     handleMetImage(input) {
       if (input.files && input.files[0]) {
         if (input.files[0].size > 2000000) {
-          this.imageError = true;
+          this.imageError = true; 
           return;
         }
         this.imageError = false;
@@ -192,5 +214,19 @@ export default {
         });
       });
     },
+    separateSubjects() {
+      this.subjects.map((sub) => {
+        sub.professors.map((prof) => {
+          if (prof.userId === this.$store.getters.user.userId) {
+            this.mySubjects.push(sub);
+            this.subjects = this.subjects.filter((item) => (
+              item.subjectId !== sub.subjectId));
+          }
+          return prof;
+        });
+        return null;
+      });
+    },
   },
 };
+    
