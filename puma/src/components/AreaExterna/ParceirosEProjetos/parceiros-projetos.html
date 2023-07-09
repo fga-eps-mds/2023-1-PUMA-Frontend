@@ -5,22 +5,32 @@
         <p class="paragrafo-sobre">
             Selecione um projeto para saber mais
         </p>
-        <div class="icons-parceiros">
-            <div class="icon-parceiro" v-for="project in projects" :key="project.projectId">
-
-                <b-card
-                    class="project-card"
-                    :title="project.title"
-                    :img-src="project.newImages[0]"
-                    img-alt="Image"
-                    img-top
-                    tag="article"
-                    style="max-width: 15rem; margin-left: 3rem;"
-                    @click="onCardClick(project.projectId)"
+        <div class="input-group">
+            <input
+                v-model="projectsSearch"
+                type="text"
+                id="caixaPesquisa"
+                class="search-input"
+                placeholder="Pesquise por um projeto">
+            <em class="fas fa-search input-group-prepend search-icon"></em>
+        </div>
+        <br>
+        <h3 class="descricao-titulo">Escolha um projeto</h3>
+        <div class="icons-parceiros"> 
+            <div class="icon-parceiro" v-for="project in filteredProjects" :key="project.projectId">
+              <b-card
+                class="project-card"
+                :title="project.title"
+                :img-src="project.newImages[0]"
+                img-alt="Image"
+                img-top
+                tag="article"
+                style="max-width: 15rem; margin-left: auto; margin-right: 3rem;"
+                @click="onCardClick(project.projectId)"
                 >
                 </b-card>
                 <br>
-
+            </tr>
                 
                 <!-- <img src="" alt="">
                     <p>{{project.title}}</p> -->
@@ -35,14 +45,12 @@
                       controls
                       indicators
                       background="#ababab"
-                      style="text-shadow: 1px 1px 2px #333;max-width: 50rem; max-height: 25rem; margin: 0 auto; margin-top: 5rem;"
+                      style="text-shadow: 1px 1px 2px #333; max-width: 506px; max-height: 258px; margin: 0 auto; margin-top: 5rem;"
                       @sliding-start="onSlideStart"
                       @sliding-end="onSlideEnd"
                     >         
                       <!-- Slides with image only -->
-                      <b-carousel-slide v-for="image in currentProjectImages" :key="index"
-                      :img-src="image"></b-carousel-slide>
-                
+                      <b-carousel-slide v-for="(image, index) in currentProjectImages" :key="index" :img-src="image" :active="index === 0" class="carousel-image"></b-carousel-slide>               
                     </b-carousel>
                   </div>
                 <div class="div-descricao" style="margin-top: 10rem; display: block !important;" >
