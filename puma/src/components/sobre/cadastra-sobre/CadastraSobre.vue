@@ -143,9 +143,8 @@
                 <div class="form-col-3">
                     <div role="group" class="group">
                         <div class="label-flex-box">
-                            <div role="group" class="group">
-                                <input v-model="titleTeachers" type="text" placeholder="Idealizadores"
-                                    class="input-textfield">
+                            <div role="group" class="group" style="width: 45%;">
+                                <input v-model="titleTeachers" type="text" placeholder="Idealizadores" class="input-textfield">
                             </div>
                         </div>
                         <multiselect id="professor" v-model="professorsSelected[0]" :options="professors" track-by="userId"

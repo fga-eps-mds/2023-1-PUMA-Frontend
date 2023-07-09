@@ -37,7 +37,7 @@ export default {
       titleDescription: '',
       titleMethodology: '',
       titleGoal: '',
-      titleTeachers: ''
+      titleTeachers: '',
     };
   },
   async mounted() {
@@ -53,6 +53,7 @@ export default {
       this.id = this.$route.params.id;
       await this.pumaInfoService.getPuma_Infos(this.id).then((response) => {
         this.pumaItem = response.data['0']
+        console.log('Item', response.data['0'])
         this.infoId = this.pumaItem.infoId
         this.titleDescription = this.pumaItem.titleDescription
         this.description = this.pumaItem.description
@@ -61,6 +62,7 @@ export default {
         this.titleGoal = this.pumaItem.titleGoal
         this.goalImage = this.pumaItem.goalImage
         this.imageSelected2 = this.pumaItem.goalImage
+        this.titleMethodology = this.pumaItem.titleMethodology
         this.methodology = this.pumaItem.methodology
         this.imageSelected = this.pumaItem.methodologyImage
         this.titleTeachers = this.pumaItem.titleTeachers
@@ -140,6 +142,7 @@ export default {
           titleMethodology: this.titleMethodology,
           methodology: this.methodology,
           methodologyImage: this.imageSelected,
+          titleTeachers: this.titleTeachers,
         };
         const newObj = {
           pumaItem: newPumaItem,
