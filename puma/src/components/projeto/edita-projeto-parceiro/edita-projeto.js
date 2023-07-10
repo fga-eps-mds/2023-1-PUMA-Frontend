@@ -23,6 +23,7 @@ export default {
       projectImages: [],
       projectImagesUrls: [],
       pdf: '',
+      isBestProject: false,
       project: ''
     };
   },
@@ -35,6 +36,7 @@ export default {
       this.descricao = this.project.problem
       this.objetivos = this.project.objectives
       this.resultadoEsperado = this.project.expectedResult
+      this.isBestProject = this.project.isBestProject
       }).catch((e) => {
         console.log(e);
       });
@@ -51,7 +53,8 @@ export default {
           expectedResult: this.resultadoEsperado,
           objectives: this.objetivos,
           projectImages: this.projectImagesUrls.join('&-&'),
-          projectPdf: this.pdf
+          projectPdf: this.pdf,
+          isBestProject: this.isBestProject
         };
         await this.partnerProjectService.updateProject(this.id, project)
 

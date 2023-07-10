@@ -169,6 +169,13 @@
   background-color: #15355e;
 }
 
+.checkbox-label {
+  padding-left: 15px;
+  color: #15355E;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 @media screen and (max-width: 1200px) {
   .form {
       flex-direction: column;
