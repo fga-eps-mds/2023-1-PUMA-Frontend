@@ -47,6 +47,26 @@
             </div>
         </div>
 
+        <div class="div-img-descricao">
+            <div class="div-descricao">
+                <h3 class="descricao-titulo"> 
+                    {{ titleTeachers }}
+                </h3>
+            </div>
+        </div>
+        <span v-for="item in professors" :key="item.userId" class="contato">
+            <div class="card-div" :src="item.image" v-bind:style="{backgroundImage: `url(${item.image})`, 'background-size': 'cover', 'background-position': 'center'} ">
+                <div class="card-text-div">
+                    <div class="card-text-name">
+                        {{item.fullName}}
+                    </div>
+                    <div class="card-text-email">
+                        {{item.departament}}
+                    </div>
+                </div>
+            </div>
+        </span>
+
         <div class="div-mais-informacoes">
             <h3 class="descricao-titulo">Mais informações</h3>
             <div v-for="item in pumaMoreInfos" :key="item.moreInfoId">

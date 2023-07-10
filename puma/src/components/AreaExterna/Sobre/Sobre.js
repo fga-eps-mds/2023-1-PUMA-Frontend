@@ -1,5 +1,7 @@
+/* eslint-disable */
 import AreaExternaHeader from '../AreaExternaHeader/AreaExternaHeader.vue';
 import PumaInfoService from '../../../services/PumaInfoService';
+import UserService from '../../../services/UserService';
 
 export default {
   components: {
@@ -13,8 +15,10 @@ export default {
     return {
       paginaAtual: '/home/sobre',
       pumaInfos: [],
+      userService: new UserService(),
       pumaInfoService: new PumaInfoService(),
       pumaMoreInfos: [],
+      professors: [],
       description: '',
       goal: '',
       methodology: '',
@@ -42,7 +46,9 @@ export default {
     },
     getPuma_Infos() {
       this.pumaInfoService.getPuma_Infos().then((response) => {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA", response)
         this.pumaInfos = response.data;
+        
         this.titleDescription = response.data['0'].titleDescription;
         this.description = response.data['0'].description;
         this.descriptionImage = response.data['0'].descriptionImage;
@@ -53,6 +59,9 @@ export default {
         this.methodology = response.data['0'].methodology;
         this.methodologyImage = response.data['0'].methodologyImage;
         this.pumaMoreInfos = response.data.moreInfos;
+        this.professors = response.data.teachers;
+        console.log("FJSDLÇFKSLÇDFKF", this.professors);
+        this.titleTeachers = response.data['0'].titleTeachers;
       }).catch((e) => {
         console.log(e);
       });
