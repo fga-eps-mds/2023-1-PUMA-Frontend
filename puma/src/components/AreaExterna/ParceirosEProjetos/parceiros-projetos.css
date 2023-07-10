@@ -47,11 +47,40 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-items: center;
-    justify-content: center;
+    justify-content: start;
 }
 
 .icon-parceiro{
+    justify-content: start;
     display: inline-block;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 50px;
+    width: 90%;
+    max-width: 450px;
+    min-width: 300px;
+    border: 1px solid #15355e;
+    color: #15355e;
+    vertical-align: top;
+}
+
+.search-input::placeholder {
+  color: #15355e;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 20px;
+    padding-top: 12px;
+}
+
+.carousel-image img {
+    width: 506px;
+    height: 258px;
 }
 
 input[type=radio]{
