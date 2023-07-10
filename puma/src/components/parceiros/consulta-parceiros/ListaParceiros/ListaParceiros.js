@@ -5,8 +5,8 @@ import PartnerService from '../../../../services/PartnerService';
 export default {
   props: {
     title: String,
-    dataSubjects: Array,
-    subjectSearch: String,
+    partners: Array,
+    partnerSearch: String,
   },
   name: 'ListaParceiros',
   // components: {
@@ -15,38 +15,40 @@ export default {
   data () {
     return {
       partnerService: new PartnerService(),
-      partners: [],
-      listSubjects: [],
+      // partners: [],
+      listPartners: [],
     }
   },
 
   beforeMount() {
-    this.getPartners();
+    // this.getPartners();
   },
-  watch: {
-    dataSubjects() {
-      this.listSubjects = this.dataSubjects;
-    },
-    subjectSearch() {
-      if (this.subjectSearch) {
-        this.listSubjects = this.dataSubjects.filter((item) => (
-          item.name.toLowerCase().includes(this.subjectSearch.toLowerCase())));
-      } else {
-        this.listSubjects = this.dataSubjects;
-      }
-    },
-  },
+  // watch: {
+  //   partners() {
+  //     this.listPartners = this.partners;
+  //   },
+  //   partnerSearch() {
+  //     console.log(this.partnerSearch)
+  //     console.log(this.listPartners)
+  //     if (this.partnerSearch) {
+  //       this.listPartners = this.partners.filter((item) => (
+  //         item.name.toLowerCase().includes(this.partnerSearch.toLowerCase())));
+  //     } else {
+  //       this.listPartners = this.partners;
+  //     }
+  //   },
+  // },
   
   methods: {
-    getPartners() {
-      this.partnerService.getPartners().then((response) => {
-        this.partners = response.data;
-        console.log(this.partners)
-      }).catch((e) => {
-        console.log(e)
-        this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de parceiros, confira sua conexão com servidor e tente novamente', 'danger');
-      });
-    },
+    // getPartners() {
+    //   this.partnerService.getPartners().then((response) => {
+    //     this.partners = response.data;
+    //     console.log(this.partners)
+    //   }).catch((e) => {
+    //     console.log(e)
+    //     this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de parceiros, confira sua conexão com servidor e tente novamente', 'danger');
+    //   });
+    // },
     partnerDetail(id) {
       this.$router.push({ path: `/parceiros/detalhes/${id}` });
     },
