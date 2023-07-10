@@ -1,0 +1,56 @@
+<div class="main-content">
+    <ReturnButton/>
+
+    
+    <div class="container-geral">
+        <div class="body-container">
+            <div class="title">
+                Sobre o Parceiro
+            </div>
+            <p class="sub-title">Nome</p>
+            <div class="content">
+            </div>
+
+            <p class="sub-title">Descrição do Parceiro</p>
+            <div class="end-section content">aaa</div>
+
+            <div class="title">
+                Projetos Vinculados ao Parceiro
+            </div>
+            <p class="sub-title">Nome do Projeto</p>
+            <div class="content">
+                aaa
+            </div>
+
+            <p class="sub-title">Descrição do Projeto</p>
+            <div class="content">
+                aaa
+            </div>
+        </div>
+        <div class="form-group2">
+            <p class="sub-title">Imagem do Logotipo do Parceiro</p>
+            <div class="content">
+                <img class="img-scale" src="../../../assets/imagemTemporaria.png" alt="kratos messi">
+            </div>
+            <p class="sub-title">Imagens do Projeto</p>
+            <div class="content">
+                <table>
+                    <tr v-for="image in images" :key="image.id">
+                        <td><img :src="image.url" :alt="image.description"></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+         
+
+    </div>
+    <div class="div-buttons">
+        <input :value="operacao === 'editar' ? 'Editar' : 'Criar'" v-if="!isLoading && operacao !== 'visualizar'"
+            type="submit" class="cadastro-button" @click="onSubmit" />
+        <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
+            @click="$router.push({path: '/sobre'}).catch(() => {})" />          
+    </div> 
+
+
+</div>

@@ -81,20 +81,8 @@ export default {
         };
         this.isLoading = true;
         this.userService.registerUser(newUser).then(async () => {
-          const user = { email: this.email, password: this.password };
-          this.userService.logUserIn(user).then((response) => {
-            this.$store.commit('LOGIN_USER', {
-              userId: response.data.userId,
-              fullName: response.data.fullName,
-              isAdmin: response.data.isAdmin,
-              email: response.data.email,
-              permission: response.data.permission,
-            });
-            this.$store.commit('SET_TOKEN', response.data.token);
-            this.$router.push('/meus-projetos').catch(() => {});
-          }).catch(() => {
-            this.isLoading = false;
-          });
+          this.page = 4;
+          this.isLoading = false;
         }).catch(async () => {
           this.isLoading = false;
           this.makeToast('Erro ao cadastrar', 'Uma falha ocorreu ao efetuar o cadastro. Confira os dados inseridos e a sua conexão e tente novamente.', 'danger');
@@ -237,6 +225,12 @@ export default {
       } else {
         senha.type = 'password';
       }
+    },
+    goToInitialPage() {
+      this.$router.push('/').catch(() => {});
+    },
+    goToLogin() {
+      this.$router.push('/login').catch(() => {});
     },
   },
 };

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -308,6 +309,46 @@ const routes = [
     component: () => import('../components/destaques/cadastro-destaque/CadastroDestaque.vue'),
     meta: {
       requiresAuth: true,
+    },
+  },
+  {
+    path: '/parceiros/',
+    name: 'Parceiros',
+    component: () => import('../components/parceiros/consulta-parceiros/consulta-parceiros.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/cadastrar/',
+    name: 'Cadastrar Parceiro',
+    component: () => import('../components/parceiros/cadastra-parceiros/CadastraParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/editar/:id',
+    name: 'Editar Parceiro',
+    component: () => import('../components/parceiros/edit-parceiros/EditParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/detalhes/:id',
+    name: 'Detalhes Parceiro',
+    component: () => import('../components/parceiros/detalhes-parceiros/DetalheParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/destacar',
+    name: 'Destacar Parceiro',
+    component: () => import('../components/parceiros/consulta-parceiros/SelectParceiros/SelectParceiros.vue'),
+    meta: {
+      requiresAuth: false,
     },
   },
   {

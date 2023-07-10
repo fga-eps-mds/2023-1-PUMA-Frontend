@@ -1,0 +1,36 @@
+<div class="mt-4 table-responsive">
+    <table class="table table-borderless" summary="Tebela de Listagens da Disciplina">
+        <tr>
+            <th>
+                Parceiro
+            </th>
+            <th>Nome</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr v-for="partner in partners" :key="partner.partnerId">
+            <td>
+                <img class="imgTeste" style="margin-bottom: 20px;" :src="partner.enterpriseLogo"/>
+            </td>
+            <td class="tittle sub-tittle mb-4" style="align-items: center !important;"><p>{{ partner.name }}</p></td>
+            <td class="botao">
+                <button
+                    class="btn cd-btn"
+                    @click="partnerDetail(partner.partnerId)">
+                    <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+                </button>
+                <button
+                    class="btn cd-btn"
+                    @click="editPartner(partner.partnerId)">
+                    Editar
+                </button>
+            </td>
+        </tr>
+          
+    </table> 
+    <!-- <ul id="app"> {{ name }}
+        <li v-for="partner in parceiros" :key="parceiro">
+            {{ partner }}
+        </li>
+    </ul> -->
+</div>
