@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -282,7 +283,7 @@ const routes = [
     name: 'Cadastro de Saiba Mais',
     component: () => import('../components/sobre/SaibaMais/cadastra-saiba-mais/CadastraSaibaMais.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
 
     },
   },
@@ -311,9 +312,57 @@ const routes = [
     },
   },
   {
+    path: '/parceiros/',
+    name: 'Parceiros',
+    component: () => import('../components/parceiros/consulta-parceiros/consulta-parceiros.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/cadastrar/',
+    name: 'Cadastrar Parceiro',
+    component: () => import('../components/parceiros/cadastra-parceiros/CadastraParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/editar/:id',
+    name: 'Editar Parceiro',
+    component: () => import('../components/parceiros/edit-parceiros/EditParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/detalhes/:id',
+    name: 'Detalhes Parceiro',
+    component: () => import('../components/parceiros/detalhes-parceiros/DetalheParceiro.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/parceiros/destacar',
+    name: 'Destacar Parceiro',
+    component: () => import('../components/parceiros/consulta-parceiros/SelectParceiros/SelectParceiros.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/controleTipoUsuario',
     name: 'Controla Tipos de Usuário',
     component: () => import('../components/ControleTipoUsuario/ConsultaUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/sobre/editar/:id',
+    name: 'Consulta Saiba Mais',
+    component: () => import('../components/sobre/SaibaMais/consulta-saiba-mais/ConsultaSaibaMais.vue'),
     meta: {
       requiresAuth: true,
     },

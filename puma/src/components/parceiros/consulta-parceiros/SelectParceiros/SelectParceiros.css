@@ -1,0 +1,108 @@
+.imgTeste{
+    max-width: 200px;
+}
+
+.div-buttons {
+    /* margin-top: 80px; */
+    text-align: right;
+    /* padding-right: 6.25rem; */
+    /* padding-bottom: 6.25rem; */
+}
+.cadastro-button {
+    align-items: center;
+    background-color: #15355e;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 150px;
+    letter-spacing: 0.03em;
+    text-align: center;
+  }
+
+.main-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 30px 25px;
+    padding-left: 250px;
+    padding-right: 250px;
+    margin-bottom: 50px;
+    min-width: 350px;
+    margin-left: 50px;
+}
+
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+table {
+    width: 100%;
+    /* max-width: 1500px; */
+    border-collapse: separate;
+}
+
+th {
+    font-size: 25px;
+    color: #15355e;
+    font-weight: bold;
+    padding: 0px 0.75rem 0.75rem 0px;
+}
+
+td {
+    /* max-width: 1500px; */
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+    padding: 0.75rem 0.75rem 0.75rem 0px;
+    align-items: center;
+}
+
+tr {
+    border-top: hidden;
+    align-items: center;
+}
+
+.title-list {
+    font-size: 18px;
+    color: #15355e;
+    font-weight: bold;
+}
+
+.demaisDisciplinas thead {
+    font-size: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.botao {
+    text-align: end;
+}
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+    padding: 10px 20px;
+
+    margin-right: 10px;
+}
+
+.no-results {
+    color: #15355e;
+    font-size: 16px;
+    width: max-content;
+}

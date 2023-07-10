@@ -1,3 +1,17 @@
+.input-textfield {
+    border: 1px solid #15355e;
+    flex-direction: column;
+    display: flex;
+    border-radius: 5px;
+    padding: 15px;
+    width: 50%;
+    height: 40px;
+    outline: none;
+    font-weight: bold;
+    color: #15355E;
+    font-size: 20px;
+}
+
 .title {
     color: #15355E;
     font-weight: bold;
@@ -45,21 +59,10 @@
     
 }
 
-.form-sub-col {
-    display: flex;
-}
-
-.form-sub-col-1 {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-sub-col-2 {
+.form-col-3 {
     flex: 1;
     margin-left: 20px;
-    display: flex;
-    flex-direction: column;
+    
 }
 
 @media screen and (max-width: 1200px) {
@@ -143,7 +146,8 @@
     border: #fff 2px;
     border-radius: 25px;
     border-style: dashed;
-    width: 250px;
+    width: 450px;
+    height: 300px;
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;

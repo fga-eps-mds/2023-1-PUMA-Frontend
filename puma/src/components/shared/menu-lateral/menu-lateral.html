@@ -30,6 +30,9 @@
               <ItemMenuLateral :props="menuItems.userType" />
             </b-row>
             <b-row align-h="center">
+              <ItemMenuLateral :props="menuItems.partners" />
+            </b-row>
+            <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.controlUserType" />
             </b-row>
             <b-row align-h="center">
@@ -87,6 +90,9 @@
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.users" />
+        </li>
+        <li>
+          <ItemMenuLateral :props="menuItems.partners" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.subjectProjects" />

@@ -1,0 +1,56 @@
+.partner-container {
+    padding: 50px;
+    background-color: #f1f1f1;
+    max-height: 500px;
+    max-width: 100%;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.partner-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.partner-logo {
+    border-radius: 30px;
+    margin: 20px;
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #15355E;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.modal-description {
+    display: flex;
+}
+
+.partner-modal {
+    padding: 10px;
+}
+
+.modal-logo {
+    max-width: 400px;
+    max-height: 400px;
+    margin-left: 40px;
+    border-radius: 20px;
+}
+
+p {
+    color: #15355E;
+    overflow-wrap: anywhere;
+}
+
+.partner-imgs {
+    padding-top: 50px;
+    overflow: hidden;
+    overflow: scroll;
+    display: inline-block;
+}

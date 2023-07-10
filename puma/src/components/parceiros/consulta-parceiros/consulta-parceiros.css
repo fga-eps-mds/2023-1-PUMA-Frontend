@@ -1,0 +1,148 @@
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.tabelas {
+    margin-top: 50px;
+    max-width: 1300px;
+    width: 100%;
+    align-content: flex-start;
+}
+
+.tabelas hr {
+    width: 100%;
+    max-width: 1300px;
+    display: inline-block;
+    border-bottom: 1px solid #94A6BC;
+}
+
+.imgTeste{
+    max-width: 200px;
+}
+
+table {
+    width: 100%;
+    max-width: 1500px;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+    padding: 0.75rem 0.75rem 0.75rem 0px;
+}
+
+th {
+    font-size: 25px;
+    color: #15355e;
+    font-weight: bold;
+    padding: 0px 10rem 1rem 0px;
+}
+
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+    padding: 0.75rem 0.75rem 0.75rem 0px;
+}
+
+tr {
+    border-top: hidden;
+}
+
+.title-list {
+    font-size: 18px;
+    color: #15355e;
+    font-weight: bold;
+}
+
+.demaisDisciplinas thead {
+    font-size: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.botao {
+    text-align: end;
+}
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+    padding: 10px 20px;
+
+    margin-right: 10px;
+}
+
+.no-results {
+    color: #15355e;
+    font-size: 16px;
+    width: max-content;
+}
+
+.botao {
+    text-align: end;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+    padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 40px;
+    width: 300px;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 20px;
+    padding-top: 12px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.modal-tittle {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+@media screen and (max-width: 800px) {
+    .search-input {
+        width: 90%;
+        max-width: 300px;
+    }
+}

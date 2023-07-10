@@ -1,0 +1,57 @@
+<div class="main-content">
+    <ReturnButton/>
+    <div class="title">
+        Sobre o Parceiro
+    </div>
+    <div class="container-flex">
+        <div class="container-geral">
+            <div>
+                <div class="sub-title">
+                    Nome
+                </div>
+                <br/>
+                <p>{{partner.name}}</p>
+                <div class="sub-title">
+                    Descrição do Parceiro
+                </div>
+                <br/>
+                <p>{{partner.description}}</p>
+                <div style="margin-top: 60px;" class="sub-title">
+                    Projeto Vinculado ao Parceiro
+                </div>
+                <br/>
+                <p>{{partner.projectName}}</p>
+                <div class="sub-title">
+                    Descrição do Projeto
+                </div>
+                <br/>
+                <p>{{partner.projectDescription}}</p>
+            </div>
+        
+        </div>
+    
+        <div class="container-lateral">
+            <div class="sub-title">
+                Imagem do Logotipo do Parceiro
+            </div>
+            <img :src="partner.enterpriseLogo" />
+
+            <div style="margin-top: 20px;">
+                <div class="sub-title">
+                    Imagens do Projeto
+                </div>
+                <div v-for="img, index in imagesArray" :key="index">
+                    <img :src="img"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="div-buttons">
+        <input :value="'Editar'" type="submit" class="cadastro-button" @click="editPartner(partner.partnerId)"/>
+        <input :value="'Voltar'" type="submit" class="cadastro-button cadastro-button-voltar"
+            @click="$router.push({path: '/parceiros'}).catch(() => {})" />
+    </div>             
+</div>

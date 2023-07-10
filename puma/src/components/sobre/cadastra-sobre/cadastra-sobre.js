@@ -4,7 +4,10 @@ import PumaInfoService from '../../../services/PumaInfoService';
 import UserService from '../../../services/UserService';
 
 export default {
-  name: 'CadastroDisciplina',
+  beforeMount() {
+    this.getPuma_Infos();
+  },
+  name: 'CadastroSobre',
   components: {
     ReturnButton,
   },
@@ -27,24 +30,50 @@ export default {
       operacao: this.$route.path.split('/', 3)[2],
       imageSelected: '',
       imageSelected2: '',
+      imageSelected3: '',
       professorsSelected: [],
       subject: '',
       imageError: false,
+      titleDescription: '',
+      titleMethodology: '',
+      titleGoal: '',
+      titleTeachers: '',
     };
   },
   async mounted() {
     try {
       await this.getProfessors();
-      console.log(this.professors);
+      // console.log(this.professors);
     } catch (error) {
       console.log(error);
     }
   },
   methods: {
+    async getPuma_Infos(){
+      this.id = this.$route.params.id;
+      await this.pumaInfoService.getPuma_Infos(this.id).then((response) => {
+        this.pumaItem = response.data['0']
+        console.log('Item', response.data['0'])
+        this.infoId = this.pumaItem.infoId
+        this.titleDescription = this.pumaItem.titleDescription
+        this.description = this.pumaItem.description
+        this.imageSelected3 = this.pumaItem.descriptionImage
+        this.goals = this.pumaItem.goal
+        this.titleGoal = this.pumaItem.titleGoal
+        this.goalImage = this.pumaItem.goalImage
+        this.imageSelected2 = this.pumaItem.goalImage
+        this.titleMethodology = this.pumaItem.titleMethodology
+        this.methodology = this.pumaItem.methodology
+        this.imageSelected = this.pumaItem.methodologyImage
+        this.titleTeachers = this.pumaItem.titleTeachers
+      }).catch((e) => {
+        console.log(e);
+      });
+    },
     handleMetImage(input) {
       if (input.files && input.files[0]) {
         if (input.files[0].size > 2000000) {
-          this.imageError = true;
+          this.imageError = true; 
           return;
         }
         this.imageError = false;
@@ -73,26 +102,47 @@ export default {
         reader.readAsDataURL(input.files[0]);
       }
     },
+    handleDesImage(input) {
+      if (input.files && input.files[0]) {
+        if (input.files[0].size > 2000000) {
+          this.imageError = true;
+          return;
+        }
+        this.imageError = false;
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imageSelected3 = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
     async onSubmit() {
       try {
         const moreInfos = this.pumaInfo.moreInfos;
         const teachers = this.pumaInfo.teachers;
-       teachers.forEach(teacher => {
+        teachers.forEach(teacher => {
           if (this.professorsSelected[0].includes(teacher)) {
             teacher.isIdealizer = true;
           } else {
-           teacher.isIdealizer = false;
+            teacher.isIdealizer = false;
           }
         });
         const topics = this.pumaInfo.topics;
         const pumaItem = this.pumaInfo['0'];
         const newPumaItem = {
-          description: this.description,
-          goal: this.goals,
-          goalImage: this.imageSelected2,
           infoId: pumaItem.infoId,
+          titleDescription: this.titleDescription,
+          description: this.description,
+          descriptionImage: this.imageSelected3,
+          goal: this.goals,
+          titleGoal: this.titleGoal,
+          goalImage: this.imageSelected2,
+          titleMethodology: this.titleMethodology,
           methodology: this.methodology,
           methodologyImage: this.imageSelected,
+          titleTeachers: this.titleTeachers,
         };
         const newObj = {
           pumaItem: newPumaItem,
@@ -167,5 +217,19 @@ export default {
         });
       });
     },
+    separateSubjects() {
+      this.subjects.map((sub) => {
+        sub.professors.map((prof) => {
+          if (prof.userId === this.$store.getters.user.userId) {
+            this.mySubjects.push(sub);
+            this.subjects = this.subjects.filter((item) => (
+              item.subjectId !== sub.subjectId));
+          }
+          return prof;
+        });
+        return null;
+      });
+    },
   },
 };
+    
