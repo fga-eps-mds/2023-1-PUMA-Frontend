@@ -23,7 +23,7 @@
 
     <div class="input-group">
         <input
-            v-model="subjectSearch"
+            v-model="partnerSearch"
             type="text"
             id="caixaPesquisa"
             class="search-input"
@@ -34,8 +34,7 @@
     <div class="tabelas">
     <ListaParceiros class="parceiros"
     :title="'Parceiros'"
-    :dataSubjects="partners"
-    :subjectSearch="subjectSearch"
+    :partners="listPartners"
     />
     <!-- <ListaParceiros class="parceiros"></ListaParceiros> -->
     </div>

@@ -15,7 +15,7 @@ export default {
   },
 
   data: () => ({
-    subjectSearch: null,
+    partnerSearch: null,
     isLoading: false,
     wasLoaded: false,
     isDeletingSubject: false,
@@ -23,15 +23,30 @@ export default {
     mySubjects: [],
     partnerService: new PartnerService(),
     partners: [],
-    listSubjects: [],
+    listPartners: [],
     subjectService: new SubjectService(),
   }),
 
+  watch: {
+    partnerSearch() {
+      this.filterPartners();
+    }
+  },
+
   methods: {
+    filterPartners() {
+      if (!this.partnerSearch) {
+        this.listPartners = this.partners;
+      } else {
+        this.listPartners = this.partners.filter(item =>
+          item.name.toLowerCase().includes(this.partnerSearch.toLowerCase())
+        );
+      }
+    },
     getPartners() {
       this.partnerService.getPartners().then((response) => {
         this.partners = response.data;
-        console.log(this.partners)
+        this.listPartners = this.partners
       }).catch((e) => {
         console.log(e)
         this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de parceiros, confira sua conexão com servidor e tente novamente', 'danger');

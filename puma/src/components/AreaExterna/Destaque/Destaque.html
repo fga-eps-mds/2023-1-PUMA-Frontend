@@ -1,5 +1,6 @@
 <div v-if="showBanner" class="highlight">
-  <div class="img" v-bind:style="{backgroundImage: `url(${banner.bannerImage})`}"></div>
+  <img :src="banner.bannerImage"/>
+  <!-- <div class="img" v-bind:style="{backgroundImage: `url(${banner.bannerImage})`}"></div> -->
   <div class="info">
     <span class="title">{{ banner.title }}</span>
     <p class="text"> {{ banner.description }} </p>

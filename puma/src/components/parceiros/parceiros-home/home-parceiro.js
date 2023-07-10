@@ -47,7 +47,7 @@ export default {
     getPartners() {
       this.partnerService.getPartners().then((response) => {
         this.partners = response.data;
-        console.log(this.partners)
+        this.partners = this.partners.filter(item => item.showOnHome === true)
       }).catch((e) => {
         console.log(e)
         this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar lista de parceiros, confira sua conexão com servidor e tente novamente', 'danger');

@@ -102,13 +102,12 @@
               
                   <div>
                     <div>
-                      <div v-for="(projectImages, key) in projectImages">
+                      <div v-for="(img, key) in projectImages">
                         <div class="" :id="key">
                           <button type="button" @click="removeImage(key)">
                           &times;
                           </button>
-                        <img class="preview img-thumbnail" v-bind:ref="'projectImages' +parseInt( key )" /> 
-                        {{ projectImages.name }}
+                        <img class="preview img-thumbnail" style="height: 80px; width: 100px;" :src="img" v-bind:ref="'projectImages' +parseInt( key )" /> 
                         </div>
                       </div>
                     </div>
