@@ -39,6 +39,7 @@ export default {
         await this.partnerService.addPartners(project)
 
         this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
+        this.$router.push({ path: `/parceiros/` });
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
