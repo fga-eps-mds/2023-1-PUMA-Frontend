@@ -1,0 +1,49 @@
+<div class="main-content">
+    <ReturnButton />
+
+    <div class='title'>
+        Criar saiba mais
+    </div>
+    <div class="sub-title mb-4">
+        Preencha os campos abaixo para adicionar informações saiba mais, que poderão ser visualizadas pelos usuarios no
+        ambiente externo.
+    </div>
+
+    <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
+        <div class="form m-0">
+            <div class="form-col-1">
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <label for="name" class="input-label">Título</label>
+                        <input v-model="title" type="text" placeholder="Título" class="input-textfield">
+                    </div>
+                </ValidationProvider>
+
+                <div class="div-buttons">
+                    <button class="animated-button2 create-button button-enabled" @click="onSubmit()">
+                            <em class="fa-solid fa-plus mr-2 add-project"></em>Criar Saiba Mais
+                    </button>
+                    <button class="animated-button2 cancel-button" @click="$router.go(-1)"">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        
+            <div class=" form-col-2">
+                <ValidationProvider rules="required|min:100" v-slot="{ errors }">
+                    <div role="group" class="group">
+                        <label for="name" class="input-label">Descrição</label>
+                        <textarea id="description" class="input-textarea"
+                            placeholder="Forneça o texto da descrição do Saiba Mais que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
+                            maxlength="1000" rows="10" v-model="description">
+                        </textarea>
+                        <span class="input-counter">({{ description.length }}/1000)</span>
+                        <span class="input-error-span" v-if="errors.length">
+                            {{ errors[0] }}
+                        </span>
+                    </div>
+                </ValidationProvider>
+            </div>
+        </div>
+    </ValidationObserver>
+</div>

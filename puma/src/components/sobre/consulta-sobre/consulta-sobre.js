@@ -1,3 +1,4 @@
+/* eslint-disable */
 import PumaInfoService from '../../../services/PumaInfoService';
 
 export default {
@@ -33,5 +34,9 @@ export default {
         console.log(e);
       });
     },
+    editMoreInfo(id) {
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAA", this.id)
+      this.$router.push({ path: `/sobre/editar/${id}` })
+    }
   },
 };
