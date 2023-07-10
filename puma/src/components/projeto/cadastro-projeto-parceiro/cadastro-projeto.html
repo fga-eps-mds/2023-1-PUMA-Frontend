@@ -90,6 +90,9 @@
           </div>
           <input type="file" name="upload" accept="application/pdf" @change="onPDFSubmit"/><br><br>
 
+          <input type="checkbox" id="checkbox" v-model="isBestProject" />
+          <label for="checkbox" class="checkbox-label"> Mostrar na Home </label>
+
           <div class="div-buttons" v-if="operacao !== 'visualizar'">
             <input :value="'Criar'" type="submit" class="cadastro-button" @click="onSubmit"/>
 

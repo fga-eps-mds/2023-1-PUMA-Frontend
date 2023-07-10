@@ -6,8 +6,8 @@ export default {
   components: {
     AreaExternaHeader,
   },
-  
   beforeMount() {
+    this.onQuery();
     this.getProjects();
   },
 
@@ -16,7 +16,6 @@ export default {
       this.filterProjects();
     }
   },
-
   data() {
     return {
       partnerProjectService: new PartnerProjectService(),
@@ -27,7 +26,6 @@ export default {
       filteredProjects: [],
     }
   },
-
   methods: {
     async getProjects(){
       await this.partnerProjectService.getProjects().then((response) => {
@@ -70,6 +68,22 @@ export default {
       }).catch(() => {
         this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar os projetos, confira sua conexão com servidor e tente novamente', 'danger');
       });
+    },
+    async onQuery() {
+      const id = this.$route.query.pId;
+      if (id) {
+        this.currentProjectImages = []
+        await this.partnerProjectService.getProject(id).then((response) => {
+          this.currentProject = response.data.response[0];
+          let images = this.currentProject.projectImages.split("&-&")
+          images.forEach(element => {
+            this.currentProjectImages.push(element)
+          });
+          console.log("Images", this.currentProjectImages)
+        }).catch(() => {
+          this.makeToast('Erro de busca', 'Infelizmente houve um erro ao recuperar os projetos, confira sua conexão com servidor e tente novamente', 'danger');
+        });
+      }
     }
   }
 };

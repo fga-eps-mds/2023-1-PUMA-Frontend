@@ -1,0 +1,20 @@
+<div>
+    <div class="sectionText">Melhores projetos</div>
+    <div class="project-container">
+      <div class="icon-parceiro" v-for="project in projects" :key="project.projectId" v-if="project.isBestProject" >
+        <div>
+        <b-card
+            class="project-card"
+            :title="project.title"
+            :img-src="project.newImages[0]"
+            img-alt="Image"
+            img-top
+            tag="article"
+            style="max-width: 22.4rem; margin-left: 3rem; max-height: 17.125rem;"
+            @click="onCardClick(project.projectId)"
+        >
+        </b-card>
+        </div>
+      </div>
+    </div>
+</div>

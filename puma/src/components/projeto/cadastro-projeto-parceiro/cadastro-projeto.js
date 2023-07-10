@@ -24,10 +24,13 @@ export default {
       projectImages: [],
       projectImagesUrls: [],
       pdf: '',
+      isBestProject: false,
+      projects: []
     };
   },
   beforeMount() {
-    // this.getKeywords();
+    //this.getProjects();
+    
   },
   methods: {
     async onSubmit() {
@@ -35,17 +38,25 @@ export default {
         const isFormValid = await this.$refs.observer.validate();
         if (!isFormValid) return;
 
+        this.projects = await this.partnerProjectService.getProjects();
+        const bestProjects = await this.howManyBestProjects();
+        if (this.isBestProject && bestProjects >= 3) {
+          this.makeToast('Falha ao cadastrar projeto', 'Só é possível cadastrar até 3 projetos como melhores projetos', 'danger');
+          return;
+        }
+
         const project = {
           title: this.titulo,
           problem: this.descricao,
           expectedResult: this.resultadoEsperado,
           objectives: this.objetivos,
           projectImages: this.projectImagesUrls.join('&-&'),
-          projectPdf: this.pdf
+          projectPdf: this.pdf,
+          isBestProject: this.isBestProject
         };
         await this.partnerProjectService.addProject(project)
 
-        this.makeToast('Projeto cadastrado', `O projeto "${project.name}" foi cadastrado com sucesso`, 'success');
+        this.makeToast('Projeto cadastrado', `O projeto "${project.title}" foi cadastrado com sucesso`, 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('Falha ao cadastrar projeto', 'Infelizmente houve um erro ao realizar cadastro, confira os dados inseridos e sua conexão com servidor e tente novamente', 'danger');
@@ -60,7 +71,6 @@ export default {
     	  this.getBase64(selectedFiles[i], i);
 	  }
     console.log(this.projectImagesUrls)
-
 
     },
     async onPDFSubmit(e) {
@@ -85,6 +95,18 @@ export default {
         console.log('Error: ', error);
       };
    }, 
+
+    async howManyBestProjects() {
+      console.log(this.projects);
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      let count = 0;
+      for (let i = 0; i < this.projects.length; i += 1) {
+        if (this.projects[i].isBestProject) {
+          count += 1;
+        }
+      }
+      return count;
+    },
    
     removeImage (i) {
       // alert(i);
