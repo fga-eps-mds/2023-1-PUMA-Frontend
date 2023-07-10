@@ -5,8 +5,9 @@ import ReturnButton from '../../../shared/ReturnButton/ReturnButton.vue';
 export default {
   beforeMount() {
     this.getPuma_Infos();
+    this.getPuma_MoreInfos();
   },
-  name: 'CadastroSaibaMais',
+  name: 'CadastroContato',
   components: {
     ReturnButton,
   },
@@ -14,6 +15,7 @@ export default {
     title: '',
     description: '',
     pumaInfo: [],
+    pumaMoreInfos: [],
     pumaInfoService: new PumaInfoService(),
   }),
 
@@ -30,6 +32,7 @@ export default {
     },
 
     async onSubmit() {
+      console.log("QAULQEUR COISa", this.pumaInfo)
       try {
         const moreInfo = { 
           infoId: 1,
@@ -62,6 +65,19 @@ export default {
     makeToast(title, message, variant) {
       this.$bvToast.toast(message, {
         title, variant, solid: true, noAutoHide: true, appendToast: true,
+      });
+    },
+    getPuma_MoreInfos() {
+      this.pumaInfoService.getPuma_Infos().then((response) => {
+        response.data.moreInfos.forEach((e) => {
+          const obj = {
+            title: e.title,
+            description: e.description,
+          };
+          this.pumaMoreInfos.push(obj);
+        });
+      }).catch((e) => {
+        console.log(e);
       });
     },
   },

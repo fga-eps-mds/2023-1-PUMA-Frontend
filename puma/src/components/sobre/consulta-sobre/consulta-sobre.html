@@ -12,14 +12,14 @@
       <em class="fa-solid fa-plus mr-2 add-project"></em>Editar sobre
     </button>
 
-    <button class="btn cd-btn ml-3" onclick="window.location.href = '/sobre/editar'">
+    <button class="btn cd-btn ml-3" onclick="window.location.href = '/sobre/cadastra-saiba-mais'">
       <em class="fa-solid fa-plus mr-2 add-project"></em>Criar Saiba Mais
     </button>
   </div>
 
   <div role="group" class="group">
-    <div class='topics'>
-      Descrição
+    <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+      {{ info.titleDescription }}
     </div>
     <div class='text' v-for="info in pumaInfos" :key="info.infoId">
       {{ info.description }}
@@ -29,26 +29,39 @@
   <div class="form m-0">
     <div class="form-col-1">
       <div role="group" class="group">
-        <div class='topics'>
-          Objetivos
+        <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.titleGoal }}
         </div>
         <div class='text' v-for="info in pumaInfos" :key="info.infoId">
           {{ info.goal }}
         </div>
       </div>
       <div role="group" class="group">
-        <div class='topics'>
-          Idealizadores
+        <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.titleTeachers }}
         </div>
-        <div class='text' v-for="info in pumaInfos.teachers" :key="info.infoId">
-          <h5><b>{{ info.fullName}}</b></h5>
-        </div>
+        <tr class='text'>
+          <td>
+            <h4><b>Nome</b></h4>
+          </td>
+          <td>
+            <h4><b>Departamento</b></h4>
+          </td>
+        </tr>
+        <tr class='text' v-for="info in pumaInfos.teachers" :key="info.infoId">
+          <td>
+            <h5>{{ info.fullName }}</h5>
+          </td>
+          <td>
+            <h5>{{ info.departament }}</h5>
+          </td>
+        </tr>
       </div>
     </div>
     <div class="form-col-2">
       <div role="group" class="group">
-        <div class='topics'>
-          Metodologia
+        <div class='topics' v-for="info in pumaInfos" :key="info.infoId">
+          {{ info.titleMethodology }}
         </div>
         <div class='text' v-for="info in pumaInfos" :key="info.infoId">
           {{ info.methodology }}
@@ -58,13 +71,16 @@
         <div class='topics'>
           Saiba mais
         </div>
-        <div class='text' v-for="info in pumaMoreInfos" :key="info.title">
-          <h5><b>{{ info.title }}</b></h5>
-          {{info.description}}
-        </div>
+        <tr class='text' v-for="info in pumaMoreInfos" :key="info.title">
+          <td<h5><b>{{ info.title }}</b></h5>
+            {{ info.description }}</td>
+            <td class="botao">
+              <button class="btn cd-btn-detalhes" onclick="window.location.href = '/sobre/cadastra-saiba-mais'">
+                <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
+              </button>
+            </td>
+        </tr>
       </div>
     </div>
   </div>
-
-
 </div>

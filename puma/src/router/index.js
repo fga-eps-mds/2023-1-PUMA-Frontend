@@ -283,7 +283,7 @@ const routes = [
     name: 'Cadastro de Saiba Mais',
     component: () => import('../components/sobre/SaibaMais/cadastra-saiba-mais/CadastraSaibaMais.vue'),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
 
     },
   },
@@ -355,6 +355,14 @@ const routes = [
     path: '/controleTipoUsuario',
     name: 'Controla Tipos de Usuário',
     component: () => import('../components/ControleTipoUsuario/ConsultaUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/sobre/editar/:id',
+    name: 'Consulta Saiba Mais',
+    component: () => import('../components/sobre/SaibaMais/consulta-saiba-mais/ConsultaSaibaMais.vue'),
     meta: {
       requiresAuth: true,
     },
