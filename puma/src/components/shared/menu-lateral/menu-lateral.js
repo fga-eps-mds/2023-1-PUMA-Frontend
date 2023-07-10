@@ -91,6 +91,16 @@ export default {
             this.$router.push({ path: '/tipoUsuario' }).catch(() => { });
           },
         },
+        partners: {
+          basePath: '/parceiros',
+          title: 'Parceiros',
+          // eslint-disable-next-line
+          iconUrl: require('@/assets/menu-6.svg'),
+          show: () => this.user.permission.canGiveUserType,
+          onclick: () => {
+            this.$router.push({ path: '/parceiros' }).catch(() => { });
+          },
+        },
         controlUserType: {
           basePath: '/controleTipoUsuario',
           title: 'Usuários',
