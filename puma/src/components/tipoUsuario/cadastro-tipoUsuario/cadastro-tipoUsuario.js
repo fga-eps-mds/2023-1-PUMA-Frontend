@@ -111,7 +111,7 @@ export default {
           resolve();
           this.$router.push({path: '/tipoUsuario'}).catch(() => {});
         }).catch((error) => {
-          this.makeToast('ERRO', 'Infelizmente houve um erro ao deletar o perfil', 'danger');
+          this.makeToast('ERRO', 'Só é possível deletar tipos de usuário que não possuam nenhum usuário registrado', 'danger');
           reject();
         });
       });

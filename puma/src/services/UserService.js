@@ -43,10 +43,10 @@ export default class UserService {
     });
   }
 
-  updatePassword(email, password, callback) {
+  updatePassword(token, password, callback) {
     return axios({
       method: 'put',
-      url: `${global.URL_GATEWAY}/user/password/${email}`,
+      url: `${global.URL_GATEWAY}/user/password/${token}`,
       data: {
         password,
       },
@@ -88,17 +88,13 @@ export default class UserService {
     });
   }
 
-  updateUserType(newUserType, callback) {
-    return axios({
-      method: 'put',
-      url: `${global.URL_GATEWAY}/user/userType/${newUserType.userTypeId}`,
-      data: {
-        newUserType,
-      },
-    }).then((res) => {
-      callback(res);
-    }).catch((error) => {
-      callback(error.response);
+  updateUserType(newUserType) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/userType/${newUserType.userTypeId}`, newUserType).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`/user/userType/:userTypeId update reject: ${response}`);
+      });
     });
   }
 
@@ -128,6 +124,36 @@ export default class UserService {
         resolve(response);
       }).catch((response) => {
         reject(`user/teacher/pending reject: ${response}`);
+      });
+    });
+  }
+
+  getAllUsers() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/user/all`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`user/all reject: ${response}`);
+      });
+    });
+  }
+
+  revokeUserPermissions(userId) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/revoke/${userId}`).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`user/revoke/${userId} reject: ${response}`);
+      });
+    });
+  }
+
+  changeUserTypes(users) {
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/user/userTypes/change`, users).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`userTypes/change reject: ${response}`);
       });
     });
   }

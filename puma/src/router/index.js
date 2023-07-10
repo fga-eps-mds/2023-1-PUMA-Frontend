@@ -351,6 +351,14 @@ const routes = [
       requiresAuth: false,
     },
   },
+  {
+    path: '/controleTipoUsuario',
+    name: 'Controla Tipos de Usuário',
+    component: () => import('../components/ControleTipoUsuario/ConsultaUsuario.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({

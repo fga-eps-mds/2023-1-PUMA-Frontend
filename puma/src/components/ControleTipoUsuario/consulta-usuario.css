@@ -1,0 +1,161 @@
+.main-content {
+    height: 100%;
+}
+
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+.title {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 40px;
+    width: 300px;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 20px;
+    padding-top: 12px;
+}
+
+.modal-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.tabelas {
+    margin-top: 50px;
+    max-width: 1300px;
+    width: 100%;
+    height: 70%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    align-content: flex-start;
+}
+
+.tabelas::-webkit-scrollbar {
+    display: none;
+  }
+
+.table-header {
+    top: 0;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    position: sticky;
+}
+
+@media screen and (max-width: 800px) {
+    .search-input {
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+table {
+    width: 100%;
+    max-width: 1500px;
+    border-collapse: separate;
+    display: block;
+}
+
+th {
+    font-size: 25px;
+    color: #15355e;
+    font-weight: bold;
+    padding: 0px 0.75rem 0.75rem 0px;
+}
+
+td {
+    max-width: 1500px;
+    width: 33%;
+    text-align: start;
+    min-width: 200px;
+    padding: 0.75rem 0.75rem 0.75rem 0px;
+}
+
+tr {
+    border-top: hidden;
+}
+
+.title-list {
+    font-size: 18px;
+    margin-left: 0.6em;
+    color: #15355e;
+    font-weight: bold;
+}
+
+.tbl-btn {
+    text-align: end;
+}
+
+.btn-div {
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    margin-top: 35px;
+    margin-bottom: 25px;
+}
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+    padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
+}
+
+.tbl-btns {
+    color: #d10000;
+    border-color: #d10000;
+}
+
+.tbl-btns:hover {
+    transition: 0.2s;
+    color: #d45b5b;
+    border-color: #d45b5b;
+}
+
+.edit-btn {
+    background-color: #15355e;
+    color: white;
+    border-color: white;
+    padding: 10px 20px;
+}
+
+.edit-btn:hover {
+    transition: 0.2s;
+    opacity: 0.7;
+}
+
+.userTypesDiv{
+    width: 100%;
+}
+
+.userTypes {
+    width: 100%;
+
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #fff;
+    color: black;
+    border: 1px solid #15355e;
+}

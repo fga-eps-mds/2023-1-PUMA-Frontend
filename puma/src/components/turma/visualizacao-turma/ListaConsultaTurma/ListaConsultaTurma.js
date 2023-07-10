@@ -62,7 +62,7 @@ export default {
         listClassesEditable = [];
         this.listClassesEditable.map((sub) => {
           sub.teachers.map((prof) => {
-            if (prof.userid === this.$store.getters.user.userId) {
+            if (prof.userId === this.$store.getters.user.userId) {
               listClassesEditable.push(sub);
             }
             return null;
@@ -135,13 +135,13 @@ export default {
           this.listClasses = res.data;
           /* eslint-disable no-await-in-loop */
           for (let i = 0; i < this.listClasses.length;) {
-            await this.classService.getClassById(this.listClasses[i].classid)
+            await this.classService.getClassById(this.listClasses[i].classId)
               .then((responseClass) => {
                 this.listClasses[i].teachers = responseClass.data.classItem.teachers;
               });
 
             for (let j = 0; j < this.listSubjects.length;) {
-              if (this.listSubjects[j].subjectid === this.listClasses[i].subjectid) {
+              if (this.listSubjects[j].subjectId === this.listClasses[i].subjectId) {
                 this.listClasses[i].subject = this.listSubjects[j];
                 break;
               }

@@ -8,6 +8,11 @@
                 <img v-else src="../../../../assets/imagemTemporaria.png" class="img-sobre" alt="Imagem da Disciplina" />
             </div>
 
+            <div class="info" v-if="!!disciplina.subject.courseDescription">
+                <h3 class="subtitulo">Descrição</h3>
+                <p class="texto">{{disciplina.subject.courseDescription}}</p>
+            </div>
+
             <div class="info">
                 <h3 class="subtitulo">Ementa</h3>
                 <p class="texto">{{disciplina.subject.courseSyllabus}}</p>
