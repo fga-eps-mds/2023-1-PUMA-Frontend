@@ -6,7 +6,7 @@ export default {
   beforeMount() {
     this.getPuma_Infos();
   },
-  name: 'CadastroContato',
+  name: 'CadastroSaibaMais',
   components: {
     ReturnButton,
   },
@@ -30,7 +30,6 @@ export default {
     },
 
     async onSubmit() {
-      console.log("QAULQEUR COISa", this.pumaInfo)
       try {
         const moreInfo = { 
           infoId: 1,
@@ -40,7 +39,6 @@ export default {
 
         const pumaMoreInfos = this.pumaInfo.moreInfos;
         pumaMoreInfos.push(moreInfo)
-        console.log("PUMAAAAAAAAAAAAAAAAAAAAAAAA", pumaMoreInfos)
         const teachers = this.pumaInfo.teachers;
         const topics = this.pumaInfo.topics;
         const pumaItem = this.pumaInfo['0'];
