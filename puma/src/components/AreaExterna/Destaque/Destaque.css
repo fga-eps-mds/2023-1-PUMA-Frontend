@@ -10,16 +10,17 @@
   gap: 60px;
 }
 
-.img{
-width:330px;
-height: 215px;
-border-radius:10px ;
+img{
+  max-width:330px;
+  max-height: 215px;
+  border-radius:10px ;
 }
 
 .info{
   margin-top: 25px;
 }
 .text{
+  overflow-wrap: anywhere;
   color: white;
   width: 500px;
   padding-bottom: 20px;
@@ -47,6 +48,7 @@ border-radius:10px ;
     flex-direction: column;
   }
   .text{
+    overflow-wrap: anywhere;
     width: 330px;
   }
 }
