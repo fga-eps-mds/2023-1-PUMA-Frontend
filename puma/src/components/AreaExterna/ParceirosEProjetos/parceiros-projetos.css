@@ -4,6 +4,16 @@
     color: rgba(2, 16, 33, 0.8);
 }
 
+.project-card {
+    width: 200px;
+    object-fit: cover;
+    height: 100%;
+}
+
+.project-card > img {
+    height: 50%;
+}
+
 .project-card:hover {
     transition: all 0.2s ease-out;
     box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
@@ -48,6 +58,7 @@ h1 {
     flex-wrap: wrap;
     justify-items: center;
     justify-content: start;
+    height: 100%;
 }
 
 .icon-parceiro{
