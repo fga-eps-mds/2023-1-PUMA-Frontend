@@ -23,7 +23,7 @@
                             <textarea id="description" class="input-textarea"
                                 placeholder="Forneça o texto do Tópico 1 que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
                                 maxlength="1000" rows="10" v-model="description">
-                      </textarea>
+                            </textarea>
                             <span class="input-counter">({{ description.length }}/1000)</span>
                             <span class="input-error-span" v-if="errors.length">
                                 {{ errors[0] }}
@@ -40,7 +40,7 @@
                                 <textarea id="goals" class="input-textarea"
                                     placeholder="Forneça o texto do Tópico 1 que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
                                     maxlength="1000" rows="10" v-model="goals">
-                          </textarea>
+                                </textarea>
                                 <span class="input-counter">({{ goals.length }}/1000)</span>
                                 <span class="input-error-span" v-if="errors.length">
                                     {{ errors[0] }}
@@ -57,7 +57,7 @@
                             <textarea id="methodology" class="input-textarea"
                                 placeholder="Forneça o texto do Tópico 1 que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
                                 maxlength="1000" rows="10" v-model="methodology">
-                      </textarea>
+                            </textarea>
                             <span class="input-counter">({{ methodology.length }}/1000)</span>
                             <span class="input-error-span" v-if="errors.length">
                                 {{ errors[0] }}
