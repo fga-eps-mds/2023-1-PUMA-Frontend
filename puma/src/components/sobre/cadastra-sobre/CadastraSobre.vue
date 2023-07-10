@@ -17,11 +17,11 @@
 
                     <ValidationProvider rules="required|min:100" v-slot="{ errors }">
                         <div role="group" class="group" style="width: 45%;">
-                            <input v-model="titleDescription" type="text" placeholder="Descrição" class="input-textfield">
+                            <input v-model="titleDescription" type="text" placeholder="Tópico 1" class="input-textfield">
                         </div>
                         <div role="group" class="group">
                             <textarea id="description" class="input-textarea"
-                                placeholder="Informe a descrição do campo 1 que será exibida no ambiente externo usando, no mínimo, 100 caracteres."
+                                placeholder="Forneça o texto do Tópico 1 que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
                                 maxlength="1000" rows="10" v-model="description">
                       </textarea>
                             <span class="input-counter">({{ description.length }}/1000)</span>
@@ -34,11 +34,11 @@
                     <ValidationProvider rules="required|min:100" v-slot="{ errors }">
                         <div role="group" class="group">
                             <div role="group" class="group" style="width: 45%;">
-                                <input v-model="titleGoal" type="text" placeholder="Objetivos" class="input-textfield">
+                                <input v-model="titleGoal" type="text" placeholder="Tópico 2" class="input-textfield">
                             </div>
                             <div class="goals">
                                 <textarea id="goals" class="input-textarea"
-                                    placeholder="Forneça os objetivos da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                                    placeholder="Forneça o texto do Tópico 1 que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
                                     maxlength="1000" rows="10" v-model="goals">
                           </textarea>
                                 <span class="input-counter">({{ goals.length }}/1000)</span>
@@ -51,11 +51,11 @@
 
                     <ValidationProvider rules="required|min:100" v-slot="{ errors }">
                         <div role="group" class="group" style="width: 45%;">
-                            <input v-model="titleMethodology" type="text" placeholder="Metodologia" class="input-textfield">
+                            <input v-model="titleMethodology" type="text" placeholder="Tópico 3" class="input-textfield">
                         </div>
                         <div role="group" class="group">
                             <textarea id="methodology" class="input-textarea"
-                                placeholder="Forneça as metodologias utilizadas na plataforma da PUMA que serão exibidos no ambiente externo usando, no mínimo, 100 caracteres."
+                                placeholder="Forneça o texto do Tópico 1 que será exibido no ambiente externo usando, no mínimo, 100 caracteres."
                                 maxlength="1000" rows="10" v-model="methodology">
                       </textarea>
                             <span class="input-counter">({{ methodology.length }}/1000)</span>
