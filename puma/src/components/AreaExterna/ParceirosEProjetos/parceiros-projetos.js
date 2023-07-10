@@ -53,7 +53,7 @@ export default {
         this.sortProjectNames();
       } else {
         this.filteredProjects = this.projects.filter(project =>
-          project.title.toLowerCase().startsWith(this.projectsSearch.toLowerCase())
+          project.title.toLowerCase().includes(this.projectsSearch.toLowerCase())
         );
       }
     },
